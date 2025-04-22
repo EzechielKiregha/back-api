@@ -2,20 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Product {
+type ChatMessageEntity {
   id: String!
-  userId: String!
-  name: String!
-  description: String
-  price: Float
-  category: String
+  chatId: String!
+  message: String!
+  senderId: String
   createdAt: DateTime!
-  updatedAt: DateTime!
-  isPublished: Boolean!
-  isFeatured: Boolean!
-  approvedForSale: String!
-  stripeId: String
-  priceId: String
+  chat: ChatEntity!
 }
 
 """
@@ -23,6 +16,565 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type AdEntity {
+  id: String!
+  businessId: String!
+  productId: String!
+  price: Float!
+  periodDays: Int!
+  createdAt: DateTime!
+  endedAt: DateTime
+  business: BusinessEntity!
+  product: ProductEntity!
+}
+
+type MediaEntity {
+  id: String!
+  url: String!
+  type: String!
+  productId: String!
+  createdAt: DateTime!
+  product: ProductEntity!
+}
+
+type PaymentTransactionEntity {
+  id: String!
+  orderId: String!
+  status: String!
+  method: String!
+  amount: Float!
+  transactionDate: DateTime!
+  qrCode: String
+  createdAt: DateTime!
+  order: OrderEntity!
+}
+
+type OrderEntity {
+  id: String!
+  clientId: String!
+  deliveryFee: Float!
+  deliveryAddress: String
+  qrCode: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  client: ClientEntity!
+  products: [OrderProductEntity!]!
+  payment: PaymentTransactionEntity
+}
+
+type OrderProductEntity {
+  id: String!
+  orderId: String!
+  productId: String!
+  quantity: Int!
+  order: OrderEntity!
+  product: ProductEntity!
+}
+
+type ReOwnedProductEntity {
+  id: String!
+  businessId: String!
+  productId: String!
+  oldOwnerId: String!
+  oldPrice: Float!
+  newPrice: Float!
+  markupPercentage: Float!
+  agreedViaChatId: String!
+  createdAt: DateTime!
+  business: BusinessEntity!
+  product: ProductEntity!
+  agreedViaChat: ChatEntity!
+}
+
+type RepostedProductEntity {
+  id: String!
+  businessId: String!
+  productId: String!
+  earnPercentage: Float!
+  createdAt: DateTime!
+  business: BusinessEntity!
+  product: ProductEntity!
+}
+
+type ReviewEntity {
+  id: String!
+  clientId: String!
+  productId: String!
+  rating: Int!
+  comment: String
+  createdAt: DateTime!
+  client: ClientEntity!
+  product: ProductEntity!
+}
+
+type ProductEntity {
+  id: String!
+  title: String!
+  description: String
+  price: Float!
+  stock: Int!
+  category: String
+  businessId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  medias: [MediaEntity!]!
+  reviews: [ReviewEntity!]!
+  orders: [OrderProductEntity!]!
+  chats: [ChatEntity!]!
+  reposts: [RepostedProductEntity!]!
+  reowns: [ReOwnedProductEntity!]!
+  ads: [AdEntity!]!
+}
+
+type WorkerEntity {
+  id: String!
+  email: String!
+  fullName: String
+  role: String
+  phone: String
+  businessId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  business: BusinessEntity!
+  chats: [ChatEntity!]!
+}
+
+type ChatEntity {
+  id: String!
+  clientId: String!
+  productId: String!
+  businessId: String
+  workerId: String
+  status: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  client: ClientEntity!
+  product: ProductEntity!
+  business: BusinessEntity
+  worker: WorkerEntity
+  messages: [ChatMessageEntity!]!
+}
+
+type FreelanceServiceEntity {
+  id: String!
+  title: String!
+  description: String
+  isHourly: Boolean!
+  rate: Float!
+  businessId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  business: BusinessEntity!
+  orders: [FreelanceOrderEntity!]!
+}
+
+type FreelanceOrderEntity {
+  id: String!
+  clientId: String!
+  serviceId: String!
+  status: String!
+  quantity: Int!
+  totalAmount: Float!
+  escrowAmount: Float!
+  commissionPercent: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  client: ClientEntity!
+  service: FreelanceServiceEntity!
+  businesses: [BusinessEntity!]!
+}
+
+type ClientEntity {
+  id: String!
+  username: String!
+  email: String!
+  fullName: String
+  address: String
+  phone: String
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  orders: [OrderEntity!]!
+  reviews: [ReviewEntity!]!
+  chats: [ChatEntity!]!
+  recharges: [AccountRechargeEntity!]!
+  freelanceOrders: [FreelanceOrderEntity!]!
+  referralsMade: [ReferralEntity!]!
+  referralsReceived: [ReferralEntity!]!
+}
+
+type AccountRechargeEntity {
+  id: String!
+  amount: Float!
+  method: String!
+  origin: String!
+  businessId: String
+  clientId: String
+  createdAt: DateTime!
+  business: BusinessEntity
+  client: ClientEntity
+}
+
+type BusinessEntity {
+  id: String!
+  name: String!
+  email: String!
+  description: String
+  address: String
+  phone: String
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  products: [ProductEntity!]!
+  workers: [WorkerEntity!]!
+  repostedItems: [RepostedProductEntity!]!
+  reownedItems: [ReOwnedProductEntity!]!
+  recharges: [AccountRechargeEntity!]!
+  ads: [AdEntity!]!
+  freelanceServices: [FreelanceServiceEntity!]!
+  freelanceOrders: [FreelanceOrderEntity!]!
+  referralsMade: [ReferralEntity!]!
+  referralsReceived: [ReferralEntity!]!
+  chats: [ChatEntity!]!
+}
+
+type ReferralEntity {
+  id: String!
+  affiliateBusinessId: String
+  affiliateClientId: String
+  referredBusinessId: String
+  referredClientId: String
+  verifiedPurchase: Boolean!
+  createdAt: DateTime!
+  affiliateBusiness: BusinessEntity
+  affiliateClient: ClientEntity
+  referredBusiness: BusinessEntity
+  referredClient: ClientEntity
+}
+
+type TokenEntity {
+  id: String!
+  name: String
+  value: Int!
+  createdAt: DateTime!
+}
+
+type KnowYourCustomerEntity {
+  id: String!
+  status: String!
+  documentUrl: String!
+  submittedAt: DateTime!
+  verifiedAt: DateTime
+  businessId: String
+  clientId: String
+  workerId: String
+  business: BusinessEntity
+  client: ClientEntity
+  worker: WorkerEntity
+}
+
 type Query {
-  products: [Product!]!
+  product(id: Int!): ProductEntity!
+  order(id: Int!): OrderEntity!
+  media(id: Int!): MediaEntity!
+  business(id: Int!): BusinessEntity!
+  client(id: Int!): ClientEntity!
+  worker(id: Int!): WorkerEntity!
+  orderProduct(id: Int!): OrderProductEntity!
+  review(id: Int!): ReviewEntity!
+  chat(id: Int!): ChatEntity!
+  chatNessage(id: Int!): ChatMessageEntity!
+  repostedProduct(id: Int!): RepostedProductEntity!
+  reOwnedProduct(id: Int!): ReOwnedProductEntity!
+  knowYourCustomer(id: Int!): KnowYourCustomerEntity!
+  accountRecharge(id: Int!): AccountRechargeEntity!
+  token(id: Int!): TokenEntity!
+  paymentTransaction(id: Int!): PaymentTransactionEntity!
+  ad(id: Int!): AdEntity!
+  freelanceService(id: Int!): FreelanceServiceEntity!
+  freelanceOrder(id: Int!): FreelanceOrderEntity!
+  referral(id: Int!): ReferralEntity!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): ProductEntity!
+  updateProduct(updateProductInput: UpdateProductInput!): ProductEntity!
+  removeProduct(id: Int!): ProductEntity!
+  createOrder(createOrderInput: CreateOrderInput!): OrderEntity!
+  updateOrder(updateOrderInput: UpdateOrderInput!): OrderEntity!
+  removeOrder(id: Int!): OrderEntity!
+  createMedia(createMediaInput: CreateMediaInput!): MediaEntity!
+  updateMedia(updateMediaInput: UpdateMediaInput!): MediaEntity!
+  removeMedia(id: Int!): MediaEntity!
+  createBusiness(createBusinessInput: CreateBusinessInput!): BusinessEntity!
+  updateBusiness(updateBusinessInput: UpdateBusinessInput!): BusinessEntity!
+  removeBusiness(id: Int!): BusinessEntity!
+  createClient(createClientInput: CreateClientInput!): ClientEntity!
+  updateClient(updateClientInput: UpdateClientInput!): ClientEntity!
+  removeClient(id: Int!): ClientEntity!
+  createWorker(createWorkerInput: CreateWorkerInput!): WorkerEntity!
+  updateWorker(updateWorkerInput: UpdateWorkerInput!): WorkerEntity!
+  removeWorker(id: Int!): WorkerEntity!
+  createOrderProduct(createOrderProductInput: CreateOrderProductInput!): OrderProductEntity!
+  updateOrderProduct(updateOrderProductInput: UpdateOrderProductInput!): OrderProductEntity!
+  removeOrderProduct(id: Int!): OrderProductEntity!
+  createReview(createReviewInput: CreateReviewInput!): ReviewEntity!
+  updateReview(updateReviewInput: UpdateReviewInput!): ReviewEntity!
+  removeReview(id: Int!): ReviewEntity!
+  createChat(createChatInput: CreateChatInput!): ChatEntity!
+  updateChat(updateChatInput: UpdateChatInput!): ChatEntity!
+  removeChat(id: Int!): ChatEntity!
+  createChatNessage(createChatNessageInput: CreateChatNessageInput!): ChatMessageEntity!
+  updateChatNessage(updateChatNessageInput: UpdateChatNessageInput!): ChatMessageEntity!
+  removeChatNessage(id: Int!): ChatMessageEntity!
+  createRepostedProduct(createRepostedProductInput: CreateRepostedProductInput!): RepostedProductEntity!
+  updateRepostedProduct(updateRepostedProductInput: UpdateRepostedProductInput!): RepostedProductEntity!
+  removeRepostedProduct(id: Int!): RepostedProductEntity!
+  createReOwnedProduct(createReOwnedProductInput: CreateReOwnedProductInput!): ReOwnedProductEntity!
+  updateReOwnedProduct(updateReOwnedProductInput: UpdateReOwnedProductInput!): ReOwnedProductEntity!
+  removeReOwnedProduct(id: Int!): ReOwnedProductEntity!
+  createKnowYourCustomer(createKnowYourCustomerInput: CreateKnowYourCustomerInput!): KnowYourCustomerEntity!
+  updateKnowYourCustomer(updateKnowYourCustomerInput: UpdateKnowYourCustomerInput!): KnowYourCustomerEntity!
+  removeKnowYourCustomer(id: Int!): KnowYourCustomerEntity!
+  createAccountRecharge(createAccountRechargeInput: CreateAccountRechargeInput!): AccountRechargeEntity!
+  updateAccountRecharge(updateAccountRechargeInput: UpdateAccountRechargeInput!): AccountRechargeEntity!
+  removeAccountRecharge(id: Int!): AccountRechargeEntity!
+  createToken(createTokenInput: CreateTokenInput!): TokenEntity!
+  updateToken(updateTokenInput: UpdateTokenInput!): TokenEntity!
+  removeToken(id: Int!): TokenEntity!
+  createPaymentTransaction(createPaymentTransactionInput: CreatePaymentTransactionInput!): PaymentTransactionEntity!
+  updatePaymentTransaction(updatePaymentTransactionInput: UpdatePaymentTransactionInput!): PaymentTransactionEntity!
+  removePaymentTransaction(id: Int!): PaymentTransactionEntity!
+  createAd(createAdInput: CreateAdInput!): AdEntity!
+  updateAd(updateAdInput: UpdateAdInput!): AdEntity!
+  removeAd(id: Int!): AdEntity!
+  createFreelanceService(createFreelanceServiceInput: CreateFreelanceServiceInput!): FreelanceServiceEntity!
+  updateFreelanceService(updateFreelanceServiceInput: UpdateFreelanceServiceInput!): FreelanceServiceEntity!
+  removeFreelanceService(id: Int!): FreelanceServiceEntity!
+  createFreelanceOrder(createFreelanceOrderInput: CreateFreelanceOrderInput!): FreelanceOrderEntity!
+  updateFreelanceOrder(updateFreelanceOrderInput: UpdateFreelanceOrderInput!): FreelanceOrderEntity!
+  removeFreelanceOrder(id: Int!): FreelanceOrderEntity!
+  createReferral(createReferralInput: CreateReferralInput!): ReferralEntity!
+  updateReferral(updateReferralInput: UpdateReferralInput!): ReferralEntity!
+  removeReferral(id: Int!): ReferralEntity!
+}
+
+input CreateProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateOrderInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOrderInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateMediaInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateMediaInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateBusinessInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateBusinessInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateClientInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateClientInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateWorkerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateWorkerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateOrderProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOrderProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateReviewInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateReviewInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateChatInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateChatInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateChatNessageInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateChatNessageInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateRepostedProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRepostedProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateReOwnedProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateReOwnedProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateKnowYourCustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateKnowYourCustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAccountRechargeInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAccountRechargeInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateTokenInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTokenInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreatePaymentTransactionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdatePaymentTransactionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAdInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAdInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateFreelanceServiceInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateFreelanceServiceInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateFreelanceOrderInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateFreelanceOrderInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateReferralInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateReferralInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

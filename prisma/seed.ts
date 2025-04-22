@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Country, FreelanceStatus, KycStatus, MediaType, PaymentMethod, PaymentStatus, PrismaClient, RechargeMethod } from '../src/generated/prisma';
+import { Country, FreelanceStatus, KycStatus, MediaType, PaymentMethod, PaymentStatus, PrismaClient, RechargeMethod } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
