@@ -20,6 +20,9 @@ export class WorkerEntity {
   phone?: string;
 
   @Field()
+  password: string; // This should be hashed and not exposed in the GraphQL schema
+
+  @Field()
   businessId: string;
 
   @Field()

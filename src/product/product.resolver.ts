@@ -7,29 +7,4 @@ import { UpdateProductInput } from './dto/update-product.input';
 @Resolver(() => ProductEntity)
 export class ProductResolver {
   constructor(private readonly productService: ProductService) {}
-
-  @Mutation(() => ProductEntity)
-  createProduct(@Args('createProductInput') createProductInput: CreateProductInput) {
-    return this.productService.create(createProductInput);
-  }
-
-  @Query(() => [ProductEntity], { name: 'product' })
-  findAll() {
-    return this.productService.findAll();
-  }
-
-  @Query(() => ProductEntity, { name: 'product' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.productService.findOne(id);
-  }
-
-  @Mutation(() => ProductEntity)
-  updateProduct(@Args('updateProductInput') updateProductInput: UpdateProductInput) {
-    return this.productService.update(updateProductInput.id, updateProductInput);
-  }
-
-  @Mutation(() => ProductEntity)
-  removeProduct(@Args('id', { type: () => Int }) id: number) {
-    return this.productService.remove(id);
-  }
 }

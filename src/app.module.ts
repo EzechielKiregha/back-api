@@ -30,6 +30,8 @@ import { ClientModule } from './client/client.module';
 import { WorkerModule } from './worker/worker.module';
 import { ProductModule } from './product/product.module';
 import { MediaModule } from './media/media.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
@@ -39,6 +41,9 @@ import { MediaModule } from './media/media.module';
         process.cwd(),
         'src/graphql/schema.gql',
       ), // Path to the generated schema file
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
     PrismaModule,
     ProductModule,
@@ -61,6 +66,7 @@ import { MediaModule } from './media/media.module';
     FreelanceServiceModule,
     FreelanceOrderModule,
     ReferralModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

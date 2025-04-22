@@ -61,8 +61,11 @@ model Business {
   name                 String
   email                String                @unique
   description          String?
+  avatar               String?
+  coverImage           String?
   address              String?
   phone                String?
+  password             String
   isVerified           Boolean               @default(false)
   kyc                  KYC?                  @relation("BusinessKYC")
   products             Product[]
@@ -86,8 +89,10 @@ model Client {
   username             String                @unique
   email                String                @unique
   fullName             String?
+  avatar               String?
   address              String?
   phone                String?
+  password             String
   isVerified           Boolean               @default(false)
   kyc                  KYC?                  @relation("ClientKYC")
   orders               Order[]
@@ -107,6 +112,7 @@ model Worker {
   fullName             String?
   role                 String?
   phone                String?
+  password             String
   business             Business              @relation(fields: [businessId], references: [id])
   businessId           String
   kyc                  KYC?                  @relation("WorkerKYC")

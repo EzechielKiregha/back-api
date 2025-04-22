@@ -7,29 +7,4 @@ import { UpdateReviewInput } from './dto/update-review.input';
 @Resolver(() => ReviewEntity)
 export class ReviewResolver {
   constructor(private readonly reviewService: ReviewService) {}
-
-  @Mutation(() => ReviewEntity)
-  createReview(@Args('createReviewInput') createReviewInput: CreateReviewInput) {
-    return this.reviewService.create(createReviewInput);
-  }
-
-  @Query(() => [ReviewEntity], { name: 'review' })
-  findAll() {
-    return this.reviewService.findAll();
-  }
-
-  @Query(() => ReviewEntity, { name: 'review' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.reviewService.findOne(id);
-  }
-
-  @Mutation(() => ReviewEntity)
-  updateReview(@Args('updateReviewInput') updateReviewInput: UpdateReviewInput) {
-    return this.reviewService.update(updateReviewInput.id, updateReviewInput);
-  }
-
-  @Mutation(() => ReviewEntity)
-  removeReview(@Args('id', { type: () => Int }) id: number) {
-    return this.reviewService.remove(id);
-  }
 }

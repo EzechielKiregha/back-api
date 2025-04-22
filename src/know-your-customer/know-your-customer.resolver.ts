@@ -7,29 +7,4 @@ import { UpdateKnowYourCustomerInput } from './dto/update-know-your-customer.inp
 @Resolver(() => KnowYourCustomerEntity)
 export class KnowYourCustomerResolver {
   constructor(private readonly knowYourCustomerService: KnowYourCustomerService) {}
-
-  @Mutation(() => KnowYourCustomerEntity)
-  createKnowYourCustomer(@Args('createKnowYourCustomerInput') createKnowYourCustomerInput: CreateKnowYourCustomerInput) {
-    return this.knowYourCustomerService.create(createKnowYourCustomerInput);
-  }
-
-  @Query(() => [KnowYourCustomerEntity], { name: 'knowYourCustomer' })
-  findAll() {
-    return this.knowYourCustomerService.findAll();
-  }
-
-  @Query(() => KnowYourCustomerEntity, { name: 'knowYourCustomer' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.knowYourCustomerService.findOne(id);
-  }
-
-  @Mutation(() => KnowYourCustomerEntity)
-  updateKnowYourCustomer(@Args('updateKnowYourCustomerInput') updateKnowYourCustomerInput: UpdateKnowYourCustomerInput) {
-    return this.knowYourCustomerService.update(updateKnowYourCustomerInput.id, updateKnowYourCustomerInput);
-  }
-
-  @Mutation(() => KnowYourCustomerEntity)
-  removeKnowYourCustomer(@Args('id', { type: () => Int }) id: number) {
-    return this.knowYourCustomerService.remove(id);
-  }
 }

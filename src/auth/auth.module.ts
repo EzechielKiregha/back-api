@@ -1,0 +1,22 @@
+import { Module } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { AuthResolver } from './auth.resolver';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { JwtModule } from '@nestjs/jwt';
+import { sign } from 'crypto';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
+@Module({
+  imports: [
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService : ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'), // Use the secret from your environment variables
+        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') }, // Token expiration time
+      })
+    }),
+  ],
+  providers: [AuthResolver, AuthService, PrismaService],
+})
+export class AuthModule {}

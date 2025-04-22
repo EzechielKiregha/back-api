@@ -19,7 +19,10 @@ async function main(): Promise<void> {
       description: faker.company.catchPhrase(),
       address: faker.location.streetAddress(),
       phone: faker.phone.number(),
+      password: faker.internet.password(),
       isVerified: faker.datatype.boolean(),
+      avatar: faker.image.avatar(), // Add avatar URL
+      coverImage: faker.image.url(), // Add cover image URL
     })),
   });
   const businessRecords = await prisma.business.findMany();
@@ -32,7 +35,9 @@ async function main(): Promise<void> {
       fullName: faker.person.fullName(),
       address: faker.location.streetAddress(),
       phone: faker.phone.number(),
+      password: faker.internet.password(),
       isVerified: faker.datatype.boolean(),
+      avatar: faker.image.avatar(), // Add avatar URL
     })),
   });
   const clientRecords = await prisma.client.findMany();
@@ -44,6 +49,7 @@ async function main(): Promise<void> {
       fullName: faker.person.fullName(),
       role: faker.helpers.arrayElement(['Manager', 'Sales', 'Support']),
       phone: faker.phone.number(),
+      password: faker.internet.password(),
       businessId: faker.helpers.arrayElement(businessRecords).id,
     })),
   });

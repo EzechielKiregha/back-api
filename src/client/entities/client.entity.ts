@@ -27,6 +27,9 @@ export class ClientEntity {
   phone?: string;
 
   @Field()
+  password: string; // This should be hashed and not exposed in the GraphQL schema
+
+  @Field()
   isVerified: boolean;
 
   @Field()
