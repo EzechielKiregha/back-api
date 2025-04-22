@@ -1,60 +1,60 @@
-import {
-  ObjectType,
-  Field,
-  Float,
-} from '@nestjs/graphql'
+import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
+import { AdEntity } from 'src/ad/entities/ad.entity';
+import { ChatEntity } from 'src/chat/entities/chat.entity';
+import { MediaEntity } from 'src/media/entities/media.entity';
+import { OrderProductEntity } from 'src/order-product/entities/order-product.entity';
+import { ReOwnedProductEntity } from 'src/re-owned-product/entities/re-owned-product.entity';
+import { RepostedProductEntity } from 'src/reposted-product/entities/reposted-product.entity';
+import { ReviewEntity } from 'src/review/entities/review.entity';
 
 @ObjectType()
-export class Product {
-  @Field(() => String)
-  id: string
+export class ProductEntity {
+  @Field()
+  id: string;
 
-  @Field(() => String)
-  userId: string
+  @Field()
+  title: string;
 
-  @Field(() => String)
-  name: string
+  @Field({ nullable: true })
+  description?: string;
 
-  @Field(() => String, { nullable: true })
-  description?: string
+  @Field(() => Float)
+  price: number;
 
-  @Field(() => Float, { nullable: true })
-  price?: number
+  @Field(() => Int)
+  stock: number;
 
-  @Field(() => String, { nullable: true })
-  category?: string
+  @Field({ nullable: true })
+  category?: string;
 
-  @Field(() => Date)
-  createdAt: Date
+  @Field()
+  businessId: string;
 
-  @Field(() => Date)
-  updatedAt: Date
+  @Field()
+  createdAt: Date;
 
-  @Field(() => Boolean)
-  isPublished: boolean
+  @Field()
+  updatedAt: Date;
 
-  @Field(() => Boolean)
-  isFeatured: boolean
+  // Relations
+  @Field(() => [MediaEntity]) // Media associated with the product
+  medias: MediaEntity[];
 
-  @Field(() => String)
-  approvedForSale: string
+  @Field(() => [ReviewEntity]) // Reviews for the product
+  reviews: ReviewEntity[];
 
-  @Field(() => String, { nullable: true })
-  stripeId?: string
+  @Field(() => [OrderProductEntity]) // Orders containing the product
+  orders: OrderProductEntity[];
 
-  @Field(() => String, { nullable: true })
-  priceId?: string
+  @Field(() => [ChatEntity]) // Chats related to the product
+  chats: ChatEntity[];
 
-  // Add relations if needed
-  // @Field(() => [Image], { nullable: true })
-  // images?: Image[];
+  @Field(() => [RepostedProductEntity]) // Reposted versions of the product
+  reposts: RepostedProductEntity[];
 
-  // @Field(() => [ProductFile], { nullable: true })
-  // productFiles?: ProductFile[];
+  @Field(() => [ReOwnedProductEntity]) // Reowned versions of the product
+  reowns: ReOwnedProductEntity[];
 
-  // @Field(() => [Order], { nullable: true })
-  // orders?: Order[];
-
-  // @Field(() => [ProductReview], { nullable: true })
-  // reviews?: ProductReview[];
+  @Field(() => [AdEntity]) // Ads for the product
+  ads: AdEntity[];
 }

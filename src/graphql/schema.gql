@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: String!
+  userId: String!
+  name: String!
+  description: String
+  price: Float
+  category: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isPublished: Boolean!
+  isFeatured: Boolean!
+  approvedForSale: String!
+  stripeId: String
+  priceId: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  products: [Product!]!
+}

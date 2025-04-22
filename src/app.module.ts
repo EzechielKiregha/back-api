@@ -1,14 +1,35 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { PrismaModule } from './prisma/prisma.module'
+// import { PrismaModule } from '../../../../prisma/prisma.module'
 import { GraphQLModule } from '@nestjs/graphql'
 import {
   ApolloDriver,
   ApolloDriverConfig,
 } from '@nestjs/apollo'
 import { join } from 'path'
+import { PrismaModule } from './prisma/prisma.module'
+
+import { ReferralModule } from './referral/referral.module';
+import { FreelanceOrderModule } from './freelance-order/freelance-order.module';
+import { FreelanceServiceModule } from './freelance-service/freelance-service.module';
+import { AdModule } from './ad/ad.module';
+import { PaymentTransactionModule } from './payment-transaction/payment-transaction.module';
+import { TokenModule } from './token/token.module';
+import { AccountRechargeModule } from './account-recharge/account-recharge.module';
+import { KnowYourCustomerModule } from './know-your-customer/know-your-customer.module';
+import { ReOwnedProductModule } from './re-owned-product/re-owned-product.module';
+import { RepostedProductModule } from './reposted-product/reposted-product.module';
+import { ChatNessageModule } from './chat-nessage/chat-nessage.module';
+import { ChatModule } from './chat/chat.module';
+import { ReviewModule } from './review/review.module';
+import { OrderProductModule } from './order-product/order-product.module';
+import { OrderModule } from './order/order.module';
+import { BusinessModule } from './business/business.module';
+import { ClientModule } from './client/client.module';
+import { WorkerModule } from './worker/worker.module';
 import { ProductModule } from './product/product.module';
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
@@ -21,6 +42,25 @@ import { ProductModule } from './product/product.module';
     }),
     PrismaModule,
     ProductModule,
+    OrderModule,
+    MediaModule,
+    BusinessModule,
+    ClientModule,
+    WorkerModule,
+    OrderProductModule,
+    ReviewModule,
+    ChatModule,
+    ChatNessageModule,
+    RepostedProductModule,
+    ReOwnedProductModule,
+    KnowYourCustomerModule,
+    AccountRechargeModule,
+    TokenModule,
+    PaymentTransactionModule,
+    AdModule,
+    FreelanceServiceModule,
+    FreelanceOrderModule,
+    ReferralModule,
   ],
   controllers: [AppController],
   providers: [AppService],
