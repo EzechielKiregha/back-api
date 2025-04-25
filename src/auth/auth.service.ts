@@ -82,4 +82,23 @@ export class AuthService {
       accessToken,
     }
   }
+
+  async validateCurrentAccountJwt(id : string){
+    const userAccount = await this.prisma.client.findUnique({
+      where: { id },
+    });
+    if (!userAccount) {
+      const userAccountBusiness = await this.prisma.business.findUnique({
+        where: { id },
+      });
+      if (!userAccountBusiness) {
+        throw new UnauthorizedException('Acount not found');
+      }
+    // Return the client object or any relevant data
+      const currentAccount = {id : userAccountBusiness.id}
+      return currentAccount;
+    }
+    const currentAccount = {id : userAccount.id}
+    return currentAccount;
+  }
 }
