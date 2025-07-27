@@ -217,6 +217,16 @@ type AccountRechargeEntity {
   client: ClientEntity
 }
 
+type PostOfSaleEntity {
+  id: String!
+  title: String!
+  description: String
+  price: Float!
+  status: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type BusinessEntity {
   id: String!
   name: String!
@@ -224,6 +234,8 @@ type BusinessEntity {
   description: String
   address: String
   phone: String
+  avatar: String
+  coverImage: String
   password: String!
   isVerified: Boolean!
   createdAt: DateTime!
@@ -239,6 +251,7 @@ type BusinessEntity {
   referralsMade: [ReferralEntity!]!
   referralsReceived: [ReferralEntity!]!
   chats: [ChatEntity!]!
+  postOfSales: [PostOfSaleEntity!]
 }
 
 type ReferralEntity {
@@ -262,6 +275,7 @@ type AuthPayloadClient {
   phone: String!
   avatar: String
   accessToken: String!
+  refreshToken: String!
 }
 
 type AuthPayloadBusiness {
@@ -272,17 +286,74 @@ type AuthPayloadBusiness {
   avatar: String
   coverImage: String
   accessToken: String!
+  refreshToken: String!
 }
 
 type Query {
+  """Retrieves all businesses with their relations."""
+  businesses: [BusinessEntity!]!
+
+  """Retrieves a single business by ID."""
+  business(id: String!): BusinessEntity!
+
+  """Retrieves all clients with their relations."""
   clients: [ClientEntity!]!
+
+  """Retrieves a single client by ID."""
+  client(id: String!): ClientEntity!
+  postOfSale(id: Int!): PostOfSaleEntity!
 }
 
 type Mutation {
-  CreateClient(CreateClientInput: CreateClientInput!): ClientEntity!
+  """Creates a new business with hashed password."""
+  createBusiness(createBusinessInput: CreateBusinessInput!): BusinessEntity!
+
+  """Updates a business’s details."""
+  updateBusiness(id: String!, updateBusinessInput: UpdateBusinessInput!): BusinessEntity!
+
+  """Deletes a business."""
+  deleteBusiness(id: String!): BusinessEntity!
+
+  """Creates a new client with hashed password."""
+  createClient(createClientInput: CreateClientInput!): ClientEntity!
+
+  """Updates a client’s details."""
+  updateClient(id: String!, updateClientInput: UpdateClientInput!): ClientEntity!
+
+  """Deletes a client."""
+  deleteClient(id: String!): ClientEntity!
   signIn(SignInInput: SignInInput!): AuthPayloadClient!
   signBusinessIn(SignInInput: SignInInput!): AuthPayloadBusiness!
   refreshToken(refreshToken: String!): AuthPayloadClient!
+  createPostOfSale(createPostOfSaleInput: CreatePostOfSaleInput!): PostOfSaleEntity!
+  updatePostOfSale(updatePostOfSaleInput: UpdatePostOfSaleInput!): PostOfSaleEntity!
+  removePostOfSale(id: Int!): PostOfSaleEntity!
+}
+
+input CreateBusinessInput {
+  name: String!
+  email: String!
+  description: String
+  avatar: String
+  coverImage: String
+  address: String
+  phone: String
+  password: String!
+  isVerified: Boolean! = false
+}
+
+input UpdateBusinessInput {
+  name: String
+  email: String
+  description: String
+  avatar: String
+  coverImage: String
+  address: String
+  phone: String
+  password: String
+  isVerified: Boolean = false
+  id: Int!
+  kycId: String
 }
 
 input CreateClientInput {
@@ -295,7 +366,30 @@ input CreateClientInput {
   isVerified: Boolean!
 }
 
+input UpdateClientInput {
+  username: String
+  email: String
+  fullName: String
+  address: String
+  phone: String
+  password: String
+  isVerified: Boolean
+  id: Int!
+  kycId: String
+}
+
 input SignInInput {
   email: String!
   password: String!
+}
+
+input CreatePostOfSaleInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdatePostOfSaleInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

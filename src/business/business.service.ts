@@ -1,26 +1,118 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBusinessInput } from './dto/create-business.input';
 import { UpdateBusinessInput } from './dto/update-business.input';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { hash } from 'argon2';
 
 @Injectable()
 export class BusinessService {
-  create(createBusinessInput: CreateBusinessInput) {
-    return 'This action adds a new business';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createBusinessInput: CreateBusinessInput) {
+    const { password, ...businessData } = createBusinessInput;
+    const hashedPassword = await hash(password);
+
+    return this.prisma.business.create({
+      data: {
+        ...businessData,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        description: true,
+        avatar: true,
+        coverImage: true,
+        address: true,
+        phone: true,
+        isVerified: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all business`;
+  async findAll() {
+    return this.prisma.business.findMany({
+      include: {
+        products: { select: { id: true, title: true, price: true, stock: true, createdAt: true } },
+        workers: { select: { id: true, email: true, fullName: true, role: true, createdAt: true } },
+        repostedItems: { select: { id: true, earnPercentage: true, createdAt: true } },
+        reownedItems: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
+        recharges: { select: { id: true, amount: true, method: true, createdAt: true } },
+        ads: { select: { id: true, price: true, periodDays: true, createdAt: true, endedAt: true } },
+        freelanceServices: { select: { id: true, title: true, isHourly: true, rate: true, createdAt: true } },
+        freelanceOrders: { select: { id: true, status: true, totalAmount: true, createdAt: true } },
+        referralsMade: { select: { id: true, verifiedPurchase: true, createdAt: true } },
+        referralsReceived: { select: { id: true, verifiedPurchase: true, createdAt: true } },
+        chats: { select: { id: true, status: true, createdAt: true, updatedAt: true } },
+        postOfSales: { select: { id: true, title: true, price: true, status: true, createdAt: true } },
+        kyc: { select: { id: true, status: true, submittedAt: true, verifiedAt: true } },
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} business`;
+  async findOne(id: string) {
+    return this.prisma.business.findUnique({
+      where: { id },
+      include: {
+        products: { select: { id: true, title: true, price: true, stock: true, createdAt: true } },
+        workers: { select: { id: true, email: true, fullName: true, role: true, createdAt: true } },
+        repostedItems: { select: { id: true, earnPercentage: true, createdAt: true } },
+        reownedItems: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
+        recharges: { select: { id: true, amount: true, method: true, createdAt: true } },
+        ads: { select: { id: true, price: true, periodDays: true, createdAt: true, endedAt: true } },
+        freelanceServices: { select: { id: true, title: true, isHourly: true, rate: true, createdAt: true } },
+        freelanceOrders: { select: { id: true, status: true, totalAmount: true, createdAt: true } },
+        referralsMade: { select: { id: true, verifiedPurchase: true, createdAt: true } },
+        referralsReceived: { select: { id: true, verifiedPurchase: true, createdAt: true } },
+        chats: { select: { id: true, status: true, createdAt: true, updatedAt: true } },
+        postOfSales: { select: { id: true, title: true, price: true, status: true, createdAt: true } },
+        kyc: { select: { id: true, status: true, submittedAt: true, verifiedAt: true } },
+      },
+    });
   }
 
-  update(id: number, updateBusinessInput: UpdateBusinessInput) {
-    return `This action updates a #${id} business`;
+  async update(id: string, updateBusinessInput: UpdateBusinessInput) {
+    const { password, kycId, ...businessData } = updateBusinessInput;
+    const data: any = { ...businessData };
+
+    if (password) {
+      data.password = await hash(password);
+    }
+    if (kycId) {
+      data.kyc = { connect: { id: kycId } };
+    }
+
+    return this.prisma.business.update({
+      where: { id },
+      data,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        description: true,
+        avatar: true,
+        coverImage: true,
+        address: true,
+        phone: true,
+        isVerified: true,
+        createdAt: true,
+        updatedAt: true,
+        kyc: { select: { id: true, status: true } },
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} business`;
+  async remove(id: string) {
+    return this.prisma.business.delete({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+    });
   }
 }

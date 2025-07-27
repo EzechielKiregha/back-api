@@ -125,17 +125,19 @@ model Client {
 }
 
 model Worker {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  fullName   String?
-  role       String?
-  phone      String?
-  password   String
-  business   Business @relation(fields: [businessId], references: [id])
-  businessId String
-  kyc        KYC?     @relation("WorkerKYC")
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id                String             @id @default(uuid())
+  email             String             @unique
+  fullName          String?
+  role              String?
+  phone             String?
+  password          String
+  business          Business           @relation(fields: [businessId], references: [id])
+  businessId        String
+  freelanceServices FreelanceService[] @relation("WorkerServices")
+  kyc               KYC?               @relation("WorkerKYC")
+  isVerified        Boolean            @default(false)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 
   chats Chat[]
 }
@@ -327,6 +329,8 @@ model FreelanceService {
   orders      FreelanceOrder[]
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
+
+  workers Worker[] @relation("WorkerServices")
 }
 
 model FreelanceOrder {

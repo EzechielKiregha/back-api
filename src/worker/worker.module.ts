@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { WorkerService } from './worker.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { WorkerResolver } from './worker.resolver';
+import { WorkerService } from './worker.service';
 
+// Module
 @Module({
-  providers: [WorkerResolver, WorkerService],
+  providers: [WorkerResolver, WorkerService, PrismaService],
 })
 export class WorkerModule {}

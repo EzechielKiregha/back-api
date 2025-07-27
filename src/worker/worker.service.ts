@@ -1,26 +1,103 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateWorkerInput } from './dto/create-worker.input';
 import { UpdateWorkerInput } from './dto/update-worker.input';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { hash } from 'argon2';
 
 @Injectable()
 export class WorkerService {
-  create(createWorkerInput: CreateWorkerInput) {
-    return 'This action adds a new worker';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createWorkerInput: CreateWorkerInput) {
+    const { password, businessId, kycId, ...workerData } = createWorkerInput;
+    const hashedPassword = await hash(password);
+
+    if (!businessId) return new UnauthorizedException("Business ID is missing")
+
+    return this.prisma.worker.create({
+      data: {
+        ...workerData,
+        password: hashedPassword,
+        business: {
+          connect : { id : businessId}
+        },
+        kyc: kycId ? { connect: { id: kycId } } : undefined,
+
+      },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        isVerified: true,
+        createdAt: true,
+        updatedAt: true,
+        business: { select: { id: true, name: true, email: true } },
+        kyc: { select: { id: true, status: true } },
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all worker`;
+  async findAll() {
+    return this.prisma.worker.findMany({
+      include: {
+        business: { select: { id: true, name: true, email: true, description: true, createdAt: true } },
+        kyc: { select: { id: true, status: true, submittedAt: true, verifiedAt: true } },
+        freelanceServices: { select: { id: true, title: true, isHourly: true, rate: true, createdAt: true } },
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} worker`;
+  async findOne(id: string) {
+    return this.prisma.worker.findUnique({
+      where: { id },
+      include: {
+        business: { select: { id: true, name: true, email: true, description: true, createdAt: true } },
+        kyc: { select: { id: true, status: true, submittedAt: true, verifiedAt: true } },
+        freelanceServices: { select: { id: true, title: true, isHourly: true, rate: true, createdAt: true } },
+      },
+    });
   }
 
-  update(id: number, updateWorkerInput: UpdateWorkerInput) {
-    return `This action updates a #${id} worker`;
+  async update(id: string, updateWorkerInput: UpdateWorkerInput) {
+    const { password, businessId, kycId, ...workerData } = updateWorkerInput;
+    const data: any = { ...workerData };
+
+    if (password) {
+      data.password = await hash(password);
+    }
+    if (businessId) {
+      data.business = { connect: { id: businessId } };
+    }
+    if (kycId) {
+      data.kyc = { connect: { id: kycId } };
+    }
+
+    return this.prisma.worker.update({
+      where: { id },
+      data,
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        isVerified: true,
+        createdAt: true,
+        updatedAt: true,
+        business: { select: { id: true, name: true, email: true } },
+        kyc: { select: { id: true, status: true } },
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} worker`;
+  async remove(id: string) {
+    return this.prisma.worker.delete({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+      },
+    });
   }
 }

@@ -37,11 +37,19 @@ export class AuthService {
 
   async generateToken(userId: string, role: string) {
     // Implement your token generation logic here
-    const client = await this.prisma.client.findUnique({
-      where: { id: userId },
-    });
-    if (!client) {
-      throw new UnauthorizedException('Client not found');
+    let user;
+    if (role === 'client') {
+      user = await this.prisma.client.findUnique({ where: { id: userId } });
+    } else if (role === 'business') {
+      user = await this.prisma.business.findUnique({ where: { id: userId } });
+    } else if (role === 'worker') {
+      user = await this.prisma.worker.findUnique({ where: { id: userId } });
+    } else {
+      throw new UnauthorizedException('Invalid role');
+    }
+  
+    if (!user) {
+      throw new UnauthorizedException(`${role} not found`);
     }
     // Generate a token (e.g., JWT) and return it
     const payload: AuthJwtPayload = { sub: userId, role };

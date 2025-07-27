@@ -157,6 +157,7 @@ exports.Prisma.WorkerScalarFieldEnum = {
   phone: 'phone',
   password: 'password',
   businessId: 'businessId',
+  isVerified: 'isVerified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

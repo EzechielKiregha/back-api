@@ -1,6 +1,8 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { BusinessEntity } from 'src/business/entities/business.entity';
 import { ChatEntity } from 'src/chat/entities/chat.entity';
+import { FreelanceServiceEntity } from 'src/freelance-service/entities/freelance-service.entity';
+import { KnowYourCustomerEntity } from 'src/know-your-customer/entities/know-your-customer.entity';
 
 @ObjectType()
 export class WorkerEntity {
@@ -16,14 +18,8 @@ export class WorkerEntity {
   @Field({ nullable: true })
   role?: string;
 
-  @Field({ nullable: true })
-  phone?: string;
-
   @Field()
-  password: string; // This should be hashed and not exposed in the GraphQL schema
-
-  @Field()
-  businessId: string;
+  isVerified: boolean;
 
   @Field()
   createdAt: Date;
@@ -31,9 +27,14 @@ export class WorkerEntity {
   @Field()
   updatedAt: Date;
 
-  // Relations
-  @Field(() => BusinessEntity) // Business associated with the worker
-  business: BusinessEntity;
+  @Field(() => BusinessEntity, { nullable: true })
+  business?: BusinessEntity;
+
+  @Field(() => KnowYourCustomerEntity, { nullable: true })
+  kyc?: KnowYourCustomerEntity;
+
+  @Field(() => [FreelanceServiceEntity], { nullable: true })
+  freelanceServices?: FreelanceServiceEntity[];
 
   @Field(() => [ChatEntity]) // Chats associated with the worker
   chats: ChatEntity[];

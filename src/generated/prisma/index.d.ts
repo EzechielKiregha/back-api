@@ -3130,10 +3130,12 @@ export namespace Prisma {
    */
 
   export type WorkerCountOutputType = {
+    freelanceServices: number
     chats: number
   }
 
   export type WorkerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    freelanceServices?: boolean | WorkerCountOutputTypeCountFreelanceServicesArgs
     chats?: boolean | WorkerCountOutputTypeCountChatsArgs
   }
 
@@ -3146,6 +3148,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the WorkerCountOutputType
      */
     select?: WorkerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WorkerCountOutputType without action
+   */
+  export type WorkerCountOutputTypeCountFreelanceServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FreelanceServiceWhereInput
   }
 
   /**
@@ -3371,10 +3380,12 @@ export namespace Prisma {
 
   export type FreelanceServiceCountOutputType = {
     orders: number
+    workers: number
   }
 
   export type FreelanceServiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | FreelanceServiceCountOutputTypeCountOrdersArgs
+    workers?: boolean | FreelanceServiceCountOutputTypeCountWorkersArgs
   }
 
   // Custom InputTypes
@@ -3393,6 +3404,13 @@ export namespace Prisma {
    */
   export type FreelanceServiceCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FreelanceOrderWhereInput
+  }
+
+  /**
+   * FreelanceServiceCountOutputType without action
+   */
+  export type FreelanceServiceCountOutputTypeCountWorkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkerWhereInput
   }
 
 
@@ -6348,6 +6366,7 @@ export namespace Prisma {
     phone: string | null
     password: string | null
     businessId: string | null
+    isVerified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6360,6 +6379,7 @@ export namespace Prisma {
     phone: string | null
     password: string | null
     businessId: string | null
+    isVerified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6372,6 +6392,7 @@ export namespace Prisma {
     phone: number
     password: number
     businessId: number
+    isVerified: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6386,6 +6407,7 @@ export namespace Prisma {
     phone?: true
     password?: true
     businessId?: true
+    isVerified?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6398,6 +6420,7 @@ export namespace Prisma {
     phone?: true
     password?: true
     businessId?: true
+    isVerified?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6410,6 +6433,7 @@ export namespace Prisma {
     phone?: true
     password?: true
     businessId?: true
+    isVerified?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6495,6 +6519,7 @@ export namespace Prisma {
     phone: string | null
     password: string
     businessId: string
+    isVerified: boolean
     createdAt: Date
     updatedAt: Date
     _count: WorkerCountAggregateOutputType | null
@@ -6524,9 +6549,11 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     businessId?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
+    freelanceServices?: boolean | Worker$freelanceServicesArgs<ExtArgs>
     kyc?: boolean | Worker$kycArgs<ExtArgs>
     chats?: boolean | Worker$chatsArgs<ExtArgs>
     _count?: boolean | WorkerCountOutputTypeDefaultArgs<ExtArgs>
@@ -6540,6 +6567,7 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     businessId?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -6553,6 +6581,7 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     businessId?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -6566,13 +6595,15 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     businessId?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WorkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "fullName" | "role" | "phone" | "password" | "businessId" | "createdAt" | "updatedAt", ExtArgs["result"]["worker"]>
+  export type WorkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "fullName" | "role" | "phone" | "password" | "businessId" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["worker"]>
   export type WorkerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     business?: boolean | BusinessDefaultArgs<ExtArgs>
+    freelanceServices?: boolean | Worker$freelanceServicesArgs<ExtArgs>
     kyc?: boolean | Worker$kycArgs<ExtArgs>
     chats?: boolean | Worker$chatsArgs<ExtArgs>
     _count?: boolean | WorkerCountOutputTypeDefaultArgs<ExtArgs>
@@ -6588,6 +6619,7 @@ export namespace Prisma {
     name: "Worker"
     objects: {
       business: Prisma.$BusinessPayload<ExtArgs>
+      freelanceServices: Prisma.$FreelanceServicePayload<ExtArgs>[]
       kyc: Prisma.$KYCPayload<ExtArgs> | null
       chats: Prisma.$ChatPayload<ExtArgs>[]
     }
@@ -6599,6 +6631,7 @@ export namespace Prisma {
       phone: string | null
       password: string
       businessId: string
+      isVerified: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["worker"]>
@@ -6996,6 +7029,7 @@ export namespace Prisma {
   export interface Prisma__WorkerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     business<T extends BusinessDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BusinessDefaultArgs<ExtArgs>>): Prisma__BusinessClient<$Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    freelanceServices<T extends Worker$freelanceServicesArgs<ExtArgs> = {}>(args?: Subset<T, Worker$freelanceServicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FreelanceServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     kyc<T extends Worker$kycArgs<ExtArgs> = {}>(args?: Subset<T, Worker$kycArgs<ExtArgs>>): Prisma__KYCClient<$Result.GetResult<Prisma.$KYCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     chats<T extends Worker$chatsArgs<ExtArgs> = {}>(args?: Subset<T, Worker$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -7034,6 +7068,7 @@ export namespace Prisma {
     readonly phone: FieldRef<"Worker", 'String'>
     readonly password: FieldRef<"Worker", 'String'>
     readonly businessId: FieldRef<"Worker", 'String'>
+    readonly isVerified: FieldRef<"Worker", 'Boolean'>
     readonly createdAt: FieldRef<"Worker", 'DateTime'>
     readonly updatedAt: FieldRef<"Worker", 'DateTime'>
   }
@@ -7429,6 +7464,30 @@ export namespace Prisma {
      * Limit how many Workers to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Worker.freelanceServices
+   */
+  export type Worker$freelanceServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FreelanceService
+     */
+    select?: FreelanceServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FreelanceService
+     */
+    omit?: FreelanceServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FreelanceServiceInclude<ExtArgs> | null
+    where?: FreelanceServiceWhereInput
+    orderBy?: FreelanceServiceOrderByWithRelationInput | FreelanceServiceOrderByWithRelationInput[]
+    cursor?: FreelanceServiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FreelanceServiceScalarFieldEnum | FreelanceServiceScalarFieldEnum[]
   }
 
   /**
@@ -23670,6 +23729,7 @@ export namespace Prisma {
     updatedAt?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
     orders?: boolean | FreelanceService$ordersArgs<ExtArgs>
+    workers?: boolean | FreelanceService$workersArgs<ExtArgs>
     _count?: boolean | FreelanceServiceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["freelanceService"]>
 
@@ -23712,6 +23772,7 @@ export namespace Prisma {
   export type FreelanceServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     business?: boolean | BusinessDefaultArgs<ExtArgs>
     orders?: boolean | FreelanceService$ordersArgs<ExtArgs>
+    workers?: boolean | FreelanceService$workersArgs<ExtArgs>
     _count?: boolean | FreelanceServiceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FreelanceServiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23726,6 +23787,7 @@ export namespace Prisma {
     objects: {
       business: Prisma.$BusinessPayload<ExtArgs>
       orders: Prisma.$FreelanceOrderPayload<ExtArgs>[]
+      workers: Prisma.$WorkerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24132,6 +24194,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     business<T extends BusinessDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BusinessDefaultArgs<ExtArgs>>): Prisma__BusinessClient<$Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     orders<T extends FreelanceService$ordersArgs<ExtArgs> = {}>(args?: Subset<T, FreelanceService$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FreelanceOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    workers<T extends FreelanceService$workersArgs<ExtArgs> = {}>(args?: Subset<T, FreelanceService$workersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24586,6 +24649,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FreelanceOrderScalarFieldEnum | FreelanceOrderScalarFieldEnum[]
+  }
+
+  /**
+   * FreelanceService.workers
+   */
+  export type FreelanceService$workersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Worker
+     */
+    select?: WorkerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Worker
+     */
+    omit?: WorkerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkerInclude<ExtArgs> | null
+    where?: WorkerWhereInput
+    orderBy?: WorkerOrderByWithRelationInput | WorkerOrderByWithRelationInput[]
+    cursor?: WorkerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WorkerScalarFieldEnum | WorkerScalarFieldEnum[]
   }
 
   /**
@@ -29397,6 +29484,7 @@ export namespace Prisma {
     phone: 'phone',
     password: 'password',
     businessId: 'businessId',
+    isVerified: 'isVerified',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -30117,9 +30205,11 @@ export namespace Prisma {
     phone?: StringNullableFilter<"Worker"> | string | null
     password?: StringFilter<"Worker"> | string
     businessId?: StringFilter<"Worker"> | string
+    isVerified?: BoolFilter<"Worker"> | boolean
     createdAt?: DateTimeFilter<"Worker"> | Date | string
     updatedAt?: DateTimeFilter<"Worker"> | Date | string
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
+    freelanceServices?: FreelanceServiceListRelationFilter
     kyc?: XOR<KYCNullableScalarRelationFilter, KYCWhereInput> | null
     chats?: ChatListRelationFilter
   }
@@ -30132,9 +30222,11 @@ export namespace Prisma {
     phone?: SortOrderInput | SortOrder
     password?: SortOrder
     businessId?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     business?: BusinessOrderByWithRelationInput
+    freelanceServices?: FreelanceServiceOrderByRelationAggregateInput
     kyc?: KYCOrderByWithRelationInput
     chats?: ChatOrderByRelationAggregateInput
   }
@@ -30150,9 +30242,11 @@ export namespace Prisma {
     phone?: StringNullableFilter<"Worker"> | string | null
     password?: StringFilter<"Worker"> | string
     businessId?: StringFilter<"Worker"> | string
+    isVerified?: BoolFilter<"Worker"> | boolean
     createdAt?: DateTimeFilter<"Worker"> | Date | string
     updatedAt?: DateTimeFilter<"Worker"> | Date | string
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
+    freelanceServices?: FreelanceServiceListRelationFilter
     kyc?: XOR<KYCNullableScalarRelationFilter, KYCWhereInput> | null
     chats?: ChatListRelationFilter
   }, "id" | "email">
@@ -30165,6 +30259,7 @@ export namespace Prisma {
     phone?: SortOrderInput | SortOrder
     password?: SortOrder
     businessId?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WorkerCountOrderByAggregateInput
@@ -30183,6 +30278,7 @@ export namespace Prisma {
     phone?: StringNullableWithAggregatesFilter<"Worker"> | string | null
     password?: StringWithAggregatesFilter<"Worker"> | string
     businessId?: StringWithAggregatesFilter<"Worker"> | string
+    isVerified?: BoolWithAggregatesFilter<"Worker"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Worker"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Worker"> | Date | string
   }
@@ -31167,6 +31263,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FreelanceService"> | Date | string
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
     orders?: FreelanceOrderListRelationFilter
+    workers?: WorkerListRelationFilter
   }
 
   export type FreelanceServiceOrderByWithRelationInput = {
@@ -31180,6 +31277,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     business?: BusinessOrderByWithRelationInput
     orders?: FreelanceOrderOrderByRelationAggregateInput
+    workers?: WorkerOrderByRelationAggregateInput
   }
 
   export type FreelanceServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -31196,6 +31294,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FreelanceService"> | Date | string
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
     orders?: FreelanceOrderListRelationFilter
+    workers?: WorkerListRelationFilter
   }, "id">
 
   export type FreelanceServiceOrderByWithAggregationInput = {
@@ -31839,9 +31938,11 @@ export namespace Prisma {
     role?: string | null
     phone?: string | null
     password: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     business: BusinessCreateNestedOneWithoutWorkersInput
+    freelanceServices?: FreelanceServiceCreateNestedManyWithoutWorkersInput
     kyc?: KYCCreateNestedOneWithoutWorkerInput
     chats?: ChatCreateNestedManyWithoutWorkerInput
   }
@@ -31854,8 +31955,10 @@ export namespace Prisma {
     phone?: string | null
     password: string
     businessId: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    freelanceServices?: FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
     kyc?: KYCUncheckedCreateNestedOneWithoutWorkerInput
     chats?: ChatUncheckedCreateNestedManyWithoutWorkerInput
   }
@@ -31867,9 +31970,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutWorkersNestedInput
+    freelanceServices?: FreelanceServiceUpdateManyWithoutWorkersNestedInput
     kyc?: KYCUpdateOneWithoutWorkerNestedInput
     chats?: ChatUpdateManyWithoutWorkerNestedInput
   }
@@ -31882,8 +31987,10 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     businessId?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    freelanceServices?: FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
     kyc?: KYCUncheckedUpdateOneWithoutWorkerNestedInput
     chats?: ChatUncheckedUpdateManyWithoutWorkerNestedInput
   }
@@ -31896,6 +32003,7 @@ export namespace Prisma {
     phone?: string | null
     password: string
     businessId: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31907,6 +32015,7 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31919,6 +32028,7 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     businessId?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32895,6 +33005,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     business: BusinessCreateNestedOneWithoutFreelanceServicesInput
     orders?: FreelanceOrderCreateNestedManyWithoutServiceInput
+    workers?: WorkerCreateNestedManyWithoutFreelanceServicesInput
   }
 
   export type FreelanceServiceUncheckedCreateInput = {
@@ -32907,6 +33018,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
+    workers?: WorkerUncheckedCreateNestedManyWithoutFreelanceServicesInput
   }
 
   export type FreelanceServiceUpdateInput = {
@@ -32919,6 +33031,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
     orders?: FreelanceOrderUpdateManyWithoutServiceNestedInput
+    workers?: WorkerUpdateManyWithoutFreelanceServicesNestedInput
   }
 
   export type FreelanceServiceUncheckedUpdateInput = {
@@ -32931,6 +33044,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
+    workers?: WorkerUncheckedUpdateManyWithoutFreelanceServicesNestedInput
   }
 
   export type FreelanceServiceCreateManyInput = {
@@ -33629,6 +33743,7 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     businessId?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -33641,6 +33756,7 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     businessId?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -33653,6 +33769,7 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     businessId?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -35594,6 +35711,12 @@ export namespace Prisma {
     connect?: BusinessWhereUniqueInput
   }
 
+  export type FreelanceServiceCreateNestedManyWithoutWorkersInput = {
+    create?: XOR<FreelanceServiceCreateWithoutWorkersInput, FreelanceServiceUncheckedCreateWithoutWorkersInput> | FreelanceServiceCreateWithoutWorkersInput[] | FreelanceServiceUncheckedCreateWithoutWorkersInput[]
+    connectOrCreate?: FreelanceServiceCreateOrConnectWithoutWorkersInput | FreelanceServiceCreateOrConnectWithoutWorkersInput[]
+    connect?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+  }
+
   export type KYCCreateNestedOneWithoutWorkerInput = {
     create?: XOR<KYCCreateWithoutWorkerInput, KYCUncheckedCreateWithoutWorkerInput>
     connectOrCreate?: KYCCreateOrConnectWithoutWorkerInput
@@ -35605,6 +35728,12 @@ export namespace Prisma {
     connectOrCreate?: ChatCreateOrConnectWithoutWorkerInput | ChatCreateOrConnectWithoutWorkerInput[]
     createMany?: ChatCreateManyWorkerInputEnvelope
     connect?: ChatWhereUniqueInput | ChatWhereUniqueInput[]
+  }
+
+  export type FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput = {
+    create?: XOR<FreelanceServiceCreateWithoutWorkersInput, FreelanceServiceUncheckedCreateWithoutWorkersInput> | FreelanceServiceCreateWithoutWorkersInput[] | FreelanceServiceUncheckedCreateWithoutWorkersInput[]
+    connectOrCreate?: FreelanceServiceCreateOrConnectWithoutWorkersInput | FreelanceServiceCreateOrConnectWithoutWorkersInput[]
+    connect?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
   }
 
   export type KYCUncheckedCreateNestedOneWithoutWorkerInput = {
@@ -35626,6 +35755,19 @@ export namespace Prisma {
     upsert?: BusinessUpsertWithoutWorkersInput
     connect?: BusinessWhereUniqueInput
     update?: XOR<XOR<BusinessUpdateToOneWithWhereWithoutWorkersInput, BusinessUpdateWithoutWorkersInput>, BusinessUncheckedUpdateWithoutWorkersInput>
+  }
+
+  export type FreelanceServiceUpdateManyWithoutWorkersNestedInput = {
+    create?: XOR<FreelanceServiceCreateWithoutWorkersInput, FreelanceServiceUncheckedCreateWithoutWorkersInput> | FreelanceServiceCreateWithoutWorkersInput[] | FreelanceServiceUncheckedCreateWithoutWorkersInput[]
+    connectOrCreate?: FreelanceServiceCreateOrConnectWithoutWorkersInput | FreelanceServiceCreateOrConnectWithoutWorkersInput[]
+    upsert?: FreelanceServiceUpsertWithWhereUniqueWithoutWorkersInput | FreelanceServiceUpsertWithWhereUniqueWithoutWorkersInput[]
+    set?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    disconnect?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    delete?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    connect?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    update?: FreelanceServiceUpdateWithWhereUniqueWithoutWorkersInput | FreelanceServiceUpdateWithWhereUniqueWithoutWorkersInput[]
+    updateMany?: FreelanceServiceUpdateManyWithWhereWithoutWorkersInput | FreelanceServiceUpdateManyWithWhereWithoutWorkersInput[]
+    deleteMany?: FreelanceServiceScalarWhereInput | FreelanceServiceScalarWhereInput[]
   }
 
   export type KYCUpdateOneWithoutWorkerNestedInput = {
@@ -35650,6 +35792,19 @@ export namespace Prisma {
     update?: ChatUpdateWithWhereUniqueWithoutWorkerInput | ChatUpdateWithWhereUniqueWithoutWorkerInput[]
     updateMany?: ChatUpdateManyWithWhereWithoutWorkerInput | ChatUpdateManyWithWhereWithoutWorkerInput[]
     deleteMany?: ChatScalarWhereInput | ChatScalarWhereInput[]
+  }
+
+  export type FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput = {
+    create?: XOR<FreelanceServiceCreateWithoutWorkersInput, FreelanceServiceUncheckedCreateWithoutWorkersInput> | FreelanceServiceCreateWithoutWorkersInput[] | FreelanceServiceUncheckedCreateWithoutWorkersInput[]
+    connectOrCreate?: FreelanceServiceCreateOrConnectWithoutWorkersInput | FreelanceServiceCreateOrConnectWithoutWorkersInput[]
+    upsert?: FreelanceServiceUpsertWithWhereUniqueWithoutWorkersInput | FreelanceServiceUpsertWithWhereUniqueWithoutWorkersInput[]
+    set?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    disconnect?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    delete?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    connect?: FreelanceServiceWhereUniqueInput | FreelanceServiceWhereUniqueInput[]
+    update?: FreelanceServiceUpdateWithWhereUniqueWithoutWorkersInput | FreelanceServiceUpdateWithWhereUniqueWithoutWorkersInput[]
+    updateMany?: FreelanceServiceUpdateManyWithWhereWithoutWorkersInput | FreelanceServiceUpdateManyWithWhereWithoutWorkersInput[]
+    deleteMany?: FreelanceServiceScalarWhereInput | FreelanceServiceScalarWhereInput[]
   }
 
   export type KYCUncheckedUpdateOneWithoutWorkerNestedInput = {
@@ -36573,11 +36728,23 @@ export namespace Prisma {
     connect?: FreelanceOrderWhereUniqueInput | FreelanceOrderWhereUniqueInput[]
   }
 
+  export type WorkerCreateNestedManyWithoutFreelanceServicesInput = {
+    create?: XOR<WorkerCreateWithoutFreelanceServicesInput, WorkerUncheckedCreateWithoutFreelanceServicesInput> | WorkerCreateWithoutFreelanceServicesInput[] | WorkerUncheckedCreateWithoutFreelanceServicesInput[]
+    connectOrCreate?: WorkerCreateOrConnectWithoutFreelanceServicesInput | WorkerCreateOrConnectWithoutFreelanceServicesInput[]
+    connect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+  }
+
   export type FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput = {
     create?: XOR<FreelanceOrderCreateWithoutServiceInput, FreelanceOrderUncheckedCreateWithoutServiceInput> | FreelanceOrderCreateWithoutServiceInput[] | FreelanceOrderUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: FreelanceOrderCreateOrConnectWithoutServiceInput | FreelanceOrderCreateOrConnectWithoutServiceInput[]
     createMany?: FreelanceOrderCreateManyServiceInputEnvelope
     connect?: FreelanceOrderWhereUniqueInput | FreelanceOrderWhereUniqueInput[]
+  }
+
+  export type WorkerUncheckedCreateNestedManyWithoutFreelanceServicesInput = {
+    create?: XOR<WorkerCreateWithoutFreelanceServicesInput, WorkerUncheckedCreateWithoutFreelanceServicesInput> | WorkerCreateWithoutFreelanceServicesInput[] | WorkerUncheckedCreateWithoutFreelanceServicesInput[]
+    connectOrCreate?: WorkerCreateOrConnectWithoutFreelanceServicesInput | WorkerCreateOrConnectWithoutFreelanceServicesInput[]
+    connect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
   }
 
   export type BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput = {
@@ -36602,6 +36769,19 @@ export namespace Prisma {
     deleteMany?: FreelanceOrderScalarWhereInput | FreelanceOrderScalarWhereInput[]
   }
 
+  export type WorkerUpdateManyWithoutFreelanceServicesNestedInput = {
+    create?: XOR<WorkerCreateWithoutFreelanceServicesInput, WorkerUncheckedCreateWithoutFreelanceServicesInput> | WorkerCreateWithoutFreelanceServicesInput[] | WorkerUncheckedCreateWithoutFreelanceServicesInput[]
+    connectOrCreate?: WorkerCreateOrConnectWithoutFreelanceServicesInput | WorkerCreateOrConnectWithoutFreelanceServicesInput[]
+    upsert?: WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput | WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput[]
+    set?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    disconnect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    delete?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    connect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    update?: WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput | WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput[]
+    updateMany?: WorkerUpdateManyWithWhereWithoutFreelanceServicesInput | WorkerUpdateManyWithWhereWithoutFreelanceServicesInput[]
+    deleteMany?: WorkerScalarWhereInput | WorkerScalarWhereInput[]
+  }
+
   export type FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput = {
     create?: XOR<FreelanceOrderCreateWithoutServiceInput, FreelanceOrderUncheckedCreateWithoutServiceInput> | FreelanceOrderCreateWithoutServiceInput[] | FreelanceOrderUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: FreelanceOrderCreateOrConnectWithoutServiceInput | FreelanceOrderCreateOrConnectWithoutServiceInput[]
@@ -36614,6 +36794,19 @@ export namespace Prisma {
     update?: FreelanceOrderUpdateWithWhereUniqueWithoutServiceInput | FreelanceOrderUpdateWithWhereUniqueWithoutServiceInput[]
     updateMany?: FreelanceOrderUpdateManyWithWhereWithoutServiceInput | FreelanceOrderUpdateManyWithWhereWithoutServiceInput[]
     deleteMany?: FreelanceOrderScalarWhereInput | FreelanceOrderScalarWhereInput[]
+  }
+
+  export type WorkerUncheckedUpdateManyWithoutFreelanceServicesNestedInput = {
+    create?: XOR<WorkerCreateWithoutFreelanceServicesInput, WorkerUncheckedCreateWithoutFreelanceServicesInput> | WorkerCreateWithoutFreelanceServicesInput[] | WorkerUncheckedCreateWithoutFreelanceServicesInput[]
+    connectOrCreate?: WorkerCreateOrConnectWithoutFreelanceServicesInput | WorkerCreateOrConnectWithoutFreelanceServicesInput[]
+    upsert?: WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput | WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput[]
+    set?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    disconnect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    delete?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    connect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
+    update?: WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput | WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput[]
+    updateMany?: WorkerUpdateManyWithWhereWithoutFreelanceServicesInput | WorkerUpdateManyWithWhereWithoutFreelanceServicesInput[]
+    deleteMany?: WorkerScalarWhereInput | WorkerScalarWhereInput[]
   }
 
   export type ClientCreateNestedOneWithoutFreelanceOrdersInput = {
@@ -37317,8 +37510,10 @@ export namespace Prisma {
     role?: string | null
     phone?: string | null
     password: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    freelanceServices?: FreelanceServiceCreateNestedManyWithoutWorkersInput
     kyc?: KYCCreateNestedOneWithoutWorkerInput
     chats?: ChatCreateNestedManyWithoutWorkerInput
   }
@@ -37330,8 +37525,10 @@ export namespace Prisma {
     role?: string | null
     phone?: string | null
     password: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    freelanceServices?: FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
     kyc?: KYCUncheckedCreateNestedOneWithoutWorkerInput
     chats?: ChatUncheckedCreateNestedManyWithoutWorkerInput
   }
@@ -37467,6 +37664,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: FreelanceOrderCreateNestedManyWithoutServiceInput
+    workers?: WorkerCreateNestedManyWithoutFreelanceServicesInput
   }
 
   export type FreelanceServiceUncheckedCreateWithoutBusinessInput = {
@@ -37478,6 +37676,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
+    workers?: WorkerUncheckedCreateNestedManyWithoutFreelanceServicesInput
   }
 
   export type FreelanceServiceCreateOrConnectWithoutBusinessInput = {
@@ -37732,6 +37931,7 @@ export namespace Prisma {
     phone?: StringNullableFilter<"Worker"> | string | null
     password?: StringFilter<"Worker"> | string
     businessId?: StringFilter<"Worker"> | string
+    isVerified?: BoolFilter<"Worker"> | boolean
     createdAt?: DateTimeFilter<"Worker"> | Date | string
     updatedAt?: DateTimeFilter<"Worker"> | Date | string
   }
@@ -38538,6 +38738,35 @@ export namespace Prisma {
     create: XOR<BusinessCreateWithoutWorkersInput, BusinessUncheckedCreateWithoutWorkersInput>
   }
 
+  export type FreelanceServiceCreateWithoutWorkersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isHourly?: boolean
+    rate: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    business: BusinessCreateNestedOneWithoutFreelanceServicesInput
+    orders?: FreelanceOrderCreateNestedManyWithoutServiceInput
+  }
+
+  export type FreelanceServiceUncheckedCreateWithoutWorkersInput = {
+    id?: string
+    title: string
+    description?: string | null
+    isHourly?: boolean
+    rate: number
+    businessId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
+  }
+
+  export type FreelanceServiceCreateOrConnectWithoutWorkersInput = {
+    where: FreelanceServiceWhereUniqueInput
+    create: XOR<FreelanceServiceCreateWithoutWorkersInput, FreelanceServiceUncheckedCreateWithoutWorkersInput>
+  }
+
   export type KYCCreateWithoutWorkerInput = {
     id?: string
     status?: $Enums.KycStatus
@@ -38658,6 +38887,22 @@ export namespace Prisma {
     referralsReceived?: ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
     chats?: ChatUncheckedUpdateManyWithoutBusinessNestedInput
     postOfSales?: PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  }
+
+  export type FreelanceServiceUpsertWithWhereUniqueWithoutWorkersInput = {
+    where: FreelanceServiceWhereUniqueInput
+    update: XOR<FreelanceServiceUpdateWithoutWorkersInput, FreelanceServiceUncheckedUpdateWithoutWorkersInput>
+    create: XOR<FreelanceServiceCreateWithoutWorkersInput, FreelanceServiceUncheckedCreateWithoutWorkersInput>
+  }
+
+  export type FreelanceServiceUpdateWithWhereUniqueWithoutWorkersInput = {
+    where: FreelanceServiceWhereUniqueInput
+    data: XOR<FreelanceServiceUpdateWithoutWorkersInput, FreelanceServiceUncheckedUpdateWithoutWorkersInput>
+  }
+
+  export type FreelanceServiceUpdateManyWithWhereWithoutWorkersInput = {
+    where: FreelanceServiceScalarWhereInput
+    data: XOR<FreelanceServiceUpdateManyMutationInput, FreelanceServiceUncheckedUpdateManyWithoutWorkersInput>
   }
 
   export type KYCUpsertWithoutWorkerInput = {
@@ -39985,9 +40230,11 @@ export namespace Prisma {
     role?: string | null
     phone?: string | null
     password: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     business: BusinessCreateNestedOneWithoutWorkersInput
+    freelanceServices?: FreelanceServiceCreateNestedManyWithoutWorkersInput
     kyc?: KYCCreateNestedOneWithoutWorkerInput
   }
 
@@ -39999,8 +40246,10 @@ export namespace Prisma {
     phone?: string | null
     password: string
     businessId: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    freelanceServices?: FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
     kyc?: KYCUncheckedCreateNestedOneWithoutWorkerInput
   }
 
@@ -40218,9 +40467,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutWorkersNestedInput
+    freelanceServices?: FreelanceServiceUpdateManyWithoutWorkersNestedInput
     kyc?: KYCUpdateOneWithoutWorkerNestedInput
   }
 
@@ -40232,8 +40483,10 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     businessId?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    freelanceServices?: FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
     kyc?: KYCUncheckedUpdateOneWithoutWorkerNestedInput
   }
 
@@ -40863,9 +41116,11 @@ export namespace Prisma {
     role?: string | null
     phone?: string | null
     password: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     business: BusinessCreateNestedOneWithoutWorkersInput
+    freelanceServices?: FreelanceServiceCreateNestedManyWithoutWorkersInput
     chats?: ChatCreateNestedManyWithoutWorkerInput
   }
 
@@ -40877,8 +41132,10 @@ export namespace Prisma {
     phone?: string | null
     password: string
     businessId: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    freelanceServices?: FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
     chats?: ChatUncheckedCreateNestedManyWithoutWorkerInput
   }
 
@@ -41025,9 +41282,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutWorkersNestedInput
+    freelanceServices?: FreelanceServiceUpdateManyWithoutWorkersNestedInput
     chats?: ChatUpdateManyWithoutWorkerNestedInput
   }
 
@@ -41039,8 +41298,10 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     businessId?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    freelanceServices?: FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
     chats?: ChatUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
@@ -41683,6 +41944,41 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type WorkerCreateWithoutFreelanceServicesInput = {
+    id?: string
+    email: string
+    fullName?: string | null
+    role?: string | null
+    phone?: string | null
+    password: string
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    business: BusinessCreateNestedOneWithoutWorkersInput
+    kyc?: KYCCreateNestedOneWithoutWorkerInput
+    chats?: ChatCreateNestedManyWithoutWorkerInput
+  }
+
+  export type WorkerUncheckedCreateWithoutFreelanceServicesInput = {
+    id?: string
+    email: string
+    fullName?: string | null
+    role?: string | null
+    phone?: string | null
+    password: string
+    businessId: string
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    kyc?: KYCUncheckedCreateNestedOneWithoutWorkerInput
+    chats?: ChatUncheckedCreateNestedManyWithoutWorkerInput
+  }
+
+  export type WorkerCreateOrConnectWithoutFreelanceServicesInput = {
+    where: WorkerWhereUniqueInput
+    create: XOR<WorkerCreateWithoutFreelanceServicesInput, WorkerUncheckedCreateWithoutFreelanceServicesInput>
+  }
+
   export type BusinessUpsertWithoutFreelanceServicesInput = {
     update: XOR<BusinessUpdateWithoutFreelanceServicesInput, BusinessUncheckedUpdateWithoutFreelanceServicesInput>
     create: XOR<BusinessCreateWithoutFreelanceServicesInput, BusinessUncheckedCreateWithoutFreelanceServicesInput>
@@ -41764,6 +42060,22 @@ export namespace Prisma {
     data: XOR<FreelanceOrderUpdateManyMutationInput, FreelanceOrderUncheckedUpdateManyWithoutServiceInput>
   }
 
+  export type WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput = {
+    where: WorkerWhereUniqueInput
+    update: XOR<WorkerUpdateWithoutFreelanceServicesInput, WorkerUncheckedUpdateWithoutFreelanceServicesInput>
+    create: XOR<WorkerCreateWithoutFreelanceServicesInput, WorkerUncheckedCreateWithoutFreelanceServicesInput>
+  }
+
+  export type WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput = {
+    where: WorkerWhereUniqueInput
+    data: XOR<WorkerUpdateWithoutFreelanceServicesInput, WorkerUncheckedUpdateWithoutFreelanceServicesInput>
+  }
+
+  export type WorkerUpdateManyWithWhereWithoutFreelanceServicesInput = {
+    where: WorkerScalarWhereInput
+    data: XOR<WorkerUpdateManyMutationInput, WorkerUncheckedUpdateManyWithoutFreelanceServicesInput>
+  }
+
   export type ClientCreateWithoutFreelanceOrdersInput = {
     id?: string
     username: string
@@ -41822,6 +42134,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     business: BusinessCreateNestedOneWithoutFreelanceServicesInput
+    workers?: WorkerCreateNestedManyWithoutFreelanceServicesInput
   }
 
   export type FreelanceServiceUncheckedCreateWithoutOrdersInput = {
@@ -41833,6 +42146,7 @@ export namespace Prisma {
     businessId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    workers?: WorkerUncheckedCreateNestedManyWithoutFreelanceServicesInput
   }
 
   export type FreelanceServiceCreateOrConnectWithoutOrdersInput = {
@@ -41974,6 +42288,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
+    workers?: WorkerUpdateManyWithoutFreelanceServicesNestedInput
   }
 
   export type FreelanceServiceUncheckedUpdateWithoutOrdersInput = {
@@ -41985,6 +42300,7 @@ export namespace Prisma {
     businessId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workers?: WorkerUncheckedUpdateManyWithoutFreelanceServicesNestedInput
   }
 
   export type BusinessUpsertWithWhereUniqueWithoutFreelanceOrdersInput = {
@@ -42928,6 +43244,7 @@ export namespace Prisma {
     role?: string | null
     phone?: string | null
     password: string
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43070,8 +43387,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    freelanceServices?: FreelanceServiceUpdateManyWithoutWorkersNestedInput
     kyc?: KYCUpdateOneWithoutWorkerNestedInput
     chats?: ChatUpdateManyWithoutWorkerNestedInput
   }
@@ -43083,8 +43402,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    freelanceServices?: FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
     kyc?: KYCUncheckedUpdateOneWithoutWorkerNestedInput
     chats?: ChatUncheckedUpdateManyWithoutWorkerNestedInput
   }
@@ -43096,6 +43417,7 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43217,6 +43539,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: FreelanceOrderUpdateManyWithoutServiceNestedInput
+    workers?: WorkerUpdateManyWithoutFreelanceServicesNestedInput
   }
 
   export type FreelanceServiceUncheckedUpdateWithoutBusinessInput = {
@@ -43228,6 +43551,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
+    workers?: WorkerUncheckedUpdateManyWithoutFreelanceServicesNestedInput
   }
 
   export type FreelanceServiceUncheckedUpdateManyWithoutBusinessInput = {
@@ -43717,6 +44041,41 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type FreelanceServiceUpdateWithoutWorkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isHourly?: BoolFieldUpdateOperationsInput | boolean
+    rate?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    business?: BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
+    orders?: FreelanceOrderUpdateManyWithoutServiceNestedInput
+  }
+
+  export type FreelanceServiceUncheckedUpdateWithoutWorkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isHourly?: BoolFieldUpdateOperationsInput | boolean
+    rate?: FloatFieldUpdateOperationsInput | number
+    businessId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
+  }
+
+  export type FreelanceServiceUncheckedUpdateManyWithoutWorkersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isHourly?: BoolFieldUpdateOperationsInput | boolean
+    rate?: FloatFieldUpdateOperationsInput | number
+    businessId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ChatUpdateWithoutWorkerInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -44154,6 +44513,49 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     escrowAmount?: FloatFieldUpdateOperationsInput | number
     commissionPercent?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkerUpdateWithoutFreelanceServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    business?: BusinessUpdateOneRequiredWithoutWorkersNestedInput
+    kyc?: KYCUpdateOneWithoutWorkerNestedInput
+    chats?: ChatUpdateManyWithoutWorkerNestedInput
+  }
+
+  export type WorkerUncheckedUpdateWithoutFreelanceServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    businessId?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    kyc?: KYCUncheckedUpdateOneWithoutWorkerNestedInput
+    chats?: ChatUncheckedUpdateManyWithoutWorkerNestedInput
+  }
+
+  export type WorkerUncheckedUpdateManyWithoutFreelanceServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    businessId?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -20,6 +20,9 @@ export class AuthPayloadClient {
 
   @Field(() => String)
   accessToken: string;
+  
+  @Field(() => String)
+  refreshToken: string;
 }
 
 @ObjectType()
@@ -44,4 +47,7 @@ export class AuthPayloadBusiness {
 
   @Field(() => String)
   accessToken: string;
+  
+  @Field(() => String)
+  refreshToken: string;
 }

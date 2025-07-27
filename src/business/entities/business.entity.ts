@@ -4,6 +4,7 @@ import { AdEntity } from 'src/ad/entities/ad.entity';
 import { ChatEntity } from 'src/chat/entities/chat.entity';
 import { FreelanceOrderEntity } from 'src/freelance-order/entities/freelance-order.entity';
 import { FreelanceServiceEntity } from 'src/freelance-service/entities/freelance-service.entity';
+import { PostOfSaleEntity } from 'src/post-of-sale/entities/post-of-sale.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { ReOwnedProductEntity } from 'src/re-owned-product/entities/re-owned-product.entity';
 import { ReferralEntity } from 'src/referral/entities/referral.entity';
@@ -14,21 +15,27 @@ import { WorkerEntity } from 'src/worker/entities/worker.entity';
 export class BusinessEntity {
   @Field()
   id: string;
-
+  
   @Field()
   name: string;
-
+  
   @Field()
   email: string;
-
+  
   @Field({ nullable: true })
   description?: string;
-
+  
   @Field({ nullable: true })
   address?: string;
-
+  
   @Field({ nullable: true })
   phone?: string;
+  
+  @Field({ nullable: true })
+  avatar?: string;
+
+  @Field({ nullable: true })
+  coverImage?: string;
 
   @Field()
   password: string; // This should be hashed and not exposed in the GraphQL schema
@@ -41,7 +48,7 @@ export class BusinessEntity {
 
   @Field()
   updatedAt: Date;
-
+  
   // Relations
   @Field(() => [ProductEntity]) // Products associated with the business
   products: ProductEntity[];
@@ -75,4 +82,7 @@ export class BusinessEntity {
 
   @Field(() => [ChatEntity]) // Chats associated with the business
   chats: ChatEntity[];
+  
+    @Field(() => [PostOfSaleEntity], { nullable: true })
+    postOfSales?: PostOfSaleEntity[];
 }
