@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -54,6 +55,19 @@ enum FreelanceStatus {
   CANCELLED
 }
 
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  SOLD
+  ARCHIVED
+}
+
+enum PostTransactionStatus {
+  PENDING
+  COMPLETED
+  REFUNDED
+}
+
 // Models
 
 model Business {
@@ -82,6 +96,8 @@ model Business {
   updatedAt            DateTime              @updatedAt
 
   chats Chat[]
+
+  postOfSales PostOfSale[]
 }
 
 model Client {
@@ -104,6 +120,8 @@ model Client {
   referralsReceived    Referral[]            @relation("ClientReferred")
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
+
+  PostTransaction PostTransaction[]
 }
 
 model Worker {
@@ -149,6 +167,8 @@ model Media {
   product              Product               @relation(fields: [productId], references: [id])
   productId            String
   createdAt            DateTime              @default(now())
+
+  postOfSales PostOfSale[]
 }
 
 model Order {
@@ -278,6 +298,8 @@ model PaymentTransaction {
   transactionDate      DateTime              @default(now())
   qrCode               String?
   createdAt            DateTime              @default(now())
+
+  PostTransaction PostTransaction[]
 }
 
 model Ad {
@@ -338,4 +360,36 @@ model Referral {
   referredClientId     String?
   verifiedPurchase     Boolean               @default(false)
   createdAt            DateTime              @default(now())
+}
+
+// 2. Core PostOfSale model
+model PostOfSale {
+  id           String         @id @default(cuid())
+  title        String
+  description  String?
+  price        Float
+  status       PostStatus     @default(DRAFT)
+  business     Business       @relation(fields: [businessId], references: [id])
+  businessId   String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  // Optional relations
+  media        Media[]        // if you attach images/videos
+  transactions PostTransaction[]
+}
+
+// 3. Link PostTransaction to PostOfSale + Client + PaymentTransaction
+model PostTransaction {
+  id                  String                  @id @default(cuid())
+  post                PostOfSale              @relation(fields: [postId], references: [id])
+  postId              String
+  client              Client                  @relation(fields: [clientId], references: [id])
+  clientId            String
+  paymentTransaction  PaymentTransaction?     @relation(fields: [paymentTransactionId], references: [id])
+  paymentTransactionId String?
+
+  status              PostTransactionStatus   @default(PENDING)
+  amount              Float
+  createdAt           DateTime                @default(now())
 }

@@ -5,7 +5,6 @@ import { FreelanceOrderEntity } from 'src/freelance-order/entities/freelance-ord
 import { OrderEntity } from 'src/order/entities/order.entity';
 import { ReferralEntity } from 'src/referral/entities/referral.entity';
 import { ReviewEntity } from 'src/review/entities/review.entity';
-
 @ObjectType()
 export class ClientEntity {
   @Field()
@@ -26,9 +25,7 @@ export class ClientEntity {
   @Field({ nullable: true })
   phone?: string;
 
-  @Field()
-  password: string; // This should be hashed and not exposed in the GraphQL schema
-
+  // Password is not exposed in GraphQL schema for security
   @Field()
   isVerified: boolean;
 
@@ -38,25 +35,25 @@ export class ClientEntity {
   @Field()
   updatedAt: Date;
 
-  // Relations
-  @Field(() => [OrderEntity]) // Orders made by the client
-  orders: OrderEntity[];
+  // Relations (simplified for GraphQL, actual types depend on other modules)
+  @Field(() => [ObjectType()], { nullable: true })
+  orders?: any[];
 
-  @Field(() => [ReviewEntity]) // Reviews written by the client
-  reviews: ReviewEntity[];
+  @Field(() => [ObjectType()], { nullable: true })
+  reviews?: any[];
 
-  @Field(() => [ChatEntity]) // Chats associated with the client
-  chats: ChatEntity[];
+  @Field(() => [ObjectType()], { nullable: true })
+  chats?: any[];
 
-  @Field(() => [AccountRechargeEntity]) // Recharges made by the client
-  recharges: AccountRechargeEntity[];
+  @Field(() => [ObjectType()], { nullable: true })
+  recharges?: any[];
 
-  @Field(() => [FreelanceOrderEntity]) // Freelance orders made by the client
-  freelanceOrders: FreelanceOrderEntity[];
+  @Field(() => [ObjectType()], { nullable: true })
+  freelanceOrders?: any[];
 
-  @Field(() => [ReferralEntity]) // Referrals made by the client
-  referralsMade: ReferralEntity[];
+  @Field(() => [ObjectType()], { nullable: true })
+  referralsMade?: any[];
 
-  @Field(() => [ReferralEntity]) // Referrals received by the client
-  referralsReceived: ReferralEntity[];
+  @Field(() => [ObjectType()], { nullable: true })
+  referralsReceived?: any[];
 }

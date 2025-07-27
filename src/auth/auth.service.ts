@@ -11,55 +11,47 @@ export class AuthService {
 
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
-  async validateClient(email: string, password: string) {
-    // Implement your authentication logic here
-    const client = await this.prisma.client.findUnique({
-      where: { email },
-    });
-    if (!client) {
-      throw new UnauthorizedException('Client not found');
+  async validateUser(email: string, password: string, role: string) {
+    let user;
+    if (role === 'client') {
+      user = await this.prisma.client.findUnique({ where: { email } });
+    } else if (role === 'business') {
+      user = await this.prisma.business.findUnique({ where: { email } });
+    } else if (role === 'worker') {
+      user = await this.prisma.worker.findUnique({ where: { email } });
+    } else {
+      throw new UnauthorizedException('Invalid role');
     }
-    const isValid = await verify(client.password, password); // Replace with actual password verification logic
-    
+  
+    if (!user) {
+      throw new UnauthorizedException(`${role} not found`);
+    }
+  
+    const isValid = await verify(user.password, password);
     if (!isValid) {
-      throw new UnauthorizedException('Invalid password');
+      throw new UnauthorizedException('Invalid credentials');
     }
-    return client; // Return the client object or any relevant data
+  
+    return user;
   }
 
-  async validateBusiness(email: string, password: string) {
-    // Implement your business authentication logic here
-    const business = await this.prisma.business.findUnique({
-      where: { email },
-    });
-    if (!business) {
-      throw new UnauthorizedException('Business not found');
-    }
-    const isValid = await verify(business.password, password); // Replace with actual password verification logic
-    if (!isValid) {
-      throw new UnauthorizedException('Invalid Credentials');
-    }
-    return business; // Return the business object or any relevant data
-  }
-
-  async generateToken(clientId: string) {
+  async generateToken(userId: string, role: string) {
     // Implement your token generation logic here
     const client = await this.prisma.client.findUnique({
-      where: { id: clientId },
+      where: { id: userId },
     });
     if (!client) {
       throw new UnauthorizedException('Client not found');
     }
     // Generate a token (e.g., JWT) and return it
-    const payload : AuthJwtPayload = { sub: client.id };
-    const accessToken = await this.jwtService.signAsync(payload);
-    return {
-      accessToken,
-    };
+    const payload: AuthJwtPayload = { sub: userId, role };
+    const accessToken = await this.jwtService.signAsync(payload, { expiresIn: '15m' });
+    const refreshToken = await this.jwtService.signAsync(payload, { expiresIn: '7d' });
+    return { accessToken, refreshToken };
   }
 
-  async loginClient(client: Client){
-    const {accessToken} = await this.generateToken(client.id);
+  async loginClient(client: Client) {
+    const { accessToken, refreshToken } = await this.generateToken(client.id, "client");
     return {
       id: client.id,
       email: client.email,
@@ -67,11 +59,12 @@ export class AuthService {
       phone: client.phone,
       avatar: client.avatar,
       accessToken,
+      refreshToken,  // Now included in the response
     };
   }
 
-  async loginBusiness(business: Business){
-    const {accessToken} = await this.generateToken(business.id);
+  async loginBusiness(business: Business) {
+    const { accessToken, refreshToken } = await this.generateToken(business.id, "business");
     return {
       id: business.id,
       email: business.email,
@@ -80,10 +73,11 @@ export class AuthService {
       avatar: business.avatar,
       coverImage: business.coverImage,
       accessToken,
-    }
+      refreshToken,  // Now included in the response
+    };
   }
 
-  async validateCurrentAccountJwt(id : string){
+  async validateCurrentAccountJwt(id : string, role : string){
     const userAccount = await this.prisma.client.findUnique({
       where: { id },
     });
@@ -95,10 +89,10 @@ export class AuthService {
         throw new UnauthorizedException('Acount not found');
       }
     // Return the client object or any relevant data
-      const currentAccount = {id : userAccountBusiness.id}
+      const currentAccount = {id : userAccountBusiness.id, role}
       return currentAccount;
     }
-    const currentAccount = {id : userAccount.id}
+    const currentAccount = {id : userAccount.id, role}
     return currentAccount;
   }
 }

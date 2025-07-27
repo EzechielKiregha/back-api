@@ -282,6 +282,7 @@ type Mutation {
   CreateClient(CreateClientInput: CreateClientInput!): ClientEntity!
   signIn(SignInInput: SignInInput!): AuthPayloadClient!
   signBusinessIn(SignInInput: SignInInput!): AuthPayloadBusiness!
+  refreshToken(refreshToken: String!): AuthPayloadClient!
 }
 
 input CreateClientInput {
