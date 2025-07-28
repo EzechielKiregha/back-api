@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
 
@@ -142,15 +142,25 @@ model Worker {
   chats Chat[]
 }
 
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[] @relation("ProductCategory")
+}
+
 model Product {
   id                   String                @id @default(uuid())
   title                String
   description          String?
   price                Float
   stock                Int                   @default(0)
-  category             String?
   business             Business              @relation(fields: [businessId], references: [id])
   businessId           String
+  categoryId      String
+  category        Category         @relation("ProductCategory", fields: [categoryId], references: [id])
   medias               Media[]
   reviews              Review[]
   orders               OrderProduct[]
@@ -194,6 +204,7 @@ model OrderProduct {
   product              Product               @relation(fields: [productId], references: [id])
   productId            String
   quantity             Int                   @default(1)
+  createdAt            DateTime              @default(now())
 }
 
 model Review {

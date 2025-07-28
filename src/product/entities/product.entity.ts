@@ -1,5 +1,7 @@
 import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
 import { AdEntity } from 'src/ad/entities/ad.entity';
+import { BusinessEntity } from 'src/business/entities/business.entity';
+import { CategoryEntity } from 'src/category/entities/category.entity';
 import { ChatEntity } from 'src/chat/entities/chat.entity';
 import { MediaEntity } from 'src/media/entities/media.entity';
 import { OrderProductEntity } from 'src/order-product/entities/order-product.entity';
@@ -24,9 +26,6 @@ export class ProductEntity {
   @Field(() => Int)
   stock: number;
 
-  @Field({ nullable: true })
-  category?: string;
-
   @Field()
   businessId: string;
 
@@ -39,6 +38,12 @@ export class ProductEntity {
   // Relations
   @Field(() => [MediaEntity]) // Media associated with the product
   medias: MediaEntity[];
+
+  @Field(() => BusinessEntity, { nullable: true })
+  business?: BusinessEntity;
+  
+  @Field(() => CategoryEntity, { nullable: true })
+  category?: CategoryEntity;
 
   @Field(() => [ReviewEntity]) // Reviews for the product
   reviews: ReviewEntity[];

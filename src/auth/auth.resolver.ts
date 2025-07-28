@@ -1,9 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { ClientEntity } from 'src/client/entities/client.entity';
-import { CreateClientInput } from 'src/client/dto/create-client.input';
 import { SignInInput } from './dto/signin.input';
-import { AuthPayloadBusiness, AuthPayloadClient } from './entities/auth-payload.entity';
+import { AuthPayloadBusiness, AuthPayloadClient, AuthPayloadWorker } from './entities/auth-payload.entity';
 import { JwtService } from '@nestjs/jwt';
 
 @Resolver()
@@ -21,6 +19,12 @@ export class AuthResolver {
     const business = await this.authService.validateUser(signInInput.email, signInInput.password, "business");
 
     return this.authService.loginBusiness(business);
+  }
+  @Mutation(() => AuthPayloadWorker)
+  async signWorkerIn(@Args('SignInInput') signInInput: SignInInput) {
+    const worker = await this.authService.validateUser(signInInput.email, signInInput.password, "worker");
+
+    return this.authService.loginWorker(worker);
   }
 
   @Mutation(() => AuthPayloadClient)

@@ -8,9 +8,6 @@ export class OrderEntity {
   @Field()
   id: string;
 
-  @Field()
-  clientId: string;
-
   @Field(() => Float)
   deliveryFee: number;
 
@@ -26,13 +23,14 @@ export class OrderEntity {
   @Field()
   updatedAt: Date;
 
-  // Relations
-  @Field(() => ClientEntity) // Client who placed the order
+  @Field(() => ClientEntity)
   client: ClientEntity;
 
-  @Field(() => [OrderProductEntity]) // Products in the order
-  products: OrderProductEntity[];
+  @Field(() => PaymentTransactionEntity, { nullable: true })
+  payment?: PaymentTransactionEntity;
 
-  @Field(() => PaymentTransactionEntity, { nullable: true }) // Payment transaction for the order
-  payment: PaymentTransactionEntity;
+  @Field(() => [OrderProductEntity], { nullable: true })
+  products?: OrderProductEntity[];
 }
+
+

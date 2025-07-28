@@ -1,10 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { hash, verify } from 'argon2';
+import { verify } from 'argon2';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthJwtPayload } from './types/auth-jwtpayload';
-import { ClientEntity } from 'src/client/entities/client.entity';
-import { Business, Client } from '@prisma/client';
+import { Business, Client, Worker } from '../generated/prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -84,23 +83,53 @@ export class AuthService {
       refreshToken,  // Now included in the response
     };
   }
+  async loginWorker(worker: Worker) {
+    const { accessToken, refreshToken } = await this.generateToken(worker.id, "worker");
+    return {
+      id: worker.id,
+      email: worker.email,
+      fullname: worker.fullName,
+      phone: worker.phone,
+      accessToken,
+      refreshToken,   // Now included in the response
+    };
+  }
 
   async validateCurrentAccountJwt(id : string, role : string){
+  if (role === 'client'){
     const userAccount = await this.prisma.client.findUnique({
       where: { id },
     });
+
     if (!userAccount) {
-      const userAccountBusiness = await this.prisma.business.findUnique({
-        where: { id },
-      });
-      if (!userAccountBusiness) {
-        throw new UnauthorizedException('Acount not found');
-      }
-    // Return the client object or any relevant data
-      const currentAccount = {id : userAccountBusiness.id, role}
-      return currentAccount;
+      throw new UnauthorizedException('Acount not found');
     }
     const currentAccount = {id : userAccount.id, role}
     return currentAccount;
+
+  } else if (role === 'business'){
+    const userAccountBusiness = await this.prisma.business.findUnique({
+      where: { id },
+    });
+
+    if (!userAccountBusiness) {
+      throw new UnauthorizedException('Acount not found');
+    }
+    const currentAccount = {id : userAccountBusiness.id, role}
+    return currentAccount;
+
+  } else if (role === 'worker'){
+    const userAccountWorker = await this.prisma.worker.findUnique({
+      where: { id },
+    });
+    if (!userAccountWorker) {
+      throw new UnauthorizedException('Acount not found');
+    }
+    const currentAccount = {id : userAccountWorker.id, role}
+    return currentAccount;
+  } else {
+    
+    throw new UnauthorizedException('Unauthorized Role so far');
   }
+}
 }

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { WorkerService } from './worker.service';
 import { WorkerEntity } from './entities/worker.entity';
 import { CreateWorkerInput } from './dto/create-worker.input';
@@ -31,7 +31,7 @@ export class WorkerResolver {
   @Query(() => WorkerEntity, { name: 'worker', description: 'Retrieves a single worker by ID.' })
   async getWorker(@Args('id', { type: () => String }) id: string, @Context() context) {
     const user = context.req.user;
-    if (user.role === 'worker' && user.id !== id) {
+    if (user.role !== 'worker' && user.id !== id) {
       throw new Error('Workers can only access their own data');
     }
     return this.workerService.findOne(id);

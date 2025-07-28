@@ -1,22 +1,35 @@
-import { ObjectType, Field, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Float, registerEnumType } from '@nestjs/graphql';
 import { OrderEntity } from 'src/order/entities/order.entity';
+
+// Enums
+enum PaymentStatus {
+  PENDING = 'PENDING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+enum PaymentMethod {
+  TOKEN = 'TOKEN',
+  MOBILE_MONEY = 'MOBILE_MONEY',
+}
+
+// Register enums with GraphQL
+registerEnumType(PaymentStatus, { name: 'PaymentStatus' });
+registerEnumType(PaymentMethod, { name: 'PaymentMethod' });
 
 @ObjectType()
 export class PaymentTransactionEntity {
   @Field()
   id: string;
 
-  @Field()
-  orderId: string;
-
-  @Field()
-  status: string; // PaymentStatus (e.g., PENDING, COMPLETED, FAILED)
-
-  @Field()
-  method: string; // PaymentMethod (e.g., TOKEN, MOBILE_MONEY)
-
   @Field(() => Float)
   amount: number;
+
+  @Field()
+  method: PaymentMethod;
+
+  @Field()
+  status: PaymentStatus;
 
   @Field()
   transactionDate: Date;

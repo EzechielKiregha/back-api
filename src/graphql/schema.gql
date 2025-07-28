@@ -28,6 +28,15 @@ type AdEntity {
   product: ProductEntity!
 }
 
+type CategoryEntity {
+  id: String!
+  name: String!
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  products: [ProductEntity!]
+}
+
 type MediaEntity {
   id: String!
   url: String!
@@ -39,10 +48,9 @@ type MediaEntity {
 
 type PaymentTransactionEntity {
   id: String!
-  orderId: String!
-  status: String!
-  method: String!
   amount: Float!
+  method: String!
+  status: String!
   transactionDate: DateTime!
   qrCode: String
   createdAt: DateTime!
@@ -51,15 +59,14 @@ type PaymentTransactionEntity {
 
 type OrderEntity {
   id: String!
-  clientId: String!
   deliveryFee: Float!
   deliveryAddress: String
   qrCode: String
   createdAt: DateTime!
   updatedAt: DateTime!
   client: ClientEntity!
-  products: [OrderProductEntity!]!
   payment: PaymentTransactionEntity
+  products: [OrderProductEntity!]
 }
 
 type OrderProductEntity {
@@ -113,11 +120,12 @@ type ProductEntity {
   description: String
   price: Float!
   stock: Int!
-  category: String
   businessId: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   medias: [MediaEntity!]!
+  business: BusinessEntity
+  category: CategoryEntity
   reviews: [ReviewEntity!]!
   orders: [OrderProductEntity!]!
   chats: [ChatEntity!]!
@@ -126,17 +134,60 @@ type ProductEntity {
   ads: [AdEntity!]!
 }
 
+type FreelanceOrderEntity {
+  id: String!
+  clientId: String!
+  serviceId: String!
+  status: String!
+  quantity: Int!
+  totalAmount: Float!
+  escrowAmount: Float!
+  commissionPercent: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  client: ClientEntity!
+  service: FreelanceServiceEntity!
+  businesses: [BusinessEntity!]!
+}
+
+type FreelanceServiceEntity {
+  id: String!
+  title: String!
+  description: String
+  isHourly: Boolean!
+  rate: Float!
+  businessId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  business: BusinessEntity!
+  orders: [FreelanceOrderEntity!]!
+}
+
+type KnowYourCustomerEntity {
+  id: String!
+  status: String!
+  documentUrl: String!
+  submittedAt: DateTime!
+  verifiedAt: DateTime
+  businessId: String
+  clientId: String
+  workerId: String
+  business: BusinessEntity
+  client: ClientEntity
+  worker: WorkerEntity
+}
+
 type WorkerEntity {
   id: String!
   email: String!
   fullName: String
   role: String
-  phone: String
-  password: String!
-  businessId: String!
+  isVerified: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
-  business: BusinessEntity!
+  business: BusinessEntity
+  kyc: KnowYourCustomerEntity
+  freelanceServices: [FreelanceServiceEntity!]
   chats: [ChatEntity!]!
 }
 
@@ -154,35 +205,6 @@ type ChatEntity {
   business: BusinessEntity
   worker: WorkerEntity
   messages: [ChatMessageEntity!]!
-}
-
-type FreelanceServiceEntity {
-  id: String!
-  title: String!
-  description: String
-  isHourly: Boolean!
-  rate: Float!
-  businessId: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  business: BusinessEntity!
-  orders: [FreelanceOrderEntity!]!
-}
-
-type FreelanceOrderEntity {
-  id: String!
-  clientId: String!
-  serviceId: String!
-  status: String!
-  quantity: Int!
-  totalAmount: Float!
-  escrowAmount: Float!
-  commissionPercent: Float!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  client: ClientEntity!
-  service: FreelanceServiceEntity!
-  businesses: [BusinessEntity!]!
 }
 
 type ClientEntity {
@@ -278,6 +300,15 @@ type AuthPayloadClient {
   refreshToken: String!
 }
 
+type AuthPayloadWorker {
+  id: String!
+  email: String!
+  fullname: String!
+  phone: String!
+  accessToken: String!
+  refreshToken: String!
+}
+
 type AuthPayloadBusiness {
   id: String!
   email: String!
@@ -290,6 +321,18 @@ type AuthPayloadBusiness {
 }
 
 type Query {
+  """Retrieves all products with their relations."""
+  products: [ProductEntity!]!
+
+  """Retrieves a single product by ID."""
+  product(id: String!): ProductEntity!
+
+  """Retrieves orders based on user role."""
+  orders: [OrderEntity!]!
+
+  """Retrieves a single order by ID."""
+  order(id: String!): OrderEntity!
+
   """Retrieves all businesses with their relations."""
   businesses: [BusinessEntity!]!
 
@@ -301,10 +344,40 @@ type Query {
 
   """Retrieves a single client by ID."""
   client(id: String!): ClientEntity!
+
+  """Retrieves all workers with their relations."""
+  workers: [WorkerEntity!]!
+
+  """Retrieves a single worker by ID."""
+  worker(id: String!): WorkerEntity!
   postOfSale(id: Int!): PostOfSaleEntity!
+
+  """Retrieves all categories with their products."""
+  categories: [CategoryEntity!]!
+
+  """Retrieves a single category by ID."""
+  category(id: String!): CategoryEntity!
 }
 
 type Mutation {
+  """Creates a new product for a business."""
+  createProduct(createProductInput: CreateProductInput!): ProductEntity!
+
+  """Updates a product’s details."""
+  updateProduct(id: String!, updateProductInput: UpdateProductInput!): ProductEntity!
+
+  """Deletes a product."""
+  deleteProduct(id: String!): ProductEntity!
+
+  """Creates a new order for a client."""
+  createOrder(createOrderInput: CreateOrderInput!): OrderEntity!
+
+  """Updates an order’s details."""
+  updateOrder(id: String!, updateOrderInput: UpdateOrderInput!): OrderEntity!
+
+  """Deletes an order."""
+  deleteOrder(id: String!): OrderEntity!
+
   """Creates a new business with hashed password."""
   createBusiness(createBusinessInput: CreateBusinessInput!): BusinessEntity!
 
@@ -322,12 +395,92 @@ type Mutation {
 
   """Deletes a client."""
   deleteClient(id: String!): ClientEntity!
+
+  """Creates a new worker with hashed password."""
+  createWorker(createWorkerInput: CreateWorkerInput!): WorkerEntity!
+
+  """Updates a worker’s details."""
+  updateWorker(id: String!, updateWorkerInput: UpdateWorkerInput!): WorkerEntity!
+
+  """Deletes a worker."""
+  deleteWorker(id: String!): WorkerEntity!
   signIn(SignInInput: SignInInput!): AuthPayloadClient!
   signBusinessIn(SignInInput: SignInInput!): AuthPayloadBusiness!
+  signWorkerIn(SignInInput: SignInInput!): AuthPayloadWorker!
   refreshToken(refreshToken: String!): AuthPayloadClient!
   createPostOfSale(createPostOfSaleInput: CreatePostOfSaleInput!): PostOfSaleEntity!
   updatePostOfSale(updatePostOfSaleInput: UpdatePostOfSaleInput!): PostOfSaleEntity!
   removePostOfSale(id: Int!): PostOfSaleEntity!
+
+  """Creates a new category."""
+  createCategory(createCategoryInput: CreateCategoryInput!): CategoryEntity!
+
+  """Updates a category’s details."""
+  updateCategory(id: String!, updateCategoryInput: UpdateCategoryInput!): CategoryEntity!
+
+  """Deletes a category."""
+  deleteCategory(id: String!): CategoryEntity!
+}
+
+input CreateProductInput {
+  title: String!
+  description: String
+  price: Float!
+  stock: Int!
+  businessId: String!
+  categoryId: String!
+}
+
+input UpdateProductInput {
+  title: String
+  description: String
+  price: Float
+  stock: Int
+  businessId: String
+  categoryId: String
+  id: String!
+}
+
+input CreateOrderInput {
+  clientId: String!
+  deliveryFee: Float!
+  deliveryAddress: String
+  qrCode: String
+  orderProducts: [CreateOrderProductInput!]!
+  payment: CreatePaymentTransactionInput!
+}
+
+input CreateOrderProductInput {
+  productId: String!
+  quantity: Int!
+}
+
+input CreatePaymentTransactionInput {
+  amount: Float!
+  method: PaymentMethod!
+  status: PaymentStatus!
+  qrCode: String
+}
+
+enum PaymentMethod {
+  TOKEN
+  MOBILE_MONEY
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+input UpdateOrderInput {
+  clientId: String
+  deliveryFee: Float
+  deliveryAddress: String
+  qrCode: String
+  orderProducts: [CreateOrderProductInput!]
+  payment: CreatePaymentTransactionInput
+  id: String!
 }
 
 input CreateBusinessInput {
@@ -378,6 +531,27 @@ input UpdateClientInput {
   kycId: String
 }
 
+input CreateWorkerInput {
+  email: String!
+  fullName: String
+  role: String
+  password: String!
+  isVerified: Boolean! = false
+  businessId: String
+  kycId: String
+}
+
+input UpdateWorkerInput {
+  email: String
+  fullName: String
+  role: String
+  password: String
+  isVerified: Boolean = false
+  businessId: String
+  kycId: String
+  id: String!
+}
+
 input SignInInput {
   email: String!
   password: String!
@@ -392,4 +566,15 @@ input UpdatePostOfSaleInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
+}
+
+input CreateCategoryInput {
+  name: String!
+  description: String
+}
+
+input UpdateCategoryInput {
+  name: String
+  description: String
+  id: String!
 }

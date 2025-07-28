@@ -1,7 +1,39 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Int, Field, Float, registerEnumType } from '@nestjs/graphql';
+import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+
+// Enums
+enum PaymentStatus {
+  PENDING = 'PENDING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+enum PaymentMethod {
+  TOKEN = 'TOKEN',
+  MOBILE_MONEY = 'MOBILE_MONEY',
+}
+
+// Register enums with GraphQL
+registerEnumType(PaymentStatus, { name: 'PaymentStatus' });
+registerEnumType(PaymentMethod, { name: 'PaymentMethod' });
 
 @InputType()
 export class CreatePaymentTransactionInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => Float)
+  @IsNumber()
+  @Min(0)
+  amount: number;
+
+  @Field(() => PaymentMethod)
+  @IsEnum(PaymentMethod)
+  method: PaymentMethod;
+
+  @Field(() => PaymentStatus)
+  @IsEnum(PaymentStatus)
+  status: PaymentStatus;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  qrCode?: string;
 }

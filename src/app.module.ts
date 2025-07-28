@@ -32,6 +32,7 @@ import { MediaModule } from './media/media.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config'
 import { PostOfSaleModule } from './post-of-sale/post-of-sale.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { PostOfSaleModule } from './post-of-sale/post-of-sale.module';
     ReferralModule,
     AuthModule,
     PostOfSaleModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
