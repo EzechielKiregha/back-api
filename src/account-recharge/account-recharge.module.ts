@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AccountRechargeService } from './account-recharge.service';
-import { AccountRechargeResolver } from './account-recharge.resolver';
 
+import { PrismaService } from '../prisma/prisma.service';
+import { AccountRechargeResolver } from './account-recharge.resolver';
+import { AccountRechargeService } from './account-recharge.service';
+
+
+// Module
 @Module({
-  providers: [AccountRechargeResolver, AccountRechargeService],
+  providers: [AccountRechargeResolver, AccountRechargeService, PrismaService],
 })
 export class AccountRechargeModule {}

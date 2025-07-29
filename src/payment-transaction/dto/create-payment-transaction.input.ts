@@ -2,13 +2,13 @@ import { InputType, Int, Field, Float, registerEnumType } from '@nestjs/graphql'
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
 // Enums
-enum PaymentStatus {
+export enum PaymentStatus {
   PENDING = 'PENDING',
   COMPLETED = 'COMPLETED',
   FAILED = 'FAILED',
 }
 
-enum PaymentMethod {
+export enum PaymentMethod {
   TOKEN = 'TOKEN',
   MOBILE_MONEY = 'MOBILE_MONEY',
 }
@@ -19,6 +19,11 @@ registerEnumType(PaymentMethod, { name: 'PaymentMethod' });
 
 @InputType()
 export class CreatePaymentTransactionInput {
+  @Field()
+  @IsOptional()
+  @IsString()
+  orderId?: string;
+
   @Field(() => Float)
   @IsNumber()
   @Min(0)

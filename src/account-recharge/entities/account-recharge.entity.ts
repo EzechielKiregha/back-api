@@ -1,6 +1,8 @@
-import { ObjectType, Field, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Float, registerEnumType } from '@nestjs/graphql';
 import { BusinessEntity } from 'src/business/entities/business.entity';
 import { ClientEntity } from 'src/client/entities/client.entity';
+import { Country, RechargeMethod } from '../dto/create-account-recharge.input';
+
 
 @ObjectType()
 export class AccountRechargeEntity {
@@ -10,25 +12,20 @@ export class AccountRechargeEntity {
   @Field(() => Float)
   amount: number;
 
-  @Field()
-  method: string; // RechargeMethod (e.g., MTN_MONEY, AIRTEL_MONEY)
+  @Field(() => RechargeMethod)
+  method: RechargeMethod;
 
-  @Field()
-  origin: string; // Country (e.g., DRC, KENYA)
-
-  @Field({ nullable: true })
-  businessId?: string;
-
-  @Field({ nullable: true })
-  clientId?: string;
+  @Field(() => Country)
+  origin: Country;
 
   @Field()
   createdAt: Date;
 
-  // Relations
-  @Field(() => BusinessEntity, { nullable: true }) // Business associated with the recharge
-  business: BusinessEntity;
+  @Field(() => ClientEntity, { nullable: true })
+  client?: ClientEntity;
 
-  @Field(() => ClientEntity, { nullable: true }) // Client associated with the recharge
-  client: ClientEntity;
+  @Field(() => BusinessEntity, { nullable: true })
+  business?: BusinessEntity;
 }
+
+

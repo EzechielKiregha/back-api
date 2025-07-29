@@ -43,4 +43,23 @@ export class PaymentTransactionEntity {
   // Relations
   @Field(() => OrderEntity) // Order associated with the payment transaction
   order: OrderEntity;
+
+  @Field(() => [PostTransactionEntity], { nullable: true })
+  PostTransaction?: PostTransactionEntity[];
+}
+
+
+@ObjectType()
+export class PostTransactionEntity {
+  @Field()
+  id: string;
+
+  @Field(() => Float)
+  amount: number;
+
+  @Field()
+  status: string;
+
+  @Field()
+  createdAt: Date;
 }

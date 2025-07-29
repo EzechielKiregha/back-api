@@ -55,6 +55,14 @@ type PaymentTransactionEntity {
   qrCode: String
   createdAt: DateTime!
   order: OrderEntity!
+  PostTransaction: [PostTransactionEntity!]
+}
+
+type PostTransactionEntity {
+  id: String!
+  amount: Float!
+  status: String!
+  createdAt: DateTime!
 }
 
 type OrderEntity {
@@ -230,13 +238,27 @@ type ClientEntity {
 type AccountRechargeEntity {
   id: String!
   amount: Float!
-  method: String!
-  origin: String!
-  businessId: String
-  clientId: String
+  method: RechargeMethod!
+  origin: Country!
   createdAt: DateTime!
-  business: BusinessEntity
   client: ClientEntity
+  business: BusinessEntity
+}
+
+enum RechargeMethod {
+  MTN_MONEY
+  AIRTEL_MONEY
+  ORANGE_MONEY
+  MPESA
+}
+
+enum Country {
+  DRC
+  KENYA
+  UGANDA
+  RWANDA
+  BURUNDI
+  TANZANIA
 }
 
 type PostOfSaleEntity {
@@ -350,6 +372,21 @@ type Query {
 
   """Retrieves a single worker by ID."""
   worker(id: String!): WorkerEntity!
+
+  """Retrieves the total recharge balance for the user."""
+  accountBalance: Float!
+
+  """Retrieves account recharges for the user."""
+  accountRecharges: [AccountRechargeEntity!]!
+
+  """Retrieves a single account recharge by ID."""
+  accountRecharge(id: String!): AccountRechargeEntity!
+
+  """Retrieves payment transactions based on user role."""
+  paymentTransactions: [PaymentTransactionEntity!]!
+
+  """Retrieves a single payment transaction by ID."""
+  paymentTransaction(id: String!): PaymentTransactionEntity!
   postOfSale(id: Int!): PostOfSaleEntity!
 
   """Retrieves all categories with their products."""
@@ -404,6 +441,24 @@ type Mutation {
 
   """Deletes a worker."""
   deleteWorker(id: String!): WorkerEntity!
+
+  """Creates a new account recharge."""
+  createAccountRecharge(createAccountRechargeInput: CreateAccountRechargeInput!): AccountRechargeEntity!
+
+  """Updates an account recharge."""
+  updateAccountRecharge(id: String!, updateAccountRechargeInput: UpdateAccountRechargeInput!): AccountRechargeEntity!
+
+  """Deletes an account recharge."""
+  deleteAccountRecharge(id: String!): AccountRechargeEntity!
+
+  """Creates a new payment transaction."""
+  createPaymentTransaction(createPaymentTransactionInput: CreatePaymentTransactionInput!): PaymentTransactionEntity!
+
+  """Updates a payment transaction’s status or QR code."""
+  updatePaymentTransaction(id: String!, updatePaymentTransactionInput: UpdatePaymentTransactionInput!): PaymentTransactionEntity!
+
+  """Deletes a payment transaction."""
+  deletePaymentTransaction(id: String!): PaymentTransactionEntity!
   signIn(SignInInput: SignInInput!): AuthPayloadClient!
   signBusinessIn(SignInInput: SignInInput!): AuthPayloadBusiness!
   signWorkerIn(SignInInput: SignInInput!): AuthPayloadWorker!
@@ -456,6 +511,7 @@ input CreateOrderProductInput {
 }
 
 input CreatePaymentTransactionInput {
+  orderId: String!
   amount: Float!
   method: PaymentMethod!
   status: PaymentStatus!
@@ -550,6 +606,28 @@ input UpdateWorkerInput {
   businessId: String
   kycId: String
   id: String!
+}
+
+input CreateAccountRechargeInput {
+  amount: Float!
+  method: RechargeMethod!
+  origin: Country!
+  clientId: String
+  businessId: String
+}
+
+input UpdateAccountRechargeInput {
+  amount: Float
+  method: RechargeMethod
+  origin: Country
+  clientId: String
+  businessId: String
+  id: String!
+}
+
+input UpdatePaymentTransactionInput {
+  status: PaymentStatus
+  qrCode: String
 }
 
 input SignInInput {

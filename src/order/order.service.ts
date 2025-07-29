@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PaymentMethod, PaymentStatus } from 'src/generated/prisma/enums';
 // Service
 @Injectable()
 export class OrderService {
@@ -17,7 +18,7 @@ export class OrderService {
           create: {
             amount: payment.amount,
             method: payment.method,
-            status: payment.status,
+            status: payment.status || PaymentStatus.PENDING,
             qrCode: payment.qrCode,
           },
         },
