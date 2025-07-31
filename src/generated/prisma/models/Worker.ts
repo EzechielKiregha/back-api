@@ -222,9 +222,9 @@ export type WorkerWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
-  freelanceServices?: Prisma.FreelanceServiceListRelationFilter
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
   chats?: Prisma.ChatListRelationFilter
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
 }
 
 export type WorkerOrderByWithRelationInput = {
@@ -239,9 +239,9 @@ export type WorkerOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   business?: Prisma.BusinessOrderByWithRelationInput
-  freelanceServices?: Prisma.FreelanceServiceOrderByRelationAggregateInput
   kyc?: Prisma.KYCOrderByWithRelationInput
   chats?: Prisma.ChatOrderByRelationAggregateInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentOrderByRelationAggregateInput
 }
 
 export type WorkerWhereUniqueInput = Prisma.AtLeast<{
@@ -259,9 +259,9 @@ export type WorkerWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
-  freelanceServices?: Prisma.FreelanceServiceListRelationFilter
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
   chats?: Prisma.ChatListRelationFilter
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
 }, "id" | "email">
 
 export type WorkerOrderByWithAggregationInput = {
@@ -307,9 +307,9 @@ export type WorkerCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
-  freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
   chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateInput = {
@@ -323,9 +323,9 @@ export type WorkerUncheckedCreateInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUpdateInput = {
@@ -339,9 +339,9 @@ export type WorkerUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
-  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
   chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateInput = {
@@ -355,9 +355,9 @@ export type WorkerUncheckedUpdateInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateManyInput = {
@@ -452,6 +452,11 @@ export type WorkerNullableScalarRelationFilter = {
   isNot?: Prisma.WorkerWhereInput | null
 }
 
+export type WorkerScalarRelationFilter = {
+  is?: Prisma.WorkerWhereInput
+  isNot?: Prisma.WorkerWhereInput
+}
+
 export type WorkerCreateNestedManyWithoutBusinessInput = {
   create?: Prisma.XOR<Prisma.WorkerCreateWithoutBusinessInput, Prisma.WorkerUncheckedCreateWithoutBusinessInput> | Prisma.WorkerCreateWithoutBusinessInput[] | Prisma.WorkerUncheckedCreateWithoutBusinessInput[]
   connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutBusinessInput | Prisma.WorkerCreateOrConnectWithoutBusinessInput[]
@@ -526,42 +531,18 @@ export type WorkerUpdateOneWithoutKycNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutKycInput, Prisma.WorkerUpdateWithoutKycInput>, Prisma.WorkerUncheckedUpdateWithoutKycInput>
 }
 
-export type WorkerCreateNestedManyWithoutFreelanceServicesInput = {
-  create?: Prisma.XOR<Prisma.WorkerCreateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput> | Prisma.WorkerCreateWithoutFreelanceServicesInput[] | Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput[]
-  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput | Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput[]
-  connect?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
+export type WorkerCreateNestedOneWithoutWorkerServiceAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutWorkerServiceAssignmentsInput
+  connect?: Prisma.WorkerWhereUniqueInput
 }
 
-export type WorkerUncheckedCreateNestedManyWithoutFreelanceServicesInput = {
-  create?: Prisma.XOR<Prisma.WorkerCreateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput> | Prisma.WorkerCreateWithoutFreelanceServicesInput[] | Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput[]
-  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput | Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput[]
-  connect?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-}
-
-export type WorkerUpdateManyWithoutFreelanceServicesNestedInput = {
-  create?: Prisma.XOR<Prisma.WorkerCreateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput> | Prisma.WorkerCreateWithoutFreelanceServicesInput[] | Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput[]
-  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput | Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput[]
-  upsert?: Prisma.WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput | Prisma.WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput[]
-  set?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  disconnect?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  delete?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  connect?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  update?: Prisma.WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput | Prisma.WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput[]
-  updateMany?: Prisma.WorkerUpdateManyWithWhereWithoutFreelanceServicesInput | Prisma.WorkerUpdateManyWithWhereWithoutFreelanceServicesInput[]
-  deleteMany?: Prisma.WorkerScalarWhereInput | Prisma.WorkerScalarWhereInput[]
-}
-
-export type WorkerUncheckedUpdateManyWithoutFreelanceServicesNestedInput = {
-  create?: Prisma.XOR<Prisma.WorkerCreateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput> | Prisma.WorkerCreateWithoutFreelanceServicesInput[] | Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput[]
-  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput | Prisma.WorkerCreateOrConnectWithoutFreelanceServicesInput[]
-  upsert?: Prisma.WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput | Prisma.WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput[]
-  set?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  disconnect?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  delete?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  connect?: Prisma.WorkerWhereUniqueInput | Prisma.WorkerWhereUniqueInput[]
-  update?: Prisma.WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput | Prisma.WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput[]
-  updateMany?: Prisma.WorkerUpdateManyWithWhereWithoutFreelanceServicesInput | Prisma.WorkerUpdateManyWithWhereWithoutFreelanceServicesInput[]
-  deleteMany?: Prisma.WorkerScalarWhereInput | Prisma.WorkerScalarWhereInput[]
+export type WorkerUpdateOneRequiredWithoutWorkerServiceAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutWorkerServiceAssignmentsInput
+  upsert?: Prisma.WorkerUpsertWithoutWorkerServiceAssignmentsInput
+  connect?: Prisma.WorkerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUpdateWithoutWorkerServiceAssignmentsInput>, Prisma.WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput>
 }
 
 export type WorkerCreateWithoutBusinessInput = {
@@ -574,9 +555,9 @@ export type WorkerCreateWithoutBusinessInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
   chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutBusinessInput = {
@@ -589,9 +570,9 @@ export type WorkerUncheckedCreateWithoutBusinessInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutBusinessInput = {
@@ -647,8 +628,8 @@ export type WorkerCreateWithoutChatsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
-  freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutChatsInput = {
@@ -662,8 +643,8 @@ export type WorkerUncheckedCreateWithoutChatsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutChatsInput = {
@@ -693,8 +674,8 @@ export type WorkerUpdateWithoutChatsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
-  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutChatsInput = {
@@ -708,8 +689,8 @@ export type WorkerUncheckedUpdateWithoutChatsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateWithoutKycInput = {
@@ -723,8 +704,8 @@ export type WorkerCreateWithoutKycInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
-  freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutWorkersInput
   chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutKycInput = {
@@ -738,8 +719,8 @@ export type WorkerUncheckedCreateWithoutKycInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutWorkersInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutKycInput = {
@@ -769,8 +750,8 @@ export type WorkerUpdateWithoutKycInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
-  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutWorkersNestedInput
   chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutKycInput = {
@@ -784,11 +765,11 @@ export type WorkerUncheckedUpdateWithoutKycInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
-export type WorkerCreateWithoutFreelanceServicesInput = {
+export type WorkerCreateWithoutWorkerServiceAssignmentsInput = {
   id?: string
   email: string
   fullName?: string | null
@@ -803,7 +784,7 @@ export type WorkerCreateWithoutFreelanceServicesInput = {
   chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
 }
 
-export type WorkerUncheckedCreateWithoutFreelanceServicesInput = {
+export type WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput = {
   id?: string
   email: string
   fullName?: string | null
@@ -818,25 +799,50 @@ export type WorkerUncheckedCreateWithoutFreelanceServicesInput = {
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
 }
 
-export type WorkerCreateOrConnectWithoutFreelanceServicesInput = {
+export type WorkerCreateOrConnectWithoutWorkerServiceAssignmentsInput = {
   where: Prisma.WorkerWhereUniqueInput
-  create: Prisma.XOR<Prisma.WorkerCreateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput>
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput>
 }
 
-export type WorkerUpsertWithWhereUniqueWithoutFreelanceServicesInput = {
-  where: Prisma.WorkerWhereUniqueInput
-  update: Prisma.XOR<Prisma.WorkerUpdateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedUpdateWithoutFreelanceServicesInput>
-  create: Prisma.XOR<Prisma.WorkerCreateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedCreateWithoutFreelanceServicesInput>
+export type WorkerUpsertWithoutWorkerServiceAssignmentsInput = {
+  update: Prisma.XOR<Prisma.WorkerUpdateWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput>
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput>
+  where?: Prisma.WorkerWhereInput
 }
 
-export type WorkerUpdateWithWhereUniqueWithoutFreelanceServicesInput = {
-  where: Prisma.WorkerWhereUniqueInput
-  data: Prisma.XOR<Prisma.WorkerUpdateWithoutFreelanceServicesInput, Prisma.WorkerUncheckedUpdateWithoutFreelanceServicesInput>
+export type WorkerUpdateToOneWithWhereWithoutWorkerServiceAssignmentsInput = {
+  where?: Prisma.WorkerWhereInput
+  data: Prisma.XOR<Prisma.WorkerUpdateWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput>
 }
 
-export type WorkerUpdateManyWithWhereWithoutFreelanceServicesInput = {
-  where: Prisma.WorkerScalarWhereInput
-  data: Prisma.XOR<Prisma.WorkerUpdateManyMutationInput, Prisma.WorkerUncheckedUpdateManyWithoutFreelanceServicesInput>
+export type WorkerUpdateWithoutWorkerServiceAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
+  kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
+}
+
+export type WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateManyBusinessInput = {
@@ -861,9 +867,9 @@ export type WorkerUpdateWithoutBusinessInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
   chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutBusinessInput = {
@@ -876,9 +882,9 @@ export type WorkerUncheckedUpdateWithoutBusinessInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutWorkersNestedInput
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateManyWithoutBusinessInput = {
@@ -893,62 +899,19 @@ export type WorkerUncheckedUpdateManyWithoutBusinessInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type WorkerUpdateWithoutFreelanceServicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
-  kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
-}
-
-export type WorkerUncheckedUpdateWithoutFreelanceServicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.StringFieldUpdateOperationsInput | string
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
-}
-
-export type WorkerUncheckedUpdateManyWithoutFreelanceServicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.StringFieldUpdateOperationsInput | string
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 /**
  * Count Type WorkerCountOutputType
  */
 
 export type WorkerCountOutputType = {
-  freelanceServices: number
   chats: number
+  workerServiceAssignments: number
 }
 
 export type WorkerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  freelanceServices?: boolean | WorkerCountOutputTypeCountFreelanceServicesArgs
   chats?: boolean | WorkerCountOutputTypeCountChatsArgs
+  workerServiceAssignments?: boolean | WorkerCountOutputTypeCountWorkerServiceAssignmentsArgs
 }
 
 /**
@@ -964,15 +927,15 @@ export type WorkerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * WorkerCountOutputType without action
  */
-export type WorkerCountOutputTypeCountFreelanceServicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FreelanceServiceWhereInput
+export type WorkerCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatWhereInput
 }
 
 /**
  * WorkerCountOutputType without action
  */
-export type WorkerCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatWhereInput
+export type WorkerCountOutputTypeCountWorkerServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorkerServiceAssignmentWhereInput
 }
 
 
@@ -988,9 +951,9 @@ export type WorkerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  freelanceServices?: boolean | Prisma.Worker$freelanceServicesArgs<ExtArgs>
   kyc?: boolean | Prisma.Worker$kycArgs<ExtArgs>
   chats?: boolean | Prisma.Worker$chatsArgs<ExtArgs>
+  workerServiceAssignments?: boolean | Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["worker"]>
 
@@ -1038,9 +1001,9 @@ export type WorkerSelectScalar = {
 export type WorkerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "fullName" | "role" | "phone" | "password" | "businessId" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["worker"]>
 export type WorkerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  freelanceServices?: boolean | Prisma.Worker$freelanceServicesArgs<ExtArgs>
   kyc?: boolean | Prisma.Worker$kycArgs<ExtArgs>
   chats?: boolean | Prisma.Worker$chatsArgs<ExtArgs>
+  workerServiceAssignments?: boolean | Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1054,9 +1017,9 @@ export type $WorkerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Worker"
   objects: {
     business: Prisma.$BusinessPayload<ExtArgs>
-    freelanceServices: Prisma.$FreelanceServicePayload<ExtArgs>[]
     kyc: Prisma.$KYCPayload<ExtArgs> | null
     chats: Prisma.$ChatPayload<ExtArgs>[]
+    workerServiceAssignments: Prisma.$WorkerServiceAssignmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1464,9 +1427,9 @@ readonly fields: WorkerFieldRefs;
 export interface Prisma__WorkerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   business<T extends Prisma.BusinessDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessDefaultArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  freelanceServices<T extends Prisma.Worker$freelanceServicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$freelanceServicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   kyc<T extends Prisma.Worker$kycArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$kycArgs<ExtArgs>>): Prisma.Prisma__KYCClient<runtime.Types.Result.GetResult<Prisma.$KYCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   chats<T extends Prisma.Worker$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  workerServiceAssignments<T extends Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkerServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1902,30 +1865,6 @@ export type WorkerDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Worker.freelanceServices
- */
-export type Worker$freelanceServicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FreelanceService
-   */
-  select?: Prisma.FreelanceServiceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FreelanceService
-   */
-  omit?: Prisma.FreelanceServiceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FreelanceServiceInclude<ExtArgs> | null
-  where?: Prisma.FreelanceServiceWhereInput
-  orderBy?: Prisma.FreelanceServiceOrderByWithRelationInput | Prisma.FreelanceServiceOrderByWithRelationInput[]
-  cursor?: Prisma.FreelanceServiceWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FreelanceServiceScalarFieldEnum | Prisma.FreelanceServiceScalarFieldEnum[]
-}
-
-/**
  * Worker.kyc
  */
 export type Worker$kycArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1966,6 +1905,30 @@ export type Worker$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
+}
+
+/**
+ * Worker.workerServiceAssignments
+ */
+export type Worker$workerServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorkerServiceAssignment
+   */
+  select?: Prisma.WorkerServiceAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorkerServiceAssignment
+   */
+  omit?: Prisma.WorkerServiceAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkerServiceAssignmentInclude<ExtArgs> | null
+  where?: Prisma.WorkerServiceAssignmentWhereInput
+  orderBy?: Prisma.WorkerServiceAssignmentOrderByWithRelationInput | Prisma.WorkerServiceAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.WorkerServiceAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorkerServiceAssignmentScalarFieldEnum | Prisma.WorkerServiceAssignmentScalarFieldEnum[]
 }
 
 /**

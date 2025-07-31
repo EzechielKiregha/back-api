@@ -300,7 +300,7 @@ export type PostTransactionCreateInput = {
   createdAt?: Date | string
   post: Prisma.PostOfSaleCreateNestedOneWithoutTransactionsInput
   client: Prisma.ClientCreateNestedOneWithoutPostTransactionInput
-  paymentTransaction?: Prisma.PaymentTransactionCreateNestedOneWithoutPostTransactionInput
+  paymentTransaction?: Prisma.PaymentTransactionCreateNestedOneWithoutPostTransactionsInput
 }
 
 export type PostTransactionUncheckedCreateInput = {
@@ -320,7 +320,7 @@ export type PostTransactionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.PostOfSaleUpdateOneRequiredWithoutTransactionsNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutPostTransactionNestedInput
-  paymentTransaction?: Prisma.PaymentTransactionUpdateOneWithoutPostTransactionNestedInput
+  paymentTransaction?: Prisma.PaymentTransactionUpdateOneWithoutPostTransactionsNestedInput
 }
 
 export type PostTransactionUncheckedUpdateInput = {
@@ -544,7 +544,7 @@ export type PostTransactionCreateWithoutClientInput = {
   amount: number
   createdAt?: Date | string
   post: Prisma.PostOfSaleCreateNestedOneWithoutTransactionsInput
-  paymentTransaction?: Prisma.PaymentTransactionCreateNestedOneWithoutPostTransactionInput
+  paymentTransaction?: Prisma.PaymentTransactionCreateNestedOneWithoutPostTransactionsInput
 }
 
 export type PostTransactionUncheckedCreateWithoutClientInput = {
@@ -645,7 +645,7 @@ export type PostTransactionCreateWithoutPostInput = {
   amount: number
   createdAt?: Date | string
   client: Prisma.ClientCreateNestedOneWithoutPostTransactionInput
-  paymentTransaction?: Prisma.PaymentTransactionCreateNestedOneWithoutPostTransactionInput
+  paymentTransaction?: Prisma.PaymentTransactionCreateNestedOneWithoutPostTransactionsInput
 }
 
 export type PostTransactionUncheckedCreateWithoutPostInput = {
@@ -698,7 +698,7 @@ export type PostTransactionUpdateWithoutClientInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.PostOfSaleUpdateOneRequiredWithoutTransactionsNestedInput
-  paymentTransaction?: Prisma.PaymentTransactionUpdateOneWithoutPostTransactionNestedInput
+  paymentTransaction?: Prisma.PaymentTransactionUpdateOneWithoutPostTransactionsNestedInput
 }
 
 export type PostTransactionUncheckedUpdateWithoutClientInput = {
@@ -770,7 +770,7 @@ export type PostTransactionUpdateWithoutPostInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   client?: Prisma.ClientUpdateOneRequiredWithoutPostTransactionNestedInput
-  paymentTransaction?: Prisma.PaymentTransactionUpdateOneWithoutPostTransactionNestedInput
+  paymentTransaction?: Prisma.PaymentTransactionUpdateOneWithoutPostTransactionsNestedInput
 }
 
 export type PostTransactionUncheckedUpdateWithoutPostInput = {

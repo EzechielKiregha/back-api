@@ -142,33 +142,34 @@ type ProductEntity {
   ads: [AdEntity!]!
 }
 
-type FreelanceOrderEntity {
-  id: String!
-  clientId: String!
-  serviceId: String!
-  status: String!
-  quantity: Int!
-  totalAmount: Float!
-  escrowAmount: Float!
-  commissionPercent: Float!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  client: ClientEntity!
-  service: FreelanceServiceEntity!
-  businesses: [BusinessEntity!]!
-}
-
 type FreelanceServiceEntity {
   id: String!
   title: String!
   description: String
   isHourly: Boolean!
   rate: Float!
-  businessId: String!
+  category: FreelanceServiceCategory!
   createdAt: DateTime!
   updatedAt: DateTime!
   business: BusinessEntity!
-  orders: [FreelanceOrderEntity!]!
+  workerServiceAssignments: [WorkerServiceAssignmentEntity!]!
+}
+
+enum FreelanceServiceCategory {
+  PLUMBER
+  ELECTRICIAN
+  CARPENTER
+  MECHANIC
+  TUTOR
+  CLEANER
+  OTHER
+}
+
+type WorkerServiceAssignmentEntity {
+  id: String!
+  worker: WorkerEntity!
+  role: String!
+  assignedAt: DateTime!
 }
 
 type KnowYourCustomerEntity {
@@ -213,6 +214,43 @@ type ChatEntity {
   business: BusinessEntity
   worker: WorkerEntity
   messages: [ChatMessageEntity!]!
+}
+
+type FreelanceOrderEntity {
+  id: String!
+  status: FreelanceStatus!
+  quantity: Int!
+  totalAmount: Float!
+  escrowAmount: Float!
+  commissionPercent: Float!
+  escrowStatus: EscrowStatus
+  createdAt: DateTime!
+  escrowReleasedAt: DateTime!
+  client: ClientEntity!
+  service: FreelanceServiceEntity!
+  freelanceOrderBusiness: [FreelanceOrderBusinessEntity!]!
+  payment: PaymentTransactionEntity
+}
+
+enum FreelanceStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum EscrowStatus {
+  HELD
+  RELEASED
+  DISPUTED
+}
+
+type FreelanceOrderBusinessEntity {
+  id: String!
+  business: BusinessEntity!
+  role: String!
+  assignedAt: DateTime!
 }
 
 type ClientEntity {
@@ -387,6 +425,18 @@ type Query {
 
   """Retrieves a single payment transaction by ID."""
   paymentTransaction(id: String!): PaymentTransactionEntity!
+
+  """Retrieves freelance services, optionally filtered by category."""
+  freelanceServices(category: FreelanceCategory): [FreelanceServiceEntity!]!
+
+  """Retrieves a single freelance service by ID."""
+  freelanceService(id: String!): FreelanceServiceEntity!
+
+  """Retrieves freelance orders based on user role."""
+  freelanceOrders: [FreelanceOrderEntity!]!
+
+  """Retrieves a single freelance order by ID."""
+  freelanceOrder(id: String!): FreelanceOrderEntity!
   postOfSale(id: Int!): PostOfSaleEntity!
 
   """Retrieves all categories with their products."""
@@ -394,6 +444,16 @@ type Query {
 
   """Retrieves a single category by ID."""
   category(id: String!): CategoryEntity!
+}
+
+enum FreelanceCategory {
+  PLUMBER
+  ELECTRICIAN
+  CARPENTER
+  MECHANIC
+  TUTOR
+  CLEANER
+  OTHER
 }
 
 type Mutation {
@@ -459,6 +519,30 @@ type Mutation {
 
   """Deletes a payment transaction."""
   deletePaymentTransaction(id: String!): PaymentTransactionEntity!
+
+  """Creates a new freelance service."""
+  createFreelanceService(createFreelanceServiceInput: CreateFreelanceServiceInput!): FreelanceServiceEntity!
+
+  """Updates a freelance service."""
+  updateFreelanceService(id: String!, updateFreelanceServiceInput: UpdateFreelanceServiceInput!): FreelanceServiceEntity!
+
+  """Assigns workers to a freelance service."""
+  assignWorkersToService(assignWorkersInput: AssignWorkersInput!): FreelanceServiceEntity!
+
+  """Deletes a freelance service."""
+  deleteFreelanceService(id: String!): FreelanceServiceEntity!
+
+  """Creates a new freelance order."""
+  createFreelanceOrder(createFreelanceOrderInput: CreateFreelanceOrderInput!): FreelanceOrderEntity!
+
+  """Updates a freelance order’s status or escrow status."""
+  updateFreelanceOrder(id: String!, updateFreelanceOrderInput: UpdateFreelanceOrderInput!): FreelanceOrderEntity!
+
+  """Assigns businesses to a freelance order."""
+  assignBusinessesToOrder(assignBusinessesInput: AssignBusinessesInput!): FreelanceOrderEntity!
+
+  """Deletes a freelance order."""
+  deleteFreelanceOrder(id: String!): FreelanceOrderEntity!
   signIn(SignInInput: SignInInput!): AuthPayloadClient!
   signBusinessIn(SignInInput: SignInInput!): AuthPayloadBusiness!
   signWorkerIn(SignInInput: SignInInput!): AuthPayloadWorker!
@@ -628,6 +712,48 @@ input UpdateAccountRechargeInput {
 input UpdatePaymentTransactionInput {
   status: PaymentStatus
   qrCode: String
+}
+
+input CreateFreelanceServiceInput {
+  title: String!
+  description: String
+  isHourly: Boolean! = true
+  category: FreelanceServiceCategory!
+  rate: Float!
+  workerIds: [String!]
+}
+
+input UpdateFreelanceServiceInput {
+  id: String!
+  title: String
+  description: String
+  isHourly: Boolean
+  rate: Float
+  workerIds: [String!]
+}
+
+input AssignWorkersInput {
+  serviceId: String!
+  workerIds: [String!]!
+}
+
+input CreateFreelanceOrderInput {
+  serviceId: String!
+  clientId: String!
+  quantity: Int! = 1
+  businessIds: [String!]
+  paymentMethod: PaymentMethod! = TOKEN
+}
+
+input UpdateFreelanceOrderInput {
+  status: FreelanceStatus
+  escrowStatus: EscrowStatus
+  commissionPercent: Float
+}
+
+input AssignBusinessesInput {
+  orderId: String!
+  businessIds: [String!]!
 }
 
 input SignInInput {

@@ -423,6 +423,11 @@ export type OrderScalarRelationFilter = {
   isNot?: Prisma.OrderWhereInput
 }
 
+export type OrderNullableScalarRelationFilter = {
+  is?: Prisma.OrderWhereInput | null
+  isNot?: Prisma.OrderWhereInput | null
+}
+
 export type OrderCreateNestedManyWithoutClientInput = {
   create?: Prisma.XOR<Prisma.OrderCreateWithoutClientInput, Prisma.OrderUncheckedCreateWithoutClientInput> | Prisma.OrderCreateWithoutClientInput[] | Prisma.OrderUncheckedCreateWithoutClientInput[]
   connectOrCreate?: Prisma.OrderCreateOrConnectWithoutClientInput | Prisma.OrderCreateOrConnectWithoutClientInput[]
@@ -485,10 +490,12 @@ export type OrderCreateNestedOneWithoutPaymentInput = {
   connect?: Prisma.OrderWhereUniqueInput
 }
 
-export type OrderUpdateOneRequiredWithoutPaymentNestedInput = {
+export type OrderUpdateOneWithoutPaymentNestedInput = {
   create?: Prisma.XOR<Prisma.OrderCreateWithoutPaymentInput, Prisma.OrderUncheckedCreateWithoutPaymentInput>
   connectOrCreate?: Prisma.OrderCreateOrConnectWithoutPaymentInput
   upsert?: Prisma.OrderUpsertWithoutPaymentInput
+  disconnect?: Prisma.OrderWhereInput | boolean
+  delete?: Prisma.OrderWhereInput | boolean
   connect?: Prisma.OrderWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrderUpdateToOneWithWhereWithoutPaymentInput, Prisma.OrderUpdateWithoutPaymentInput>, Prisma.OrderUncheckedUpdateWithoutPaymentInput>
 }

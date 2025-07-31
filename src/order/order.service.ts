@@ -10,7 +10,7 @@ export class OrderService {
 
   async create(createOrderInput: CreateOrderInput) {
     const { clientId, orderProducts, payment, ...orderData } = createOrderInput;
-    return this.prisma.order.create({
+    const order = await this.prisma.order.create({
       data: {
         ...orderData,
         client: { connect: { id: clientId } },
@@ -41,6 +41,21 @@ export class OrderService {
         products: { select: { id: true, quantity: true, createdAt: true, product: { select: { id: true, businessId: true, title: true, price: true, stock: true, createdAt: true } } } },
       },
     });
+
+    // Update stock after order is created
+    await Promise.all(
+      order.products.map((op: {
+        quantity: number;
+        product: { id: string };
+      }) =>
+        this.prisma.product.update({
+          where: { id: op.product.id },
+          data: { stock: { decrement: op.quantity } },
+        })
+      )
+    );
+
+    return order
   }
 
   async findAll() {

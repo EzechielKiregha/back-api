@@ -47,7 +47,7 @@ export class PaymentTransactionResolver {
         },
         include: {
           order: { select: { id: true, deliveryFee: true, deliveryAddress: true, createdAt: true } },
-          PostTransaction: { select: { id: true, amount: true, status: true, createdAt: true } },
+          postTransactions: { select: { id: true, amount: true, status: true, createdAt: true } },
         },
       });
     }
@@ -62,7 +62,7 @@ export class PaymentTransactionResolver {
         },
         include: {
           order: { select: { id: true, deliveryFee: true, deliveryAddress: true, createdAt: true } },
-          PostTransaction: { select: { id: true, amount: true, status: true, createdAt: true } },
+          postTransactions: { select: { id: true, amount: true, status: true, createdAt: true } },
         },
       });
     }
@@ -75,12 +75,12 @@ export class PaymentTransactionResolver {
   async getPaymentTransaction(@Args('id', { type: () => String }) id: string, @Context() context) {
     const user = context.req.user;
     const transaction = await this.paymentTransactionService.findOne(id);
-    if (!transaction) {
+    if (!transaction?.orderId) {
       throw new Error('Payment transaction not found');
     }
     if (user.role === 'client') {
       const order = await this.prisma.order.findUnique({
-        where: { id: transaction.order.id },
+        where: { id: transaction.orderId },
         select: { clientId: true },
       });
 
@@ -92,7 +92,7 @@ export class PaymentTransactionResolver {
     }
     if (user.role === 'business') {
       const order = await this.prisma.order.findUnique({
-        where: { id: transaction.order.id },
+        where: { id: transaction.orderId },
         include: { products: { select: { product: { select: { businessId: true } } } } },
       });
       if (!order) return new Error("Order no found")
@@ -114,11 +114,11 @@ export class PaymentTransactionResolver {
   ) {
     const user = context.req.user;
     const transaction = await this.paymentTransactionService.findOne(id);
-    if (!transaction) {
+    if (!transaction?.orderId) {
       throw new Error('Payment transaction not found');
     }
     const order = await this.prisma.order.findUnique({
-      where: { id: transaction.order.id },
+      where: { id: transaction.orderId },
       select: { clientId: true, payment : true },
     });
     if (!order) return new Error("Order no found")
@@ -141,11 +141,11 @@ export class PaymentTransactionResolver {
   async deletePaymentTransaction(@Args('id', { type: () => String }) id: string, @Context() context) {
     const user = context.req.user;
     const transaction = await this.paymentTransactionService.findOne(id);
-    if (!transaction) {
+    if (!transaction?.orderId) {
       throw new Error('Payment transaction not found');
     }
     const order = await this.prisma.order.findUnique({
-      where: { id: transaction.order.id },
+      where: { id: transaction.orderId },
       select: { clientId: true },
     });
     if (!order) return new Error("Order no found")

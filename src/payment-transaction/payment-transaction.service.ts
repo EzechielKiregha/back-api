@@ -54,7 +54,7 @@ export class PaymentTransactionService {
         qrCode: true,
         createdAt: true,
         order: { select: { id: true, deliveryFee: true, deliveryAddress: true, createdAt: true } },
-        PostTransaction: { select: { id: true, amount: true, status: true, createdAt: true } },
+        postTransactions: { select: { id: true, amount: true, status: true, createdAt: true } },
       },
     });
   }
@@ -108,7 +108,7 @@ export class PaymentTransactionService {
     return this.prisma.paymentTransaction.findMany({
       include: {
         order: { select: { id: true, deliveryFee: true, deliveryAddress: true, createdAt: true } },
-        PostTransaction: { select: { id: true, amount: true, status: true, createdAt: true } },
+        postTransactions: { select: { id: true, amount: true, status: true, createdAt: true } },
       },
     });
   }
@@ -118,7 +118,7 @@ export class PaymentTransactionService {
       where: { id },
       include: {
         order: { select: { id: true, deliveryFee: true, deliveryAddress: true, createdAt: true } },
-        PostTransaction: { select: { id: true, amount: true, status: true, createdAt: true } },
+        postTransactions: { select: { id: true, amount: true, status: true, createdAt: true } },
       },
     });
   }

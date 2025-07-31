@@ -413,7 +413,9 @@ export const ModelName = {
   PaymentTransaction: 'PaymentTransaction',
   Ad: 'Ad',
   FreelanceService: 'FreelanceService',
+  WorkerServiceAssignment: 'WorkerServiceAssignment',
   FreelanceOrder: 'FreelanceOrder',
+  FreelanceOrderBusiness: 'FreelanceOrderBusiness',
   Referral: 'Referral',
   PostOfSale: 'PostOfSale',
   PostTransaction: 'PostTransaction'
@@ -432,7 +434,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "business" | "client" | "worker" | "category" | "product" | "media" | "order" | "orderProduct" | "review" | "chat" | "chatMessage" | "repostedProduct" | "reOwnedProduct" | "kYC" | "accountRecharge" | "token" | "paymentTransaction" | "ad" | "freelanceService" | "freelanceOrder" | "referral" | "postOfSale" | "postTransaction"
+    modelProps: "business" | "client" | "worker" | "category" | "product" | "media" | "order" | "orderProduct" | "review" | "chat" | "chatMessage" | "repostedProduct" | "reOwnedProduct" | "kYC" | "accountRecharge" | "token" | "paymentTransaction" | "ad" | "freelanceService" | "workerServiceAssignment" | "freelanceOrder" | "freelanceOrderBusiness" | "referral" | "postOfSale" | "postTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1842,6 +1844,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    WorkerServiceAssignment: {
+      payload: Prisma.$WorkerServiceAssignmentPayload<ExtArgs>
+      fields: Prisma.WorkerServiceAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WorkerServiceAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WorkerServiceAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.WorkerServiceAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WorkerServiceAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.WorkerServiceAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.WorkerServiceAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.WorkerServiceAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WorkerServiceAssignmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>[]
+        }
+        delete: {
+          args: Prisma.WorkerServiceAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>
+        }
+        update: {
+          args: Prisma.WorkerServiceAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.WorkerServiceAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WorkerServiceAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WorkerServiceAssignmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.WorkerServiceAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkerServiceAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.WorkerServiceAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWorkerServiceAssignment>
+        }
+        groupBy: {
+          args: Prisma.WorkerServiceAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkerServiceAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WorkerServiceAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkerServiceAssignmentCountAggregateOutputType> | number
+        }
+      }
+    }
     FreelanceOrder: {
       payload: Prisma.$FreelanceOrderPayload<ExtArgs>
       fields: Prisma.FreelanceOrderFieldRefs
@@ -1913,6 +1989,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FreelanceOrderCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FreelanceOrderCountAggregateOutputType> | number
+        }
+      }
+    }
+    FreelanceOrderBusiness: {
+      payload: Prisma.$FreelanceOrderBusinessPayload<ExtArgs>
+      fields: Prisma.FreelanceOrderBusinessFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FreelanceOrderBusinessFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FreelanceOrderBusinessFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>
+        }
+        findFirst: {
+          args: Prisma.FreelanceOrderBusinessFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FreelanceOrderBusinessFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>
+        }
+        findMany: {
+          args: Prisma.FreelanceOrderBusinessFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>[]
+        }
+        create: {
+          args: Prisma.FreelanceOrderBusinessCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>
+        }
+        createMany: {
+          args: Prisma.FreelanceOrderBusinessCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FreelanceOrderBusinessCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>[]
+        }
+        delete: {
+          args: Prisma.FreelanceOrderBusinessDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>
+        }
+        update: {
+          args: Prisma.FreelanceOrderBusinessUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>
+        }
+        deleteMany: {
+          args: Prisma.FreelanceOrderBusinessDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FreelanceOrderBusinessUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FreelanceOrderBusinessUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>[]
+        }
+        upsert: {
+          args: Prisma.FreelanceOrderBusinessUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FreelanceOrderBusinessPayload>
+        }
+        aggregate: {
+          args: Prisma.FreelanceOrderBusinessAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFreelanceOrderBusiness>
+        }
+        groupBy: {
+          args: Prisma.FreelanceOrderBusinessGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FreelanceOrderBusinessGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FreelanceOrderBusinessCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FreelanceOrderBusinessCountAggregateOutputType> | number
         }
       }
     }
@@ -2397,7 +2547,8 @@ export const PaymentTransactionScalarFieldEnum = {
   amount: 'amount',
   transactionDate: 'transactionDate',
   qrCode: 'qrCode',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  freelanceOrderId: 'freelanceOrderId'
 } as const
 
 export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
@@ -2422,12 +2573,24 @@ export const FreelanceServiceScalarFieldEnum = {
   description: 'description',
   isHourly: 'isHourly',
   rate: 'rate',
+  category: 'category',
   businessId: 'businessId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type FreelanceServiceScalarFieldEnum = (typeof FreelanceServiceScalarFieldEnum)[keyof typeof FreelanceServiceScalarFieldEnum]
+
+
+export const WorkerServiceAssignmentScalarFieldEnum = {
+  id: 'id',
+  workerId: 'workerId',
+  freelanceServiceId: 'freelanceServiceId',
+  role: 'role',
+  assignedAt: 'assignedAt'
+} as const
+
+export type WorkerServiceAssignmentScalarFieldEnum = (typeof WorkerServiceAssignmentScalarFieldEnum)[keyof typeof WorkerServiceAssignmentScalarFieldEnum]
 
 
 export const FreelanceOrderScalarFieldEnum = {
@@ -2439,11 +2602,24 @@ export const FreelanceOrderScalarFieldEnum = {
   totalAmount: 'totalAmount',
   escrowAmount: 'escrowAmount',
   commissionPercent: 'commissionPercent',
+  escrowStatus: 'escrowStatus',
+  escrowReleasedAt: 'escrowReleasedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type FreelanceOrderScalarFieldEnum = (typeof FreelanceOrderScalarFieldEnum)[keyof typeof FreelanceOrderScalarFieldEnum]
+
+
+export const FreelanceOrderBusinessScalarFieldEnum = {
+  id: 'id',
+  freelanceOrderId: 'freelanceOrderId',
+  businessId: 'businessId',
+  role: 'role',
+  assignedAt: 'assignedAt'
+} as const
+
+export type FreelanceOrderBusinessScalarFieldEnum = (typeof FreelanceOrderBusinessScalarFieldEnum)[keyof typeof FreelanceOrderBusinessScalarFieldEnum]
 
 
 export const ReferralScalarFieldEnum = {
@@ -2664,6 +2840,20 @@ export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'FreelanceServiceCategory'
+ */
+export type EnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FreelanceServiceCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'FreelanceServiceCategory[]'
+ */
+export type ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FreelanceServiceCategory[]'>
+    
+
+
+/**
  * Reference to a field of type 'FreelanceStatus'
  */
 export type EnumFreelanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FreelanceStatus'>
@@ -2674,6 +2864,20 @@ export type EnumFreelanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'FreelanceStatus[]'
  */
 export type ListEnumFreelanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FreelanceStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EscrowStatus'
+ */
+export type EnumEscrowStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EscrowStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'EscrowStatus[]'
+ */
+export type ListEnumEscrowStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EscrowStatus[]'>
     
 
 
@@ -2798,7 +3002,9 @@ export type GlobalOmitConfig = {
   paymentTransaction?: Prisma.PaymentTransactionOmit
   ad?: Prisma.AdOmit
   freelanceService?: Prisma.FreelanceServiceOmit
+  workerServiceAssignment?: Prisma.WorkerServiceAssignmentOmit
   freelanceOrder?: Prisma.FreelanceOrderOmit
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessOmit
   referral?: Prisma.ReferralOmit
   postOfSale?: Prisma.PostOfSaleOmit
   postTransaction?: Prisma.PostTransactionOmit

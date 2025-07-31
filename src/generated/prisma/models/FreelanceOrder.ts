@@ -48,6 +48,8 @@ export type FreelanceOrderMinAggregateOutputType = {
   totalAmount: number | null
   escrowAmount: number | null
   commissionPercent: number | null
+  escrowStatus: $Enums.EscrowStatus | null
+  escrowReleasedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -61,6 +63,8 @@ export type FreelanceOrderMaxAggregateOutputType = {
   totalAmount: number | null
   escrowAmount: number | null
   commissionPercent: number | null
+  escrowStatus: $Enums.EscrowStatus | null
+  escrowReleasedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,6 +78,8 @@ export type FreelanceOrderCountAggregateOutputType = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus: number
+  escrowReleasedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -103,6 +109,8 @@ export type FreelanceOrderMinAggregateInputType = {
   totalAmount?: true
   escrowAmount?: true
   commissionPercent?: true
+  escrowStatus?: true
+  escrowReleasedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -116,6 +124,8 @@ export type FreelanceOrderMaxAggregateInputType = {
   totalAmount?: true
   escrowAmount?: true
   commissionPercent?: true
+  escrowStatus?: true
+  escrowReleasedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -129,6 +139,8 @@ export type FreelanceOrderCountAggregateInputType = {
   totalAmount?: true
   escrowAmount?: true
   commissionPercent?: true
+  escrowStatus?: true
+  escrowReleasedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -229,6 +241,8 @@ export type FreelanceOrderGroupByOutputType = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus: $Enums.EscrowStatus | null
+  escrowReleasedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: FreelanceOrderCountAggregateOutputType | null
@@ -265,11 +279,14 @@ export type FreelanceOrderWhereInput = {
   totalAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
   escrowAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
   commissionPercent?: Prisma.FloatFilter<"FreelanceOrder"> | number
+  escrowStatus?: Prisma.EnumEscrowStatusNullableFilter<"FreelanceOrder"> | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.DateTimeNullableFilter<"FreelanceOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
   service?: Prisma.XOR<Prisma.FreelanceServiceScalarRelationFilter, Prisma.FreelanceServiceWhereInput>
-  businesses?: Prisma.BusinessListRelationFilter
+  payment?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessListRelationFilter
 }
 
 export type FreelanceOrderOrderByWithRelationInput = {
@@ -281,11 +298,14 @@ export type FreelanceOrderOrderByWithRelationInput = {
   totalAmount?: Prisma.SortOrder
   escrowAmount?: Prisma.SortOrder
   commissionPercent?: Prisma.SortOrder
+  escrowStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  escrowReleasedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   client?: Prisma.ClientOrderByWithRelationInput
   service?: Prisma.FreelanceServiceOrderByWithRelationInput
-  businesses?: Prisma.BusinessOrderByRelationAggregateInput
+  payment?: Prisma.PaymentTransactionOrderByWithRelationInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessOrderByRelationAggregateInput
 }
 
 export type FreelanceOrderWhereUniqueInput = Prisma.AtLeast<{
@@ -300,11 +320,14 @@ export type FreelanceOrderWhereUniqueInput = Prisma.AtLeast<{
   totalAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
   escrowAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
   commissionPercent?: Prisma.FloatFilter<"FreelanceOrder"> | number
+  escrowStatus?: Prisma.EnumEscrowStatusNullableFilter<"FreelanceOrder"> | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.DateTimeNullableFilter<"FreelanceOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
   service?: Prisma.XOR<Prisma.FreelanceServiceScalarRelationFilter, Prisma.FreelanceServiceWhereInput>
-  businesses?: Prisma.BusinessListRelationFilter
+  payment?: Prisma.XOR<Prisma.PaymentTransactionNullableScalarRelationFilter, Prisma.PaymentTransactionWhereInput> | null
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessListRelationFilter
 }, "id">
 
 export type FreelanceOrderOrderByWithAggregationInput = {
@@ -316,6 +339,8 @@ export type FreelanceOrderOrderByWithAggregationInput = {
   totalAmount?: Prisma.SortOrder
   escrowAmount?: Prisma.SortOrder
   commissionPercent?: Prisma.SortOrder
+  escrowStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  escrowReleasedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.FreelanceOrderCountOrderByAggregateInput
@@ -337,6 +362,8 @@ export type FreelanceOrderScalarWhereWithAggregatesInput = {
   totalAmount?: Prisma.FloatWithAggregatesFilter<"FreelanceOrder"> | number
   escrowAmount?: Prisma.FloatWithAggregatesFilter<"FreelanceOrder"> | number
   commissionPercent?: Prisma.FloatWithAggregatesFilter<"FreelanceOrder"> | number
+  escrowStatus?: Prisma.EnumEscrowStatusNullableWithAggregatesFilter<"FreelanceOrder"> | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FreelanceOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FreelanceOrder"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FreelanceOrder"> | Date | string
 }
@@ -348,11 +375,14 @@ export type FreelanceOrderCreateInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   client: Prisma.ClientCreateNestedOneWithoutFreelanceOrdersInput
   service: Prisma.FreelanceServiceCreateNestedOneWithoutOrdersInput
-  businesses?: Prisma.BusinessCreateNestedManyWithoutFreelanceOrdersInput
+  payment?: Prisma.PaymentTransactionCreateNestedOneWithoutFreelanceOrderInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutFreelanceOrderInput
 }
 
 export type FreelanceOrderUncheckedCreateInput = {
@@ -364,9 +394,12 @@ export type FreelanceOrderUncheckedCreateInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutFreelanceOrdersInput
+  payment?: Prisma.PaymentTransactionUncheckedCreateNestedOneWithoutFreelanceOrderInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutFreelanceOrderInput
 }
 
 export type FreelanceOrderUpdateInput = {
@@ -376,11 +409,14 @@ export type FreelanceOrderUpdateInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   client?: Prisma.ClientUpdateOneRequiredWithoutFreelanceOrdersNestedInput
   service?: Prisma.FreelanceServiceUpdateOneRequiredWithoutOrdersNestedInput
-  businesses?: Prisma.BusinessUpdateManyWithoutFreelanceOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUpdateOneWithoutFreelanceOrderNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderUncheckedUpdateInput = {
@@ -392,9 +428,12 @@ export type FreelanceOrderUncheckedUpdateInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutFreelanceOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUncheckedUpdateOneWithoutFreelanceOrderNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderCreateManyInput = {
@@ -406,6 +445,8 @@ export type FreelanceOrderCreateManyInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -417,6 +458,8 @@ export type FreelanceOrderUpdateManyMutationInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -430,6 +473,8 @@ export type FreelanceOrderUncheckedUpdateManyInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,6 +489,11 @@ export type FreelanceOrderOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type FreelanceOrderNullableScalarRelationFilter = {
+  is?: Prisma.FreelanceOrderWhereInput | null
+  isNot?: Prisma.FreelanceOrderWhereInput | null
+}
+
 export type FreelanceOrderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
@@ -453,6 +503,8 @@ export type FreelanceOrderCountOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   escrowAmount?: Prisma.SortOrder
   commissionPercent?: Prisma.SortOrder
+  escrowStatus?: Prisma.SortOrder
+  escrowReleasedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -473,6 +525,8 @@ export type FreelanceOrderMaxOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   escrowAmount?: Prisma.SortOrder
   commissionPercent?: Prisma.SortOrder
+  escrowStatus?: Prisma.SortOrder
+  escrowReleasedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -486,6 +540,8 @@ export type FreelanceOrderMinOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   escrowAmount?: Prisma.SortOrder
   commissionPercent?: Prisma.SortOrder
+  escrowStatus?: Prisma.SortOrder
+  escrowReleasedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -497,42 +553,9 @@ export type FreelanceOrderSumOrderByAggregateInput = {
   commissionPercent?: Prisma.SortOrder
 }
 
-export type FreelanceOrderCreateNestedManyWithoutBusinessesInput = {
-  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput> | Prisma.FreelanceOrderCreateWithoutBusinessesInput[] | Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput[]
-  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput | Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput[]
-  connect?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-}
-
-export type FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput = {
-  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput> | Prisma.FreelanceOrderCreateWithoutBusinessesInput[] | Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput[]
-  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput | Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput[]
-  connect?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-}
-
-export type FreelanceOrderUpdateManyWithoutBusinessesNestedInput = {
-  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput> | Prisma.FreelanceOrderCreateWithoutBusinessesInput[] | Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput[]
-  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput | Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput[]
-  upsert?: Prisma.FreelanceOrderUpsertWithWhereUniqueWithoutBusinessesInput | Prisma.FreelanceOrderUpsertWithWhereUniqueWithoutBusinessesInput[]
-  set?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  disconnect?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  delete?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  connect?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  update?: Prisma.FreelanceOrderUpdateWithWhereUniqueWithoutBusinessesInput | Prisma.FreelanceOrderUpdateWithWhereUniqueWithoutBusinessesInput[]
-  updateMany?: Prisma.FreelanceOrderUpdateManyWithWhereWithoutBusinessesInput | Prisma.FreelanceOrderUpdateManyWithWhereWithoutBusinessesInput[]
-  deleteMany?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
-}
-
-export type FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput = {
-  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput> | Prisma.FreelanceOrderCreateWithoutBusinessesInput[] | Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput[]
-  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput | Prisma.FreelanceOrderCreateOrConnectWithoutBusinessesInput[]
-  upsert?: Prisma.FreelanceOrderUpsertWithWhereUniqueWithoutBusinessesInput | Prisma.FreelanceOrderUpsertWithWhereUniqueWithoutBusinessesInput[]
-  set?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  disconnect?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  delete?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  connect?: Prisma.FreelanceOrderWhereUniqueInput | Prisma.FreelanceOrderWhereUniqueInput[]
-  update?: Prisma.FreelanceOrderUpdateWithWhereUniqueWithoutBusinessesInput | Prisma.FreelanceOrderUpdateWithWhereUniqueWithoutBusinessesInput[]
-  updateMany?: Prisma.FreelanceOrderUpdateManyWithWhereWithoutBusinessesInput | Prisma.FreelanceOrderUpdateManyWithWhereWithoutBusinessesInput[]
-  deleteMany?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
+export type FreelanceOrderScalarRelationFilter = {
+  is?: Prisma.FreelanceOrderWhereInput
+  isNot?: Prisma.FreelanceOrderWhereInput
 }
 
 export type FreelanceOrderCreateNestedManyWithoutClientInput = {
@@ -575,6 +598,22 @@ export type FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput = {
   update?: Prisma.FreelanceOrderUpdateWithWhereUniqueWithoutClientInput | Prisma.FreelanceOrderUpdateWithWhereUniqueWithoutClientInput[]
   updateMany?: Prisma.FreelanceOrderUpdateManyWithWhereWithoutClientInput | Prisma.FreelanceOrderUpdateManyWithWhereWithoutClientInput[]
   deleteMany?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
+}
+
+export type FreelanceOrderCreateNestedOneWithoutPaymentInput = {
+  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutPaymentInput, Prisma.FreelanceOrderUncheckedCreateWithoutPaymentInput>
+  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutPaymentInput
+  connect?: Prisma.FreelanceOrderWhereUniqueInput
+}
+
+export type FreelanceOrderUpdateOneWithoutPaymentNestedInput = {
+  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutPaymentInput, Prisma.FreelanceOrderUncheckedCreateWithoutPaymentInput>
+  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutPaymentInput
+  upsert?: Prisma.FreelanceOrderUpsertWithoutPaymentInput
+  disconnect?: Prisma.FreelanceOrderWhereInput | boolean
+  delete?: Prisma.FreelanceOrderWhereInput | boolean
+  connect?: Prisma.FreelanceOrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FreelanceOrderUpdateToOneWithWhereWithoutPaymentInput, Prisma.FreelanceOrderUpdateWithoutPaymentInput>, Prisma.FreelanceOrderUncheckedUpdateWithoutPaymentInput>
 }
 
 export type FreelanceOrderCreateNestedManyWithoutServiceInput = {
@@ -623,67 +662,22 @@ export type EnumFreelanceStatusFieldUpdateOperationsInput = {
   set?: $Enums.FreelanceStatus
 }
 
-export type FreelanceOrderCreateWithoutBusinessesInput = {
-  id?: string
-  status?: $Enums.FreelanceStatus
-  quantity?: number
-  totalAmount: number
-  escrowAmount: number
-  commissionPercent: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  client: Prisma.ClientCreateNestedOneWithoutFreelanceOrdersInput
-  service: Prisma.FreelanceServiceCreateNestedOneWithoutOrdersInput
+export type NullableEnumEscrowStatusFieldUpdateOperationsInput = {
+  set?: $Enums.EscrowStatus | null
 }
 
-export type FreelanceOrderUncheckedCreateWithoutBusinessesInput = {
-  id?: string
-  clientId: string
-  serviceId: string
-  status?: $Enums.FreelanceStatus
-  quantity?: number
-  totalAmount: number
-  escrowAmount: number
-  commissionPercent: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type FreelanceOrderCreateNestedOneWithoutFreelanceOrderBusinessInput = {
+  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUncheckedCreateWithoutFreelanceOrderBusinessInput>
+  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutFreelanceOrderBusinessInput
+  connect?: Prisma.FreelanceOrderWhereUniqueInput
 }
 
-export type FreelanceOrderCreateOrConnectWithoutBusinessesInput = {
-  where: Prisma.FreelanceOrderWhereUniqueInput
-  create: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput>
-}
-
-export type FreelanceOrderUpsertWithWhereUniqueWithoutBusinessesInput = {
-  where: Prisma.FreelanceOrderWhereUniqueInput
-  update: Prisma.XOR<Prisma.FreelanceOrderUpdateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedUpdateWithoutBusinessesInput>
-  create: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedCreateWithoutBusinessesInput>
-}
-
-export type FreelanceOrderUpdateWithWhereUniqueWithoutBusinessesInput = {
-  where: Prisma.FreelanceOrderWhereUniqueInput
-  data: Prisma.XOR<Prisma.FreelanceOrderUpdateWithoutBusinessesInput, Prisma.FreelanceOrderUncheckedUpdateWithoutBusinessesInput>
-}
-
-export type FreelanceOrderUpdateManyWithWhereWithoutBusinessesInput = {
-  where: Prisma.FreelanceOrderScalarWhereInput
-  data: Prisma.XOR<Prisma.FreelanceOrderUpdateManyMutationInput, Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesInput>
-}
-
-export type FreelanceOrderScalarWhereInput = {
-  AND?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
-  OR?: Prisma.FreelanceOrderScalarWhereInput[]
-  NOT?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
-  id?: Prisma.StringFilter<"FreelanceOrder"> | string
-  clientId?: Prisma.StringFilter<"FreelanceOrder"> | string
-  serviceId?: Prisma.StringFilter<"FreelanceOrder"> | string
-  status?: Prisma.EnumFreelanceStatusFilter<"FreelanceOrder"> | $Enums.FreelanceStatus
-  quantity?: Prisma.IntFilter<"FreelanceOrder"> | number
-  totalAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
-  escrowAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
-  commissionPercent?: Prisma.FloatFilter<"FreelanceOrder"> | number
-  createdAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
+export type FreelanceOrderUpdateOneRequiredWithoutFreelanceOrderBusinessNestedInput = {
+  create?: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUncheckedCreateWithoutFreelanceOrderBusinessInput>
+  connectOrCreate?: Prisma.FreelanceOrderCreateOrConnectWithoutFreelanceOrderBusinessInput
+  upsert?: Prisma.FreelanceOrderUpsertWithoutFreelanceOrderBusinessInput
+  connect?: Prisma.FreelanceOrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FreelanceOrderUpdateToOneWithWhereWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUpdateWithoutFreelanceOrderBusinessInput>, Prisma.FreelanceOrderUncheckedUpdateWithoutFreelanceOrderBusinessInput>
 }
 
 export type FreelanceOrderCreateWithoutClientInput = {
@@ -693,10 +687,13 @@ export type FreelanceOrderCreateWithoutClientInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   service: Prisma.FreelanceServiceCreateNestedOneWithoutOrdersInput
-  businesses?: Prisma.BusinessCreateNestedManyWithoutFreelanceOrdersInput
+  payment?: Prisma.PaymentTransactionCreateNestedOneWithoutFreelanceOrderInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutFreelanceOrderInput
 }
 
 export type FreelanceOrderUncheckedCreateWithoutClientInput = {
@@ -707,9 +704,12 @@ export type FreelanceOrderUncheckedCreateWithoutClientInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutFreelanceOrdersInput
+  payment?: Prisma.PaymentTransactionUncheckedCreateNestedOneWithoutFreelanceOrderInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutFreelanceOrderInput
 }
 
 export type FreelanceOrderCreateOrConnectWithoutClientInput = {
@@ -738,6 +738,104 @@ export type FreelanceOrderUpdateManyWithWhereWithoutClientInput = {
   data: Prisma.XOR<Prisma.FreelanceOrderUpdateManyMutationInput, Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientInput>
 }
 
+export type FreelanceOrderScalarWhereInput = {
+  AND?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
+  OR?: Prisma.FreelanceOrderScalarWhereInput[]
+  NOT?: Prisma.FreelanceOrderScalarWhereInput | Prisma.FreelanceOrderScalarWhereInput[]
+  id?: Prisma.StringFilter<"FreelanceOrder"> | string
+  clientId?: Prisma.StringFilter<"FreelanceOrder"> | string
+  serviceId?: Prisma.StringFilter<"FreelanceOrder"> | string
+  status?: Prisma.EnumFreelanceStatusFilter<"FreelanceOrder"> | $Enums.FreelanceStatus
+  quantity?: Prisma.IntFilter<"FreelanceOrder"> | number
+  totalAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
+  escrowAmount?: Prisma.FloatFilter<"FreelanceOrder"> | number
+  commissionPercent?: Prisma.FloatFilter<"FreelanceOrder"> | number
+  escrowStatus?: Prisma.EnumEscrowStatusNullableFilter<"FreelanceOrder"> | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.DateTimeNullableFilter<"FreelanceOrder"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"FreelanceOrder"> | Date | string
+}
+
+export type FreelanceOrderCreateWithoutPaymentInput = {
+  id?: string
+  status?: $Enums.FreelanceStatus
+  quantity?: number
+  totalAmount: number
+  escrowAmount: number
+  commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  client: Prisma.ClientCreateNestedOneWithoutFreelanceOrdersInput
+  service: Prisma.FreelanceServiceCreateNestedOneWithoutOrdersInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutFreelanceOrderInput
+}
+
+export type FreelanceOrderUncheckedCreateWithoutPaymentInput = {
+  id?: string
+  clientId: string
+  serviceId: string
+  status?: $Enums.FreelanceStatus
+  quantity?: number
+  totalAmount: number
+  escrowAmount: number
+  commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutFreelanceOrderInput
+}
+
+export type FreelanceOrderCreateOrConnectWithoutPaymentInput = {
+  where: Prisma.FreelanceOrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutPaymentInput, Prisma.FreelanceOrderUncheckedCreateWithoutPaymentInput>
+}
+
+export type FreelanceOrderUpsertWithoutPaymentInput = {
+  update: Prisma.XOR<Prisma.FreelanceOrderUpdateWithoutPaymentInput, Prisma.FreelanceOrderUncheckedUpdateWithoutPaymentInput>
+  create: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutPaymentInput, Prisma.FreelanceOrderUncheckedCreateWithoutPaymentInput>
+  where?: Prisma.FreelanceOrderWhereInput
+}
+
+export type FreelanceOrderUpdateToOneWithWhereWithoutPaymentInput = {
+  where?: Prisma.FreelanceOrderWhereInput
+  data: Prisma.XOR<Prisma.FreelanceOrderUpdateWithoutPaymentInput, Prisma.FreelanceOrderUncheckedUpdateWithoutPaymentInput>
+}
+
+export type FreelanceOrderUpdateWithoutPaymentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFreelanceStatusFieldUpdateOperationsInput | $Enums.FreelanceStatus
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  client?: Prisma.ClientUpdateOneRequiredWithoutFreelanceOrdersNestedInput
+  service?: Prisma.FreelanceServiceUpdateOneRequiredWithoutOrdersNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutFreelanceOrderNestedInput
+}
+
+export type FreelanceOrderUncheckedUpdateWithoutPaymentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFreelanceStatusFieldUpdateOperationsInput | $Enums.FreelanceStatus
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutFreelanceOrderNestedInput
+}
+
 export type FreelanceOrderCreateWithoutServiceInput = {
   id?: string
   status?: $Enums.FreelanceStatus
@@ -745,10 +843,13 @@ export type FreelanceOrderCreateWithoutServiceInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   client: Prisma.ClientCreateNestedOneWithoutFreelanceOrdersInput
-  businesses?: Prisma.BusinessCreateNestedManyWithoutFreelanceOrdersInput
+  payment?: Prisma.PaymentTransactionCreateNestedOneWithoutFreelanceOrderInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutFreelanceOrderInput
 }
 
 export type FreelanceOrderUncheckedCreateWithoutServiceInput = {
@@ -759,9 +860,12 @@ export type FreelanceOrderUncheckedCreateWithoutServiceInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutFreelanceOrdersInput
+  payment?: Prisma.PaymentTransactionUncheckedCreateNestedOneWithoutFreelanceOrderInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutFreelanceOrderInput
 }
 
 export type FreelanceOrderCreateOrConnectWithoutServiceInput = {
@@ -790,20 +894,71 @@ export type FreelanceOrderUpdateManyWithWhereWithoutServiceInput = {
   data: Prisma.XOR<Prisma.FreelanceOrderUpdateManyMutationInput, Prisma.FreelanceOrderUncheckedUpdateManyWithoutServiceInput>
 }
 
-export type FreelanceOrderUpdateWithoutBusinessesInput = {
+export type FreelanceOrderCreateWithoutFreelanceOrderBusinessInput = {
+  id?: string
+  status?: $Enums.FreelanceStatus
+  quantity?: number
+  totalAmount: number
+  escrowAmount: number
+  commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  client: Prisma.ClientCreateNestedOneWithoutFreelanceOrdersInput
+  service: Prisma.FreelanceServiceCreateNestedOneWithoutOrdersInput
+  payment?: Prisma.PaymentTransactionCreateNestedOneWithoutFreelanceOrderInput
+}
+
+export type FreelanceOrderUncheckedCreateWithoutFreelanceOrderBusinessInput = {
+  id?: string
+  clientId: string
+  serviceId: string
+  status?: $Enums.FreelanceStatus
+  quantity?: number
+  totalAmount: number
+  escrowAmount: number
+  commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payment?: Prisma.PaymentTransactionUncheckedCreateNestedOneWithoutFreelanceOrderInput
+}
+
+export type FreelanceOrderCreateOrConnectWithoutFreelanceOrderBusinessInput = {
+  where: Prisma.FreelanceOrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUncheckedCreateWithoutFreelanceOrderBusinessInput>
+}
+
+export type FreelanceOrderUpsertWithoutFreelanceOrderBusinessInput = {
+  update: Prisma.XOR<Prisma.FreelanceOrderUpdateWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUncheckedUpdateWithoutFreelanceOrderBusinessInput>
+  create: Prisma.XOR<Prisma.FreelanceOrderCreateWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUncheckedCreateWithoutFreelanceOrderBusinessInput>
+  where?: Prisma.FreelanceOrderWhereInput
+}
+
+export type FreelanceOrderUpdateToOneWithWhereWithoutFreelanceOrderBusinessInput = {
+  where?: Prisma.FreelanceOrderWhereInput
+  data: Prisma.XOR<Prisma.FreelanceOrderUpdateWithoutFreelanceOrderBusinessInput, Prisma.FreelanceOrderUncheckedUpdateWithoutFreelanceOrderBusinessInput>
+}
+
+export type FreelanceOrderUpdateWithoutFreelanceOrderBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumFreelanceStatusFieldUpdateOperationsInput | $Enums.FreelanceStatus
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   client?: Prisma.ClientUpdateOneRequiredWithoutFreelanceOrdersNestedInput
   service?: Prisma.FreelanceServiceUpdateOneRequiredWithoutOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUpdateOneWithoutFreelanceOrderNestedInput
 }
 
-export type FreelanceOrderUncheckedUpdateWithoutBusinessesInput = {
+export type FreelanceOrderUncheckedUpdateWithoutFreelanceOrderBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.StringFieldUpdateOperationsInput | string
   serviceId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -812,21 +967,11 @@ export type FreelanceOrderUncheckedUpdateWithoutBusinessesInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type FreelanceOrderUncheckedUpdateManyWithoutBusinessesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  serviceId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumFreelanceStatusFieldUpdateOperationsInput | $Enums.FreelanceStatus
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payment?: Prisma.PaymentTransactionUncheckedUpdateOneWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderCreateManyClientInput = {
@@ -837,6 +982,8 @@ export type FreelanceOrderCreateManyClientInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -848,10 +995,13 @@ export type FreelanceOrderUpdateWithoutClientInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   service?: Prisma.FreelanceServiceUpdateOneRequiredWithoutOrdersNestedInput
-  businesses?: Prisma.BusinessUpdateManyWithoutFreelanceOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUpdateOneWithoutFreelanceOrderNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderUncheckedUpdateWithoutClientInput = {
@@ -862,9 +1012,12 @@ export type FreelanceOrderUncheckedUpdateWithoutClientInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutFreelanceOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUncheckedUpdateOneWithoutFreelanceOrderNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderUncheckedUpdateManyWithoutClientInput = {
@@ -875,6 +1028,8 @@ export type FreelanceOrderUncheckedUpdateManyWithoutClientInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -887,6 +1042,8 @@ export type FreelanceOrderCreateManyServiceInput = {
   totalAmount: number
   escrowAmount: number
   commissionPercent: number
+  escrowStatus?: $Enums.EscrowStatus | null
+  escrowReleasedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -898,10 +1055,13 @@ export type FreelanceOrderUpdateWithoutServiceInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   client?: Prisma.ClientUpdateOneRequiredWithoutFreelanceOrdersNestedInput
-  businesses?: Prisma.BusinessUpdateManyWithoutFreelanceOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUpdateOneWithoutFreelanceOrderNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderUncheckedUpdateWithoutServiceInput = {
@@ -912,9 +1072,12 @@ export type FreelanceOrderUncheckedUpdateWithoutServiceInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutFreelanceOrdersNestedInput
+  payment?: Prisma.PaymentTransactionUncheckedUpdateOneWithoutFreelanceOrderNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutFreelanceOrderNestedInput
 }
 
 export type FreelanceOrderUncheckedUpdateManyWithoutServiceInput = {
@@ -925,6 +1088,8 @@ export type FreelanceOrderUncheckedUpdateManyWithoutServiceInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   escrowAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   commissionPercent?: Prisma.FloatFieldUpdateOperationsInput | number
+  escrowStatus?: Prisma.NullableEnumEscrowStatusFieldUpdateOperationsInput | $Enums.EscrowStatus | null
+  escrowReleasedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -935,11 +1100,11 @@ export type FreelanceOrderUncheckedUpdateManyWithoutServiceInput = {
  */
 
 export type FreelanceOrderCountOutputType = {
-  businesses: number
+  freelanceOrderBusiness: number
 }
 
 export type FreelanceOrderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  businesses?: boolean | FreelanceOrderCountOutputTypeCountBusinessesArgs
+  freelanceOrderBusiness?: boolean | FreelanceOrderCountOutputTypeCountFreelanceOrderBusinessArgs
 }
 
 /**
@@ -955,8 +1120,8 @@ export type FreelanceOrderCountOutputTypeDefaultArgs<ExtArgs extends runtime.Typ
 /**
  * FreelanceOrderCountOutputType without action
  */
-export type FreelanceOrderCountOutputTypeCountBusinessesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BusinessWhereInput
+export type FreelanceOrderCountOutputTypeCountFreelanceOrderBusinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FreelanceOrderBusinessWhereInput
 }
 
 
@@ -969,11 +1134,14 @@ export type FreelanceOrderSelect<ExtArgs extends runtime.Types.Extensions.Intern
   totalAmount?: boolean
   escrowAmount?: boolean
   commissionPercent?: boolean
+  escrowStatus?: boolean
+  escrowReleasedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   service?: boolean | Prisma.FreelanceServiceDefaultArgs<ExtArgs>
-  businesses?: boolean | Prisma.FreelanceOrder$businessesArgs<ExtArgs>
+  payment?: boolean | Prisma.FreelanceOrder$paymentArgs<ExtArgs>
+  freelanceOrderBusiness?: boolean | Prisma.FreelanceOrder$freelanceOrderBusinessArgs<ExtArgs>
   _count?: boolean | Prisma.FreelanceOrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["freelanceOrder"]>
 
@@ -986,6 +1154,8 @@ export type FreelanceOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   totalAmount?: boolean
   escrowAmount?: boolean
   commissionPercent?: boolean
+  escrowStatus?: boolean
+  escrowReleasedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
@@ -1001,6 +1171,8 @@ export type FreelanceOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   totalAmount?: boolean
   escrowAmount?: boolean
   commissionPercent?: boolean
+  escrowStatus?: boolean
+  escrowReleasedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
@@ -1016,15 +1188,18 @@ export type FreelanceOrderSelectScalar = {
   totalAmount?: boolean
   escrowAmount?: boolean
   commissionPercent?: boolean
+  escrowStatus?: boolean
+  escrowReleasedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FreelanceOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientId" | "serviceId" | "status" | "quantity" | "totalAmount" | "escrowAmount" | "commissionPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["freelanceOrder"]>
+export type FreelanceOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientId" | "serviceId" | "status" | "quantity" | "totalAmount" | "escrowAmount" | "commissionPercent" | "escrowStatus" | "escrowReleasedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["freelanceOrder"]>
 export type FreelanceOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
   service?: boolean | Prisma.FreelanceServiceDefaultArgs<ExtArgs>
-  businesses?: boolean | Prisma.FreelanceOrder$businessesArgs<ExtArgs>
+  payment?: boolean | Prisma.FreelanceOrder$paymentArgs<ExtArgs>
+  freelanceOrderBusiness?: boolean | Prisma.FreelanceOrder$freelanceOrderBusinessArgs<ExtArgs>
   _count?: boolean | Prisma.FreelanceOrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FreelanceOrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1041,7 +1216,8 @@ export type $FreelanceOrderPayload<ExtArgs extends runtime.Types.Extensions.Inte
   objects: {
     client: Prisma.$ClientPayload<ExtArgs>
     service: Prisma.$FreelanceServicePayload<ExtArgs>
-    businesses: Prisma.$BusinessPayload<ExtArgs>[]
+    payment: Prisma.$PaymentTransactionPayload<ExtArgs> | null
+    freelanceOrderBusiness: Prisma.$FreelanceOrderBusinessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1052,6 +1228,8 @@ export type $FreelanceOrderPayload<ExtArgs extends runtime.Types.Extensions.Inte
     totalAmount: number
     escrowAmount: number
     commissionPercent: number
+    escrowStatus: $Enums.EscrowStatus | null
+    escrowReleasedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["freelanceOrder"]>
@@ -1450,7 +1628,8 @@ export interface Prisma__FreelanceOrderClient<T, Null = never, ExtArgs extends r
   readonly [Symbol.toStringTag]: "PrismaPromise"
   client<T extends Prisma.ClientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   service<T extends Prisma.FreelanceServiceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceServiceDefaultArgs<ExtArgs>>): Prisma.Prisma__FreelanceServiceClient<runtime.Types.Result.GetResult<Prisma.$FreelanceServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  businesses<T extends Prisma.FreelanceOrder$businessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceOrder$businessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payment<T extends Prisma.FreelanceOrder$paymentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceOrder$paymentArgs<ExtArgs>>): Prisma.Prisma__PaymentTransactionClient<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  freelanceOrderBusiness<T extends Prisma.FreelanceOrder$freelanceOrderBusinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceOrder$freelanceOrderBusinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceOrderBusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1488,6 +1667,8 @@ export interface FreelanceOrderFieldRefs {
   readonly totalAmount: Prisma.FieldRef<"FreelanceOrder", 'Float'>
   readonly escrowAmount: Prisma.FieldRef<"FreelanceOrder", 'Float'>
   readonly commissionPercent: Prisma.FieldRef<"FreelanceOrder", 'Float'>
+  readonly escrowStatus: Prisma.FieldRef<"FreelanceOrder", 'EscrowStatus'>
+  readonly escrowReleasedAt: Prisma.FieldRef<"FreelanceOrder", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"FreelanceOrder", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FreelanceOrder", 'DateTime'>
 }
@@ -1886,27 +2067,46 @@ export type FreelanceOrderDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * FreelanceOrder.businesses
+ * FreelanceOrder.payment
  */
-export type FreelanceOrder$businessesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type FreelanceOrder$paymentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Business
+   * Select specific fields to fetch from the PaymentTransaction
    */
-  select?: Prisma.BusinessSelect<ExtArgs> | null
+  select?: Prisma.PaymentTransactionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Business
+   * Omit specific fields from the PaymentTransaction
    */
-  omit?: Prisma.BusinessOmit<ExtArgs> | null
+  omit?: Prisma.PaymentTransactionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BusinessInclude<ExtArgs> | null
-  where?: Prisma.BusinessWhereInput
-  orderBy?: Prisma.BusinessOrderByWithRelationInput | Prisma.BusinessOrderByWithRelationInput[]
-  cursor?: Prisma.BusinessWhereUniqueInput
+  include?: Prisma.PaymentTransactionInclude<ExtArgs> | null
+  where?: Prisma.PaymentTransactionWhereInput
+}
+
+/**
+ * FreelanceOrder.freelanceOrderBusiness
+ */
+export type FreelanceOrder$freelanceOrderBusinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FreelanceOrderBusiness
+   */
+  select?: Prisma.FreelanceOrderBusinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FreelanceOrderBusiness
+   */
+  omit?: Prisma.FreelanceOrderBusinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FreelanceOrderBusinessInclude<ExtArgs> | null
+  where?: Prisma.FreelanceOrderBusinessWhereInput
+  orderBy?: Prisma.FreelanceOrderBusinessOrderByWithRelationInput | Prisma.FreelanceOrderBusinessOrderByWithRelationInput[]
+  cursor?: Prisma.FreelanceOrderBusinessWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BusinessScalarFieldEnum | Prisma.BusinessScalarFieldEnum[]
+  distinct?: Prisma.FreelanceOrderBusinessScalarFieldEnum | Prisma.FreelanceOrderBusinessScalarFieldEnum[]
 }
 
 /**

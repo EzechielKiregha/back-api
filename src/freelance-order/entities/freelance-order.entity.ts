@@ -2,20 +2,16 @@ import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
 import { BusinessEntity } from 'src/business/entities/business.entity';
 import { ClientEntity } from 'src/client/entities/client.entity';
 import { FreelanceServiceEntity } from 'src/freelance-service/entities/freelance-service.entity';
+import { PaymentTransactionEntity } from 'src/payment-transaction/entities/payment-transaction.entity';
+import { EscrowStatus, FreelanceStatus } from '../dto/create-freelance-order.input';
 
 @ObjectType()
 export class FreelanceOrderEntity {
   @Field()
   id: string;
 
-  @Field()
-  clientId: string;
-
-  @Field()
-  serviceId: string;
-
-  @Field()
-  status: string; // FreelanceStatus (e.g., PENDING, IN_PROGRESS, COMPLETED, CANCELLED)
+  @Field(() => FreelanceStatus)
+  status: FreelanceStatus;
 
   @Field(() => Int)
   quantity: number;
@@ -29,19 +25,40 @@ export class FreelanceOrderEntity {
   @Field(() => Float)
   commissionPercent: number;
 
+  @Field(() => EscrowStatus, { nullable: true })
+  escrowStatus?: EscrowStatus;
+
   @Field()
   createdAt: Date;
 
   @Field()
-  updatedAt: Date;
+  escrowReleasedAt: Date;
 
-  // Relations
-  @Field(() => ClientEntity) // Client who placed the freelance order
+  @Field(() => ClientEntity)
   client: ClientEntity;
 
-  @Field(() => FreelanceServiceEntity) // Freelance service associated with the order
+  @Field(() => FreelanceServiceEntity)
   service: FreelanceServiceEntity;
 
-  @Field(() => [BusinessEntity]) // Businesses associated with the freelance order
-  businesses: BusinessEntity[];
+  @Field(() => [FreelanceOrderBusinessEntity])
+  freelanceOrderBusiness: FreelanceOrderBusinessEntity[];
+
+  @Field(() => PaymentTransactionEntity, { nullable: true })
+  payment?: PaymentTransactionEntity;
+}
+
+
+@ObjectType()
+export class FreelanceOrderBusinessEntity {
+  @Field()
+  id: string;
+
+  @Field(() => BusinessEntity)
+  business: BusinessEntity;
+
+  @Field()
+  role?: string;
+
+  @Field()
+  assignedAt: Date;
 }

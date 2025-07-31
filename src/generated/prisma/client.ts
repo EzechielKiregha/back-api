@@ -132,10 +132,20 @@ export type Ad = Prisma.AdModel
  */
 export type FreelanceService = Prisma.FreelanceServiceModel
 /**
+ * Model WorkerServiceAssignment
+ * 
+ */
+export type WorkerServiceAssignment = Prisma.WorkerServiceAssignmentModel
+/**
  * Model FreelanceOrder
  * 
  */
 export type FreelanceOrder = Prisma.FreelanceOrderModel
+/**
+ * Model FreelanceOrderBusiness
+ * 
+ */
+export type FreelanceOrderBusiness = Prisma.FreelanceOrderBusinessModel
 /**
  * Model Referral
  * 
@@ -170,8 +180,14 @@ export const PaymentStatus = $Enums.PaymentStatus
 export type PaymentMethod = $Enums.PaymentMethod
 export const PaymentMethod = $Enums.PaymentMethod
 
+export type FreelanceServiceCategory = $Enums.FreelanceServiceCategory
+export const FreelanceServiceCategory = $Enums.FreelanceServiceCategory
+
 export type FreelanceStatus = $Enums.FreelanceStatus
 export const FreelanceStatus = $Enums.FreelanceStatus
+
+export type EscrowStatus = $Enums.EscrowStatus
+export const EscrowStatus = $Enums.EscrowStatus
 
 export type PostStatus = $Enums.PostStatus
 export const PostStatus = $Enums.PostStatus

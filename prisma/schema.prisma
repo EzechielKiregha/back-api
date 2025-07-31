@@ -48,11 +48,28 @@ enum PaymentMethod {
   MOBILE_MONEY
 }
 
+enum FreelanceServiceCategory {
+  PLUMBER
+  ELECTRICIAN
+  CARPENTER
+  MECHANIC
+  TUTOR
+  CLEANER
+  OTHER
+}
+
 enum FreelanceStatus {
   PENDING
+  CONFIRMED
   IN_PROGRESS
   COMPLETED
   CANCELLED
+}
+
+enum EscrowStatus {
+  HELD
+  RELEASED
+  DISPUTED
 }
 
 enum PostStatus {
@@ -89,15 +106,14 @@ model Business {
   recharges            AccountRecharge[]     @relation("BusinessRecharges")
   ads                  Ad[]
   freelanceServices    FreelanceService[]    @relation("ServiceOwner")
-  freelanceOrders      FreelanceOrder[]      @relation("BusinessOrders")
   referralsMade        Referral[]            @relation("BusinessAffiliations")
   referralsReceived    Referral[]            @relation("BusinessReferred")
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
 
   chats Chat[]
-
   postOfSales PostOfSale[]
+  freelanceOrderBusiness FreelanceOrderBusiness[]
 }
 
 model Client {
@@ -133,13 +149,13 @@ model Worker {
   password             String
   business             Business              @relation(fields: [businessId], references: [id])
   businessId           String
-  freelanceServices    FreelanceService[]    @relation("WorkerServices")
   kyc                  KYC?                  @relation("WorkerKYC")
   isVerified           Boolean               @default(false)
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
 
   chats Chat[]
+  workerServiceAssignments WorkerServiceAssignment[]
 }
 
 model Category {
@@ -303,16 +319,18 @@ model Token {
 
 model PaymentTransaction {
   id                   String                @id @default(uuid())
-  order                Order                 @relation(fields: [orderId], references: [id])
-  orderId              String                @unique
+  order                Order?                 @relation(fields: [orderId], references: [id])
+  orderId              String?                @unique
   status               PaymentStatus         @default(PENDING)
   method               PaymentMethod         @default(TOKEN)
   amount               Float
   transactionDate      DateTime              @default(now())
   qrCode               String?
   createdAt            DateTime              @default(now())
+  freelanceOrder       FreelanceOrder?       @relation(fields: [freelanceOrderId], references: [id])
+  freelanceOrderId     String?               @unique
 
-  PostTransaction PostTransaction[]
+  postTransactions PostTransaction[]
 }
 
 model Ad {
@@ -335,13 +353,23 @@ model FreelanceService {
   description          String?
   isHourly             Boolean               @default(true)
   rate                 Float                 // Ts per hour or fixed
+  category             FreelanceServiceCategory? @default(OTHER)
   business             Business              @relation("ServiceOwner", fields: [businessId], references: [id])
   businessId           String
   orders               FreelanceOrder[]      
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
+  workerServiceAssignments WorkerServiceAssignment[]
+}
 
-  workers Worker[]     @relation("WorkerServices")
+model WorkerServiceAssignment {
+  id                   String                @id @default(uuid())
+  worker               Worker                @relation(fields: [workerId], references: [id])
+  workerId             String
+  freelanceService     FreelanceService      @relation(fields: [freelanceServiceId], references: [id])
+  freelanceServiceId   String
+  role                 String?               // e.g., "Lead", "Assistant"
+  assignedAt           DateTime              @default(now())
 }
 
 model FreelanceOrder {
@@ -355,10 +383,23 @@ model FreelanceOrder {
   totalAmount          Float                 // in Ts
   escrowAmount         Float                 // in Ts
   commissionPercent    Float                 // e.g. 0.1 for 10%
+  escrowStatus         EscrowStatus?         @default(HELD) // HELD, RELEASED, DISPUTED
+  escrowReleasedAt     DateTime?
+  payment              PaymentTransaction?   
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
 
-  businesses Business[] @relation("BusinessOrders")
+  freelanceOrderBusiness FreelanceOrderBusiness[]
+}
+
+model FreelanceOrderBusiness {
+  id                   String                @id @default(uuid())
+  freelanceOrder       FreelanceOrder        @relation(fields: [freelanceOrderId], references: [id])
+  freelanceOrderId     String
+  business             Business              @relation(fields: [businessId], references: [id])
+  businessId           String
+  role                 String?               // e.g., "Contractor"
+  assignedAt           DateTime              @default(now())
 }
 
 // Affiliation Tracking

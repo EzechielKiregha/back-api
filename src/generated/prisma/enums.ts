@@ -63,14 +63,37 @@ export const PaymentMethod = {
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 
+export const FreelanceServiceCategory = {
+  PLUMBER: 'PLUMBER',
+  ELECTRICIAN: 'ELECTRICIAN',
+  CARPENTER: 'CARPENTER',
+  MECHANIC: 'MECHANIC',
+  TUTOR: 'TUTOR',
+  CLEANER: 'CLEANER',
+  OTHER: 'OTHER'
+} as const
+
+export type FreelanceServiceCategory = (typeof FreelanceServiceCategory)[keyof typeof FreelanceServiceCategory]
+
+
 export const FreelanceStatus = {
   PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED'
 } as const
 
 export type FreelanceStatus = (typeof FreelanceStatus)[keyof typeof FreelanceStatus]
+
+
+export const EscrowStatus = {
+  HELD: 'HELD',
+  RELEASED: 'RELEASED',
+  DISPUTED: 'DISPUTED'
+} as const
+
+export type EscrowStatus = (typeof EscrowStatus)[keyof typeof EscrowStatus]
 
 
 export const PostStatus = {

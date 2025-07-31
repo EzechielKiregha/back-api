@@ -43,7 +43,7 @@ export class WorkerService {
       include: {
         business: { select: { id: true, name: true, email: true, description: true, createdAt: true } },
         kyc: { select: { id: true, status: true, submittedAt: true, verifiedAt: true } },
-        freelanceServices: { select: { id: true, title: true, isHourly: true, rate: true, createdAt: true } },
+        workerServiceAssignments: { select: { id: true, freelanceService : { select : {id : true, title: true, isHourly: true, rate: true, createdAt: true} } } },
       },
     });
   }
@@ -54,7 +54,7 @@ export class WorkerService {
       include: {
         business: { select: { id: true, name: true, email: true, description: true, createdAt: true } },
         kyc: { select: { id: true, status: true, submittedAt: true, verifiedAt: true } },
-        freelanceServices: { select: { id: true, title: true, isHourly: true, rate: true, createdAt: true } },
+        workerServiceAssignments: { select: { id: true, freelanceService : { select : {id : true, title: true, isHourly: true, rate: true, createdAt: true} } } },
       },
     });
   }

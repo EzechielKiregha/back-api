@@ -303,11 +303,35 @@ export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumPaymentMethodFilter<$PrismaModel>
 }
 
+export type EnumFreelanceServiceCategoryNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.FreelanceServiceCategory | Prisma.EnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel> | $Enums.FreelanceServiceCategory | null
+}
+
+export type EnumFreelanceServiceCategoryNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FreelanceServiceCategory | Prisma.EnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFreelanceServiceCategoryNullableWithAggregatesFilter<$PrismaModel> | $Enums.FreelanceServiceCategory | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel>
+}
+
 export type EnumFreelanceStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.FreelanceStatus | Prisma.EnumFreelanceStatusFieldRefInput<$PrismaModel>
   in?: $Enums.FreelanceStatus[] | Prisma.ListEnumFreelanceStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.FreelanceStatus[] | Prisma.ListEnumFreelanceStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumFreelanceStatusFilter<$PrismaModel> | $Enums.FreelanceStatus
+}
+
+export type EnumEscrowStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.EscrowStatus | Prisma.EnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEscrowStatusNullableFilter<$PrismaModel> | $Enums.EscrowStatus | null
 }
 
 export type EnumFreelanceStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -318,6 +342,16 @@ export type EnumFreelanceStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumFreelanceStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumFreelanceStatusFilter<$PrismaModel>
+}
+
+export type EnumEscrowStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EscrowStatus | Prisma.EnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEscrowStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.EscrowStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEscrowStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEscrowStatusNullableFilter<$PrismaModel>
 }
 
 export type EnumPostStatusFilter<$PrismaModel = never> = {
@@ -646,11 +680,35 @@ export type NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumPaymentMethodFilter<$PrismaModel>
 }
 
+export type NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.FreelanceServiceCategory | Prisma.EnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel> | $Enums.FreelanceServiceCategory | null
+}
+
+export type NestedEnumFreelanceServiceCategoryNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FreelanceServiceCategory | Prisma.EnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FreelanceServiceCategory[] | Prisma.ListEnumFreelanceServiceCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFreelanceServiceCategoryNullableWithAggregatesFilter<$PrismaModel> | $Enums.FreelanceServiceCategory | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFreelanceServiceCategoryNullableFilter<$PrismaModel>
+}
+
 export type NestedEnumFreelanceStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.FreelanceStatus | Prisma.EnumFreelanceStatusFieldRefInput<$PrismaModel>
   in?: $Enums.FreelanceStatus[] | Prisma.ListEnumFreelanceStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.FreelanceStatus[] | Prisma.ListEnumFreelanceStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumFreelanceStatusFilter<$PrismaModel> | $Enums.FreelanceStatus
+}
+
+export type NestedEnumEscrowStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.EscrowStatus | Prisma.EnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEscrowStatusNullableFilter<$PrismaModel> | $Enums.EscrowStatus | null
 }
 
 export type NestedEnumFreelanceStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -661,6 +719,16 @@ export type NestedEnumFreelanceStatusWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumFreelanceStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumFreelanceStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumEscrowStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EscrowStatus | Prisma.EnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EscrowStatus[] | Prisma.ListEnumEscrowStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEscrowStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.EscrowStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEscrowStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEscrowStatusNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumPostStatusFilter<$PrismaModel = never> = {

@@ -1,6 +1,8 @@
 import { ObjectType, Field, Float } from '@nestjs/graphql';
+import { IsEnum } from 'class-validator';
 import { BusinessEntity } from 'src/business/entities/business.entity';
-import { FreelanceOrderEntity } from 'src/freelance-order/entities/freelance-order.entity';
+import { WorkerEntity } from 'src/worker/entities/worker.entity';
+import { FreelanceServiceCategory } from '../dto/create-freelance-service.input';
 
 @ObjectType()
 export class FreelanceServiceEntity {
@@ -13,14 +15,15 @@ export class FreelanceServiceEntity {
   @Field({ nullable: true })
   description?: string;
 
-  @Field()
+  @Field(() => Boolean)
   isHourly: boolean;
 
   @Field(() => Float)
-  rate: number; // Rate per hour or fixed
+  rate: number;
 
-  @Field()
-  businessId: string;
+  @Field(() => FreelanceServiceCategory )
+  @IsEnum(FreelanceServiceCategory)
+  category : FreelanceServiceCategory
 
   @Field()
   createdAt: Date;
@@ -28,10 +31,26 @@ export class FreelanceServiceEntity {
   @Field()
   updatedAt: Date;
 
-  // Relations
-  @Field(() => BusinessEntity) // Business offering the freelance service
+  @Field(() => BusinessEntity)
   business: BusinessEntity;
 
-  @Field(() => [FreelanceOrderEntity]) // Orders associated with the freelance service
-  orders: FreelanceOrderEntity[];
+  @Field(() => [WorkerServiceAssignmentEntity])
+  workerServiceAssignments: WorkerServiceAssignmentEntity[];
 }
+
+@ObjectType()
+export class WorkerServiceAssignmentEntity {
+  @Field()
+  id: string;
+
+  @Field(() => WorkerEntity)
+  worker: WorkerEntity;
+
+  @Field()
+  role?: string;
+
+  @Field()
+  assignedAt: Date;
+}
+
+

@@ -245,11 +245,11 @@ export type BusinessWhereInput = {
   recharges?: Prisma.AccountRechargeListRelationFilter
   ads?: Prisma.AdListRelationFilter
   freelanceServices?: Prisma.FreelanceServiceListRelationFilter
-  freelanceOrders?: Prisma.FreelanceOrderListRelationFilter
   referralsMade?: Prisma.ReferralListRelationFilter
   referralsReceived?: Prisma.ReferralListRelationFilter
   chats?: Prisma.ChatListRelationFilter
   postOfSales?: Prisma.PostOfSaleListRelationFilter
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessListRelationFilter
 }
 
 export type BusinessOrderByWithRelationInput = {
@@ -273,11 +273,11 @@ export type BusinessOrderByWithRelationInput = {
   recharges?: Prisma.AccountRechargeOrderByRelationAggregateInput
   ads?: Prisma.AdOrderByRelationAggregateInput
   freelanceServices?: Prisma.FreelanceServiceOrderByRelationAggregateInput
-  freelanceOrders?: Prisma.FreelanceOrderOrderByRelationAggregateInput
   referralsMade?: Prisma.ReferralOrderByRelationAggregateInput
   referralsReceived?: Prisma.ReferralOrderByRelationAggregateInput
   chats?: Prisma.ChatOrderByRelationAggregateInput
   postOfSales?: Prisma.PostOfSaleOrderByRelationAggregateInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessOrderByRelationAggregateInput
 }
 
 export type BusinessWhereUniqueInput = Prisma.AtLeast<{
@@ -304,11 +304,11 @@ export type BusinessWhereUniqueInput = Prisma.AtLeast<{
   recharges?: Prisma.AccountRechargeListRelationFilter
   ads?: Prisma.AdListRelationFilter
   freelanceServices?: Prisma.FreelanceServiceListRelationFilter
-  freelanceOrders?: Prisma.FreelanceOrderListRelationFilter
   referralsMade?: Prisma.ReferralListRelationFilter
   referralsReceived?: Prisma.ReferralListRelationFilter
   chats?: Prisma.ChatListRelationFilter
   postOfSales?: Prisma.PostOfSaleListRelationFilter
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessListRelationFilter
 }, "id" | "email">
 
 export type BusinessOrderByWithAggregationInput = {
@@ -368,11 +368,11 @@ export type BusinessCreateInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateInput = {
@@ -396,11 +396,11 @@ export type BusinessUncheckedCreateInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUpdateInput = {
@@ -424,11 +424,11 @@ export type BusinessUpdateInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateInput = {
@@ -452,11 +452,11 @@ export type BusinessUncheckedUpdateInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateManyInput = {
@@ -557,16 +557,6 @@ export type BusinessScalarRelationFilter = {
 export type BusinessNullableScalarRelationFilter = {
   is?: Prisma.BusinessWhereInput | null
   isNot?: Prisma.BusinessWhereInput | null
-}
-
-export type BusinessListRelationFilter = {
-  every?: Prisma.BusinessWhereInput
-  some?: Prisma.BusinessWhereInput
-  none?: Prisma.BusinessWhereInput
-}
-
-export type BusinessOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -717,42 +707,18 @@ export type BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutFreelanceServicesInput, Prisma.BusinessUpdateWithoutFreelanceServicesInput>, Prisma.BusinessUncheckedUpdateWithoutFreelanceServicesInput>
 }
 
-export type BusinessCreateNestedManyWithoutFreelanceOrdersInput = {
-  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput> | Prisma.BusinessCreateWithoutFreelanceOrdersInput[] | Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput[]
-  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput | Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput[]
-  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+export type BusinessCreateNestedOneWithoutFreelanceOrderBusinessInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrderBusinessInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFreelanceOrderBusinessInput
+  connect?: Prisma.BusinessWhereUniqueInput
 }
 
-export type BusinessUncheckedCreateNestedManyWithoutFreelanceOrdersInput = {
-  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput> | Prisma.BusinessCreateWithoutFreelanceOrdersInput[] | Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput[]
-  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput | Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput[]
-  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-}
-
-export type BusinessUpdateManyWithoutFreelanceOrdersNestedInput = {
-  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput> | Prisma.BusinessCreateWithoutFreelanceOrdersInput[] | Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput[]
-  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput | Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput[]
-  upsert?: Prisma.BusinessUpsertWithWhereUniqueWithoutFreelanceOrdersInput | Prisma.BusinessUpsertWithWhereUniqueWithoutFreelanceOrdersInput[]
-  set?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  disconnect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  delete?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  update?: Prisma.BusinessUpdateWithWhereUniqueWithoutFreelanceOrdersInput | Prisma.BusinessUpdateWithWhereUniqueWithoutFreelanceOrdersInput[]
-  updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutFreelanceOrdersInput | Prisma.BusinessUpdateManyWithWhereWithoutFreelanceOrdersInput[]
-  deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
-}
-
-export type BusinessUncheckedUpdateManyWithoutFreelanceOrdersNestedInput = {
-  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput> | Prisma.BusinessCreateWithoutFreelanceOrdersInput[] | Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput[]
-  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput | Prisma.BusinessCreateOrConnectWithoutFreelanceOrdersInput[]
-  upsert?: Prisma.BusinessUpsertWithWhereUniqueWithoutFreelanceOrdersInput | Prisma.BusinessUpsertWithWhereUniqueWithoutFreelanceOrdersInput[]
-  set?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  disconnect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  delete?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
-  update?: Prisma.BusinessUpdateWithWhereUniqueWithoutFreelanceOrdersInput | Prisma.BusinessUpdateWithWhereUniqueWithoutFreelanceOrdersInput[]
-  updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutFreelanceOrdersInput | Prisma.BusinessUpdateManyWithWhereWithoutFreelanceOrdersInput[]
-  deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+export type BusinessUpdateOneRequiredWithoutFreelanceOrderBusinessNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrderBusinessInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFreelanceOrderBusinessInput
+  upsert?: Prisma.BusinessUpsertWithoutFreelanceOrderBusinessInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutFreelanceOrderBusinessInput, Prisma.BusinessUpdateWithoutFreelanceOrderBusinessInput>, Prisma.BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput>
 }
 
 export type BusinessCreateNestedOneWithoutReferralsMadeInput = {
@@ -821,11 +787,11 @@ export type BusinessCreateWithoutWorkersInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutWorkersInput = {
@@ -848,11 +814,11 @@ export type BusinessUncheckedCreateWithoutWorkersInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutWorkersInput = {
@@ -891,11 +857,11 @@ export type BusinessUpdateWithoutWorkersInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutWorkersInput = {
@@ -918,11 +884,11 @@ export type BusinessUncheckedUpdateWithoutWorkersInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutProductsInput = {
@@ -945,11 +911,11 @@ export type BusinessCreateWithoutProductsInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutProductsInput = {
@@ -972,11 +938,11 @@ export type BusinessUncheckedCreateWithoutProductsInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutProductsInput = {
@@ -1015,11 +981,11 @@ export type BusinessUpdateWithoutProductsInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutProductsInput = {
@@ -1042,11 +1008,11 @@ export type BusinessUncheckedUpdateWithoutProductsInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutChatsInput = {
@@ -1070,10 +1036,10 @@ export type BusinessCreateWithoutChatsInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutChatsInput = {
@@ -1097,10 +1063,10 @@ export type BusinessUncheckedCreateWithoutChatsInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutChatsInput = {
@@ -1140,10 +1106,10 @@ export type BusinessUpdateWithoutChatsInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutChatsInput = {
@@ -1167,10 +1133,10 @@ export type BusinessUncheckedUpdateWithoutChatsInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutRepostedItemsInput = {
@@ -1193,11 +1159,11 @@ export type BusinessCreateWithoutRepostedItemsInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutRepostedItemsInput = {
@@ -1220,11 +1186,11 @@ export type BusinessUncheckedCreateWithoutRepostedItemsInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutRepostedItemsInput = {
@@ -1263,11 +1229,11 @@ export type BusinessUpdateWithoutRepostedItemsInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutRepostedItemsInput = {
@@ -1290,11 +1256,11 @@ export type BusinessUncheckedUpdateWithoutRepostedItemsInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutReownedItemsInput = {
@@ -1317,11 +1283,11 @@ export type BusinessCreateWithoutReownedItemsInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutReownedItemsInput = {
@@ -1344,11 +1310,11 @@ export type BusinessUncheckedCreateWithoutReownedItemsInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutReownedItemsInput = {
@@ -1387,11 +1353,11 @@ export type BusinessUpdateWithoutReownedItemsInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutReownedItemsInput = {
@@ -1414,11 +1380,11 @@ export type BusinessUncheckedUpdateWithoutReownedItemsInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutKycInput = {
@@ -1441,11 +1407,11 @@ export type BusinessCreateWithoutKycInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutKycInput = {
@@ -1468,11 +1434,11 @@ export type BusinessUncheckedCreateWithoutKycInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutKycInput = {
@@ -1511,11 +1477,11 @@ export type BusinessUpdateWithoutKycInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutKycInput = {
@@ -1538,11 +1504,11 @@ export type BusinessUncheckedUpdateWithoutKycInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutRechargesInput = {
@@ -1565,11 +1531,11 @@ export type BusinessCreateWithoutRechargesInput = {
   reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutRechargesInput = {
@@ -1592,11 +1558,11 @@ export type BusinessUncheckedCreateWithoutRechargesInput = {
   reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutRechargesInput = {
@@ -1635,11 +1601,11 @@ export type BusinessUpdateWithoutRechargesInput = {
   reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutRechargesInput = {
@@ -1662,11 +1628,11 @@ export type BusinessUncheckedUpdateWithoutRechargesInput = {
   reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutAdsInput = {
@@ -1689,11 +1655,11 @@ export type BusinessCreateWithoutAdsInput = {
   reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutAdsInput = {
@@ -1716,11 +1682,11 @@ export type BusinessUncheckedCreateWithoutAdsInput = {
   reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutAdsInput = {
@@ -1759,11 +1725,11 @@ export type BusinessUpdateWithoutAdsInput = {
   reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutAdsInput = {
@@ -1786,11 +1752,11 @@ export type BusinessUncheckedUpdateWithoutAdsInput = {
   reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutFreelanceServicesInput = {
@@ -1813,11 +1779,11 @@ export type BusinessCreateWithoutFreelanceServicesInput = {
   reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutFreelanceServicesInput = {
@@ -1840,11 +1806,11 @@ export type BusinessUncheckedCreateWithoutFreelanceServicesInput = {
   reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutFreelanceServicesInput = {
@@ -1883,11 +1849,11 @@ export type BusinessUpdateWithoutFreelanceServicesInput = {
   reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutFreelanceServicesInput = {
@@ -1910,14 +1876,14 @@ export type BusinessUncheckedUpdateWithoutFreelanceServicesInput = {
   reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
-export type BusinessCreateWithoutFreelanceOrdersInput = {
+export type BusinessCreateWithoutFreelanceOrderBusinessInput = {
   id?: string
   name: string
   email: string
@@ -1944,7 +1910,7 @@ export type BusinessCreateWithoutFreelanceOrdersInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
 }
 
-export type BusinessUncheckedCreateWithoutFreelanceOrdersInput = {
+export type BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput = {
   id?: string
   name: string
   email: string
@@ -1971,43 +1937,74 @@ export type BusinessUncheckedCreateWithoutFreelanceOrdersInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
 }
 
-export type BusinessCreateOrConnectWithoutFreelanceOrdersInput = {
+export type BusinessCreateOrConnectWithoutFreelanceOrderBusinessInput = {
   where: Prisma.BusinessWhereUniqueInput
-  create: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrderBusinessInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput>
 }
 
-export type BusinessUpsertWithWhereUniqueWithoutFreelanceOrdersInput = {
-  where: Prisma.BusinessWhereUniqueInput
-  update: Prisma.XOR<Prisma.BusinessUpdateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedUpdateWithoutFreelanceOrdersInput>
-  create: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrdersInput>
+export type BusinessUpsertWithoutFreelanceOrderBusinessInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutFreelanceOrderBusinessInput, Prisma.BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutFreelanceOrderBusinessInput, Prisma.BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput>
+  where?: Prisma.BusinessWhereInput
 }
 
-export type BusinessUpdateWithWhereUniqueWithoutFreelanceOrdersInput = {
-  where: Prisma.BusinessWhereUniqueInput
-  data: Prisma.XOR<Prisma.BusinessUpdateWithoutFreelanceOrdersInput, Prisma.BusinessUncheckedUpdateWithoutFreelanceOrdersInput>
+export type BusinessUpdateToOneWithWhereWithoutFreelanceOrderBusinessInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutFreelanceOrderBusinessInput, Prisma.BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput>
 }
 
-export type BusinessUpdateManyWithWhereWithoutFreelanceOrdersInput = {
-  where: Prisma.BusinessScalarWhereInput
-  data: Prisma.XOR<Prisma.BusinessUpdateManyMutationInput, Prisma.BusinessUncheckedUpdateManyWithoutFreelanceOrdersInput>
+export type BusinessUpdateWithoutFreelanceOrderBusinessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kyc?: Prisma.KYCUpdateOneWithoutBusinessNestedInput
+  products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
+  workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
+  repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
+  ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
+  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
+  referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
+  referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
+  postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
 }
 
-export type BusinessScalarWhereInput = {
-  AND?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
-  OR?: Prisma.BusinessScalarWhereInput[]
-  NOT?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
-  id?: Prisma.StringFilter<"Business"> | string
-  name?: Prisma.StringFilter<"Business"> | string
-  email?: Prisma.StringFilter<"Business"> | string
-  description?: Prisma.StringNullableFilter<"Business"> | string | null
-  avatar?: Prisma.StringNullableFilter<"Business"> | string | null
-  coverImage?: Prisma.StringNullableFilter<"Business"> | string | null
-  address?: Prisma.StringNullableFilter<"Business"> | string | null
-  phone?: Prisma.StringNullableFilter<"Business"> | string | null
-  password?: Prisma.StringFilter<"Business"> | string
-  isVerified?: Prisma.BoolFilter<"Business"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
+export type BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kyc?: Prisma.KYCUncheckedUpdateOneWithoutBusinessNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
+  workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
+  repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
+  ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
+  referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
+  referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
+  postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutReferralsMadeInput = {
@@ -2031,10 +2028,10 @@ export type BusinessCreateWithoutReferralsMadeInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutReferralsMadeInput = {
@@ -2058,10 +2055,10 @@ export type BusinessUncheckedCreateWithoutReferralsMadeInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutReferralsMadeInput = {
@@ -2090,10 +2087,10 @@ export type BusinessCreateWithoutReferralsReceivedInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutReferralsReceivedInput = {
@@ -2117,10 +2114,10 @@ export type BusinessUncheckedCreateWithoutReferralsReceivedInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutReferralsReceivedInput = {
@@ -2160,10 +2157,10 @@ export type BusinessUpdateWithoutReferralsMadeInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutReferralsMadeInput = {
@@ -2187,10 +2184,10 @@ export type BusinessUncheckedUpdateWithoutReferralsMadeInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUpsertWithoutReferralsReceivedInput = {
@@ -2225,10 +2222,10 @@ export type BusinessUpdateWithoutReferralsReceivedInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutReferralsReceivedInput = {
@@ -2252,10 +2249,10 @@ export type BusinessUncheckedUpdateWithoutReferralsReceivedInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutPostOfSalesInput = {
@@ -2279,10 +2276,10 @@ export type BusinessCreateWithoutPostOfSalesInput = {
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutPostOfSalesInput = {
@@ -2306,10 +2303,10 @@ export type BusinessUncheckedCreateWithoutPostOfSalesInput = {
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutBusinessesInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutPostOfSalesInput = {
@@ -2349,10 +2346,10 @@ export type BusinessUpdateWithoutPostOfSalesInput = {
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutPostOfSalesInput = {
@@ -2376,79 +2373,10 @@ export type BusinessUncheckedUpdateWithoutPostOfSalesInput = {
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutBusinessesNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
-}
-
-export type BusinessUpdateWithoutFreelanceOrdersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  kyc?: Prisma.KYCUpdateOneWithoutBusinessNestedInput
-  products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
-  workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
-  repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
-  recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
-  ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
-  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
-  referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
-  referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutBusinessNestedInput
-  postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
-}
-
-export type BusinessUncheckedUpdateWithoutFreelanceOrdersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  kyc?: Prisma.KYCUncheckedUpdateOneWithoutBusinessNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
-  workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
-  repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
-  ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
-  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
-  referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
-  referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutBusinessNestedInput
-  postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
-}
-
-export type BusinessUncheckedUpdateManyWithoutFreelanceOrdersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 
@@ -2464,11 +2392,11 @@ export type BusinessCountOutputType = {
   recharges: number
   ads: number
   freelanceServices: number
-  freelanceOrders: number
   referralsMade: number
   referralsReceived: number
   chats: number
   postOfSales: number
+  freelanceOrderBusiness: number
 }
 
 export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2479,11 +2407,11 @@ export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   recharges?: boolean | BusinessCountOutputTypeCountRechargesArgs
   ads?: boolean | BusinessCountOutputTypeCountAdsArgs
   freelanceServices?: boolean | BusinessCountOutputTypeCountFreelanceServicesArgs
-  freelanceOrders?: boolean | BusinessCountOutputTypeCountFreelanceOrdersArgs
   referralsMade?: boolean | BusinessCountOutputTypeCountReferralsMadeArgs
   referralsReceived?: boolean | BusinessCountOutputTypeCountReferralsReceivedArgs
   chats?: boolean | BusinessCountOutputTypeCountChatsArgs
   postOfSales?: boolean | BusinessCountOutputTypeCountPostOfSalesArgs
+  freelanceOrderBusiness?: boolean | BusinessCountOutputTypeCountFreelanceOrderBusinessArgs
 }
 
 /**
@@ -2548,13 +2476,6 @@ export type BusinessCountOutputTypeCountFreelanceServicesArgs<ExtArgs extends ru
 /**
  * BusinessCountOutputType without action
  */
-export type BusinessCountOutputTypeCountFreelanceOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FreelanceOrderWhereInput
-}
-
-/**
- * BusinessCountOutputType without action
- */
 export type BusinessCountOutputTypeCountReferralsMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReferralWhereInput
 }
@@ -2580,6 +2501,13 @@ export type BusinessCountOutputTypeCountPostOfSalesArgs<ExtArgs extends runtime.
   where?: Prisma.PostOfSaleWhereInput
 }
 
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountFreelanceOrderBusinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FreelanceOrderBusinessWhereInput
+}
+
 
 export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2602,11 +2530,11 @@ export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   recharges?: boolean | Prisma.Business$rechargesArgs<ExtArgs>
   ads?: boolean | Prisma.Business$adsArgs<ExtArgs>
   freelanceServices?: boolean | Prisma.Business$freelanceServicesArgs<ExtArgs>
-  freelanceOrders?: boolean | Prisma.Business$freelanceOrdersArgs<ExtArgs>
   referralsMade?: boolean | Prisma.Business$referralsMadeArgs<ExtArgs>
   referralsReceived?: boolean | Prisma.Business$referralsReceivedArgs<ExtArgs>
   chats?: boolean | Prisma.Business$chatsArgs<ExtArgs>
   postOfSales?: boolean | Prisma.Business$postOfSalesArgs<ExtArgs>
+  freelanceOrderBusiness?: boolean | Prisma.Business$freelanceOrderBusinessArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["business"]>
 
@@ -2665,11 +2593,11 @@ export type BusinessInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   recharges?: boolean | Prisma.Business$rechargesArgs<ExtArgs>
   ads?: boolean | Prisma.Business$adsArgs<ExtArgs>
   freelanceServices?: boolean | Prisma.Business$freelanceServicesArgs<ExtArgs>
-  freelanceOrders?: boolean | Prisma.Business$freelanceOrdersArgs<ExtArgs>
   referralsMade?: boolean | Prisma.Business$referralsMadeArgs<ExtArgs>
   referralsReceived?: boolean | Prisma.Business$referralsReceivedArgs<ExtArgs>
   chats?: boolean | Prisma.Business$chatsArgs<ExtArgs>
   postOfSales?: boolean | Prisma.Business$postOfSalesArgs<ExtArgs>
+  freelanceOrderBusiness?: boolean | Prisma.Business$freelanceOrderBusinessArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2686,11 +2614,11 @@ export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     recharges: Prisma.$AccountRechargePayload<ExtArgs>[]
     ads: Prisma.$AdPayload<ExtArgs>[]
     freelanceServices: Prisma.$FreelanceServicePayload<ExtArgs>[]
-    freelanceOrders: Prisma.$FreelanceOrderPayload<ExtArgs>[]
     referralsMade: Prisma.$ReferralPayload<ExtArgs>[]
     referralsReceived: Prisma.$ReferralPayload<ExtArgs>[]
     chats: Prisma.$ChatPayload<ExtArgs>[]
     postOfSales: Prisma.$PostOfSalePayload<ExtArgs>[]
+    freelanceOrderBusiness: Prisma.$FreelanceOrderBusinessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3107,11 +3035,11 @@ export interface Prisma__BusinessClient<T, Null = never, ExtArgs extends runtime
   recharges<T extends Prisma.Business$rechargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$rechargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountRechargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ads<T extends Prisma.Business$adsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$adsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   freelanceServices<T extends Prisma.Business$freelanceServicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$freelanceServicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  freelanceOrders<T extends Prisma.Business$freelanceOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$freelanceOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralsMade<T extends Prisma.Business$referralsMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$referralsMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralsReceived<T extends Prisma.Business$referralsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$referralsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chats<T extends Prisma.Business$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   postOfSales<T extends Prisma.Business$postOfSalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$postOfSalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostOfSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  freelanceOrderBusiness<T extends Prisma.Business$freelanceOrderBusinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$freelanceOrderBusinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceOrderBusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3728,30 +3656,6 @@ export type Business$freelanceServicesArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
- * Business.freelanceOrders
- */
-export type Business$freelanceOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FreelanceOrder
-   */
-  select?: Prisma.FreelanceOrderSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FreelanceOrder
-   */
-  omit?: Prisma.FreelanceOrderOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FreelanceOrderInclude<ExtArgs> | null
-  where?: Prisma.FreelanceOrderWhereInput
-  orderBy?: Prisma.FreelanceOrderOrderByWithRelationInput | Prisma.FreelanceOrderOrderByWithRelationInput[]
-  cursor?: Prisma.FreelanceOrderWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FreelanceOrderScalarFieldEnum | Prisma.FreelanceOrderScalarFieldEnum[]
-}
-
-/**
  * Business.referralsMade
  */
 export type Business$referralsMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3845,6 +3749,30 @@ export type Business$postOfSalesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.PostOfSaleScalarFieldEnum | Prisma.PostOfSaleScalarFieldEnum[]
+}
+
+/**
+ * Business.freelanceOrderBusiness
+ */
+export type Business$freelanceOrderBusinessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FreelanceOrderBusiness
+   */
+  select?: Prisma.FreelanceOrderBusinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FreelanceOrderBusiness
+   */
+  omit?: Prisma.FreelanceOrderBusinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FreelanceOrderBusinessInclude<ExtArgs> | null
+  where?: Prisma.FreelanceOrderBusinessWhereInput
+  orderBy?: Prisma.FreelanceOrderBusinessOrderByWithRelationInput | Prisma.FreelanceOrderBusinessOrderByWithRelationInput[]
+  cursor?: Prisma.FreelanceOrderBusinessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FreelanceOrderBusinessScalarFieldEnum | Prisma.FreelanceOrderBusinessScalarFieldEnum[]
 }
 
 /**
