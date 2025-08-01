@@ -85,6 +85,19 @@ enum PostTransactionStatus {
   REFUNDED
 }
 
+enum NegotiationType {
+  REOWNERSHIP
+  FREELANCEORDER
+  PURCHASE
+  GENERAL
+}
+
+enum ChatStatus {
+  PENDING
+  ACTIVE
+  CLOSED
+}
+
 // Models
 
 model Business {
@@ -240,16 +253,11 @@ model Review {
   createdAt            DateTime              @default(now())
 }
 
-enum NegotiationType {
-  REOWNERSHIP
-  FREELANCEORDER
-  PURCHASE
-  GENERAL
-}
+
 
 model Chat {
   id                   String                @id @default(uuid())
-  status               String                @default("PENDING")
+  status               ChatStatus            @default(PENDING)
   isSecure             Boolean               @default(false)
   negotiationType      NegotiationType?
   product              Product?              @relation(fields: [productId], references: [id])

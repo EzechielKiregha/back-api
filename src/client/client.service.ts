@@ -46,7 +46,7 @@ export class ClientService {
         referralsMade: { select: { id: true, verifiedPurchase: true } },
         referralsReceived: { select: { id: true, verifiedPurchase: true } },
         kyc: { select: { id: true, status: true, submittedAt: true } },
-        PostTransaction: { select: { id: true, status: true, amount: true } },
+        postTransactions: { select: { id: true, status: true, amount: true } },
       },
     });
   }
@@ -63,7 +63,7 @@ export class ClientService {
         referralsMade: { select: { id: true, verifiedPurchase: true } },
         referralsReceived: { select: { id: true, verifiedPurchase: true } },
         kyc: { select: { id: true, status: true, submittedAt: true } },
-        PostTransaction: { select: { id: true, status: true, amount: true } },
+        postTransactions: { select: { id: true, status: true, amount: true } },
       },
     });
   }
