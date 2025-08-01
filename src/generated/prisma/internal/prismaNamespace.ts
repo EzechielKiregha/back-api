@@ -408,6 +408,8 @@ export const ModelName = {
   ChatMessage: 'ChatMessage',
   RepostedProduct: 'RepostedProduct',
   ReOwnedProduct: 'ReOwnedProduct',
+  Shipping: 'Shipping',
+  TokenTransaction: 'TokenTransaction',
   KYC: 'KYC',
   AccountRecharge: 'AccountRecharge',
   Token: 'Token',
@@ -435,7 +437,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "business" | "client" | "worker" | "category" | "product" | "media" | "order" | "orderProduct" | "review" | "chat" | "chatParticipant" | "chatMessage" | "repostedProduct" | "reOwnedProduct" | "kYC" | "accountRecharge" | "token" | "paymentTransaction" | "ad" | "freelanceService" | "workerServiceAssignment" | "freelanceOrder" | "freelanceOrderBusiness" | "referral" | "postOfSale" | "postTransaction"
+    modelProps: "business" | "client" | "worker" | "category" | "product" | "media" | "order" | "orderProduct" | "review" | "chat" | "chatParticipant" | "chatMessage" | "repostedProduct" | "reOwnedProduct" | "shipping" | "tokenTransaction" | "kYC" | "accountRecharge" | "token" | "paymentTransaction" | "ad" | "freelanceService" | "workerServiceAssignment" | "freelanceOrder" | "freelanceOrderBusiness" | "referral" | "postOfSale" | "postTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1475,6 +1477,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Shipping: {
+      payload: Prisma.$ShippingPayload<ExtArgs>
+      fields: Prisma.ShippingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShippingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShippingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>
+        }
+        findFirst: {
+          args: Prisma.ShippingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShippingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>
+        }
+        findMany: {
+          args: Prisma.ShippingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>[]
+        }
+        create: {
+          args: Prisma.ShippingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>
+        }
+        createMany: {
+          args: Prisma.ShippingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShippingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>[]
+        }
+        delete: {
+          args: Prisma.ShippingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>
+        }
+        update: {
+          args: Prisma.ShippingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShippingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShippingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShippingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShippingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingPayload>
+        }
+        aggregate: {
+          args: Prisma.ShippingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShipping>
+        }
+        groupBy: {
+          args: Prisma.ShippingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShippingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingCountAggregateOutputType> | number
+        }
+      }
+    }
+    TokenTransaction: {
+      payload: Prisma.$TokenTransactionPayload<ExtArgs>
+      fields: Prisma.TokenTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TokenTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TokenTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.TokenTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TokenTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.TokenTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.TokenTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.TokenTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TokenTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.TokenTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>
+        }
+        update: {
+          args: Prisma.TokenTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.TokenTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TokenTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TokenTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.TokenTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.TokenTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTokenTransaction>
+        }
+        groupBy: {
+          args: Prisma.TokenTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TokenTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TokenTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TokenTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
     KYC: {
       payload: Prisma.$KYCPayload<ExtArgs>
       fields: Prisma.KYCFieldRefs
@@ -2475,6 +2625,8 @@ export const ProductScalarFieldEnum = {
   description: 'description',
   price: 'price',
   stock: 'stock',
+  quantity: 'quantity',
+  isPhysical: 'isPhysical',
   businessId: 'businessId',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
@@ -2581,19 +2733,49 @@ export type RepostedProductScalarFieldEnum = (typeof RepostedProductScalarFieldE
 
 export const ReOwnedProductScalarFieldEnum = {
   id: 'id',
-  businessId: 'businessId',
-  productId: 'productId',
+  newProductId: 'newProductId',
+  originalProductId: 'originalProductId',
   oldOwnerId: 'oldOwnerId',
+  newOwnerId: 'newOwnerId',
+  quantity: 'quantity',
   oldPrice: 'oldPrice',
   newPrice: 'newPrice',
   markupPercentage: 'markupPercentage',
   agreedViaChatId: 'agreedViaChatId',
   agreementDate: 'agreementDate',
-  isApproved: 'isApproved',
+  isOriginalApproved: 'isOriginalApproved',
+  isNewOwnerApproved: 'isNewOwnerApproved',
+  shippingId: 'shippingId',
   createdAt: 'createdAt'
 } as const
 
 export type ReOwnedProductScalarFieldEnum = (typeof ReOwnedProductScalarFieldEnum)[keyof typeof ReOwnedProductScalarFieldEnum]
+
+
+export const ShippingScalarFieldEnum = {
+  id: 'id',
+  reOwnedProductId: 'reOwnedProductId',
+  status: 'status',
+  trackingNumber: 'trackingNumber',
+  carrier: 'carrier',
+  shippedAt: 'shippedAt',
+  deliveredAt: 'deliveredAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ShippingScalarFieldEnum = (typeof ShippingScalarFieldEnum)[keyof typeof ShippingScalarFieldEnum]
+
+
+export const TokenTransactionScalarFieldEnum = {
+  id: 'id',
+  businessId: 'businessId',
+  reOwnedProductId: 'reOwnedProductId',
+  amount: 'amount',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type TokenTransactionScalarFieldEnum = (typeof TokenTransactionScalarFieldEnum)[keyof typeof TokenTransactionScalarFieldEnum]
 
 
 export const KYCScalarFieldEnum = {
@@ -2878,6 +3060,20 @@ export type ListEnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'ChatStatus'
+ */
+export type EnumChatStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChatStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChatStatus[]'
+ */
+export type ListEnumChatStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChatStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'NegotiationType'
  */
 export type EnumNegotiationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NegotiationType'>
@@ -3105,6 +3301,8 @@ export type GlobalOmitConfig = {
   chatMessage?: Prisma.ChatMessageOmit
   repostedProduct?: Prisma.RepostedProductOmit
   reOwnedProduct?: Prisma.ReOwnedProductOmit
+  shipping?: Prisma.ShippingOmit
+  tokenTransaction?: Prisma.TokenTransactionOmit
   kYC?: Prisma.KYCOmit
   accountRecharge?: Prisma.AccountRechargeOmit
   token?: Prisma.TokenOmit

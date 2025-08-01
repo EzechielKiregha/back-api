@@ -6,6 +6,9 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { ShippingEntity } from './entities/shipping.entity';
+import { CreateShippingInput } from './dto/create-shipping.input';
+
 
 // Resolver
 @Resolver(() => ReOwnedProductEntity)
@@ -22,7 +25,7 @@ export class ReOwnedProductResolver {
     @Context() context,
   ) {
     const user = context.req.user;
-    if (user.id !== createReOwnedProductInput.requestingBusinessId) {
+    if (user.id !== createReOwnedProductInput.newOwnerId) {
       throw new Error('Businesses can only request re-ownership for themselves');
     }
     return this.reOwnedProductService.create(createReOwnedProductInput);
@@ -37,6 +40,17 @@ export class ReOwnedProductResolver {
   ) {
     const user = context.req.user;
     return this.reOwnedProductService.approve(approveReOwnedProductInput, user.id);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('business')
+  @Mutation(() => ShippingEntity, { description: 'Creates shipping details for a re-owned product.' })
+  async createShipping(
+    @Args('createShippingInput') createShippingInput: CreateShippingInput,
+    @Context() context,
+  ) {
+    const user = context.req.user;
+    return this.reOwnedProductService.createShipping(createShippingInput, user.id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)

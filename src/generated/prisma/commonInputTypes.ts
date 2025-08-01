@@ -235,11 +235,28 @@ export type EnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumMediaTypeFilter<$PrismaModel>
 }
 
+export type EnumChatStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ChatStatus | Prisma.EnumChatStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumChatStatusFilter<$PrismaModel> | $Enums.ChatStatus
+}
+
 export type EnumNegotiationTypeNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.NegotiationType | Prisma.EnumNegotiationTypeFieldRefInput<$PrismaModel> | null
   in?: $Enums.NegotiationType[] | Prisma.ListEnumNegotiationTypeFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.NegotiationType[] | Prisma.ListEnumNegotiationTypeFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumNegotiationTypeNullableFilter<$PrismaModel> | $Enums.NegotiationType | null
+}
+
+export type EnumChatStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ChatStatus | Prisma.EnumChatStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumChatStatusWithAggregatesFilter<$PrismaModel> | $Enums.ChatStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumChatStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumChatStatusFilter<$PrismaModel>
 }
 
 export type EnumNegotiationTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -629,11 +646,28 @@ export type NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumMediaTypeFilter<$PrismaModel>
 }
 
+export type NestedEnumChatStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ChatStatus | Prisma.EnumChatStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumChatStatusFilter<$PrismaModel> | $Enums.ChatStatus
+}
+
 export type NestedEnumNegotiationTypeNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.NegotiationType | Prisma.EnumNegotiationTypeFieldRefInput<$PrismaModel> | null
   in?: $Enums.NegotiationType[] | Prisma.ListEnumNegotiationTypeFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.NegotiationType[] | Prisma.ListEnumNegotiationTypeFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumNegotiationTypeNullableFilter<$PrismaModel> | $Enums.NegotiationType | null
+}
+
+export type NestedEnumChatStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ChatStatus | Prisma.EnumChatStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ChatStatus[] | Prisma.ListEnumChatStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumChatStatusWithAggregatesFilter<$PrismaModel> | $Enums.ChatStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumChatStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumChatStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumNegotiationTypeNullableWithAggregatesFilter<$PrismaModel = never> = {

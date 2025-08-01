@@ -92,6 +92,12 @@ enum NegotiationType {
   GENERAL
 }
 
+enum TokenTransactionType {
+  RELEASE
+  PROFIT_SHARE
+  REPOST_COMMISSION
+}
+
 enum ChatStatus {
   PENDING
   ACTIVE
@@ -123,7 +129,7 @@ model Business {
   referralsReceived    Referral[]            @relation("BusinessReferred")
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
-  postOfSales PostOfSale[]
+  postOfSales          PostOfSale[]
   freelanceOrderBusiness FreelanceOrderBusiness[]
 
   kycStatus            KycStatus             @default(PENDING)  // Enum: PENDING, VERIFIED, REJECTED
@@ -133,6 +139,8 @@ model Business {
   termsAgreedAt        DateTime?             // Timestamp of agreement
 
   chatParticipants ChatParticipant[]
+
+  tokenTransactions TokenTransaction[]
 }
 
 model Client {
@@ -192,19 +200,23 @@ model Product {
   description          String?
   price                Float
   stock                Int                   @default(0)
+  quantity             Int                   @default(0) // New field for stock quantity
+  isPhysical           Boolean               @default(false)  // New field to flag physical products
   business             Business              @relation(fields: [businessId], references: [id])
   businessId           String
-  categoryId      String
-  category        Category         @relation("ProductCategory", fields: [categoryId], references: [id])
+  categoryId           String
+  category             Category         @relation("ProductCategory", fields: [categoryId], references: [id])
   medias               Media[]
   reviews              Review[]
   orders               OrderProduct[]
   chats                Chat[]
   reposts              RepostedProduct[]
-  reowns               ReOwnedProduct[]
   ads                  Ad[]
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
+
+  reOwnedProducts      ReOwnedProduct[]      @relation(name: "OriginalProduct")
+  newReOwnedProducts   ReOwnedProduct[]
 }
 
 model Media {
@@ -298,24 +310,64 @@ model RepostedProduct {
   businessId           String
   product              Product               @relation(fields: [productId], references: [id])
   productId            String
-  earnPercentage       Float                 @default(0.002)
+  // earnPercentage       Float                 @default(0.003)
   createdAt            DateTime              @default(now())
+
+  @@unique([productId, businessId]) // Prevent duplicate reposts by the same business
+  tokenTransactions TokenTransaction[]
 }
 
 model ReOwnedProduct {
   id                   String                @id @default(uuid())
+  newProduct           Product               @relation(fields: [newProductId], references: [id])  // New product for new owner
+  newProductId         String                @default("N/A")
+  originalProduct      Product               @relation(fields: [originalProductId], references: [id], name: "OriginalProduct")  // Original product
+  originalProductId    String                @default("N/A")
+  oldOwnerId           String                @default("N/A") // Original business ID
+  newOwnerId           String                @default("N/A") // New business ID
+  quantity             Int                   @default(0) // Quantity re-owned
+  oldPrice             Float                 // Original price per unit
+  newPrice             Float                 // New price per unit
+  markupPercentage     Float                 // Markup percentage
+  agreedViaChatId      String                // Chat ID for negotiation
+  agreementDate        DateTime              // Agreement timestamp
+  isOriginalApproved   Boolean               @default(false)  // Original owner approval
+  isNewOwnerApproved   Boolean               @default(false)  // New owner approval
+  shipping             Shipping?             @relation(fields: [shippingId], references: [id])  // Shipping details
+  shippingId           String?               @unique
+  createdAt            DateTime              @default(now())
+
+  tokenTransactions    TokenTransaction[]
+  businessProductOwners       Business[]
+}
+
+model Shipping {
+  id                   String                @id @default(uuid())
+  reOwnedProduct       ReOwnedProduct?       
+  reOwnedProductId     String?
+  status               String                @default("PENDING")  // PENDING, SHIPPED, DELIVERED
+  trackingNumber       String?               // Optional tracking number
+  carrier              String?               // Shipping carrier
+  shippedAt            DateTime?             // Timestamp of shipping
+  deliveredAt          DateTime?             // Timestamp of delivery
+  createdAt            DateTime              @default(now())
+}
+
+model TokenTransaction {
+  id                   String                @id @default(uuid())
   business             Business              @relation(fields: [businessId], references: [id])
   businessId           String
-  product              Product               @relation(fields: [productId], references: [id])
-  productId            String
-  oldOwnerId           String
-  oldPrice             Float
-  newPrice             Float
-  markupPercentage     Float
-  agreedViaChatId      String
-  agreementDate        DateTime              // When agreement was finalized
-  isApproved           Boolean               @default(false)  // Approval status
+  reOwnedProduct       ReOwnedProduct?       @relation(fields: [reOwnedProductId], references: [id])
+  reOwnedProductId     String?
+  repostedProduct      RepostedProduct?      @relation(fields: [repostedProductId], references: [id])
+  repostedProductId    String?
+  amount               Float
+  type                 TokenTransactionType
+  isRedeemed           Boolean               @default(false)
+  isReleased           Boolean               @default(false)
   createdAt            DateTime              @default(now())
+
+  AccountRecharge AccountRecharge[]
 }
 
 model KYC {
@@ -341,6 +393,8 @@ model AccountRecharge {
   businessId           String?
   client               Client?               @relation("ClientRecharges", fields: [clientId], references: [id])
   clientId             String?
+  tokenTransaction     TokenTransaction?     @relation(fields: [tokenTransactionId], references: [id])
+  tokenTransactionId   String?               @unique
   createdAt            DateTime              @default(now())
 }
 

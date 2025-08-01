@@ -1,4 +1,4 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { AccountRechargeEntity } from 'src/account-recharge/entities/account-recharge.entity';
 import { AdEntity } from 'src/ad/entities/ad.entity';
 import { ChatEntity } from 'src/chat/entities/chat.entity';
@@ -10,6 +10,7 @@ import { ReOwnedProductEntity } from 'src/re-owned-product/entities/re-owned-pro
 import { ReferralEntity } from 'src/referral/entities/referral.entity';
 import { RepostedProductEntity } from 'src/reposted-product/entities/reposted-product.entity';
 import { WorkerEntity } from 'src/worker/entities/worker.entity';
+import { KycStatus } from '../dto/update-business.input';
 
 @ObjectType()
 export class BusinessEntity {
@@ -42,6 +43,18 @@ export class BusinessEntity {
 
   @Field()
   isVerified: boolean;
+
+  @Field(() => KycStatus)
+  kycStatus : KycStatus
+
+  @Field(() => Int)
+  totalProductsSold : number
+
+  @Field(() => Boolean)
+  hasAgreedToTerms: boolean;
+  
+  @Field(() => Boolean)
+  isB2BEnabled: boolean;
 
   @Field()
   createdAt: Date;
@@ -83,6 +96,6 @@ export class BusinessEntity {
   @Field(() => [ChatEntity]) // Chats associated with the business
   chats: ChatEntity[];
   
-    @Field(() => [PostOfSaleEntity], { nullable: true })
-    postOfSales?: PostOfSaleEntity[];
+  @Field(() => [PostOfSaleEntity], { nullable: true })
+  postOfSales?: PostOfSaleEntity[];
 }

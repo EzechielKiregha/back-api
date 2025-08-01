@@ -26,8 +26,14 @@ export class ProductEntity {
   @Field(() => Int)
   stock: number;
 
+  @Field(() => Int)
+  quantity: number;
+
   @Field()
   businessId: string;
+
+  @Field()
+  isPhysical: boolean;
 
   @Field()
   createdAt: Date;

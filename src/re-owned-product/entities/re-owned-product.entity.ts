@@ -1,9 +1,6 @@
-import { ObjectType, Field, Float } from '@nestjs/graphql';
-import { BusinessEntity } from 'src/business/entities/business.entity';
-import { ChatEntity } from 'src/chat/entities/chat.entity';
+import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
 import { ProductEntity } from 'src/product/entities/product.entity';
-
-
+import { ShippingEntity } from './shipping.entity';
 
 @ObjectType()
 export class ReOwnedProductEntity {
@@ -11,19 +8,25 @@ export class ReOwnedProductEntity {
   id: string;
 
   @Field()
-  businessId: string;
-
-  @Field(() => BusinessEntity)
-  business: BusinessEntity;
-
-  @Field()
-  productId: string;
+  newProductId: string;
 
   @Field(() => ProductEntity)
-  product: ProductEntity;
+  newProduct: ProductEntity;
+
+  @Field()
+  originalProductId: string;
+
+  @Field(() => ProductEntity)
+  originalProduct: ProductEntity;
 
   @Field()
   oldOwnerId: string;
+
+  @Field()
+  newOwnerId: string;
+
+  @Field(() => Int)
+  quantity: number;
 
   @Field(() => Float)
   oldPrice: number;
@@ -41,8 +44,18 @@ export class ReOwnedProductEntity {
   agreementDate: Date;
 
   @Field(() => Boolean)
-  isApproved: boolean;
+  isOriginalApproved: boolean;
+
+  @Field(() => Boolean)
+  isNewOwnerApproved: boolean;
+
+  @Field({ nullable: true })
+  shippingId?: string;
+
+  @Field(() => ShippingEntity, { nullable: true })
+  shipping?: ShippingEntity;
 
   @Field()
   createdAt: Date;
 }
+

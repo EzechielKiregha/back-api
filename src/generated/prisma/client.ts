@@ -107,6 +107,16 @@ export type RepostedProduct = Prisma.RepostedProductModel
  */
 export type ReOwnedProduct = Prisma.ReOwnedProductModel
 /**
+ * Model Shipping
+ * 
+ */
+export type Shipping = Prisma.ShippingModel
+/**
+ * Model TokenTransaction
+ * 
+ */
+export type TokenTransaction = Prisma.TokenTransactionModel
+/**
  * Model KYC
  * 
  */
@@ -202,3 +212,6 @@ export const PostTransactionStatus = $Enums.PostTransactionStatus
 
 export type NegotiationType = $Enums.NegotiationType
 export const NegotiationType = $Enums.NegotiationType
+
+export type ChatStatus = $Enums.ChatStatus
+export const ChatStatus = $Enums.ChatStatus

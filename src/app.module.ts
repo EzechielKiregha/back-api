@@ -33,6 +33,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config'
 import { PostOfSaleModule } from './post-of-sale/post-of-sale.module';
 import { CategoryModule } from './category/category.module';
+import { TokenTransactionModule } from './token-transaction/token-transaction.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     PostOfSaleModule,
     CategoryModule,
+    TokenTransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

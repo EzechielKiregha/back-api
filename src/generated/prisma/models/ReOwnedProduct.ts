@@ -26,12 +26,14 @@ export type AggregateReOwnedProduct = {
 }
 
 export type ReOwnedProductAvgAggregateOutputType = {
+  quantity: number | null
   oldPrice: number | null
   newPrice: number | null
   markupPercentage: number | null
 }
 
 export type ReOwnedProductSumAggregateOutputType = {
+  quantity: number | null
   oldPrice: number | null
   newPrice: number | null
   markupPercentage: number | null
@@ -39,55 +41,69 @@ export type ReOwnedProductSumAggregateOutputType = {
 
 export type ReOwnedProductMinAggregateOutputType = {
   id: string | null
-  businessId: string | null
-  productId: string | null
+  newProductId: string | null
+  originalProductId: string | null
   oldOwnerId: string | null
+  newOwnerId: string | null
+  quantity: number | null
   oldPrice: number | null
   newPrice: number | null
   markupPercentage: number | null
   agreedViaChatId: string | null
   agreementDate: Date | null
-  isApproved: boolean | null
+  isOriginalApproved: boolean | null
+  isNewOwnerApproved: boolean | null
+  shippingId: string | null
   createdAt: Date | null
 }
 
 export type ReOwnedProductMaxAggregateOutputType = {
   id: string | null
-  businessId: string | null
-  productId: string | null
+  newProductId: string | null
+  originalProductId: string | null
   oldOwnerId: string | null
+  newOwnerId: string | null
+  quantity: number | null
   oldPrice: number | null
   newPrice: number | null
   markupPercentage: number | null
   agreedViaChatId: string | null
   agreementDate: Date | null
-  isApproved: boolean | null
+  isOriginalApproved: boolean | null
+  isNewOwnerApproved: boolean | null
+  shippingId: string | null
   createdAt: Date | null
 }
 
 export type ReOwnedProductCountAggregateOutputType = {
   id: number
-  businessId: number
-  productId: number
+  newProductId: number
+  originalProductId: number
   oldOwnerId: number
+  newOwnerId: number
+  quantity: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: number
   agreementDate: number
-  isApproved: number
+  isOriginalApproved: number
+  isNewOwnerApproved: number
+  shippingId: number
   createdAt: number
   _all: number
 }
 
 
 export type ReOwnedProductAvgAggregateInputType = {
+  quantity?: true
   oldPrice?: true
   newPrice?: true
   markupPercentage?: true
 }
 
 export type ReOwnedProductSumAggregateInputType = {
+  quantity?: true
   oldPrice?: true
   newPrice?: true
   markupPercentage?: true
@@ -95,43 +111,55 @@ export type ReOwnedProductSumAggregateInputType = {
 
 export type ReOwnedProductMinAggregateInputType = {
   id?: true
-  businessId?: true
-  productId?: true
+  newProductId?: true
+  originalProductId?: true
   oldOwnerId?: true
+  newOwnerId?: true
+  quantity?: true
   oldPrice?: true
   newPrice?: true
   markupPercentage?: true
   agreedViaChatId?: true
   agreementDate?: true
-  isApproved?: true
+  isOriginalApproved?: true
+  isNewOwnerApproved?: true
+  shippingId?: true
   createdAt?: true
 }
 
 export type ReOwnedProductMaxAggregateInputType = {
   id?: true
-  businessId?: true
-  productId?: true
+  newProductId?: true
+  originalProductId?: true
   oldOwnerId?: true
+  newOwnerId?: true
+  quantity?: true
   oldPrice?: true
   newPrice?: true
   markupPercentage?: true
   agreedViaChatId?: true
   agreementDate?: true
-  isApproved?: true
+  isOriginalApproved?: true
+  isNewOwnerApproved?: true
+  shippingId?: true
   createdAt?: true
 }
 
 export type ReOwnedProductCountAggregateInputType = {
   id?: true
-  businessId?: true
-  productId?: true
+  newProductId?: true
+  originalProductId?: true
   oldOwnerId?: true
+  newOwnerId?: true
+  quantity?: true
   oldPrice?: true
   newPrice?: true
   markupPercentage?: true
   agreedViaChatId?: true
   agreementDate?: true
-  isApproved?: true
+  isOriginalApproved?: true
+  isNewOwnerApproved?: true
+  shippingId?: true
   createdAt?: true
   _all?: true
 }
@@ -224,15 +252,19 @@ export type ReOwnedProductGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type ReOwnedProductGroupByOutputType = {
   id: string
-  businessId: string
-  productId: string
+  newProductId: string
+  originalProductId: string
   oldOwnerId: string
+  newOwnerId: string
+  quantity: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date
-  isApproved: boolean
+  isOriginalApproved: boolean
+  isNewOwnerApproved: boolean
+  shippingId: string | null
   createdAt: Date
   _count: ReOwnedProductCountAggregateOutputType | null
   _avg: ReOwnedProductAvgAggregateOutputType | null
@@ -261,66 +293,91 @@ export type ReOwnedProductWhereInput = {
   OR?: Prisma.ReOwnedProductWhereInput[]
   NOT?: Prisma.ReOwnedProductWhereInput | Prisma.ReOwnedProductWhereInput[]
   id?: Prisma.StringFilter<"ReOwnedProduct"> | string
-  businessId?: Prisma.StringFilter<"ReOwnedProduct"> | string
-  productId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  newProductId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  originalProductId?: Prisma.StringFilter<"ReOwnedProduct"> | string
   oldOwnerId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  newOwnerId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  quantity?: Prisma.IntFilter<"ReOwnedProduct"> | number
   oldPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   newPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringFilter<"ReOwnedProduct"> | string
   agreementDate?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
-  isApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  isOriginalApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  isNewOwnerApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  shippingId?: Prisma.StringNullableFilter<"ReOwnedProduct"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
-  business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  newProduct?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  originalProduct?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  shipping?: Prisma.XOR<Prisma.ShippingNullableScalarRelationFilter, Prisma.ShippingWhereInput> | null
+  tokenTransactions?: Prisma.TokenTransactionListRelationFilter
+  businessProductOwners?: Prisma.BusinessListRelationFilter
 }
 
 export type ReOwnedProductOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  newProductId?: Prisma.SortOrder
+  originalProductId?: Prisma.SortOrder
   oldOwnerId?: Prisma.SortOrder
+  newOwnerId?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
   agreementDate?: Prisma.SortOrder
-  isApproved?: Prisma.SortOrder
+  isOriginalApproved?: Prisma.SortOrder
+  isNewOwnerApproved?: Prisma.SortOrder
+  shippingId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  business?: Prisma.BusinessOrderByWithRelationInput
-  product?: Prisma.ProductOrderByWithRelationInput
+  newProduct?: Prisma.ProductOrderByWithRelationInput
+  originalProduct?: Prisma.ProductOrderByWithRelationInput
+  shipping?: Prisma.ShippingOrderByWithRelationInput
+  tokenTransactions?: Prisma.TokenTransactionOrderByRelationAggregateInput
+  businessProductOwners?: Prisma.BusinessOrderByRelationAggregateInput
 }
 
 export type ReOwnedProductWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  shippingId?: string
   AND?: Prisma.ReOwnedProductWhereInput | Prisma.ReOwnedProductWhereInput[]
   OR?: Prisma.ReOwnedProductWhereInput[]
   NOT?: Prisma.ReOwnedProductWhereInput | Prisma.ReOwnedProductWhereInput[]
-  businessId?: Prisma.StringFilter<"ReOwnedProduct"> | string
-  productId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  newProductId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  originalProductId?: Prisma.StringFilter<"ReOwnedProduct"> | string
   oldOwnerId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  newOwnerId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  quantity?: Prisma.IntFilter<"ReOwnedProduct"> | number
   oldPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   newPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringFilter<"ReOwnedProduct"> | string
   agreementDate?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
-  isApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  isOriginalApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  isNewOwnerApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
-  business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
-}, "id">
+  newProduct?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  originalProduct?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  shipping?: Prisma.XOR<Prisma.ShippingNullableScalarRelationFilter, Prisma.ShippingWhereInput> | null
+  tokenTransactions?: Prisma.TokenTransactionListRelationFilter
+  businessProductOwners?: Prisma.BusinessListRelationFilter
+}, "id" | "shippingId">
 
 export type ReOwnedProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  newProductId?: Prisma.SortOrder
+  originalProductId?: Prisma.SortOrder
   oldOwnerId?: Prisma.SortOrder
+  newOwnerId?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
   agreementDate?: Prisma.SortOrder
-  isApproved?: Prisma.SortOrder
+  isOriginalApproved?: Prisma.SortOrder
+  isNewOwnerApproved?: Prisma.SortOrder
+  shippingId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ReOwnedProductCountOrderByAggregateInput
   _avg?: Prisma.ReOwnedProductAvgOrderByAggregateInput
@@ -334,111 +391,150 @@ export type ReOwnedProductScalarWhereWithAggregatesInput = {
   OR?: Prisma.ReOwnedProductScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReOwnedProductScalarWhereWithAggregatesInput | Prisma.ReOwnedProductScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
-  businessId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
-  productId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
+  newProductId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
+  originalProductId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
   oldOwnerId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
+  newOwnerId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
+  quantity?: Prisma.IntWithAggregatesFilter<"ReOwnedProduct"> | number
   oldPrice?: Prisma.FloatWithAggregatesFilter<"ReOwnedProduct"> | number
   newPrice?: Prisma.FloatWithAggregatesFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatWithAggregatesFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
   agreementDate?: Prisma.DateTimeWithAggregatesFilter<"ReOwnedProduct"> | Date | string
-  isApproved?: Prisma.BoolWithAggregatesFilter<"ReOwnedProduct"> | boolean
+  isOriginalApproved?: Prisma.BoolWithAggregatesFilter<"ReOwnedProduct"> | boolean
+  isNewOwnerApproved?: Prisma.BoolWithAggregatesFilter<"ReOwnedProduct"> | boolean
+  shippingId?: Prisma.StringNullableWithAggregatesFilter<"ReOwnedProduct"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ReOwnedProduct"> | Date | string
 }
 
 export type ReOwnedProductCreateInput = {
   id?: string
-  oldOwnerId: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
   createdAt?: Date | string
-  business: Prisma.BusinessCreateNestedOneWithoutReownedItemsInput
-  product: Prisma.ProductCreateNestedOneWithoutReownsInput
+  newProduct?: Prisma.ProductCreateNestedOneWithoutNewReOwnedProductsInput
+  originalProduct?: Prisma.ProductCreateNestedOneWithoutReOwnedProductsInput
+  shipping?: Prisma.ShippingCreateNestedOneWithoutReOwnedProductInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessCreateNestedManyWithoutReownedItemsInput
 }
 
 export type ReOwnedProductUncheckedCreateInput = {
   id?: string
-  businessId: string
-  productId: string
-  oldOwnerId: string
+  newProductId?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
   createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessUncheckedCreateNestedManyWithoutReownedItemsInput
 }
 
 export type ReOwnedProductUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  business?: Prisma.BusinessUpdateOneRequiredWithoutReownedItemsNestedInput
-  product?: Prisma.ProductUpdateOneRequiredWithoutReownsNestedInput
+  newProduct?: Prisma.ProductUpdateOneRequiredWithoutNewReOwnedProductsNestedInput
+  originalProduct?: Prisma.ProductUpdateOneRequiredWithoutReOwnedProductsNestedInput
+  shipping?: Prisma.ShippingUpdateOneWithoutReOwnedProductNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUpdateManyWithoutReownedItemsNestedInput
 }
 
 export type ReOwnedProductUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUncheckedUpdateManyWithoutReownedItemsNestedInput
 }
 
 export type ReOwnedProductCreateManyInput = {
   id?: string
-  businessId: string
-  productId: string
-  oldOwnerId: string
+  newProductId?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
   createdAt?: Date | string
 }
 
 export type ReOwnedProductUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReOwnedProductUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -454,19 +550,24 @@ export type ReOwnedProductOrderByRelationAggregateInput = {
 
 export type ReOwnedProductCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  newProductId?: Prisma.SortOrder
+  originalProductId?: Prisma.SortOrder
   oldOwnerId?: Prisma.SortOrder
+  newOwnerId?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
   agreementDate?: Prisma.SortOrder
-  isApproved?: Prisma.SortOrder
+  isOriginalApproved?: Prisma.SortOrder
+  isNewOwnerApproved?: Prisma.SortOrder
+  shippingId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type ReOwnedProductAvgOrderByAggregateInput = {
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
@@ -474,172 +575,279 @@ export type ReOwnedProductAvgOrderByAggregateInput = {
 
 export type ReOwnedProductMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  newProductId?: Prisma.SortOrder
+  originalProductId?: Prisma.SortOrder
   oldOwnerId?: Prisma.SortOrder
+  newOwnerId?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
   agreementDate?: Prisma.SortOrder
-  isApproved?: Prisma.SortOrder
+  isOriginalApproved?: Prisma.SortOrder
+  isNewOwnerApproved?: Prisma.SortOrder
+  shippingId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type ReOwnedProductMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  newProductId?: Prisma.SortOrder
+  originalProductId?: Prisma.SortOrder
   oldOwnerId?: Prisma.SortOrder
+  newOwnerId?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
   agreementDate?: Prisma.SortOrder
-  isApproved?: Prisma.SortOrder
+  isOriginalApproved?: Prisma.SortOrder
+  isNewOwnerApproved?: Prisma.SortOrder
+  shippingId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type ReOwnedProductSumOrderByAggregateInput = {
+  quantity?: Prisma.SortOrder
   oldPrice?: Prisma.SortOrder
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
 }
 
-export type ReOwnedProductCreateNestedManyWithoutBusinessInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput> | Prisma.ReOwnedProductCreateWithoutBusinessInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyBusinessInputEnvelope
+export type ReOwnedProductNullableScalarRelationFilter = {
+  is?: Prisma.ReOwnedProductWhereInput | null
+  isNot?: Prisma.ReOwnedProductWhereInput | null
+}
+
+export type ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput> | Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput[]
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
 }
 
-export type ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput> | Prisma.ReOwnedProductCreateWithoutBusinessInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyBusinessInputEnvelope
+export type ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput> | Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput[]
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
 }
 
-export type ReOwnedProductUpdateManyWithoutBusinessNestedInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput> | Prisma.ReOwnedProductCreateWithoutBusinessInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput[]
-  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyBusinessInputEnvelope
+export type ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput> | Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput[]
+  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessProductOwnersInput[]
   set?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   disconnect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   delete?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
-  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessInput[]
-  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessInput[]
+  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessProductOwnersInput[]
+  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessProductOwnersInput[]
   deleteMany?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
 }
 
-export type ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput> | Prisma.ReOwnedProductCreateWithoutBusinessInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessInput[]
-  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyBusinessInputEnvelope
+export type ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput> | Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput[]
+  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutBusinessProductOwnersInput[]
   set?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   disconnect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   delete?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
-  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessInput[]
-  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessInput[]
+  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutBusinessProductOwnersInput[]
+  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessProductOwnersInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutBusinessProductOwnersInput[]
   deleteMany?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
 }
 
-export type ReOwnedProductCreateNestedManyWithoutProductInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutProductInput> | Prisma.ReOwnedProductCreateWithoutProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutProductInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyProductInputEnvelope
+export type ReOwnedProductCreateNestedManyWithoutOriginalProductInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput> | Prisma.ReOwnedProductCreateWithoutOriginalProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyOriginalProductInputEnvelope
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
 }
 
-export type ReOwnedProductUncheckedCreateNestedManyWithoutProductInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutProductInput> | Prisma.ReOwnedProductCreateWithoutProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutProductInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyProductInputEnvelope
+export type ReOwnedProductCreateNestedManyWithoutNewProductInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput> | Prisma.ReOwnedProductCreateWithoutNewProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyNewProductInputEnvelope
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
 }
 
-export type ReOwnedProductUpdateManyWithoutProductNestedInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutProductInput> | Prisma.ReOwnedProductCreateWithoutProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutProductInput[]
-  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutProductInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutProductInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyProductInputEnvelope
+export type ReOwnedProductUncheckedCreateNestedManyWithoutOriginalProductInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput> | Prisma.ReOwnedProductCreateWithoutOriginalProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyOriginalProductInputEnvelope
+  connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+}
+
+export type ReOwnedProductUncheckedCreateNestedManyWithoutNewProductInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput> | Prisma.ReOwnedProductCreateWithoutNewProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyNewProductInputEnvelope
+  connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+}
+
+export type ReOwnedProductUpdateManyWithoutOriginalProductNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput> | Prisma.ReOwnedProductCreateWithoutOriginalProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput[]
+  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutOriginalProductInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutOriginalProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyOriginalProductInputEnvelope
   set?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   disconnect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   delete?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
-  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutProductInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutProductInput[]
-  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutProductInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutProductInput[]
+  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutOriginalProductInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutOriginalProductInput[]
+  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutOriginalProductInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutOriginalProductInput[]
   deleteMany?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
 }
 
-export type ReOwnedProductUncheckedUpdateManyWithoutProductNestedInput = {
-  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutProductInput> | Prisma.ReOwnedProductCreateWithoutProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutProductInput[]
-  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutProductInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutProductInput[]
-  createMany?: Prisma.ReOwnedProductCreateManyProductInputEnvelope
+export type ReOwnedProductUpdateManyWithoutNewProductNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput> | Prisma.ReOwnedProductCreateWithoutNewProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput[]
+  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutNewProductInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutNewProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyNewProductInputEnvelope
   set?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   disconnect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   delete?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
   connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
-  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutProductInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutProductInput[]
-  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutProductInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutProductInput[]
+  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutNewProductInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutNewProductInput[]
+  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutNewProductInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutNewProductInput[]
   deleteMany?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
 }
 
-export type ReOwnedProductCreateWithoutBusinessInput = {
+export type ReOwnedProductUncheckedUpdateManyWithoutOriginalProductNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput> | Prisma.ReOwnedProductCreateWithoutOriginalProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutOriginalProductInput[]
+  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutOriginalProductInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutOriginalProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyOriginalProductInputEnvelope
+  set?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  disconnect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  delete?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutOriginalProductInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutOriginalProductInput[]
+  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutOriginalProductInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutOriginalProductInput[]
+  deleteMany?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
+}
+
+export type ReOwnedProductUncheckedUpdateManyWithoutNewProductNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput> | Prisma.ReOwnedProductCreateWithoutNewProductInput[] | Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput[]
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput | Prisma.ReOwnedProductCreateOrConnectWithoutNewProductInput[]
+  upsert?: Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutNewProductInput | Prisma.ReOwnedProductUpsertWithWhereUniqueWithoutNewProductInput[]
+  createMany?: Prisma.ReOwnedProductCreateManyNewProductInputEnvelope
+  set?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  disconnect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  delete?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  connect?: Prisma.ReOwnedProductWhereUniqueInput | Prisma.ReOwnedProductWhereUniqueInput[]
+  update?: Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutNewProductInput | Prisma.ReOwnedProductUpdateWithWhereUniqueWithoutNewProductInput[]
+  updateMany?: Prisma.ReOwnedProductUpdateManyWithWhereWithoutNewProductInput | Prisma.ReOwnedProductUpdateManyWithWhereWithoutNewProductInput[]
+  deleteMany?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
+}
+
+export type ReOwnedProductCreateNestedOneWithoutShippingInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutShippingInput, Prisma.ReOwnedProductUncheckedCreateWithoutShippingInput>
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutShippingInput
+  connect?: Prisma.ReOwnedProductWhereUniqueInput
+}
+
+export type ReOwnedProductUncheckedCreateNestedOneWithoutShippingInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutShippingInput, Prisma.ReOwnedProductUncheckedCreateWithoutShippingInput>
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutShippingInput
+  connect?: Prisma.ReOwnedProductWhereUniqueInput
+}
+
+export type ReOwnedProductUpdateOneWithoutShippingNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutShippingInput, Prisma.ReOwnedProductUncheckedCreateWithoutShippingInput>
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutShippingInput
+  upsert?: Prisma.ReOwnedProductUpsertWithoutShippingInput
+  disconnect?: Prisma.ReOwnedProductWhereInput | boolean
+  delete?: Prisma.ReOwnedProductWhereInput | boolean
+  connect?: Prisma.ReOwnedProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReOwnedProductUpdateToOneWithWhereWithoutShippingInput, Prisma.ReOwnedProductUpdateWithoutShippingInput>, Prisma.ReOwnedProductUncheckedUpdateWithoutShippingInput>
+}
+
+export type ReOwnedProductUncheckedUpdateOneWithoutShippingNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutShippingInput, Prisma.ReOwnedProductUncheckedCreateWithoutShippingInput>
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutShippingInput
+  upsert?: Prisma.ReOwnedProductUpsertWithoutShippingInput
+  disconnect?: Prisma.ReOwnedProductWhereInput | boolean
+  delete?: Prisma.ReOwnedProductWhereInput | boolean
+  connect?: Prisma.ReOwnedProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReOwnedProductUpdateToOneWithWhereWithoutShippingInput, Prisma.ReOwnedProductUpdateWithoutShippingInput>, Prisma.ReOwnedProductUncheckedUpdateWithoutShippingInput>
+}
+
+export type ReOwnedProductCreateNestedOneWithoutTokenTransactionsInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutTokenTransactionsInput, Prisma.ReOwnedProductUncheckedCreateWithoutTokenTransactionsInput>
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutTokenTransactionsInput
+  connect?: Prisma.ReOwnedProductWhereUniqueInput
+}
+
+export type ReOwnedProductUpdateOneWithoutTokenTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutTokenTransactionsInput, Prisma.ReOwnedProductUncheckedCreateWithoutTokenTransactionsInput>
+  connectOrCreate?: Prisma.ReOwnedProductCreateOrConnectWithoutTokenTransactionsInput
+  upsert?: Prisma.ReOwnedProductUpsertWithoutTokenTransactionsInput
+  disconnect?: Prisma.ReOwnedProductWhereInput | boolean
+  delete?: Prisma.ReOwnedProductWhereInput | boolean
+  connect?: Prisma.ReOwnedProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReOwnedProductUpdateToOneWithWhereWithoutTokenTransactionsInput, Prisma.ReOwnedProductUpdateWithoutTokenTransactionsInput>, Prisma.ReOwnedProductUncheckedUpdateWithoutTokenTransactionsInput>
+}
+
+export type ReOwnedProductCreateWithoutBusinessProductOwnersInput = {
   id?: string
-  oldOwnerId: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
   createdAt?: Date | string
-  product: Prisma.ProductCreateNestedOneWithoutReownsInput
+  newProduct?: Prisma.ProductCreateNestedOneWithoutNewReOwnedProductsInput
+  originalProduct?: Prisma.ProductCreateNestedOneWithoutReOwnedProductsInput
+  shipping?: Prisma.ShippingCreateNestedOneWithoutReOwnedProductInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutReOwnedProductInput
 }
 
-export type ReOwnedProductUncheckedCreateWithoutBusinessInput = {
+export type ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput = {
   id?: string
-  productId: string
-  oldOwnerId: string
+  newProductId?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
   createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutReOwnedProductInput
 }
 
-export type ReOwnedProductCreateOrConnectWithoutBusinessInput = {
+export type ReOwnedProductCreateOrConnectWithoutBusinessProductOwnersInput = {
   where: Prisma.ReOwnedProductWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput>
 }
 
-export type ReOwnedProductCreateManyBusinessInputEnvelope = {
-  data: Prisma.ReOwnedProductCreateManyBusinessInput | Prisma.ReOwnedProductCreateManyBusinessInput[]
-  skipDuplicates?: boolean
-}
-
-export type ReOwnedProductUpsertWithWhereUniqueWithoutBusinessInput = {
+export type ReOwnedProductUpsertWithWhereUniqueWithoutBusinessProductOwnersInput = {
   where: Prisma.ReOwnedProductWhereUniqueInput
-  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedUpdateWithoutBusinessInput>
-  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessInput>
+  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedUpdateWithoutBusinessProductOwnersInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedCreateWithoutBusinessProductOwnersInput>
 }
 
-export type ReOwnedProductUpdateWithWhereUniqueWithoutBusinessInput = {
+export type ReOwnedProductUpdateWithWhereUniqueWithoutBusinessProductOwnersInput = {
   where: Prisma.ReOwnedProductWhereUniqueInput
-  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutBusinessInput, Prisma.ReOwnedProductUncheckedUpdateWithoutBusinessInput>
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutBusinessProductOwnersInput, Prisma.ReOwnedProductUncheckedUpdateWithoutBusinessProductOwnersInput>
 }
 
-export type ReOwnedProductUpdateManyWithWhereWithoutBusinessInput = {
+export type ReOwnedProductUpdateManyWithWhereWithoutBusinessProductOwnersInput = {
   where: Prisma.ReOwnedProductScalarWhereInput
-  data: Prisma.XOR<Prisma.ReOwnedProductUpdateManyMutationInput, Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessInput>
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateManyMutationInput, Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersInput>
 }
 
 export type ReOwnedProductScalarWhereInput = {
@@ -647,269 +855,702 @@ export type ReOwnedProductScalarWhereInput = {
   OR?: Prisma.ReOwnedProductScalarWhereInput[]
   NOT?: Prisma.ReOwnedProductScalarWhereInput | Prisma.ReOwnedProductScalarWhereInput[]
   id?: Prisma.StringFilter<"ReOwnedProduct"> | string
-  businessId?: Prisma.StringFilter<"ReOwnedProduct"> | string
-  productId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  newProductId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  originalProductId?: Prisma.StringFilter<"ReOwnedProduct"> | string
   oldOwnerId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  newOwnerId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  quantity?: Prisma.IntFilter<"ReOwnedProduct"> | number
   oldPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   newPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringFilter<"ReOwnedProduct"> | string
   agreementDate?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
-  isApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  isOriginalApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  isNewOwnerApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
+  shippingId?: Prisma.StringNullableFilter<"ReOwnedProduct"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
 }
 
-export type ReOwnedProductCreateWithoutProductInput = {
+export type ReOwnedProductCreateWithoutOriginalProductInput = {
   id?: string
-  oldOwnerId: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
   createdAt?: Date | string
-  business: Prisma.BusinessCreateNestedOneWithoutReownedItemsInput
+  newProduct?: Prisma.ProductCreateNestedOneWithoutNewReOwnedProductsInput
+  shipping?: Prisma.ShippingCreateNestedOneWithoutReOwnedProductInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessCreateNestedManyWithoutReownedItemsInput
 }
 
-export type ReOwnedProductUncheckedCreateWithoutProductInput = {
+export type ReOwnedProductUncheckedCreateWithoutOriginalProductInput = {
   id?: string
-  businessId: string
-  oldOwnerId: string
+  newProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
   createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessUncheckedCreateNestedManyWithoutReownedItemsInput
 }
 
-export type ReOwnedProductCreateOrConnectWithoutProductInput = {
+export type ReOwnedProductCreateOrConnectWithoutOriginalProductInput = {
   where: Prisma.ReOwnedProductWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutProductInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput>
 }
 
-export type ReOwnedProductCreateManyProductInputEnvelope = {
-  data: Prisma.ReOwnedProductCreateManyProductInput | Prisma.ReOwnedProductCreateManyProductInput[]
+export type ReOwnedProductCreateManyOriginalProductInputEnvelope = {
+  data: Prisma.ReOwnedProductCreateManyOriginalProductInput | Prisma.ReOwnedProductCreateManyOriginalProductInput[]
   skipDuplicates?: boolean
 }
 
-export type ReOwnedProductUpsertWithWhereUniqueWithoutProductInput = {
-  where: Prisma.ReOwnedProductWhereUniqueInput
-  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutProductInput, Prisma.ReOwnedProductUncheckedUpdateWithoutProductInput>
-  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutProductInput>
+export type ReOwnedProductCreateWithoutNewProductInput = {
+  id?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
+  oldPrice: number
+  newPrice: number
+  markupPercentage: number
+  agreedViaChatId: string
+  agreementDate: Date | string
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  createdAt?: Date | string
+  originalProduct?: Prisma.ProductCreateNestedOneWithoutReOwnedProductsInput
+  shipping?: Prisma.ShippingCreateNestedOneWithoutReOwnedProductInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessCreateNestedManyWithoutReownedItemsInput
 }
 
-export type ReOwnedProductUpdateWithWhereUniqueWithoutProductInput = {
-  where: Prisma.ReOwnedProductWhereUniqueInput
-  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutProductInput, Prisma.ReOwnedProductUncheckedUpdateWithoutProductInput>
+export type ReOwnedProductUncheckedCreateWithoutNewProductInput = {
+  id?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
+  oldPrice: number
+  newPrice: number
+  markupPercentage: number
+  agreedViaChatId: string
+  agreementDate: Date | string
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
+  createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessUncheckedCreateNestedManyWithoutReownedItemsInput
 }
 
-export type ReOwnedProductUpdateManyWithWhereWithoutProductInput = {
+export type ReOwnedProductCreateOrConnectWithoutNewProductInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput>
+}
+
+export type ReOwnedProductCreateManyNewProductInputEnvelope = {
+  data: Prisma.ReOwnedProductCreateManyNewProductInput | Prisma.ReOwnedProductCreateManyNewProductInput[]
+  skipDuplicates?: boolean
+}
+
+export type ReOwnedProductUpsertWithWhereUniqueWithoutOriginalProductInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedUpdateWithoutOriginalProductInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutOriginalProductInput>
+}
+
+export type ReOwnedProductUpdateWithWhereUniqueWithoutOriginalProductInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutOriginalProductInput, Prisma.ReOwnedProductUncheckedUpdateWithoutOriginalProductInput>
+}
+
+export type ReOwnedProductUpdateManyWithWhereWithoutOriginalProductInput = {
   where: Prisma.ReOwnedProductScalarWhereInput
-  data: Prisma.XOR<Prisma.ReOwnedProductUpdateManyMutationInput, Prisma.ReOwnedProductUncheckedUpdateManyWithoutProductInput>
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateManyMutationInput, Prisma.ReOwnedProductUncheckedUpdateManyWithoutOriginalProductInput>
 }
 
-export type ReOwnedProductCreateManyBusinessInput = {
+export type ReOwnedProductUpsertWithWhereUniqueWithoutNewProductInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedUpdateWithoutNewProductInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedCreateWithoutNewProductInput>
+}
+
+export type ReOwnedProductUpdateWithWhereUniqueWithoutNewProductInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutNewProductInput, Prisma.ReOwnedProductUncheckedUpdateWithoutNewProductInput>
+}
+
+export type ReOwnedProductUpdateManyWithWhereWithoutNewProductInput = {
+  where: Prisma.ReOwnedProductScalarWhereInput
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateManyMutationInput, Prisma.ReOwnedProductUncheckedUpdateManyWithoutNewProductInput>
+}
+
+export type ReOwnedProductCreateWithoutShippingInput = {
   id?: string
-  productId: string
-  oldOwnerId: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
   createdAt?: Date | string
+  newProduct?: Prisma.ProductCreateNestedOneWithoutNewReOwnedProductsInput
+  originalProduct?: Prisma.ProductCreateNestedOneWithoutReOwnedProductsInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessCreateNestedManyWithoutReownedItemsInput
 }
 
-export type ReOwnedProductUpdateWithoutBusinessInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
-  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductUpdateOneRequiredWithoutReownsNestedInput
-}
-
-export type ReOwnedProductUncheckedUpdateWithoutBusinessInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
-  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ReOwnedProductUncheckedUpdateManyWithoutBusinessInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
-  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
-  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ReOwnedProductCreateManyProductInput = {
+export type ReOwnedProductUncheckedCreateWithoutShippingInput = {
   id?: string
-  businessId: string
-  oldOwnerId: string
+  newProductId?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
   oldPrice: number
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
   agreementDate: Date | string
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessUncheckedCreateNestedManyWithoutReownedItemsInput
+}
+
+export type ReOwnedProductCreateOrConnectWithoutShippingInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutShippingInput, Prisma.ReOwnedProductUncheckedCreateWithoutShippingInput>
+}
+
+export type ReOwnedProductUpsertWithoutShippingInput = {
+  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutShippingInput, Prisma.ReOwnedProductUncheckedUpdateWithoutShippingInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutShippingInput, Prisma.ReOwnedProductUncheckedCreateWithoutShippingInput>
+  where?: Prisma.ReOwnedProductWhereInput
+}
+
+export type ReOwnedProductUpdateToOneWithWhereWithoutShippingInput = {
+  where?: Prisma.ReOwnedProductWhereInput
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutShippingInput, Prisma.ReOwnedProductUncheckedUpdateWithoutShippingInput>
+}
+
+export type ReOwnedProductUpdateWithoutShippingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  newProduct?: Prisma.ProductUpdateOneRequiredWithoutNewReOwnedProductsNestedInput
+  originalProduct?: Prisma.ProductUpdateOneRequiredWithoutReOwnedProductsNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUpdateManyWithoutReownedItemsNestedInput
+}
+
+export type ReOwnedProductUncheckedUpdateWithoutShippingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUncheckedUpdateManyWithoutReownedItemsNestedInput
+}
+
+export type ReOwnedProductCreateWithoutTokenTransactionsInput = {
+  id?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
+  oldPrice: number
+  newPrice: number
+  markupPercentage: number
+  agreedViaChatId: string
+  agreementDate: Date | string
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  createdAt?: Date | string
+  newProduct?: Prisma.ProductCreateNestedOneWithoutNewReOwnedProductsInput
+  originalProduct?: Prisma.ProductCreateNestedOneWithoutReOwnedProductsInput
+  shipping?: Prisma.ShippingCreateNestedOneWithoutReOwnedProductInput
+  businessProductOwners?: Prisma.BusinessCreateNestedManyWithoutReownedItemsInput
+}
+
+export type ReOwnedProductUncheckedCreateWithoutTokenTransactionsInput = {
+  id?: string
+  newProductId?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
+  oldPrice: number
+  newPrice: number
+  markupPercentage: number
+  agreedViaChatId: string
+  agreementDate: Date | string
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
+  createdAt?: Date | string
+  businessProductOwners?: Prisma.BusinessUncheckedCreateNestedManyWithoutReownedItemsInput
+}
+
+export type ReOwnedProductCreateOrConnectWithoutTokenTransactionsInput = {
+  where: Prisma.ReOwnedProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutTokenTransactionsInput, Prisma.ReOwnedProductUncheckedCreateWithoutTokenTransactionsInput>
+}
+
+export type ReOwnedProductUpsertWithoutTokenTransactionsInput = {
+  update: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutTokenTransactionsInput, Prisma.ReOwnedProductUncheckedUpdateWithoutTokenTransactionsInput>
+  create: Prisma.XOR<Prisma.ReOwnedProductCreateWithoutTokenTransactionsInput, Prisma.ReOwnedProductUncheckedCreateWithoutTokenTransactionsInput>
+  where?: Prisma.ReOwnedProductWhereInput
+}
+
+export type ReOwnedProductUpdateToOneWithWhereWithoutTokenTransactionsInput = {
+  where?: Prisma.ReOwnedProductWhereInput
+  data: Prisma.XOR<Prisma.ReOwnedProductUpdateWithoutTokenTransactionsInput, Prisma.ReOwnedProductUncheckedUpdateWithoutTokenTransactionsInput>
+}
+
+export type ReOwnedProductUpdateWithoutTokenTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  newProduct?: Prisma.ProductUpdateOneRequiredWithoutNewReOwnedProductsNestedInput
+  originalProduct?: Prisma.ProductUpdateOneRequiredWithoutReOwnedProductsNestedInput
+  shipping?: Prisma.ShippingUpdateOneWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUpdateManyWithoutReownedItemsNestedInput
+}
+
+export type ReOwnedProductUncheckedUpdateWithoutTokenTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  businessProductOwners?: Prisma.BusinessUncheckedUpdateManyWithoutReownedItemsNestedInput
+}
+
+export type ReOwnedProductUpdateWithoutBusinessProductOwnersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  newProduct?: Prisma.ProductUpdateOneRequiredWithoutNewReOwnedProductsNestedInput
+  originalProduct?: Prisma.ProductUpdateOneRequiredWithoutReOwnedProductsNestedInput
+  shipping?: Prisma.ShippingUpdateOneWithoutReOwnedProductNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutReOwnedProductNestedInput
+}
+
+export type ReOwnedProductUncheckedUpdateWithoutBusinessProductOwnersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutReOwnedProductNestedInput
+}
+
+export type ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReOwnedProductCreateManyOriginalProductInput = {
+  id?: string
+  newProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
+  oldPrice: number
+  newPrice: number
+  markupPercentage: number
+  agreedViaChatId: string
+  agreementDate: Date | string
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
   createdAt?: Date | string
 }
 
-export type ReOwnedProductUpdateWithoutProductInput = {
+export type ReOwnedProductCreateManyNewProductInput = {
+  id?: string
+  originalProductId?: string
+  oldOwnerId?: string
+  newOwnerId?: string
+  quantity?: number
+  oldPrice: number
+  newPrice: number
+  markupPercentage: number
+  agreedViaChatId: string
+  agreementDate: Date | string
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: string | null
+  createdAt?: Date | string
+}
+
+export type ReOwnedProductUpdateWithoutOriginalProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  business?: Prisma.BusinessUpdateOneRequiredWithoutReownedItemsNestedInput
+  newProduct?: Prisma.ProductUpdateOneRequiredWithoutNewReOwnedProductsNestedInput
+  shipping?: Prisma.ShippingUpdateOneWithoutReOwnedProductNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUpdateManyWithoutReownedItemsNestedInput
 }
 
-export type ReOwnedProductUncheckedUpdateWithoutProductInput = {
+export type ReOwnedProductUncheckedUpdateWithoutOriginalProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUncheckedUpdateManyWithoutReownedItemsNestedInput
 }
 
-export type ReOwnedProductUncheckedUpdateManyWithoutProductInput = {
+export type ReOwnedProductUncheckedUpdateManyWithoutOriginalProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  newProductId?: Prisma.StringFieldUpdateOperationsInput | string
   oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
   agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type ReOwnedProductUpdateWithoutNewProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  originalProduct?: Prisma.ProductUpdateOneRequiredWithoutReOwnedProductsNestedInput
+  shipping?: Prisma.ShippingUpdateOneWithoutReOwnedProductNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUpdateManyWithoutReownedItemsNestedInput
+}
+
+export type ReOwnedProductUncheckedUpdateWithoutNewProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutReOwnedProductNestedInput
+  businessProductOwners?: Prisma.BusinessUncheckedUpdateManyWithoutReownedItemsNestedInput
+}
+
+export type ReOwnedProductUncheckedUpdateManyWithoutNewProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalProductId?: Prisma.StringFieldUpdateOperationsInput | string
+  oldOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  newOwnerId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  oldPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isOriginalApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNewOwnerApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  shippingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ReOwnedProductCountOutputType
+ */
+
+export type ReOwnedProductCountOutputType = {
+  tokenTransactions: number
+  businessProductOwners: number
+}
+
+export type ReOwnedProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tokenTransactions?: boolean | ReOwnedProductCountOutputTypeCountTokenTransactionsArgs
+  businessProductOwners?: boolean | ReOwnedProductCountOutputTypeCountBusinessProductOwnersArgs
+}
+
+/**
+ * ReOwnedProductCountOutputType without action
+ */
+export type ReOwnedProductCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReOwnedProductCountOutputType
+   */
+  select?: Prisma.ReOwnedProductCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ReOwnedProductCountOutputType without action
+ */
+export type ReOwnedProductCountOutputTypeCountTokenTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TokenTransactionWhereInput
+}
+
+/**
+ * ReOwnedProductCountOutputType without action
+ */
+export type ReOwnedProductCountOutputTypeCountBusinessProductOwnersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BusinessWhereInput
+}
 
 
 export type ReOwnedProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  businessId?: boolean
-  productId?: boolean
+  newProductId?: boolean
+  originalProductId?: boolean
   oldOwnerId?: boolean
+  newOwnerId?: boolean
+  quantity?: boolean
   oldPrice?: boolean
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
   agreementDate?: boolean
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: boolean
   createdAt?: boolean
-  business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  newProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  originalProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  shipping?: boolean | Prisma.ReOwnedProduct$shippingArgs<ExtArgs>
+  tokenTransactions?: boolean | Prisma.ReOwnedProduct$tokenTransactionsArgs<ExtArgs>
+  businessProductOwners?: boolean | Prisma.ReOwnedProduct$businessProductOwnersArgs<ExtArgs>
+  _count?: boolean | Prisma.ReOwnedProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reOwnedProduct"]>
 
 export type ReOwnedProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  businessId?: boolean
-  productId?: boolean
+  newProductId?: boolean
+  originalProductId?: boolean
   oldOwnerId?: boolean
+  newOwnerId?: boolean
+  quantity?: boolean
   oldPrice?: boolean
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
   agreementDate?: boolean
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: boolean
   createdAt?: boolean
-  business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  newProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  originalProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  shipping?: boolean | Prisma.ReOwnedProduct$shippingArgs<ExtArgs>
 }, ExtArgs["result"]["reOwnedProduct"]>
 
 export type ReOwnedProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  businessId?: boolean
-  productId?: boolean
+  newProductId?: boolean
+  originalProductId?: boolean
   oldOwnerId?: boolean
+  newOwnerId?: boolean
+  quantity?: boolean
   oldPrice?: boolean
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
   agreementDate?: boolean
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: boolean
   createdAt?: boolean
-  business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  newProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  originalProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  shipping?: boolean | Prisma.ReOwnedProduct$shippingArgs<ExtArgs>
 }, ExtArgs["result"]["reOwnedProduct"]>
 
 export type ReOwnedProductSelectScalar = {
   id?: boolean
-  businessId?: boolean
-  productId?: boolean
+  newProductId?: boolean
+  originalProductId?: boolean
   oldOwnerId?: boolean
+  newOwnerId?: boolean
+  quantity?: boolean
   oldPrice?: boolean
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
   agreementDate?: boolean
-  isApproved?: boolean
+  isOriginalApproved?: boolean
+  isNewOwnerApproved?: boolean
+  shippingId?: boolean
   createdAt?: boolean
 }
 
-export type ReOwnedProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessId" | "productId" | "oldOwnerId" | "oldPrice" | "newPrice" | "markupPercentage" | "agreedViaChatId" | "agreementDate" | "isApproved" | "createdAt", ExtArgs["result"]["reOwnedProduct"]>
+export type ReOwnedProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "newProductId" | "originalProductId" | "oldOwnerId" | "newOwnerId" | "quantity" | "oldPrice" | "newPrice" | "markupPercentage" | "agreedViaChatId" | "agreementDate" | "isOriginalApproved" | "isNewOwnerApproved" | "shippingId" | "createdAt", ExtArgs["result"]["reOwnedProduct"]>
 export type ReOwnedProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  newProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  originalProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  shipping?: boolean | Prisma.ReOwnedProduct$shippingArgs<ExtArgs>
+  tokenTransactions?: boolean | Prisma.ReOwnedProduct$tokenTransactionsArgs<ExtArgs>
+  businessProductOwners?: boolean | Prisma.ReOwnedProduct$businessProductOwnersArgs<ExtArgs>
+  _count?: boolean | Prisma.ReOwnedProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReOwnedProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  newProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  originalProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  shipping?: boolean | Prisma.ReOwnedProduct$shippingArgs<ExtArgs>
 }
 export type ReOwnedProductIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  newProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  originalProduct?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  shipping?: boolean | Prisma.ReOwnedProduct$shippingArgs<ExtArgs>
 }
 
 export type $ReOwnedProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ReOwnedProduct"
   objects: {
-    business: Prisma.$BusinessPayload<ExtArgs>
-    product: Prisma.$ProductPayload<ExtArgs>
+    newProduct: Prisma.$ProductPayload<ExtArgs>
+    originalProduct: Prisma.$ProductPayload<ExtArgs>
+    shipping: Prisma.$ShippingPayload<ExtArgs> | null
+    tokenTransactions: Prisma.$TokenTransactionPayload<ExtArgs>[]
+    businessProductOwners: Prisma.$BusinessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    businessId: string
-    productId: string
+    newProductId: string
+    originalProductId: string
     oldOwnerId: string
+    newOwnerId: string
+    quantity: number
     oldPrice: number
     newPrice: number
     markupPercentage: number
     agreedViaChatId: string
     agreementDate: Date
-    isApproved: boolean
+    isOriginalApproved: boolean
+    isNewOwnerApproved: boolean
+    shippingId: string | null
     createdAt: Date
   }, ExtArgs["result"]["reOwnedProduct"]>
   composites: {}
@@ -1305,8 +1946,11 @@ readonly fields: ReOwnedProductFieldRefs;
  */
 export interface Prisma__ReOwnedProductClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  business<T extends Prisma.BusinessDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessDefaultArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  newProduct<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  originalProduct<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  shipping<T extends Prisma.ReOwnedProduct$shippingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReOwnedProduct$shippingArgs<ExtArgs>>): Prisma.Prisma__ShippingClient<runtime.Types.Result.GetResult<Prisma.$ShippingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tokenTransactions<T extends Prisma.ReOwnedProduct$tokenTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReOwnedProduct$tokenTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  businessProductOwners<T extends Prisma.ReOwnedProduct$businessProductOwnersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReOwnedProduct$businessProductOwnersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1337,15 +1981,19 @@ export interface Prisma__ReOwnedProductClient<T, Null = never, ExtArgs extends r
  */
 export interface ReOwnedProductFieldRefs {
   readonly id: Prisma.FieldRef<"ReOwnedProduct", 'String'>
-  readonly businessId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
-  readonly productId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
+  readonly newProductId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
+  readonly originalProductId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
   readonly oldOwnerId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
+  readonly newOwnerId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
+  readonly quantity: Prisma.FieldRef<"ReOwnedProduct", 'Int'>
   readonly oldPrice: Prisma.FieldRef<"ReOwnedProduct", 'Float'>
   readonly newPrice: Prisma.FieldRef<"ReOwnedProduct", 'Float'>
   readonly markupPercentage: Prisma.FieldRef<"ReOwnedProduct", 'Float'>
   readonly agreedViaChatId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
   readonly agreementDate: Prisma.FieldRef<"ReOwnedProduct", 'DateTime'>
-  readonly isApproved: Prisma.FieldRef<"ReOwnedProduct", 'Boolean'>
+  readonly isOriginalApproved: Prisma.FieldRef<"ReOwnedProduct", 'Boolean'>
+  readonly isNewOwnerApproved: Prisma.FieldRef<"ReOwnedProduct", 'Boolean'>
+  readonly shippingId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
   readonly createdAt: Prisma.FieldRef<"ReOwnedProduct", 'DateTime'>
 }
     
@@ -1740,6 +2388,73 @@ export type ReOwnedProductDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many ReOwnedProducts to delete.
    */
   limit?: number
+}
+
+/**
+ * ReOwnedProduct.shipping
+ */
+export type ReOwnedProduct$shippingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Shipping
+   */
+  select?: Prisma.ShippingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Shipping
+   */
+  omit?: Prisma.ShippingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShippingInclude<ExtArgs> | null
+  where?: Prisma.ShippingWhereInput
+}
+
+/**
+ * ReOwnedProduct.tokenTransactions
+ */
+export type ReOwnedProduct$tokenTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TokenTransaction
+   */
+  select?: Prisma.TokenTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TokenTransaction
+   */
+  omit?: Prisma.TokenTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TokenTransactionInclude<ExtArgs> | null
+  where?: Prisma.TokenTransactionWhereInput
+  orderBy?: Prisma.TokenTransactionOrderByWithRelationInput | Prisma.TokenTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TokenTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TokenTransactionScalarFieldEnum | Prisma.TokenTransactionScalarFieldEnum[]
+}
+
+/**
+ * ReOwnedProduct.businessProductOwners
+ */
+export type ReOwnedProduct$businessProductOwnersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Business
+   */
+  select?: Prisma.BusinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Business
+   */
+  omit?: Prisma.BusinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BusinessInclude<ExtArgs> | null
+  where?: Prisma.BusinessWhereInput
+  orderBy?: Prisma.BusinessOrderByWithRelationInput | Prisma.BusinessOrderByWithRelationInput[]
+  cursor?: Prisma.BusinessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BusinessScalarFieldEnum | Prisma.BusinessScalarFieldEnum[]
 }
 
 /**

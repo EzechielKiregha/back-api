@@ -28,6 +28,9 @@ export class ChatService {
     if (productId) {
       const product = await this.prisma.product.findUnique({ where: { id: productId } });
       if (!product) throw new Error('Product not found');
+      if (negotiationType === 'REOWNERSHIP' && product.isPhysical && !isSecure) {
+        throw new Error('REOWNERSHIP chats for physical products must be secure');
+      }
     }
     if (serviceId) {
       const service = await this.prisma.freelanceService.findUnique({ where: { id: serviceId } });
@@ -36,7 +39,6 @@ export class ChatService {
 
     // Validate participants
     const participantsData = new Array<Object>;
-    
     for (const id of participantIds) {
       const client = await this.prisma.client.findUnique({ where: { id } });
       const business = client ? null : await this.prisma.business.findUnique({ where: { id } });
@@ -74,7 +76,7 @@ export class ChatService {
         participants: { create: participantsData },
       },
       include: {
-        product: productId ? { select: { id: true, title: true, businessId: true } } : false,
+        product: productId ? { select: { id: true, title: true, businessId: true, isPhysical: true } } : false,
         service: serviceId ? { select: { id: true, title: true, businessId: true } } : false,
         participants: {
           include: {
@@ -138,7 +140,7 @@ export class ChatService {
         },
       },
       include: {
-        product: { select: { id: true, title: true, businessId: true } },
+        product: { select: { id: true, title: true, businessId: true, isPhysical: true } },
         service: { select: { id: true, title: true, businessId: true } },
         participants: {
           include: {
@@ -156,7 +158,7 @@ export class ChatService {
     const chat = await this.prisma.chat.findUnique({
       where: { id },
       include: {
-        product: { select: { id: true, title: true, businessId: true } },
+        product: { select: { id: true, title: true, businessId: true, isPhysical: true } },
         service: { select: { id: true, title: true, businessId: true } },
         participants: {
           include: {
@@ -192,7 +194,7 @@ export class ChatService {
       where: { id },
       data: { status, isSecure, negotiationType },
       include: {
-        product: { select: { id: true, title: true, businessId: true } },
+        product: { select: { id: true, title: true, businessId: true, isPhysical: true } },
         service: { select: { id: true, title: true, businessId: true } },
         participants: {
           include: {
@@ -217,4 +219,5 @@ export class ChatService {
     });
   }
 }
+
 

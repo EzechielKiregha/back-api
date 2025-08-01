@@ -6,9 +6,8 @@ type ChatMessageEntity {
   id: String!
   chatId: String!
   message: String!
-  senderId: String
+  senderId: String!
   createdAt: DateTime!
-  chat: ChatEntity!
 }
 
 """
@@ -89,26 +88,27 @@ type OrderProductEntity {
 type ReOwnedProductEntity {
   id: String!
   businessId: String!
+  business: BusinessEntity!
   productId: String!
+  product: ProductEntity!
   oldOwnerId: String!
   oldPrice: Float!
   newPrice: Float!
   markupPercentage: Float!
   agreedViaChatId: String!
+  agreementDate: DateTime!
+  isApproved: Boolean!
   createdAt: DateTime!
-  business: BusinessEntity!
-  product: ProductEntity!
-  agreedViaChat: ChatEntity!
 }
 
 type RepostedProductEntity {
   id: String!
   businessId: String!
+  business: BusinessEntity!
   productId: String!
+  product: ProductEntity!
   earnPercentage: Float!
   createdAt: DateTime!
-  business: BusinessEntity!
-  product: ProductEntity!
 }
 
 type ReviewEntity {
@@ -142,6 +142,34 @@ type ProductEntity {
   ads: [AdEntity!]!
 }
 
+type KnowYourCustomerEntity {
+  id: String!
+  status: String!
+  documentUrl: String!
+  submittedAt: DateTime!
+  verifiedAt: DateTime
+  businessId: String
+  clientId: String
+  workerId: String
+  business: BusinessEntity
+  client: ClientEntity
+  worker: WorkerEntity
+}
+
+type WorkerEntity {
+  id: String!
+  email: String!
+  fullName: String
+  role: String
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  business: BusinessEntity
+  kyc: KnowYourCustomerEntity
+  freelanceServices: [FreelanceServiceEntity!]
+  chats: [ChatEntity!]!
+}
+
 type FreelanceServiceEntity {
   id: String!
   title: String!
@@ -172,48 +200,44 @@ type WorkerServiceAssignmentEntity {
   assignedAt: DateTime!
 }
 
-type KnowYourCustomerEntity {
+type ChatParticipantEntity {
   id: String!
-  status: String!
-  documentUrl: String!
-  submittedAt: DateTime!
-  verifiedAt: DateTime
-  businessId: String
+  chatId: String!
   clientId: String
-  workerId: String
-  business: BusinessEntity
   client: ClientEntity
-  worker: WorkerEntity
-}
-
-type WorkerEntity {
-  id: String!
-  email: String!
-  fullName: String
-  role: String
-  isVerified: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  businessId: String
   business: BusinessEntity
-  kyc: KnowYourCustomerEntity
-  freelanceServices: [FreelanceServiceEntity!]
-  chats: [ChatEntity!]!
+  workerId: String
+  worker: WorkerEntity
+  createdAt: DateTime!
 }
 
 type ChatEntity {
   id: String!
-  clientId: String!
-  productId: String!
-  businessId: String
-  workerId: String
-  status: String!
+  status: ChatStatus!
+  isSecure: Boolean!
+  negotiationType: NegotiationType
+  productId: String
+  product: ProductEntity
+  serviceId: String
+  service: FreelanceServiceEntity
+  participants: [ChatParticipantEntity!]!
+  messages: [ChatMessageEntity!]!
   createdAt: DateTime!
   updatedAt: DateTime!
-  client: ClientEntity!
-  product: ProductEntity!
-  business: BusinessEntity
-  worker: WorkerEntity
-  messages: [ChatMessageEntity!]!
+}
+
+enum ChatStatus {
+  PENDING
+  ACTIVE
+  CLOSED
+}
+
+enum NegotiationType {
+  REOWNERSHIP
+  FREELANCEORDER
+  PURCHASE
+  GENERAL
 }
 
 type FreelanceOrderEntity {
@@ -320,6 +344,10 @@ type BusinessEntity {
   coverImage: String
   password: String!
   isVerified: Boolean!
+  kycStatus: KycStatus!
+  totalProductsSold: Int!
+  hasAgreedToTerms: Boolean!
+  isB2BEnabled: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
   products: [ProductEntity!]!
@@ -334,6 +362,12 @@ type BusinessEntity {
   referralsReceived: [ReferralEntity!]!
   chats: [ChatEntity!]!
   postOfSales: [PostOfSaleEntity!]
+}
+
+enum KycStatus {
+  PENDING
+  VERIFIED
+  REJECTED
 }
 
 type ReferralEntity {
@@ -410,6 +444,24 @@ type Query {
 
   """Retrieves a single worker by ID."""
   worker(id: String!): WorkerEntity!
+
+  """Retrieves chats for the user."""
+  chats: [ChatEntity!]!
+
+  """Retrieves a single chat by ID."""
+  chat(id: String!): ChatEntity!
+
+  """Retrieves reposted products for a business."""
+  repostedProducts: [RepostedProductEntity!]!
+
+  """Retrieves a single reposted product by ID."""
+  repostedProduct(id: String!): RepostedProductEntity!
+
+  """Retrieves re-owned products for a business."""
+  reOwnedProducts: [ReOwnedProductEntity!]!
+
+  """Retrieves a single re-owned product by ID."""
+  reOwnedProduct(id: String!): ReOwnedProductEntity!
 
   """Retrieves the total recharge balance for the user."""
   accountBalance: Float!
@@ -501,6 +553,30 @@ type Mutation {
 
   """Deletes a worker."""
   deleteWorker(id: String!): WorkerEntity!
+
+  """Creates a new chat with dynamic participants."""
+  createChat(createChatInput: CreateChatInput!): ChatEntity!
+
+  """Sends a message in a chat."""
+  createChatMessage(createChatMessageInput: CreateChatMessageInput!): ChatMessageEntity!
+
+  """Updates a chat’s status or properties."""
+  updateChat(id: String!, updateChatInput: UpdateChatInput!): ChatEntity!
+
+  """Deletes a chat."""
+  deleteChat(id: String!): ChatEntity!
+
+  """Creates a reposted product."""
+  createRepostedProduct(createRepostedProductInput: CreateRepostedProductInput!): RepostedProductEntity!
+
+  """Deletes a reposted product."""
+  deleteRepostedProduct(id: String!): RepostedProductEntity!
+
+  """Initiates a re-ownership request."""
+  createReOwnedProduct(createReOwnedProductInput: CreateReOwnedProductInput!): ReOwnedProductEntity!
+
+  """Approves or rejects a re-ownership request."""
+  approveReOwnedProduct(approveReOwnedProductInput: ApproveReOwnedProductInput!): ReOwnedProductEntity!
 
   """Creates a new account recharge."""
   createAccountRecharge(createAccountRechargeInput: CreateAccountRechargeInput!): AccountRechargeEntity!
@@ -644,9 +720,12 @@ input UpdateBusinessInput {
   address: String
   phone: String
   password: String
-  isVerified: Boolean = false
-  id: Int!
+  isVerified: Boolean
   kycId: String
+  kycStatus: KycStatus!
+  totalProductsSold: Int
+  hasAgreedToTerms: Boolean
+  isB2BEnabled: Boolean
 }
 
 input CreateClientInput {
@@ -690,6 +769,45 @@ input UpdateWorkerInput {
   businessId: String
   kycId: String
   id: String!
+}
+
+input CreateChatInput {
+  productId: String
+  serviceId: String
+  participantIds: [String!]!
+  isSecure: Boolean! = false
+  negotiationType: NegotiationType
+}
+
+input CreateChatMessageInput {
+  chatId: String!
+  message: String!
+}
+
+input UpdateChatInput {
+  id: String!
+  status: ChatStatus
+  isSecure: Boolean
+  negotiationType: NegotiationType
+}
+
+input CreateRepostedProductInput {
+  productId: String!
+  businessId: String!
+  earnPercentage: Float! = 0.002
+}
+
+input CreateReOwnedProductInput {
+  productId: String!
+  requestingBusinessId: String!
+  newPrice: Float!
+  markupPercentage: Float!
+}
+
+input ApproveReOwnedProductInput {
+  reOwnedProductId: String!
+  chatId: String!
+  isApproved: Boolean!
 }
 
 input CreateAccountRechargeInput {

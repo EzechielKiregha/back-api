@@ -16,14 +16,14 @@ export class OrderResolver {
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('client')
-  @Mutation(() => OrderEntity, { description: 'Creates a new order for a client.' })
+  @Mutation(() => OrderEntity, { description: 'Creates an order for a product.' })
   async createOrder(
     @Args('createOrderInput') createOrderInput: CreateOrderInput,
     @Context() context,
   ) {
     const user = context.req.user;
-    if (user.role === 'client' && user.id !== createOrderInput.clientId) {
-      throw new Error('Clients can only create orders for their own account');
+    if (user.id !== createOrderInput.clientId) {
+      throw new Error('Clients can only create orders for themselves');
     }
     return this.orderService.create(createOrderInput);
   }

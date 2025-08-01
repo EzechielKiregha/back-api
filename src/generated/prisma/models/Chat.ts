@@ -25,7 +25,7 @@ export type AggregateChat = {
 
 export type ChatMinAggregateOutputType = {
   id: string | null
-  status: string | null
+  status: $Enums.ChatStatus | null
   isSecure: boolean | null
   negotiationType: $Enums.NegotiationType | null
   productId: string | null
@@ -36,7 +36,7 @@ export type ChatMinAggregateOutputType = {
 
 export type ChatMaxAggregateOutputType = {
   id: string | null
-  status: string | null
+  status: $Enums.ChatStatus | null
   isSecure: boolean | null
   negotiationType: $Enums.NegotiationType | null
   productId: string | null
@@ -166,7 +166,7 @@ export type ChatGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type ChatGroupByOutputType = {
   id: string
-  status: string
+  status: $Enums.ChatStatus
   isSecure: boolean
   negotiationType: $Enums.NegotiationType | null
   productId: string | null
@@ -198,7 +198,7 @@ export type ChatWhereInput = {
   OR?: Prisma.ChatWhereInput[]
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   id?: Prisma.StringFilter<"Chat"> | string
-  status?: Prisma.StringFilter<"Chat"> | string
+  status?: Prisma.EnumChatStatusFilter<"Chat"> | $Enums.ChatStatus
   isSecure?: Prisma.BoolFilter<"Chat"> | boolean
   negotiationType?: Prisma.EnumNegotiationTypeNullableFilter<"Chat"> | $Enums.NegotiationType | null
   productId?: Prisma.StringNullableFilter<"Chat"> | string | null
@@ -231,7 +231,7 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   OR?: Prisma.ChatWhereInput[]
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
-  status?: Prisma.StringFilter<"Chat"> | string
+  status?: Prisma.EnumChatStatusFilter<"Chat"> | $Enums.ChatStatus
   isSecure?: Prisma.BoolFilter<"Chat"> | boolean
   negotiationType?: Prisma.EnumNegotiationTypeNullableFilter<"Chat"> | $Enums.NegotiationType | null
   productId?: Prisma.StringNullableFilter<"Chat"> | string | null
@@ -263,7 +263,7 @@ export type ChatScalarWhereWithAggregatesInput = {
   OR?: Prisma.ChatScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ChatScalarWhereWithAggregatesInput | Prisma.ChatScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Chat"> | string
-  status?: Prisma.StringWithAggregatesFilter<"Chat"> | string
+  status?: Prisma.EnumChatStatusWithAggregatesFilter<"Chat"> | $Enums.ChatStatus
   isSecure?: Prisma.BoolWithAggregatesFilter<"Chat"> | boolean
   negotiationType?: Prisma.EnumNegotiationTypeNullableWithAggregatesFilter<"Chat"> | $Enums.NegotiationType | null
   productId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
@@ -274,7 +274,7 @@ export type ChatScalarWhereWithAggregatesInput = {
 
 export type ChatCreateInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
@@ -287,7 +287,7 @@ export type ChatCreateInput = {
 
 export type ChatUncheckedCreateInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   productId?: string | null
@@ -300,7 +300,7 @@ export type ChatUncheckedCreateInput = {
 
 export type ChatUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,7 +313,7 @@ export type ChatUpdateInput = {
 
 export type ChatUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -326,7 +326,7 @@ export type ChatUncheckedUpdateInput = {
 
 export type ChatCreateManyInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   productId?: string | null
@@ -337,7 +337,7 @@ export type ChatCreateManyInput = {
 
 export type ChatUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -346,7 +346,7 @@ export type ChatUpdateManyMutationInput = {
 
 export type ChatUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -445,6 +445,10 @@ export type ChatUncheckedUpdateManyWithoutProductNestedInput = {
   deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
 }
 
+export type EnumChatStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ChatStatus
+}
+
 export type NullableEnumNegotiationTypeFieldUpdateOperationsInput = {
   set?: $Enums.NegotiationType | null
 }
@@ -521,7 +525,7 @@ export type ChatUncheckedUpdateManyWithoutServiceNestedInput = {
 
 export type ChatCreateWithoutProductInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
@@ -533,7 +537,7 @@ export type ChatCreateWithoutProductInput = {
 
 export type ChatUncheckedCreateWithoutProductInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   serviceId?: string | null
@@ -574,7 +578,7 @@ export type ChatScalarWhereInput = {
   OR?: Prisma.ChatScalarWhereInput[]
   NOT?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
   id?: Prisma.StringFilter<"Chat"> | string
-  status?: Prisma.StringFilter<"Chat"> | string
+  status?: Prisma.EnumChatStatusFilter<"Chat"> | $Enums.ChatStatus
   isSecure?: Prisma.BoolFilter<"Chat"> | boolean
   negotiationType?: Prisma.EnumNegotiationTypeNullableFilter<"Chat"> | $Enums.NegotiationType | null
   productId?: Prisma.StringNullableFilter<"Chat"> | string | null
@@ -585,7 +589,7 @@ export type ChatScalarWhereInput = {
 
 export type ChatCreateWithoutParticipantsInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
@@ -597,7 +601,7 @@ export type ChatCreateWithoutParticipantsInput = {
 
 export type ChatUncheckedCreateWithoutParticipantsInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   productId?: string | null
@@ -625,7 +629,7 @@ export type ChatUpdateToOneWithWhereWithoutParticipantsInput = {
 
 export type ChatUpdateWithoutParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -637,7 +641,7 @@ export type ChatUpdateWithoutParticipantsInput = {
 
 export type ChatUncheckedUpdateWithoutParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -649,7 +653,7 @@ export type ChatUncheckedUpdateWithoutParticipantsInput = {
 
 export type ChatCreateWithoutMessagesInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
@@ -661,7 +665,7 @@ export type ChatCreateWithoutMessagesInput = {
 
 export type ChatUncheckedCreateWithoutMessagesInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   productId?: string | null
@@ -689,7 +693,7 @@ export type ChatUpdateToOneWithWhereWithoutMessagesInput = {
 
 export type ChatUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -701,7 +705,7 @@ export type ChatUpdateWithoutMessagesInput = {
 
 export type ChatUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -713,7 +717,7 @@ export type ChatUncheckedUpdateWithoutMessagesInput = {
 
 export type ChatCreateWithoutServiceInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
@@ -725,7 +729,7 @@ export type ChatCreateWithoutServiceInput = {
 
 export type ChatUncheckedCreateWithoutServiceInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   productId?: string | null
@@ -763,7 +767,7 @@ export type ChatUpdateManyWithWhereWithoutServiceInput = {
 
 export type ChatCreateManyProductInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   serviceId?: string | null
@@ -773,7 +777,7 @@ export type ChatCreateManyProductInput = {
 
 export type ChatUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -785,7 +789,7 @@ export type ChatUpdateWithoutProductInput = {
 
 export type ChatUncheckedUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -797,7 +801,7 @@ export type ChatUncheckedUpdateWithoutProductInput = {
 
 export type ChatUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -807,7 +811,7 @@ export type ChatUncheckedUpdateManyWithoutProductInput = {
 
 export type ChatCreateManyServiceInput = {
   id?: string
-  status?: string
+  status?: $Enums.ChatStatus
   isSecure?: boolean
   negotiationType?: $Enums.NegotiationType | null
   productId?: string | null
@@ -817,7 +821,7 @@ export type ChatCreateManyServiceInput = {
 
 export type ChatUpdateWithoutServiceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -829,7 +833,7 @@ export type ChatUpdateWithoutServiceInput = {
 
 export type ChatUncheckedUpdateWithoutServiceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -841,7 +845,7 @@ export type ChatUncheckedUpdateWithoutServiceInput = {
 
 export type ChatUncheckedUpdateManyWithoutServiceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
   isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
   negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -969,7 +973,7 @@ export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    status: string
+    status: $Enums.ChatStatus
     isSecure: boolean
     negotiationType: $Enums.NegotiationType | null
     productId: string | null
@@ -1404,7 +1408,7 @@ export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface ChatFieldRefs {
   readonly id: Prisma.FieldRef<"Chat", 'String'>
-  readonly status: Prisma.FieldRef<"Chat", 'String'>
+  readonly status: Prisma.FieldRef<"Chat", 'ChatStatus'>
   readonly isSecure: Prisma.FieldRef<"Chat", 'Boolean'>
   readonly negotiationType: Prisma.FieldRef<"Chat", 'NegotiationType'>
   readonly productId: Prisma.FieldRef<"Chat", 'String'>

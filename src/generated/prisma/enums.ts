@@ -123,3 +123,12 @@ export const NegotiationType = {
 } as const
 
 export type NegotiationType = (typeof NegotiationType)[keyof typeof NegotiationType]
+
+
+export const ChatStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  CLOSED: 'CLOSED'
+} as const
+
+export type ChatStatus = (typeof ChatStatus)[keyof typeof ChatStatus]

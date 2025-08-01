@@ -27,6 +27,10 @@ export class BusinessService {
         address: true,
         phone: true,
         isVerified: true,
+        isB2BEnabled:true,
+        kycStatus:true,
+        hasAgreedToTerms:true,
+        totalProductsSold:true,
         createdAt: true,
         updatedAt: true,
       },
@@ -96,10 +100,14 @@ export class BusinessService {
         address: true,
         phone: true,
         isVerified: true,
+        isB2BEnabled:true,
+        kycStatus:true,
+        hasAgreedToTerms:true,
+        totalProductsSold:true,
         createdAt: true,
         updatedAt: true,
         kyc: { select: { id: true, status: true } },
-      },
+      },  
     });
   }
 

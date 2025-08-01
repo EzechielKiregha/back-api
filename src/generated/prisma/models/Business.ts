@@ -324,6 +324,7 @@ export type BusinessWhereInput = {
   postOfSales?: Prisma.PostOfSaleListRelationFilter
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessListRelationFilter
   chatParticipants?: Prisma.ChatParticipantListRelationFilter
+  tokenTransactions?: Prisma.TokenTransactionListRelationFilter
 }
 
 export type BusinessOrderByWithRelationInput = {
@@ -357,6 +358,7 @@ export type BusinessOrderByWithRelationInput = {
   postOfSales?: Prisma.PostOfSaleOrderByRelationAggregateInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessOrderByRelationAggregateInput
   chatParticipants?: Prisma.ChatParticipantOrderByRelationAggregateInput
+  tokenTransactions?: Prisma.TokenTransactionOrderByRelationAggregateInput
 }
 
 export type BusinessWhereUniqueInput = Prisma.AtLeast<{
@@ -393,6 +395,7 @@ export type BusinessWhereUniqueInput = Prisma.AtLeast<{
   postOfSales?: Prisma.PostOfSaleListRelationFilter
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessListRelationFilter
   chatParticipants?: Prisma.ChatParticipantListRelationFilter
+  tokenTransactions?: Prisma.TokenTransactionListRelationFilter
 }, "id" | "email">
 
 export type BusinessOrderByWithAggregationInput = {
@@ -465,7 +468,7 @@ export type BusinessCreateInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -474,6 +477,7 @@ export type BusinessCreateInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateInput = {
@@ -498,7 +502,7 @@ export type BusinessUncheckedCreateInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -507,6 +511,7 @@ export type BusinessUncheckedCreateInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUpdateInput = {
@@ -531,7 +536,7 @@ export type BusinessUpdateInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -540,6 +545,7 @@ export type BusinessUpdateInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateInput = {
@@ -564,7 +570,7 @@ export type BusinessUncheckedUpdateInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -573,6 +579,7 @@ export type BusinessUncheckedUpdateInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateManyInput = {
@@ -713,6 +720,16 @@ export type BusinessNullableScalarRelationFilter = {
   isNot?: Prisma.BusinessWhereInput | null
 }
 
+export type BusinessListRelationFilter = {
+  every?: Prisma.BusinessWhereInput
+  some?: Prisma.BusinessWhereInput
+  none?: Prisma.BusinessWhereInput
+}
+
+export type BusinessOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -803,18 +820,56 @@ export type BusinessUpdateOneRequiredWithoutRepostedItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutRepostedItemsInput, Prisma.BusinessUpdateWithoutRepostedItemsInput>, Prisma.BusinessUncheckedUpdateWithoutRepostedItemsInput>
 }
 
-export type BusinessCreateNestedOneWithoutReownedItemsInput = {
-  create?: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput>
-  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutReownedItemsInput
+export type BusinessCreateNestedManyWithoutReownedItemsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput> | Prisma.BusinessCreateWithoutReownedItemsInput[] | Prisma.BusinessUncheckedCreateWithoutReownedItemsInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutReownedItemsInput | Prisma.BusinessCreateOrConnectWithoutReownedItemsInput[]
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+}
+
+export type BusinessUncheckedCreateNestedManyWithoutReownedItemsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput> | Prisma.BusinessCreateWithoutReownedItemsInput[] | Prisma.BusinessUncheckedCreateWithoutReownedItemsInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutReownedItemsInput | Prisma.BusinessCreateOrConnectWithoutReownedItemsInput[]
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+}
+
+export type BusinessUpdateManyWithoutReownedItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput> | Prisma.BusinessCreateWithoutReownedItemsInput[] | Prisma.BusinessUncheckedCreateWithoutReownedItemsInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutReownedItemsInput | Prisma.BusinessCreateOrConnectWithoutReownedItemsInput[]
+  upsert?: Prisma.BusinessUpsertWithWhereUniqueWithoutReownedItemsInput | Prisma.BusinessUpsertWithWhereUniqueWithoutReownedItemsInput[]
+  set?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  disconnect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  delete?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  update?: Prisma.BusinessUpdateWithWhereUniqueWithoutReownedItemsInput | Prisma.BusinessUpdateWithWhereUniqueWithoutReownedItemsInput[]
+  updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutReownedItemsInput | Prisma.BusinessUpdateManyWithWhereWithoutReownedItemsInput[]
+  deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+}
+
+export type BusinessUncheckedUpdateManyWithoutReownedItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput> | Prisma.BusinessCreateWithoutReownedItemsInput[] | Prisma.BusinessUncheckedCreateWithoutReownedItemsInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutReownedItemsInput | Prisma.BusinessCreateOrConnectWithoutReownedItemsInput[]
+  upsert?: Prisma.BusinessUpsertWithWhereUniqueWithoutReownedItemsInput | Prisma.BusinessUpsertWithWhereUniqueWithoutReownedItemsInput[]
+  set?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  disconnect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  delete?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  update?: Prisma.BusinessUpdateWithWhereUniqueWithoutReownedItemsInput | Prisma.BusinessUpdateWithWhereUniqueWithoutReownedItemsInput[]
+  updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutReownedItemsInput | Prisma.BusinessUpdateManyWithWhereWithoutReownedItemsInput[]
+  deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+}
+
+export type BusinessCreateNestedOneWithoutTokenTransactionsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutTokenTransactionsInput, Prisma.BusinessUncheckedCreateWithoutTokenTransactionsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutTokenTransactionsInput
   connect?: Prisma.BusinessWhereUniqueInput
 }
 
-export type BusinessUpdateOneRequiredWithoutReownedItemsNestedInput = {
-  create?: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput>
-  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutReownedItemsInput
-  upsert?: Prisma.BusinessUpsertWithoutReownedItemsInput
+export type BusinessUpdateOneRequiredWithoutTokenTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutTokenTransactionsInput, Prisma.BusinessUncheckedCreateWithoutTokenTransactionsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutTokenTransactionsInput
+  upsert?: Prisma.BusinessUpsertWithoutTokenTransactionsInput
   connect?: Prisma.BusinessWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutReownedItemsInput, Prisma.BusinessUpdateWithoutReownedItemsInput>, Prisma.BusinessUncheckedUpdateWithoutReownedItemsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutTokenTransactionsInput, Prisma.BusinessUpdateWithoutTokenTransactionsInput>, Prisma.BusinessUncheckedUpdateWithoutTokenTransactionsInput>
 }
 
 export type BusinessCreateNestedOneWithoutKycInput = {
@@ -958,7 +1013,7 @@ export type BusinessCreateWithoutWorkersInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutBusinessInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -967,6 +1022,7 @@ export type BusinessCreateWithoutWorkersInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutWorkersInput = {
@@ -990,7 +1046,7 @@ export type BusinessUncheckedCreateWithoutWorkersInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutBusinessInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -999,6 +1055,7 @@ export type BusinessUncheckedCreateWithoutWorkersInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutWorkersInput = {
@@ -1038,7 +1095,7 @@ export type BusinessUpdateWithoutWorkersInput = {
   kyc?: Prisma.KYCUpdateOneWithoutBusinessNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -1047,6 +1104,7 @@ export type BusinessUpdateWithoutWorkersInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutWorkersInput = {
@@ -1070,7 +1128,7 @@ export type BusinessUncheckedUpdateWithoutWorkersInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutBusinessNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -1079,6 +1137,7 @@ export type BusinessUncheckedUpdateWithoutWorkersInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutProductsInput = {
@@ -1102,7 +1161,7 @@ export type BusinessCreateWithoutProductsInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -1111,6 +1170,7 @@ export type BusinessCreateWithoutProductsInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutProductsInput = {
@@ -1134,7 +1194,7 @@ export type BusinessUncheckedCreateWithoutProductsInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -1143,6 +1203,7 @@ export type BusinessUncheckedCreateWithoutProductsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutProductsInput = {
@@ -1182,7 +1243,7 @@ export type BusinessUpdateWithoutProductsInput = {
   kyc?: Prisma.KYCUpdateOneWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -1191,6 +1252,7 @@ export type BusinessUpdateWithoutProductsInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutProductsInput = {
@@ -1214,7 +1276,7 @@ export type BusinessUncheckedUpdateWithoutProductsInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -1223,6 +1285,7 @@ export type BusinessUncheckedUpdateWithoutProductsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutChatParticipantsInput = {
@@ -1247,7 +1310,7 @@ export type BusinessCreateWithoutChatParticipantsInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -1255,6 +1318,7 @@ export type BusinessCreateWithoutChatParticipantsInput = {
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutChatParticipantsInput = {
@@ -1279,7 +1343,7 @@ export type BusinessUncheckedCreateWithoutChatParticipantsInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -1287,6 +1351,7 @@ export type BusinessUncheckedCreateWithoutChatParticipantsInput = {
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutChatParticipantsInput = {
@@ -1327,7 +1392,7 @@ export type BusinessUpdateWithoutChatParticipantsInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -1335,6 +1400,7 @@ export type BusinessUpdateWithoutChatParticipantsInput = {
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutChatParticipantsInput = {
@@ -1359,7 +1425,7 @@ export type BusinessUncheckedUpdateWithoutChatParticipantsInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -1367,6 +1433,7 @@ export type BusinessUncheckedUpdateWithoutChatParticipantsInput = {
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutRepostedItemsInput = {
@@ -1390,7 +1457,7 @@ export type BusinessCreateWithoutRepostedItemsInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutBusinessInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -1399,6 +1466,7 @@ export type BusinessCreateWithoutRepostedItemsInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutRepostedItemsInput = {
@@ -1422,7 +1490,7 @@ export type BusinessUncheckedCreateWithoutRepostedItemsInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutBusinessInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -1431,6 +1499,7 @@ export type BusinessUncheckedCreateWithoutRepostedItemsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutRepostedItemsInput = {
@@ -1470,7 +1539,7 @@ export type BusinessUpdateWithoutRepostedItemsInput = {
   kyc?: Prisma.KYCUpdateOneWithoutBusinessNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -1479,6 +1548,7 @@ export type BusinessUpdateWithoutRepostedItemsInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutRepostedItemsInput = {
@@ -1502,7 +1572,7 @@ export type BusinessUncheckedUpdateWithoutRepostedItemsInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutBusinessNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -1511,6 +1581,7 @@ export type BusinessUncheckedUpdateWithoutRepostedItemsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutReownedItemsInput = {
@@ -1543,6 +1614,7 @@ export type BusinessCreateWithoutReownedItemsInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutReownedItemsInput = {
@@ -1575,6 +1647,7 @@ export type BusinessUncheckedCreateWithoutReownedItemsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutReownedItemsInput = {
@@ -1582,18 +1655,128 @@ export type BusinessCreateOrConnectWithoutReownedItemsInput = {
   create: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput>
 }
 
-export type BusinessUpsertWithoutReownedItemsInput = {
+export type BusinessUpsertWithWhereUniqueWithoutReownedItemsInput = {
+  where: Prisma.BusinessWhereUniqueInput
   update: Prisma.XOR<Prisma.BusinessUpdateWithoutReownedItemsInput, Prisma.BusinessUncheckedUpdateWithoutReownedItemsInput>
   create: Prisma.XOR<Prisma.BusinessCreateWithoutReownedItemsInput, Prisma.BusinessUncheckedCreateWithoutReownedItemsInput>
-  where?: Prisma.BusinessWhereInput
 }
 
-export type BusinessUpdateToOneWithWhereWithoutReownedItemsInput = {
-  where?: Prisma.BusinessWhereInput
+export type BusinessUpdateWithWhereUniqueWithoutReownedItemsInput = {
+  where: Prisma.BusinessWhereUniqueInput
   data: Prisma.XOR<Prisma.BusinessUpdateWithoutReownedItemsInput, Prisma.BusinessUncheckedUpdateWithoutReownedItemsInput>
 }
 
-export type BusinessUpdateWithoutReownedItemsInput = {
+export type BusinessUpdateManyWithWhereWithoutReownedItemsInput = {
+  where: Prisma.BusinessScalarWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateManyMutationInput, Prisma.BusinessUncheckedUpdateManyWithoutReownedItemsInput>
+}
+
+export type BusinessScalarWhereInput = {
+  AND?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+  OR?: Prisma.BusinessScalarWhereInput[]
+  NOT?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+  id?: Prisma.StringFilter<"Business"> | string
+  name?: Prisma.StringFilter<"Business"> | string
+  email?: Prisma.StringFilter<"Business"> | string
+  description?: Prisma.StringNullableFilter<"Business"> | string | null
+  avatar?: Prisma.StringNullableFilter<"Business"> | string | null
+  coverImage?: Prisma.StringNullableFilter<"Business"> | string | null
+  address?: Prisma.StringNullableFilter<"Business"> | string | null
+  phone?: Prisma.StringNullableFilter<"Business"> | string | null
+  password?: Prisma.StringFilter<"Business"> | string
+  isVerified?: Prisma.BoolFilter<"Business"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
+  kycStatus?: Prisma.EnumKycStatusFilter<"Business"> | $Enums.KycStatus
+  isB2BEnabled?: Prisma.BoolFilter<"Business"> | boolean
+  totalProductsSold?: Prisma.IntFilter<"Business"> | number
+  hasAgreedToTerms?: Prisma.BoolFilter<"Business"> | boolean
+  termsAgreedAt?: Prisma.DateTimeNullableFilter<"Business"> | Date | string | null
+}
+
+export type BusinessCreateWithoutTokenTransactionsInput = {
+  id?: string
+  name: string
+  email: string
+  description?: string | null
+  avatar?: string | null
+  coverImage?: string | null
+  address?: string | null
+  phone?: string | null
+  password: string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kycStatus?: $Enums.KycStatus
+  isB2BEnabled?: boolean
+  totalProductsSold?: number
+  hasAgreedToTerms?: boolean
+  termsAgreedAt?: Date | string | null
+  kyc?: Prisma.KYCCreateNestedOneWithoutBusinessInput
+  products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
+  workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
+  repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
+  recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
+  ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
+  freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
+  referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
+  referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
+  postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutTokenTransactionsInput = {
+  id?: string
+  name: string
+  email: string
+  description?: string | null
+  avatar?: string | null
+  coverImage?: string | null
+  address?: string | null
+  phone?: string | null
+  password: string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kycStatus?: $Enums.KycStatus
+  isB2BEnabled?: boolean
+  totalProductsSold?: number
+  hasAgreedToTerms?: boolean
+  termsAgreedAt?: Date | string | null
+  kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutBusinessInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
+  workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
+  repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
+  recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
+  ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
+  referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
+  referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
+  postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutTokenTransactionsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutTokenTransactionsInput, Prisma.BusinessUncheckedCreateWithoutTokenTransactionsInput>
+}
+
+export type BusinessUpsertWithoutTokenTransactionsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutTokenTransactionsInput, Prisma.BusinessUncheckedUpdateWithoutTokenTransactionsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutTokenTransactionsInput, Prisma.BusinessUncheckedCreateWithoutTokenTransactionsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutTokenTransactionsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutTokenTransactionsInput, Prisma.BusinessUncheckedUpdateWithoutTokenTransactionsInput>
+}
+
+export type BusinessUpdateWithoutTokenTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1615,6 +1798,7 @@ export type BusinessUpdateWithoutReownedItemsInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -1625,7 +1809,7 @@ export type BusinessUpdateWithoutReownedItemsInput = {
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
 }
 
-export type BusinessUncheckedUpdateWithoutReownedItemsInput = {
+export type BusinessUncheckedUpdateWithoutTokenTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1647,6 +1831,7 @@ export type BusinessUncheckedUpdateWithoutReownedItemsInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -1678,7 +1863,7 @@ export type BusinessCreateWithoutKycInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -1687,6 +1872,7 @@ export type BusinessCreateWithoutKycInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutKycInput = {
@@ -1710,7 +1896,7 @@ export type BusinessUncheckedCreateWithoutKycInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -1719,6 +1905,7 @@ export type BusinessUncheckedCreateWithoutKycInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutKycInput = {
@@ -1758,7 +1945,7 @@ export type BusinessUpdateWithoutKycInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -1767,6 +1954,7 @@ export type BusinessUpdateWithoutKycInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutKycInput = {
@@ -1790,7 +1978,7 @@ export type BusinessUncheckedUpdateWithoutKycInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -1799,6 +1987,7 @@ export type BusinessUncheckedUpdateWithoutKycInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutRechargesInput = {
@@ -1823,7 +2012,7 @@ export type BusinessCreateWithoutRechargesInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
@@ -1831,6 +2020,7 @@ export type BusinessCreateWithoutRechargesInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutRechargesInput = {
@@ -1855,7 +2045,7 @@ export type BusinessUncheckedCreateWithoutRechargesInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
@@ -1863,6 +2053,7 @@ export type BusinessUncheckedCreateWithoutRechargesInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutRechargesInput = {
@@ -1903,7 +2094,7 @@ export type BusinessUpdateWithoutRechargesInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
@@ -1911,6 +2102,7 @@ export type BusinessUpdateWithoutRechargesInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutRechargesInput = {
@@ -1935,7 +2127,7 @@ export type BusinessUncheckedUpdateWithoutRechargesInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
@@ -1943,6 +2135,7 @@ export type BusinessUncheckedUpdateWithoutRechargesInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutAdsInput = {
@@ -1967,7 +2160,7 @@ export type BusinessCreateWithoutAdsInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
@@ -1975,6 +2168,7 @@ export type BusinessCreateWithoutAdsInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutAdsInput = {
@@ -1999,7 +2193,7 @@ export type BusinessUncheckedCreateWithoutAdsInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
@@ -2007,6 +2201,7 @@ export type BusinessUncheckedCreateWithoutAdsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutAdsInput = {
@@ -2047,7 +2242,7 @@ export type BusinessUpdateWithoutAdsInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
@@ -2055,6 +2250,7 @@ export type BusinessUpdateWithoutAdsInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutAdsInput = {
@@ -2079,7 +2275,7 @@ export type BusinessUncheckedUpdateWithoutAdsInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
@@ -2087,6 +2283,7 @@ export type BusinessUncheckedUpdateWithoutAdsInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutFreelanceServicesInput = {
@@ -2111,7 +2308,7 @@ export type BusinessCreateWithoutFreelanceServicesInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateBusinessInput
@@ -2119,6 +2316,7 @@ export type BusinessCreateWithoutFreelanceServicesInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutFreelanceServicesInput = {
@@ -2143,7 +2341,7 @@ export type BusinessUncheckedCreateWithoutFreelanceServicesInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateBusinessInput
@@ -2151,6 +2349,7 @@ export type BusinessUncheckedCreateWithoutFreelanceServicesInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutFreelanceServicesInput = {
@@ -2191,7 +2390,7 @@ export type BusinessUpdateWithoutFreelanceServicesInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
@@ -2199,6 +2398,7 @@ export type BusinessUpdateWithoutFreelanceServicesInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutFreelanceServicesInput = {
@@ -2223,7 +2423,7 @@ export type BusinessUncheckedUpdateWithoutFreelanceServicesInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
@@ -2231,6 +2431,7 @@ export type BusinessUncheckedUpdateWithoutFreelanceServicesInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutFreelanceOrderBusinessInput = {
@@ -2255,7 +2456,7 @@ export type BusinessCreateWithoutFreelanceOrderBusinessInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -2263,6 +2464,7 @@ export type BusinessCreateWithoutFreelanceOrderBusinessInput = {
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput = {
@@ -2287,7 +2489,7 @@ export type BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -2295,6 +2497,7 @@ export type BusinessUncheckedCreateWithoutFreelanceOrderBusinessInput = {
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutFreelanceOrderBusinessInput = {
@@ -2335,7 +2538,7 @@ export type BusinessUpdateWithoutFreelanceOrderBusinessInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -2343,6 +2546,7 @@ export type BusinessUpdateWithoutFreelanceOrderBusinessInput = {
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput = {
@@ -2367,7 +2571,7 @@ export type BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -2375,6 +2579,7 @@ export type BusinessUncheckedUpdateWithoutFreelanceOrderBusinessInput = {
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutReferralsMadeInput = {
@@ -2399,7 +2604,7 @@ export type BusinessCreateWithoutReferralsMadeInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -2407,6 +2612,7 @@ export type BusinessCreateWithoutReferralsMadeInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutReferralsMadeInput = {
@@ -2431,7 +2637,7 @@ export type BusinessUncheckedCreateWithoutReferralsMadeInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -2439,6 +2645,7 @@ export type BusinessUncheckedCreateWithoutReferralsMadeInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutReferralsMadeInput = {
@@ -2468,7 +2675,7 @@ export type BusinessCreateWithoutReferralsReceivedInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -2476,6 +2683,7 @@ export type BusinessCreateWithoutReferralsReceivedInput = {
   postOfSales?: Prisma.PostOfSaleCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutReferralsReceivedInput = {
@@ -2500,7 +2708,7 @@ export type BusinessUncheckedCreateWithoutReferralsReceivedInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -2508,6 +2716,7 @@ export type BusinessUncheckedCreateWithoutReferralsReceivedInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedCreateNestedManyWithoutBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutReferralsReceivedInput = {
@@ -2548,7 +2757,7 @@ export type BusinessUpdateWithoutReferralsMadeInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -2556,6 +2765,7 @@ export type BusinessUpdateWithoutReferralsMadeInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutReferralsMadeInput = {
@@ -2580,7 +2790,7 @@ export type BusinessUncheckedUpdateWithoutReferralsMadeInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -2588,6 +2798,7 @@ export type BusinessUncheckedUpdateWithoutReferralsMadeInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUpsertWithoutReferralsReceivedInput = {
@@ -2623,7 +2834,7 @@ export type BusinessUpdateWithoutReferralsReceivedInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -2631,6 +2842,7 @@ export type BusinessUpdateWithoutReferralsReceivedInput = {
   postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutReferralsReceivedInput = {
@@ -2655,7 +2867,7 @@ export type BusinessUncheckedUpdateWithoutReferralsReceivedInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -2663,6 +2875,7 @@ export type BusinessUncheckedUpdateWithoutReferralsReceivedInput = {
   postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutPostOfSalesInput = {
@@ -2687,7 +2900,7 @@ export type BusinessCreateWithoutPostOfSalesInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceCreateNestedManyWithoutBusinessInput
@@ -2695,6 +2908,7 @@ export type BusinessCreateWithoutPostOfSalesInput = {
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutPostOfSalesInput = {
@@ -2719,7 +2933,7 @@ export type BusinessUncheckedCreateWithoutPostOfSalesInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   workers?: Prisma.WorkerUncheckedCreateNestedManyWithoutBusinessInput
   repostedItems?: Prisma.RepostedProductUncheckedCreateNestedManyWithoutBusinessInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedCreateNestedManyWithoutBusinessProductOwnersInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutBusinessInput
   ads?: Prisma.AdUncheckedCreateNestedManyWithoutBusinessInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedCreateNestedManyWithoutBusinessInput
@@ -2727,6 +2941,7 @@ export type BusinessUncheckedCreateWithoutPostOfSalesInput = {
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredBusinessInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedCreateNestedManyWithoutBusinessInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutBusinessInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutPostOfSalesInput = {
@@ -2767,7 +2982,7 @@ export type BusinessUpdateWithoutPostOfSalesInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
@@ -2775,6 +2990,7 @@ export type BusinessUpdateWithoutPostOfSalesInput = {
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutPostOfSalesInput = {
@@ -2799,7 +3015,7 @@ export type BusinessUncheckedUpdateWithoutPostOfSalesInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
   repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
-  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  reownedItems?: Prisma.ReOwnedProductUncheckedUpdateManyWithoutBusinessProductOwnersNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
   ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
   freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
@@ -2807,6 +3023,93 @@ export type BusinessUncheckedUpdateWithoutPostOfSalesInput = {
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
   freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUpdateWithoutReownedItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  isB2BEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalProductsSold?: Prisma.IntFieldUpdateOperationsInput | number
+  hasAgreedToTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  kyc?: Prisma.KYCUpdateOneWithoutBusinessNestedInput
+  products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
+  workers?: Prisma.WorkerUpdateManyWithoutBusinessNestedInput
+  repostedItems?: Prisma.RepostedProductUpdateManyWithoutBusinessNestedInput
+  recharges?: Prisma.AccountRechargeUpdateManyWithoutBusinessNestedInput
+  ads?: Prisma.AdUpdateManyWithoutBusinessNestedInput
+  freelanceServices?: Prisma.FreelanceServiceUpdateManyWithoutBusinessNestedInput
+  referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateBusinessNestedInput
+  referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredBusinessNestedInput
+  postOfSales?: Prisma.PostOfSaleUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUpdateManyWithoutBusinessNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutReownedItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  isB2BEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalProductsSold?: Prisma.IntFieldUpdateOperationsInput | number
+  hasAgreedToTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  kyc?: Prisma.KYCUncheckedUpdateOneWithoutBusinessNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
+  workers?: Prisma.WorkerUncheckedUpdateManyWithoutBusinessNestedInput
+  repostedItems?: Prisma.RepostedProductUncheckedUpdateManyWithoutBusinessNestedInput
+  recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutBusinessNestedInput
+  ads?: Prisma.AdUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceServices?: Prisma.FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput
+  referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateBusinessNestedInput
+  referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredBusinessNestedInput
+  postOfSales?: Prisma.PostOfSaleUncheckedUpdateManyWithoutBusinessNestedInput
+  freelanceOrderBusiness?: Prisma.FreelanceOrderBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutBusinessNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateManyWithoutReownedItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kycStatus?: Prisma.EnumKycStatusFieldUpdateOperationsInput | $Enums.KycStatus
+  isB2BEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalProductsSold?: Prisma.IntFieldUpdateOperationsInput | number
+  hasAgreedToTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  termsAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -2827,6 +3130,7 @@ export type BusinessCountOutputType = {
   postOfSales: number
   freelanceOrderBusiness: number
   chatParticipants: number
+  tokenTransactions: number
 }
 
 export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2842,6 +3146,7 @@ export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   postOfSales?: boolean | BusinessCountOutputTypeCountPostOfSalesArgs
   freelanceOrderBusiness?: boolean | BusinessCountOutputTypeCountFreelanceOrderBusinessArgs
   chatParticipants?: boolean | BusinessCountOutputTypeCountChatParticipantsArgs
+  tokenTransactions?: boolean | BusinessCountOutputTypeCountTokenTransactionsArgs
 }
 
 /**
@@ -2938,6 +3243,13 @@ export type BusinessCountOutputTypeCountChatParticipantsArgs<ExtArgs extends run
   where?: Prisma.ChatParticipantWhereInput
 }
 
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountTokenTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TokenTransactionWhereInput
+}
+
 
 export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2970,6 +3282,7 @@ export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   postOfSales?: boolean | Prisma.Business$postOfSalesArgs<ExtArgs>
   freelanceOrderBusiness?: boolean | Prisma.Business$freelanceOrderBusinessArgs<ExtArgs>
   chatParticipants?: boolean | Prisma.Business$chatParticipantsArgs<ExtArgs>
+  tokenTransactions?: boolean | Prisma.Business$tokenTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["business"]>
 
@@ -3048,6 +3361,7 @@ export type BusinessInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   postOfSales?: boolean | Prisma.Business$postOfSalesArgs<ExtArgs>
   freelanceOrderBusiness?: boolean | Prisma.Business$freelanceOrderBusinessArgs<ExtArgs>
   chatParticipants?: boolean | Prisma.Business$chatParticipantsArgs<ExtArgs>
+  tokenTransactions?: boolean | Prisma.Business$tokenTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3069,6 +3383,7 @@ export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     postOfSales: Prisma.$PostOfSalePayload<ExtArgs>[]
     freelanceOrderBusiness: Prisma.$FreelanceOrderBusinessPayload<ExtArgs>[]
     chatParticipants: Prisma.$ChatParticipantPayload<ExtArgs>[]
+    tokenTransactions: Prisma.$TokenTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3495,6 +3810,7 @@ export interface Prisma__BusinessClient<T, Null = never, ExtArgs extends runtime
   postOfSales<T extends Prisma.Business$postOfSalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$postOfSalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostOfSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   freelanceOrderBusiness<T extends Prisma.Business$freelanceOrderBusinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$freelanceOrderBusinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceOrderBusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatParticipants<T extends Prisma.Business$chatParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$chatParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tokenTransactions<T extends Prisma.Business$tokenTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$tokenTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4233,6 +4549,30 @@ export type Business$chatParticipantsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ChatParticipantScalarFieldEnum | Prisma.ChatParticipantScalarFieldEnum[]
+}
+
+/**
+ * Business.tokenTransactions
+ */
+export type Business$tokenTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TokenTransaction
+   */
+  select?: Prisma.TokenTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TokenTransaction
+   */
+  omit?: Prisma.TokenTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TokenTransactionInclude<ExtArgs> | null
+  where?: Prisma.TokenTransactionWhereInput
+  orderBy?: Prisma.TokenTransactionOrderByWithRelationInput | Prisma.TokenTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TokenTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TokenTransactionScalarFieldEnum | Prisma.TokenTransactionScalarFieldEnum[]
 }
 
 /**

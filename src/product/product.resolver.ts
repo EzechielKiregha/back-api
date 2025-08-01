@@ -50,7 +50,7 @@ export class ProductResolver {
 
     if (!product) return new NotFoundException("No product found")
 
-    if (user.role === 'business' && user.id !== product.business.id) {
+    if (user.role === 'business' && user.id !== product.businessId) {
       throw new Error('Businesses can only update their own products');
     }
     return this.productService.update(id, updateProductInput);
@@ -65,7 +65,7 @@ export class ProductResolver {
 
     if (!product) return new NotFoundException("No product found")
       
-    if (user.role === 'business' && user.id !== product.business.id) {
+    if (user.role === 'business' && user.id !== product.businessId) {
       throw new Error('Businesses can only delete their own products');
     }
     return this.productService.remove(id);

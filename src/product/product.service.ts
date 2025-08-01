@@ -37,7 +37,7 @@ export class ProductService {
         category: { select: { id: true, name: true, description: true, createdAt: true } },
         orders: { select: { id: true, quantity: true, orderId: true } },
         reposts: { select: { id: true, earnPercentage: true, createdAt: true } },
-        reowns: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
+        reOwnedProducts: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
       },
     });
   }
@@ -50,7 +50,7 @@ export class ProductService {
         category: { select: { id: true, name: true, description: true, createdAt: true } },
         orders: { select: { id: true, quantity: true, orderId: true } },
         reposts: { select: { id: true, earnPercentage: true, createdAt: true } },
-        reowns: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
+        reOwnedProducts: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
       },
     });
   }

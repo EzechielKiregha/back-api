@@ -1,16 +1,21 @@
 import { InputType, Int, Field, Float } from '@nestjs/graphql';
-import { IsBoolean, IsNumber, IsString, Min } from 'class-validator';
+import { IsBoolean, IsInt, IsNumber, IsString, Min } from 'class-validator';
 
 // DTOs
 @InputType()
 export class CreateReOwnedProductInput {
   @Field()
   @IsString()
-  productId: string;
+  originalProductId: string;
 
   @Field()
   @IsString()
-  requestingBusinessId: string;
+  newOwnerId: string;
+
+  @Field(() => Int)
+  @IsInt()
+  @Min(1)
+  quantity: number;
 
   @Field(() => Float)
   @IsNumber()
@@ -22,6 +27,7 @@ export class CreateReOwnedProductInput {
   @Min(0)
   markupPercentage: number;
 }
+
 
 @InputType()
 export class ApproveReOwnedProductInput {
