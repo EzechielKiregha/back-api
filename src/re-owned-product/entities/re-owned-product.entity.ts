@@ -3,6 +3,8 @@ import { BusinessEntity } from 'src/business/entities/business.entity';
 import { ChatEntity } from 'src/chat/entities/chat.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 
+
+
 @ObjectType()
 export class ReOwnedProductEntity {
   @Field()
@@ -11,8 +13,14 @@ export class ReOwnedProductEntity {
   @Field()
   businessId: string;
 
+  @Field(() => BusinessEntity)
+  business: BusinessEntity;
+
   @Field()
   productId: string;
+
+  @Field(() => ProductEntity)
+  product: ProductEntity;
 
   @Field()
   oldOwnerId: string;
@@ -30,15 +38,11 @@ export class ReOwnedProductEntity {
   agreedViaChatId: string;
 
   @Field()
+  agreementDate: Date;
+
+  @Field(() => Boolean)
+  isApproved: boolean;
+
+  @Field()
   createdAt: Date;
-
-  // Relations
-  @Field(() => BusinessEntity) // Business associated with the re-owned product
-  business: BusinessEntity;
-
-  @Field(() => ProductEntity) // Product being re-owned
-  product: ProductEntity;
-
-  @Field(() => ChatEntity) // Chat where the agreement was made
-  agreedViaChat: ChatEntity;
 }

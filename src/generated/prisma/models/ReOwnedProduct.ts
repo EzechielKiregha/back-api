@@ -46,6 +46,8 @@ export type ReOwnedProductMinAggregateOutputType = {
   newPrice: number | null
   markupPercentage: number | null
   agreedViaChatId: string | null
+  agreementDate: Date | null
+  isApproved: boolean | null
   createdAt: Date | null
 }
 
@@ -58,6 +60,8 @@ export type ReOwnedProductMaxAggregateOutputType = {
   newPrice: number | null
   markupPercentage: number | null
   agreedViaChatId: string | null
+  agreementDate: Date | null
+  isApproved: boolean | null
   createdAt: Date | null
 }
 
@@ -70,6 +74,8 @@ export type ReOwnedProductCountAggregateOutputType = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: number
+  agreementDate: number
+  isApproved: number
   createdAt: number
   _all: number
 }
@@ -96,6 +102,8 @@ export type ReOwnedProductMinAggregateInputType = {
   newPrice?: true
   markupPercentage?: true
   agreedViaChatId?: true
+  agreementDate?: true
+  isApproved?: true
   createdAt?: true
 }
 
@@ -108,6 +116,8 @@ export type ReOwnedProductMaxAggregateInputType = {
   newPrice?: true
   markupPercentage?: true
   agreedViaChatId?: true
+  agreementDate?: true
+  isApproved?: true
   createdAt?: true
 }
 
@@ -120,6 +130,8 @@ export type ReOwnedProductCountAggregateInputType = {
   newPrice?: true
   markupPercentage?: true
   agreedViaChatId?: true
+  agreementDate?: true
+  isApproved?: true
   createdAt?: true
   _all?: true
 }
@@ -219,6 +231,8 @@ export type ReOwnedProductGroupByOutputType = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date
+  isApproved: boolean
   createdAt: Date
   _count: ReOwnedProductCountAggregateOutputType | null
   _avg: ReOwnedProductAvgAggregateOutputType | null
@@ -254,6 +268,8 @@ export type ReOwnedProductWhereInput = {
   newPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  agreementDate?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
+  isApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
@@ -268,6 +284,8 @@ export type ReOwnedProductOrderByWithRelationInput = {
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
+  agreementDate?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   business?: Prisma.BusinessOrderByWithRelationInput
   product?: Prisma.ProductOrderByWithRelationInput
@@ -285,6 +303,8 @@ export type ReOwnedProductWhereUniqueInput = Prisma.AtLeast<{
   newPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  agreementDate?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
+  isApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
@@ -299,6 +319,8 @@ export type ReOwnedProductOrderByWithAggregationInput = {
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
+  agreementDate?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ReOwnedProductCountOrderByAggregateInput
   _avg?: Prisma.ReOwnedProductAvgOrderByAggregateInput
@@ -319,6 +341,8 @@ export type ReOwnedProductScalarWhereWithAggregatesInput = {
   newPrice?: Prisma.FloatWithAggregatesFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatWithAggregatesFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringWithAggregatesFilter<"ReOwnedProduct"> | string
+  agreementDate?: Prisma.DateTimeWithAggregatesFilter<"ReOwnedProduct"> | Date | string
+  isApproved?: Prisma.BoolWithAggregatesFilter<"ReOwnedProduct"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ReOwnedProduct"> | Date | string
 }
 
@@ -329,6 +353,8 @@ export type ReOwnedProductCreateInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutReownedItemsInput
   product: Prisma.ProductCreateNestedOneWithoutReownsInput
@@ -343,6 +369,8 @@ export type ReOwnedProductUncheckedCreateInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
 }
 
@@ -353,6 +381,8 @@ export type ReOwnedProductUpdateInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutReownedItemsNestedInput
   product?: Prisma.ProductUpdateOneRequiredWithoutReownsNestedInput
@@ -367,6 +397,8 @@ export type ReOwnedProductUncheckedUpdateInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -379,6 +411,8 @@ export type ReOwnedProductCreateManyInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
 }
 
@@ -389,6 +423,8 @@ export type ReOwnedProductUpdateManyMutationInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -401,6 +437,8 @@ export type ReOwnedProductUncheckedUpdateManyInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -423,6 +461,8 @@ export type ReOwnedProductCountOrderByAggregateInput = {
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
+  agreementDate?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -441,6 +481,8 @@ export type ReOwnedProductMaxOrderByAggregateInput = {
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
+  agreementDate?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -453,6 +495,8 @@ export type ReOwnedProductMinOrderByAggregateInput = {
   newPrice?: Prisma.SortOrder
   markupPercentage?: Prisma.SortOrder
   agreedViaChatId?: Prisma.SortOrder
+  agreementDate?: Prisma.SortOrder
+  isApproved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -553,6 +597,8 @@ export type ReOwnedProductCreateWithoutBusinessInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutReownsInput
 }
@@ -565,6 +611,8 @@ export type ReOwnedProductUncheckedCreateWithoutBusinessInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
 }
 
@@ -606,6 +654,8 @@ export type ReOwnedProductScalarWhereInput = {
   newPrice?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   markupPercentage?: Prisma.FloatFilter<"ReOwnedProduct"> | number
   agreedViaChatId?: Prisma.StringFilter<"ReOwnedProduct"> | string
+  agreementDate?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
+  isApproved?: Prisma.BoolFilter<"ReOwnedProduct"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ReOwnedProduct"> | Date | string
 }
 
@@ -616,6 +666,8 @@ export type ReOwnedProductCreateWithoutProductInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutReownedItemsInput
 }
@@ -628,6 +680,8 @@ export type ReOwnedProductUncheckedCreateWithoutProductInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
 }
 
@@ -665,6 +719,8 @@ export type ReOwnedProductCreateManyBusinessInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
 }
 
@@ -675,6 +731,8 @@ export type ReOwnedProductUpdateWithoutBusinessInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutReownsNestedInput
 }
@@ -687,6 +745,8 @@ export type ReOwnedProductUncheckedUpdateWithoutBusinessInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -698,6 +758,8 @@ export type ReOwnedProductUncheckedUpdateManyWithoutBusinessInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -709,6 +771,8 @@ export type ReOwnedProductCreateManyProductInput = {
   newPrice: number
   markupPercentage: number
   agreedViaChatId: string
+  agreementDate: Date | string
+  isApproved?: boolean
   createdAt?: Date | string
 }
 
@@ -719,6 +783,8 @@ export type ReOwnedProductUpdateWithoutProductInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutReownedItemsNestedInput
 }
@@ -731,6 +797,8 @@ export type ReOwnedProductUncheckedUpdateWithoutProductInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -742,6 +810,8 @@ export type ReOwnedProductUncheckedUpdateManyWithoutProductInput = {
   newPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   agreedViaChatId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -756,6 +826,8 @@ export type ReOwnedProductSelect<ExtArgs extends runtime.Types.Extensions.Intern
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
+  agreementDate?: boolean
+  isApproved?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -770,6 +842,8 @@ export type ReOwnedProductSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
+  agreementDate?: boolean
+  isApproved?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -784,6 +858,8 @@ export type ReOwnedProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
+  agreementDate?: boolean
+  isApproved?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -798,10 +874,12 @@ export type ReOwnedProductSelectScalar = {
   newPrice?: boolean
   markupPercentage?: boolean
   agreedViaChatId?: boolean
+  agreementDate?: boolean
+  isApproved?: boolean
   createdAt?: boolean
 }
 
-export type ReOwnedProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessId" | "productId" | "oldOwnerId" | "oldPrice" | "newPrice" | "markupPercentage" | "agreedViaChatId" | "createdAt", ExtArgs["result"]["reOwnedProduct"]>
+export type ReOwnedProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessId" | "productId" | "oldOwnerId" | "oldPrice" | "newPrice" | "markupPercentage" | "agreedViaChatId" | "agreementDate" | "isApproved" | "createdAt", ExtArgs["result"]["reOwnedProduct"]>
 export type ReOwnedProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -830,6 +908,8 @@ export type $ReOwnedProductPayload<ExtArgs extends runtime.Types.Extensions.Inte
     newPrice: number
     markupPercentage: number
     agreedViaChatId: string
+    agreementDate: Date
+    isApproved: boolean
     createdAt: Date
   }, ExtArgs["result"]["reOwnedProduct"]>
   composites: {}
@@ -1264,6 +1344,8 @@ export interface ReOwnedProductFieldRefs {
   readonly newPrice: Prisma.FieldRef<"ReOwnedProduct", 'Float'>
   readonly markupPercentage: Prisma.FieldRef<"ReOwnedProduct", 'Float'>
   readonly agreedViaChatId: Prisma.FieldRef<"ReOwnedProduct", 'String'>
+  readonly agreementDate: Prisma.FieldRef<"ReOwnedProduct", 'DateTime'>
+  readonly isApproved: Prisma.FieldRef<"ReOwnedProduct", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"ReOwnedProduct", 'DateTime'>
 }
     

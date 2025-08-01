@@ -40,7 +40,7 @@ export class ClientService {
           select: { id: true, createdAt: true, deliveryFee: true },
         },
         recharges: { select: { id: true, amount: true, method: true } },
-        chats: { select: { id: true, status: true, createdAt: true } },
+        chatParticipants: { select: {chat : { select: { id: true, status: true, createdAt: true, updatedAt: true } } } },
         reviews: { select: { id: true, rating: true, comment: true } },
         freelanceOrders: { select: { id: true, status: true, totalAmount: true } },
         referralsMade: { select: { id: true, verifiedPurchase: true } },
@@ -57,7 +57,7 @@ export class ClientService {
       include: {
         orders: { select: { id: true, createdAt: true, deliveryFee: true } },
         recharges: { select: { id: true, amount: true, method: true } },
-        chats: { select: { id: true, status: true, createdAt: true } },
+        chatParticipants: { select: {chat : { select: { id: true, status: true, createdAt: true, updatedAt: true } } } },
         reviews: { select: { id: true, rating: true, comment: true } },
         freelanceOrders: { select: { id: true, status: true, totalAmount: true } },
         referralsMade: { select: { id: true, verifiedPurchase: true } },

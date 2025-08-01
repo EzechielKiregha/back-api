@@ -510,6 +510,11 @@ export type ProductScalarRelationFilter = {
   isNot?: Prisma.ProductWhereInput
 }
 
+export type ProductNullableScalarRelationFilter = {
+  is?: Prisma.ProductWhereInput | null
+  isNot?: Prisma.ProductWhereInput | null
+}
+
 export type ProductCreateNestedManyWithoutBusinessInput = {
   create?: Prisma.XOR<Prisma.ProductCreateWithoutBusinessInput, Prisma.ProductUncheckedCreateWithoutBusinessInput> | Prisma.ProductCreateWithoutBusinessInput[] | Prisma.ProductUncheckedCreateWithoutBusinessInput[]
   connectOrCreate?: Prisma.ProductCreateOrConnectWithoutBusinessInput | Prisma.ProductCreateOrConnectWithoutBusinessInput[]
@@ -602,14 +607,6 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ProductCreateNestedOneWithoutMediasInput = {
   create?: Prisma.XOR<Prisma.ProductCreateWithoutMediasInput, Prisma.ProductUncheckedCreateWithoutMediasInput>
   connectOrCreate?: Prisma.ProductCreateOrConnectWithoutMediasInput
@@ -658,10 +655,12 @@ export type ProductCreateNestedOneWithoutChatsInput = {
   connect?: Prisma.ProductWhereUniqueInput
 }
 
-export type ProductUpdateOneRequiredWithoutChatsNestedInput = {
+export type ProductUpdateOneWithoutChatsNestedInput = {
   create?: Prisma.XOR<Prisma.ProductCreateWithoutChatsInput, Prisma.ProductUncheckedCreateWithoutChatsInput>
   connectOrCreate?: Prisma.ProductCreateOrConnectWithoutChatsInput
   upsert?: Prisma.ProductUpsertWithoutChatsInput
+  disconnect?: Prisma.ProductWhereInput | boolean
+  delete?: Prisma.ProductWhereInput | boolean
   connect?: Prisma.ProductWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutChatsInput, Prisma.ProductUpdateWithoutChatsInput>, Prisma.ProductUncheckedUpdateWithoutChatsInput>
 }

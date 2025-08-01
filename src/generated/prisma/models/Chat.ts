@@ -25,33 +25,33 @@ export type AggregateChat = {
 
 export type ChatMinAggregateOutputType = {
   id: string | null
-  clientId: string | null
-  productId: string | null
-  businessId: string | null
-  workerId: string | null
   status: string | null
+  isSecure: boolean | null
+  negotiationType: $Enums.NegotiationType | null
+  productId: string | null
+  serviceId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type ChatMaxAggregateOutputType = {
   id: string | null
-  clientId: string | null
-  productId: string | null
-  businessId: string | null
-  workerId: string | null
   status: string | null
+  isSecure: boolean | null
+  negotiationType: $Enums.NegotiationType | null
+  productId: string | null
+  serviceId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type ChatCountAggregateOutputType = {
   id: number
-  clientId: number
-  productId: number
-  businessId: number
-  workerId: number
   status: number
+  isSecure: number
+  negotiationType: number
+  productId: number
+  serviceId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -60,33 +60,33 @@ export type ChatCountAggregateOutputType = {
 
 export type ChatMinAggregateInputType = {
   id?: true
-  clientId?: true
-  productId?: true
-  businessId?: true
-  workerId?: true
   status?: true
+  isSecure?: true
+  negotiationType?: true
+  productId?: true
+  serviceId?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type ChatMaxAggregateInputType = {
   id?: true
-  clientId?: true
-  productId?: true
-  businessId?: true
-  workerId?: true
   status?: true
+  isSecure?: true
+  negotiationType?: true
+  productId?: true
+  serviceId?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type ChatCountAggregateInputType = {
   id?: true
-  clientId?: true
-  productId?: true
-  businessId?: true
-  workerId?: true
   status?: true
+  isSecure?: true
+  negotiationType?: true
+  productId?: true
+  serviceId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -166,11 +166,11 @@ export type ChatGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type ChatGroupByOutputType = {
   id: string
-  clientId: string
-  productId: string
-  businessId: string | null
-  workerId: string | null
   status: string
+  isSecure: boolean
+  negotiationType: $Enums.NegotiationType | null
+  productId: string | null
+  serviceId: string | null
   createdAt: Date
   updatedAt: Date
   _count: ChatCountAggregateOutputType | null
@@ -198,33 +198,31 @@ export type ChatWhereInput = {
   OR?: Prisma.ChatWhereInput[]
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   id?: Prisma.StringFilter<"Chat"> | string
-  clientId?: Prisma.StringFilter<"Chat"> | string
-  productId?: Prisma.StringFilter<"Chat"> | string
-  businessId?: Prisma.StringNullableFilter<"Chat"> | string | null
-  workerId?: Prisma.StringNullableFilter<"Chat"> | string | null
   status?: Prisma.StringFilter<"Chat"> | string
+  isSecure?: Prisma.BoolFilter<"Chat"> | boolean
+  negotiationType?: Prisma.EnumNegotiationTypeNullableFilter<"Chat"> | $Enums.NegotiationType | null
+  productId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  serviceId?: Prisma.StringNullableFilter<"Chat"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
-  client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
-  business?: Prisma.XOR<Prisma.BusinessNullableScalarRelationFilter, Prisma.BusinessWhereInput> | null
-  worker?: Prisma.XOR<Prisma.WorkerNullableScalarRelationFilter, Prisma.WorkerWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
+  service?: Prisma.XOR<Prisma.FreelanceServiceNullableScalarRelationFilter, Prisma.FreelanceServiceWhereInput> | null
+  participants?: Prisma.ChatParticipantListRelationFilter
   messages?: Prisma.ChatMessageListRelationFilter
 }
 
 export type ChatOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
-  businessId?: Prisma.SortOrderInput | Prisma.SortOrder
-  workerId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  isSecure?: Prisma.SortOrder
+  negotiationType?: Prisma.SortOrderInput | Prisma.SortOrder
+  productId?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  client?: Prisma.ClientOrderByWithRelationInput
   product?: Prisma.ProductOrderByWithRelationInput
-  business?: Prisma.BusinessOrderByWithRelationInput
-  worker?: Prisma.WorkerOrderByWithRelationInput
+  service?: Prisma.FreelanceServiceOrderByWithRelationInput
+  participants?: Prisma.ChatParticipantOrderByRelationAggregateInput
   messages?: Prisma.ChatMessageOrderByRelationAggregateInput
 }
 
@@ -233,27 +231,26 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   OR?: Prisma.ChatWhereInput[]
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
-  clientId?: Prisma.StringFilter<"Chat"> | string
-  productId?: Prisma.StringFilter<"Chat"> | string
-  businessId?: Prisma.StringNullableFilter<"Chat"> | string | null
-  workerId?: Prisma.StringNullableFilter<"Chat"> | string | null
   status?: Prisma.StringFilter<"Chat"> | string
+  isSecure?: Prisma.BoolFilter<"Chat"> | boolean
+  negotiationType?: Prisma.EnumNegotiationTypeNullableFilter<"Chat"> | $Enums.NegotiationType | null
+  productId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  serviceId?: Prisma.StringNullableFilter<"Chat"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
-  client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
-  business?: Prisma.XOR<Prisma.BusinessNullableScalarRelationFilter, Prisma.BusinessWhereInput> | null
-  worker?: Prisma.XOR<Prisma.WorkerNullableScalarRelationFilter, Prisma.WorkerWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
+  service?: Prisma.XOR<Prisma.FreelanceServiceNullableScalarRelationFilter, Prisma.FreelanceServiceWhereInput> | null
+  participants?: Prisma.ChatParticipantListRelationFilter
   messages?: Prisma.ChatMessageListRelationFilter
 }, "id">
 
 export type ChatOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
-  businessId?: Prisma.SortOrderInput | Prisma.SortOrder
-  workerId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  isSecure?: Prisma.SortOrder
+  negotiationType?: Prisma.SortOrderInput | Prisma.SortOrder
+  productId?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ChatCountOrderByAggregateInput
@@ -266,11 +263,11 @@ export type ChatScalarWhereWithAggregatesInput = {
   OR?: Prisma.ChatScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ChatScalarWhereWithAggregatesInput | Prisma.ChatScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Chat"> | string
-  clientId?: Prisma.StringWithAggregatesFilter<"Chat"> | string
-  productId?: Prisma.StringWithAggregatesFilter<"Chat"> | string
-  businessId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
-  workerId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"Chat"> | string
+  isSecure?: Prisma.BoolWithAggregatesFilter<"Chat"> | boolean
+  negotiationType?: Prisma.EnumNegotiationTypeNullableWithAggregatesFilter<"Chat"> | $Enums.NegotiationType | null
+  productId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
+  serviceId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Chat"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Chat"> | Date | string
 }
@@ -278,58 +275,62 @@ export type ChatScalarWhereWithAggregatesInput = {
 export type ChatCreateInput = {
   id?: string
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  client: Prisma.ClientCreateNestedOneWithoutChatsInput
-  product: Prisma.ProductCreateNestedOneWithoutChatsInput
-  business?: Prisma.BusinessCreateNestedOneWithoutChatsInput
-  worker?: Prisma.WorkerCreateNestedOneWithoutChatsInput
+  product?: Prisma.ProductCreateNestedOneWithoutChatsInput
+  service?: Prisma.FreelanceServiceCreateNestedOneWithoutChatsInput
+  participants?: Prisma.ChatParticipantCreateNestedManyWithoutChatInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
 }
 
 export type ChatUncheckedCreateInput = {
   id?: string
-  clientId: string
-  productId: string
-  businessId?: string | null
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  productId?: string | null
+  serviceId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  participants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutChatInput
   messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
 }
 
 export type ChatUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  client?: Prisma.ClientUpdateOneRequiredWithoutChatsNestedInput
-  product?: Prisma.ProductUpdateOneRequiredWithoutChatsNestedInput
-  business?: Prisma.BusinessUpdateOneWithoutChatsNestedInput
-  worker?: Prisma.WorkerUpdateOneWithoutChatsNestedInput
+  product?: Prisma.ProductUpdateOneWithoutChatsNestedInput
+  service?: Prisma.FreelanceServiceUpdateOneWithoutChatsNestedInput
+  participants?: Prisma.ChatParticipantUpdateManyWithoutChatNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutChatNestedInput
   messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
 }
 
 export type ChatCreateManyInput = {
   id?: string
-  clientId: string
-  productId: string
-  businessId?: string | null
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  productId?: string | null
+  serviceId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -337,17 +338,19 @@ export type ChatCreateManyInput = {
 export type ChatUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChatUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,33 +367,33 @@ export type ChatOrderByRelationAggregateInput = {
 
 export type ChatCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  workerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  isSecure?: Prisma.SortOrder
+  negotiationType?: Prisma.SortOrder
+  productId?: Prisma.SortOrder
+  serviceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ChatMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  workerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  isSecure?: Prisma.SortOrder
+  negotiationType?: Prisma.SortOrder
+  productId?: Prisma.SortOrder
+  serviceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ChatMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  productId?: Prisma.SortOrder
-  businessId?: Prisma.SortOrder
-  workerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  isSecure?: Prisma.SortOrder
+  negotiationType?: Prisma.SortOrder
+  productId?: Prisma.SortOrder
+  serviceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -398,132 +401,6 @@ export type ChatMinOrderByAggregateInput = {
 export type ChatScalarRelationFilter = {
   is?: Prisma.ChatWhereInput
   isNot?: Prisma.ChatWhereInput
-}
-
-export type ChatCreateNestedManyWithoutBusinessInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutBusinessInput, Prisma.ChatUncheckedCreateWithoutBusinessInput> | Prisma.ChatCreateWithoutBusinessInput[] | Prisma.ChatUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutBusinessInput | Prisma.ChatCreateOrConnectWithoutBusinessInput[]
-  createMany?: Prisma.ChatCreateManyBusinessInputEnvelope
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-}
-
-export type ChatUncheckedCreateNestedManyWithoutBusinessInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutBusinessInput, Prisma.ChatUncheckedCreateWithoutBusinessInput> | Prisma.ChatCreateWithoutBusinessInput[] | Prisma.ChatUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutBusinessInput | Prisma.ChatCreateOrConnectWithoutBusinessInput[]
-  createMany?: Prisma.ChatCreateManyBusinessInputEnvelope
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-}
-
-export type ChatUpdateManyWithoutBusinessNestedInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutBusinessInput, Prisma.ChatUncheckedCreateWithoutBusinessInput> | Prisma.ChatCreateWithoutBusinessInput[] | Prisma.ChatUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutBusinessInput | Prisma.ChatCreateOrConnectWithoutBusinessInput[]
-  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutBusinessInput | Prisma.ChatUpsertWithWhereUniqueWithoutBusinessInput[]
-  createMany?: Prisma.ChatCreateManyBusinessInputEnvelope
-  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  update?: Prisma.ChatUpdateWithWhereUniqueWithoutBusinessInput | Prisma.ChatUpdateWithWhereUniqueWithoutBusinessInput[]
-  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutBusinessInput | Prisma.ChatUpdateManyWithWhereWithoutBusinessInput[]
-  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-}
-
-export type ChatUncheckedUpdateManyWithoutBusinessNestedInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutBusinessInput, Prisma.ChatUncheckedCreateWithoutBusinessInput> | Prisma.ChatCreateWithoutBusinessInput[] | Prisma.ChatUncheckedCreateWithoutBusinessInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutBusinessInput | Prisma.ChatCreateOrConnectWithoutBusinessInput[]
-  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutBusinessInput | Prisma.ChatUpsertWithWhereUniqueWithoutBusinessInput[]
-  createMany?: Prisma.ChatCreateManyBusinessInputEnvelope
-  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  update?: Prisma.ChatUpdateWithWhereUniqueWithoutBusinessInput | Prisma.ChatUpdateWithWhereUniqueWithoutBusinessInput[]
-  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutBusinessInput | Prisma.ChatUpdateManyWithWhereWithoutBusinessInput[]
-  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-}
-
-export type ChatCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutClientInput, Prisma.ChatUncheckedCreateWithoutClientInput> | Prisma.ChatCreateWithoutClientInput[] | Prisma.ChatUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutClientInput | Prisma.ChatCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.ChatCreateManyClientInputEnvelope
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-}
-
-export type ChatUncheckedCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutClientInput, Prisma.ChatUncheckedCreateWithoutClientInput> | Prisma.ChatCreateWithoutClientInput[] | Prisma.ChatUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutClientInput | Prisma.ChatCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.ChatCreateManyClientInputEnvelope
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-}
-
-export type ChatUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutClientInput, Prisma.ChatUncheckedCreateWithoutClientInput> | Prisma.ChatCreateWithoutClientInput[] | Prisma.ChatUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutClientInput | Prisma.ChatCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutClientInput | Prisma.ChatUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.ChatCreateManyClientInputEnvelope
-  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  update?: Prisma.ChatUpdateWithWhereUniqueWithoutClientInput | Prisma.ChatUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutClientInput | Prisma.ChatUpdateManyWithWhereWithoutClientInput[]
-  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-}
-
-export type ChatUncheckedUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutClientInput, Prisma.ChatUncheckedCreateWithoutClientInput> | Prisma.ChatCreateWithoutClientInput[] | Prisma.ChatUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutClientInput | Prisma.ChatCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutClientInput | Prisma.ChatUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.ChatCreateManyClientInputEnvelope
-  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  update?: Prisma.ChatUpdateWithWhereUniqueWithoutClientInput | Prisma.ChatUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutClientInput | Prisma.ChatUpdateManyWithWhereWithoutClientInput[]
-  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-}
-
-export type ChatCreateNestedManyWithoutWorkerInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutWorkerInput, Prisma.ChatUncheckedCreateWithoutWorkerInput> | Prisma.ChatCreateWithoutWorkerInput[] | Prisma.ChatUncheckedCreateWithoutWorkerInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutWorkerInput | Prisma.ChatCreateOrConnectWithoutWorkerInput[]
-  createMany?: Prisma.ChatCreateManyWorkerInputEnvelope
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-}
-
-export type ChatUncheckedCreateNestedManyWithoutWorkerInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutWorkerInput, Prisma.ChatUncheckedCreateWithoutWorkerInput> | Prisma.ChatCreateWithoutWorkerInput[] | Prisma.ChatUncheckedCreateWithoutWorkerInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutWorkerInput | Prisma.ChatCreateOrConnectWithoutWorkerInput[]
-  createMany?: Prisma.ChatCreateManyWorkerInputEnvelope
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-}
-
-export type ChatUpdateManyWithoutWorkerNestedInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutWorkerInput, Prisma.ChatUncheckedCreateWithoutWorkerInput> | Prisma.ChatCreateWithoutWorkerInput[] | Prisma.ChatUncheckedCreateWithoutWorkerInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutWorkerInput | Prisma.ChatCreateOrConnectWithoutWorkerInput[]
-  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutWorkerInput | Prisma.ChatUpsertWithWhereUniqueWithoutWorkerInput[]
-  createMany?: Prisma.ChatCreateManyWorkerInputEnvelope
-  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  update?: Prisma.ChatUpdateWithWhereUniqueWithoutWorkerInput | Prisma.ChatUpdateWithWhereUniqueWithoutWorkerInput[]
-  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutWorkerInput | Prisma.ChatUpdateManyWithWhereWithoutWorkerInput[]
-  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-}
-
-export type ChatUncheckedUpdateManyWithoutWorkerNestedInput = {
-  create?: Prisma.XOR<Prisma.ChatCreateWithoutWorkerInput, Prisma.ChatUncheckedCreateWithoutWorkerInput> | Prisma.ChatCreateWithoutWorkerInput[] | Prisma.ChatUncheckedCreateWithoutWorkerInput[]
-  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutWorkerInput | Prisma.ChatCreateOrConnectWithoutWorkerInput[]
-  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutWorkerInput | Prisma.ChatUpsertWithWhereUniqueWithoutWorkerInput[]
-  createMany?: Prisma.ChatCreateManyWorkerInputEnvelope
-  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
-  update?: Prisma.ChatUpdateWithWhereUniqueWithoutWorkerInput | Prisma.ChatUpdateWithWhereUniqueWithoutWorkerInput[]
-  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutWorkerInput | Prisma.ChatUpdateManyWithWhereWithoutWorkerInput[]
-  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
 }
 
 export type ChatCreateNestedManyWithoutProductInput = {
@@ -568,6 +445,24 @@ export type ChatUncheckedUpdateManyWithoutProductNestedInput = {
   deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
 }
 
+export type NullableEnumNegotiationTypeFieldUpdateOperationsInput = {
+  set?: $Enums.NegotiationType | null
+}
+
+export type ChatCreateNestedOneWithoutParticipantsInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutParticipantsInput, Prisma.ChatUncheckedCreateWithoutParticipantsInput>
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutParticipantsInput
+  connect?: Prisma.ChatWhereUniqueInput
+}
+
+export type ChatUpdateOneRequiredWithoutParticipantsNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutParticipantsInput, Prisma.ChatUncheckedCreateWithoutParticipantsInput>
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutParticipantsInput
+  upsert?: Prisma.ChatUpsertWithoutParticipantsInput
+  connect?: Prisma.ChatWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChatUpdateToOneWithWhereWithoutParticipantsInput, Prisma.ChatUpdateWithoutParticipantsInput>, Prisma.ChatUncheckedUpdateWithoutParticipantsInput>
+}
+
 export type ChatCreateNestedOneWithoutMessagesInput = {
   create?: Prisma.XOR<Prisma.ChatCreateWithoutMessagesInput, Prisma.ChatUncheckedCreateWithoutMessagesInput>
   connectOrCreate?: Prisma.ChatCreateOrConnectWithoutMessagesInput
@@ -582,183 +477,69 @@ export type ChatUpdateOneRequiredWithoutMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChatUpdateToOneWithWhereWithoutMessagesInput, Prisma.ChatUpdateWithoutMessagesInput>, Prisma.ChatUncheckedUpdateWithoutMessagesInput>
 }
 
-export type ChatCreateWithoutBusinessInput = {
-  id?: string
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  client: Prisma.ClientCreateNestedOneWithoutChatsInput
-  product: Prisma.ProductCreateNestedOneWithoutChatsInput
-  worker?: Prisma.WorkerCreateNestedOneWithoutChatsInput
-  messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+export type ChatCreateNestedManyWithoutServiceInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutServiceInput, Prisma.ChatUncheckedCreateWithoutServiceInput> | Prisma.ChatCreateWithoutServiceInput[] | Prisma.ChatUncheckedCreateWithoutServiceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutServiceInput | Prisma.ChatCreateOrConnectWithoutServiceInput[]
+  createMany?: Prisma.ChatCreateManyServiceInputEnvelope
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
 }
 
-export type ChatUncheckedCreateWithoutBusinessInput = {
-  id?: string
-  clientId: string
-  productId: string
-  workerId?: string | null
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
+export type ChatUncheckedCreateNestedManyWithoutServiceInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutServiceInput, Prisma.ChatUncheckedCreateWithoutServiceInput> | Prisma.ChatCreateWithoutServiceInput[] | Prisma.ChatUncheckedCreateWithoutServiceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutServiceInput | Prisma.ChatCreateOrConnectWithoutServiceInput[]
+  createMany?: Prisma.ChatCreateManyServiceInputEnvelope
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
 }
 
-export type ChatCreateOrConnectWithoutBusinessInput = {
-  where: Prisma.ChatWhereUniqueInput
-  create: Prisma.XOR<Prisma.ChatCreateWithoutBusinessInput, Prisma.ChatUncheckedCreateWithoutBusinessInput>
+export type ChatUpdateManyWithoutServiceNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutServiceInput, Prisma.ChatUncheckedCreateWithoutServiceInput> | Prisma.ChatCreateWithoutServiceInput[] | Prisma.ChatUncheckedCreateWithoutServiceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutServiceInput | Prisma.ChatCreateOrConnectWithoutServiceInput[]
+  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutServiceInput | Prisma.ChatUpsertWithWhereUniqueWithoutServiceInput[]
+  createMany?: Prisma.ChatCreateManyServiceInputEnvelope
+  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  update?: Prisma.ChatUpdateWithWhereUniqueWithoutServiceInput | Prisma.ChatUpdateWithWhereUniqueWithoutServiceInput[]
+  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutServiceInput | Prisma.ChatUpdateManyWithWhereWithoutServiceInput[]
+  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
 }
 
-export type ChatCreateManyBusinessInputEnvelope = {
-  data: Prisma.ChatCreateManyBusinessInput | Prisma.ChatCreateManyBusinessInput[]
-  skipDuplicates?: boolean
-}
-
-export type ChatUpsertWithWhereUniqueWithoutBusinessInput = {
-  where: Prisma.ChatWhereUniqueInput
-  update: Prisma.XOR<Prisma.ChatUpdateWithoutBusinessInput, Prisma.ChatUncheckedUpdateWithoutBusinessInput>
-  create: Prisma.XOR<Prisma.ChatCreateWithoutBusinessInput, Prisma.ChatUncheckedCreateWithoutBusinessInput>
-}
-
-export type ChatUpdateWithWhereUniqueWithoutBusinessInput = {
-  where: Prisma.ChatWhereUniqueInput
-  data: Prisma.XOR<Prisma.ChatUpdateWithoutBusinessInput, Prisma.ChatUncheckedUpdateWithoutBusinessInput>
-}
-
-export type ChatUpdateManyWithWhereWithoutBusinessInput = {
-  where: Prisma.ChatScalarWhereInput
-  data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutBusinessInput>
-}
-
-export type ChatScalarWhereInput = {
-  AND?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-  OR?: Prisma.ChatScalarWhereInput[]
-  NOT?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
-  id?: Prisma.StringFilter<"Chat"> | string
-  clientId?: Prisma.StringFilter<"Chat"> | string
-  productId?: Prisma.StringFilter<"Chat"> | string
-  businessId?: Prisma.StringNullableFilter<"Chat"> | string | null
-  workerId?: Prisma.StringNullableFilter<"Chat"> | string | null
-  status?: Prisma.StringFilter<"Chat"> | string
-  createdAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
-}
-
-export type ChatCreateWithoutClientInput = {
-  id?: string
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  product: Prisma.ProductCreateNestedOneWithoutChatsInput
-  business?: Prisma.BusinessCreateNestedOneWithoutChatsInput
-  worker?: Prisma.WorkerCreateNestedOneWithoutChatsInput
-  messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
-}
-
-export type ChatUncheckedCreateWithoutClientInput = {
-  id?: string
-  productId: string
-  businessId?: string | null
-  workerId?: string | null
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
-}
-
-export type ChatCreateOrConnectWithoutClientInput = {
-  where: Prisma.ChatWhereUniqueInput
-  create: Prisma.XOR<Prisma.ChatCreateWithoutClientInput, Prisma.ChatUncheckedCreateWithoutClientInput>
-}
-
-export type ChatCreateManyClientInputEnvelope = {
-  data: Prisma.ChatCreateManyClientInput | Prisma.ChatCreateManyClientInput[]
-  skipDuplicates?: boolean
-}
-
-export type ChatUpsertWithWhereUniqueWithoutClientInput = {
-  where: Prisma.ChatWhereUniqueInput
-  update: Prisma.XOR<Prisma.ChatUpdateWithoutClientInput, Prisma.ChatUncheckedUpdateWithoutClientInput>
-  create: Prisma.XOR<Prisma.ChatCreateWithoutClientInput, Prisma.ChatUncheckedCreateWithoutClientInput>
-}
-
-export type ChatUpdateWithWhereUniqueWithoutClientInput = {
-  where: Prisma.ChatWhereUniqueInput
-  data: Prisma.XOR<Prisma.ChatUpdateWithoutClientInput, Prisma.ChatUncheckedUpdateWithoutClientInput>
-}
-
-export type ChatUpdateManyWithWhereWithoutClientInput = {
-  where: Prisma.ChatScalarWhereInput
-  data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutClientInput>
-}
-
-export type ChatCreateWithoutWorkerInput = {
-  id?: string
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  client: Prisma.ClientCreateNestedOneWithoutChatsInput
-  product: Prisma.ProductCreateNestedOneWithoutChatsInput
-  business?: Prisma.BusinessCreateNestedOneWithoutChatsInput
-  messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
-}
-
-export type ChatUncheckedCreateWithoutWorkerInput = {
-  id?: string
-  clientId: string
-  productId: string
-  businessId?: string | null
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
-}
-
-export type ChatCreateOrConnectWithoutWorkerInput = {
-  where: Prisma.ChatWhereUniqueInput
-  create: Prisma.XOR<Prisma.ChatCreateWithoutWorkerInput, Prisma.ChatUncheckedCreateWithoutWorkerInput>
-}
-
-export type ChatCreateManyWorkerInputEnvelope = {
-  data: Prisma.ChatCreateManyWorkerInput | Prisma.ChatCreateManyWorkerInput[]
-  skipDuplicates?: boolean
-}
-
-export type ChatUpsertWithWhereUniqueWithoutWorkerInput = {
-  where: Prisma.ChatWhereUniqueInput
-  update: Prisma.XOR<Prisma.ChatUpdateWithoutWorkerInput, Prisma.ChatUncheckedUpdateWithoutWorkerInput>
-  create: Prisma.XOR<Prisma.ChatCreateWithoutWorkerInput, Prisma.ChatUncheckedCreateWithoutWorkerInput>
-}
-
-export type ChatUpdateWithWhereUniqueWithoutWorkerInput = {
-  where: Prisma.ChatWhereUniqueInput
-  data: Prisma.XOR<Prisma.ChatUpdateWithoutWorkerInput, Prisma.ChatUncheckedUpdateWithoutWorkerInput>
-}
-
-export type ChatUpdateManyWithWhereWithoutWorkerInput = {
-  where: Prisma.ChatScalarWhereInput
-  data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutWorkerInput>
+export type ChatUncheckedUpdateManyWithoutServiceNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutServiceInput, Prisma.ChatUncheckedCreateWithoutServiceInput> | Prisma.ChatCreateWithoutServiceInput[] | Prisma.ChatUncheckedCreateWithoutServiceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutServiceInput | Prisma.ChatCreateOrConnectWithoutServiceInput[]
+  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutServiceInput | Prisma.ChatUpsertWithWhereUniqueWithoutServiceInput[]
+  createMany?: Prisma.ChatCreateManyServiceInputEnvelope
+  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  update?: Prisma.ChatUpdateWithWhereUniqueWithoutServiceInput | Prisma.ChatUpdateWithWhereUniqueWithoutServiceInput[]
+  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutServiceInput | Prisma.ChatUpdateManyWithWhereWithoutServiceInput[]
+  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
 }
 
 export type ChatCreateWithoutProductInput = {
   id?: string
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  client: Prisma.ClientCreateNestedOneWithoutChatsInput
-  business?: Prisma.BusinessCreateNestedOneWithoutChatsInput
-  worker?: Prisma.WorkerCreateNestedOneWithoutChatsInput
+  service?: Prisma.FreelanceServiceCreateNestedOneWithoutChatsInput
+  participants?: Prisma.ChatParticipantCreateNestedManyWithoutChatInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
 }
 
 export type ChatUncheckedCreateWithoutProductInput = {
   id?: string
-  clientId: string
-  businessId?: string | null
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  serviceId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  participants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutChatInput
   messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
 }
 
@@ -788,26 +569,106 @@ export type ChatUpdateManyWithWhereWithoutProductInput = {
   data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutProductInput>
 }
 
+export type ChatScalarWhereInput = {
+  AND?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+  OR?: Prisma.ChatScalarWhereInput[]
+  NOT?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+  id?: Prisma.StringFilter<"Chat"> | string
+  status?: Prisma.StringFilter<"Chat"> | string
+  isSecure?: Prisma.BoolFilter<"Chat"> | boolean
+  negotiationType?: Prisma.EnumNegotiationTypeNullableFilter<"Chat"> | $Enums.NegotiationType | null
+  productId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  serviceId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Chat"> | Date | string
+}
+
+export type ChatCreateWithoutParticipantsInput = {
+  id?: string
+  status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductCreateNestedOneWithoutChatsInput
+  service?: Prisma.FreelanceServiceCreateNestedOneWithoutChatsInput
+  messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+}
+
+export type ChatUncheckedCreateWithoutParticipantsInput = {
+  id?: string
+  status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  productId?: string | null
+  serviceId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
+}
+
+export type ChatCreateOrConnectWithoutParticipantsInput = {
+  where: Prisma.ChatWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChatCreateWithoutParticipantsInput, Prisma.ChatUncheckedCreateWithoutParticipantsInput>
+}
+
+export type ChatUpsertWithoutParticipantsInput = {
+  update: Prisma.XOR<Prisma.ChatUpdateWithoutParticipantsInput, Prisma.ChatUncheckedUpdateWithoutParticipantsInput>
+  create: Prisma.XOR<Prisma.ChatCreateWithoutParticipantsInput, Prisma.ChatUncheckedCreateWithoutParticipantsInput>
+  where?: Prisma.ChatWhereInput
+}
+
+export type ChatUpdateToOneWithWhereWithoutParticipantsInput = {
+  where?: Prisma.ChatWhereInput
+  data: Prisma.XOR<Prisma.ChatUpdateWithoutParticipantsInput, Prisma.ChatUncheckedUpdateWithoutParticipantsInput>
+}
+
+export type ChatUpdateWithoutParticipantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductUpdateOneWithoutChatsNestedInput
+  service?: Prisma.FreelanceServiceUpdateOneWithoutChatsNestedInput
+  messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateWithoutParticipantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
+}
+
 export type ChatCreateWithoutMessagesInput = {
   id?: string
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  client: Prisma.ClientCreateNestedOneWithoutChatsInput
-  product: Prisma.ProductCreateNestedOneWithoutChatsInput
-  business?: Prisma.BusinessCreateNestedOneWithoutChatsInput
-  worker?: Prisma.WorkerCreateNestedOneWithoutChatsInput
+  product?: Prisma.ProductCreateNestedOneWithoutChatsInput
+  service?: Prisma.FreelanceServiceCreateNestedOneWithoutChatsInput
+  participants?: Prisma.ChatParticipantCreateNestedManyWithoutChatInput
 }
 
 export type ChatUncheckedCreateWithoutMessagesInput = {
   id?: string
-  clientId: string
-  productId: string
-  businessId?: string | null
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  productId?: string | null
+  serviceId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  participants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutChatInput
 }
 
 export type ChatCreateOrConnectWithoutMessagesInput = {
@@ -829,157 +690,83 @@ export type ChatUpdateToOneWithWhereWithoutMessagesInput = {
 export type ChatUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  client?: Prisma.ClientUpdateOneRequiredWithoutChatsNestedInput
-  product?: Prisma.ProductUpdateOneRequiredWithoutChatsNestedInput
-  business?: Prisma.BusinessUpdateOneWithoutChatsNestedInput
-  worker?: Prisma.WorkerUpdateOneWithoutChatsNestedInput
+  product?: Prisma.ProductUpdateOneWithoutChatsNestedInput
+  service?: Prisma.FreelanceServiceUpdateOneWithoutChatsNestedInput
+  participants?: Prisma.ChatParticipantUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutChatNestedInput
 }
 
-export type ChatCreateManyBusinessInput = {
+export type ChatCreateWithoutServiceInput = {
   id?: string
-  clientId: string
-  productId: string
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  product?: Prisma.ProductCreateNestedOneWithoutChatsInput
+  participants?: Prisma.ChatParticipantCreateNestedManyWithoutChatInput
+  messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
 }
 
-export type ChatUpdateWithoutBusinessInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  client?: Prisma.ClientUpdateOneRequiredWithoutChatsNestedInput
-  product?: Prisma.ProductUpdateOneRequiredWithoutChatsNestedInput
-  worker?: Prisma.WorkerUpdateOneWithoutChatsNestedInput
-  messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
-}
-
-export type ChatUncheckedUpdateWithoutBusinessInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
-}
-
-export type ChatUncheckedUpdateManyWithoutBusinessInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ChatCreateManyClientInput = {
+export type ChatUncheckedCreateWithoutServiceInput = {
   id?: string
-  productId: string
-  businessId?: string | null
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  productId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  participants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutChatInput
+  messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
 }
 
-export type ChatUpdateWithoutClientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductUpdateOneRequiredWithoutChatsNestedInput
-  business?: Prisma.BusinessUpdateOneWithoutChatsNestedInput
-  worker?: Prisma.WorkerUpdateOneWithoutChatsNestedInput
-  messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+export type ChatCreateOrConnectWithoutServiceInput = {
+  where: Prisma.ChatWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChatCreateWithoutServiceInput, Prisma.ChatUncheckedCreateWithoutServiceInput>
 }
 
-export type ChatUncheckedUpdateWithoutClientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
+export type ChatCreateManyServiceInputEnvelope = {
+  data: Prisma.ChatCreateManyServiceInput | Prisma.ChatCreateManyServiceInput[]
+  skipDuplicates?: boolean
 }
 
-export type ChatUncheckedUpdateManyWithoutClientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ChatUpsertWithWhereUniqueWithoutServiceInput = {
+  where: Prisma.ChatWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChatUpdateWithoutServiceInput, Prisma.ChatUncheckedUpdateWithoutServiceInput>
+  create: Prisma.XOR<Prisma.ChatCreateWithoutServiceInput, Prisma.ChatUncheckedCreateWithoutServiceInput>
 }
 
-export type ChatCreateManyWorkerInput = {
-  id?: string
-  clientId: string
-  productId: string
-  businessId?: string | null
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type ChatUpdateWithWhereUniqueWithoutServiceInput = {
+  where: Prisma.ChatWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChatUpdateWithoutServiceInput, Prisma.ChatUncheckedUpdateWithoutServiceInput>
 }
 
-export type ChatUpdateWithoutWorkerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  client?: Prisma.ClientUpdateOneRequiredWithoutChatsNestedInput
-  product?: Prisma.ProductUpdateOneRequiredWithoutChatsNestedInput
-  business?: Prisma.BusinessUpdateOneWithoutChatsNestedInput
-  messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
-}
-
-export type ChatUncheckedUpdateWithoutWorkerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
-}
-
-export type ChatUncheckedUpdateManyWithoutWorkerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ChatUpdateManyWithWhereWithoutServiceInput = {
+  where: Prisma.ChatScalarWhereInput
+  data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutServiceInput>
 }
 
 export type ChatCreateManyProductInput = {
   id?: string
-  clientId: string
-  businessId?: string | null
-  workerId?: string | null
   status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  serviceId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -987,31 +774,77 @@ export type ChatCreateManyProductInput = {
 export type ChatUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  client?: Prisma.ClientUpdateOneRequiredWithoutChatsNestedInput
-  business?: Prisma.BusinessUpdateOneWithoutChatsNestedInput
-  worker?: Prisma.WorkerUpdateOneWithoutChatsNestedInput
+  service?: Prisma.FreelanceServiceUpdateOneWithoutChatsNestedInput
+  participants?: Prisma.ChatParticipantUpdateManyWithoutChatNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutChatNestedInput
   messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  serviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ChatCreateManyServiceInput = {
+  id?: string
+  status?: string
+  isSecure?: boolean
+  negotiationType?: $Enums.NegotiationType | null
+  productId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ChatUpdateWithoutServiceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductUpdateOneWithoutChatsNestedInput
+  participants?: Prisma.ChatParticipantUpdateManyWithoutChatNestedInput
+  messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateWithoutServiceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutChatNestedInput
+  messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateManyWithoutServiceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  isSecure?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  negotiationType?: Prisma.NullableEnumNegotiationTypeFieldUpdateOperationsInput | $Enums.NegotiationType | null
+  productId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1022,10 +855,12 @@ export type ChatUncheckedUpdateManyWithoutProductInput = {
  */
 
 export type ChatCountOutputType = {
+  participants: number
   messages: number
 }
 
 export type ChatCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  participants?: boolean | ChatCountOutputTypeCountParticipantsArgs
   messages?: boolean | ChatCountOutputTypeCountMessagesArgs
 }
 
@@ -1042,6 +877,13 @@ export type ChatCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * ChatCountOutputType without action
  */
+export type ChatCountOutputTypeCountParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatParticipantWhereInput
+}
+
+/**
+ * ChatCountOutputType without action
+ */
 export type ChatCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ChatMessageWhereInput
 }
@@ -1049,100 +891,89 @@ export type ChatCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.E
 
 export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  clientId?: boolean
-  productId?: boolean
-  businessId?: boolean
-  workerId?: boolean
   status?: boolean
+  isSecure?: boolean
+  negotiationType?: boolean
+  productId?: boolean
+  serviceId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  business?: boolean | Prisma.Chat$businessArgs<ExtArgs>
-  worker?: boolean | Prisma.Chat$workerArgs<ExtArgs>
+  product?: boolean | Prisma.Chat$productArgs<ExtArgs>
+  service?: boolean | Prisma.Chat$serviceArgs<ExtArgs>
+  participants?: boolean | Prisma.Chat$participantsArgs<ExtArgs>
   messages?: boolean | Prisma.Chat$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  clientId?: boolean
-  productId?: boolean
-  businessId?: boolean
-  workerId?: boolean
   status?: boolean
+  isSecure?: boolean
+  negotiationType?: boolean
+  productId?: boolean
+  serviceId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  business?: boolean | Prisma.Chat$businessArgs<ExtArgs>
-  worker?: boolean | Prisma.Chat$workerArgs<ExtArgs>
+  product?: boolean | Prisma.Chat$productArgs<ExtArgs>
+  service?: boolean | Prisma.Chat$serviceArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  clientId?: boolean
-  productId?: boolean
-  businessId?: boolean
-  workerId?: boolean
   status?: boolean
+  isSecure?: boolean
+  negotiationType?: boolean
+  productId?: boolean
+  serviceId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  business?: boolean | Prisma.Chat$businessArgs<ExtArgs>
-  worker?: boolean | Prisma.Chat$workerArgs<ExtArgs>
+  product?: boolean | Prisma.Chat$productArgs<ExtArgs>
+  service?: boolean | Prisma.Chat$serviceArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectScalar = {
   id?: boolean
-  clientId?: boolean
-  productId?: boolean
-  businessId?: boolean
-  workerId?: boolean
   status?: boolean
+  isSecure?: boolean
+  negotiationType?: boolean
+  productId?: boolean
+  serviceId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clientId" | "productId" | "businessId" | "workerId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["chat"]>
+export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "isSecure" | "negotiationType" | "productId" | "serviceId" | "createdAt" | "updatedAt", ExtArgs["result"]["chat"]>
 export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  business?: boolean | Prisma.Chat$businessArgs<ExtArgs>
-  worker?: boolean | Prisma.Chat$workerArgs<ExtArgs>
+  product?: boolean | Prisma.Chat$productArgs<ExtArgs>
+  service?: boolean | Prisma.Chat$serviceArgs<ExtArgs>
+  participants?: boolean | Prisma.Chat$participantsArgs<ExtArgs>
   messages?: boolean | Prisma.Chat$messagesArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  business?: boolean | Prisma.Chat$businessArgs<ExtArgs>
-  worker?: boolean | Prisma.Chat$workerArgs<ExtArgs>
+  product?: boolean | Prisma.Chat$productArgs<ExtArgs>
+  service?: boolean | Prisma.Chat$serviceArgs<ExtArgs>
 }
 export type ChatIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  business?: boolean | Prisma.Chat$businessArgs<ExtArgs>
-  worker?: boolean | Prisma.Chat$workerArgs<ExtArgs>
+  product?: boolean | Prisma.Chat$productArgs<ExtArgs>
+  service?: boolean | Prisma.Chat$serviceArgs<ExtArgs>
 }
 
 export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Chat"
   objects: {
-    client: Prisma.$ClientPayload<ExtArgs>
-    product: Prisma.$ProductPayload<ExtArgs>
-    business: Prisma.$BusinessPayload<ExtArgs> | null
-    worker: Prisma.$WorkerPayload<ExtArgs> | null
+    product: Prisma.$ProductPayload<ExtArgs> | null
+    service: Prisma.$FreelanceServicePayload<ExtArgs> | null
+    participants: Prisma.$ChatParticipantPayload<ExtArgs>[]
     messages: Prisma.$ChatMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    clientId: string
-    productId: string
-    businessId: string | null
-    workerId: string | null
     status: string
+    isSecure: boolean
+    negotiationType: $Enums.NegotiationType | null
+    productId: string | null
+    serviceId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["chat"]>
@@ -1539,10 +1370,9 @@ readonly fields: ChatFieldRefs;
  */
 export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  client<T extends Prisma.ClientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  business<T extends Prisma.Chat$businessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$businessArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  worker<T extends Prisma.Chat$workerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$workerArgs<ExtArgs>>): Prisma.Prisma__WorkerClient<runtime.Types.Result.GetResult<Prisma.$WorkerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.Chat$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$productArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  service<T extends Prisma.Chat$serviceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$serviceArgs<ExtArgs>>): Prisma.Prisma__FreelanceServiceClient<runtime.Types.Result.GetResult<Prisma.$FreelanceServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  participants<T extends Prisma.Chat$participantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messages<T extends Prisma.Chat$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1574,11 +1404,11 @@ export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface ChatFieldRefs {
   readonly id: Prisma.FieldRef<"Chat", 'String'>
-  readonly clientId: Prisma.FieldRef<"Chat", 'String'>
-  readonly productId: Prisma.FieldRef<"Chat", 'String'>
-  readonly businessId: Prisma.FieldRef<"Chat", 'String'>
-  readonly workerId: Prisma.FieldRef<"Chat", 'String'>
   readonly status: Prisma.FieldRef<"Chat", 'String'>
+  readonly isSecure: Prisma.FieldRef<"Chat", 'Boolean'>
+  readonly negotiationType: Prisma.FieldRef<"Chat", 'NegotiationType'>
+  readonly productId: Prisma.FieldRef<"Chat", 'String'>
+  readonly serviceId: Prisma.FieldRef<"Chat", 'String'>
   readonly createdAt: Prisma.FieldRef<"Chat", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Chat", 'DateTime'>
 }
@@ -1977,41 +1807,65 @@ export type ChatDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Chat.business
+ * Chat.product
  */
-export type Chat$businessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Chat$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Business
+   * Select specific fields to fetch from the Product
    */
-  select?: Prisma.BusinessSelect<ExtArgs> | null
+  select?: Prisma.ProductSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Business
+   * Omit specific fields from the Product
    */
-  omit?: Prisma.BusinessOmit<ExtArgs> | null
+  omit?: Prisma.ProductOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BusinessInclude<ExtArgs> | null
-  where?: Prisma.BusinessWhereInput
+  include?: Prisma.ProductInclude<ExtArgs> | null
+  where?: Prisma.ProductWhereInput
 }
 
 /**
- * Chat.worker
+ * Chat.service
  */
-export type Chat$workerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Chat$serviceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Worker
+   * Select specific fields to fetch from the FreelanceService
    */
-  select?: Prisma.WorkerSelect<ExtArgs> | null
+  select?: Prisma.FreelanceServiceSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Worker
+   * Omit specific fields from the FreelanceService
    */
-  omit?: Prisma.WorkerOmit<ExtArgs> | null
+  omit?: Prisma.FreelanceServiceOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.WorkerInclude<ExtArgs> | null
-  where?: Prisma.WorkerWhereInput
+  include?: Prisma.FreelanceServiceInclude<ExtArgs> | null
+  where?: Prisma.FreelanceServiceWhereInput
+}
+
+/**
+ * Chat.participants
+ */
+export type Chat$participantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatParticipant
+   */
+  select?: Prisma.ChatParticipantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatParticipant
+   */
+  omit?: Prisma.ChatParticipantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatParticipantInclude<ExtArgs> | null
+  where?: Prisma.ChatParticipantWhereInput
+  orderBy?: Prisma.ChatParticipantOrderByWithRelationInput | Prisma.ChatParticipantOrderByWithRelationInput[]
+  cursor?: Prisma.ChatParticipantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatParticipantScalarFieldEnum | Prisma.ChatParticipantScalarFieldEnum[]
 }
 
 /**

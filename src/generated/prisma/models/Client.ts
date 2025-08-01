@@ -232,12 +232,12 @@ export type ClientWhereInput = {
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
   orders?: Prisma.OrderListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
-  chats?: Prisma.ChatListRelationFilter
   recharges?: Prisma.AccountRechargeListRelationFilter
   freelanceOrders?: Prisma.FreelanceOrderListRelationFilter
   referralsMade?: Prisma.ReferralListRelationFilter
   referralsReceived?: Prisma.ReferralListRelationFilter
-  PostTransaction?: Prisma.PostTransactionListRelationFilter
+  postTransactions?: Prisma.PostTransactionListRelationFilter
+  chatParticipants?: Prisma.ChatParticipantListRelationFilter
 }
 
 export type ClientOrderByWithRelationInput = {
@@ -255,12 +255,12 @@ export type ClientOrderByWithRelationInput = {
   kyc?: Prisma.KYCOrderByWithRelationInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
-  chats?: Prisma.ChatOrderByRelationAggregateInput
   recharges?: Prisma.AccountRechargeOrderByRelationAggregateInput
   freelanceOrders?: Prisma.FreelanceOrderOrderByRelationAggregateInput
   referralsMade?: Prisma.ReferralOrderByRelationAggregateInput
   referralsReceived?: Prisma.ReferralOrderByRelationAggregateInput
-  PostTransaction?: Prisma.PostTransactionOrderByRelationAggregateInput
+  postTransactions?: Prisma.PostTransactionOrderByRelationAggregateInput
+  chatParticipants?: Prisma.ChatParticipantOrderByRelationAggregateInput
 }
 
 export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -281,12 +281,12 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
   orders?: Prisma.OrderListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
-  chats?: Prisma.ChatListRelationFilter
   recharges?: Prisma.AccountRechargeListRelationFilter
   freelanceOrders?: Prisma.FreelanceOrderListRelationFilter
   referralsMade?: Prisma.ReferralListRelationFilter
   referralsReceived?: Prisma.ReferralListRelationFilter
-  PostTransaction?: Prisma.PostTransactionListRelationFilter
+  postTransactions?: Prisma.PostTransactionListRelationFilter
+  chatParticipants?: Prisma.ChatParticipantListRelationFilter
 }, "id" | "username" | "email">
 
 export type ClientOrderByWithAggregationInput = {
@@ -338,12 +338,12 @@ export type ClientCreateInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateInput = {
@@ -361,12 +361,12 @@ export type ClientUncheckedCreateInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientUpdateInput = {
@@ -384,12 +384,12 @@ export type ClientUpdateInput = {
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateInput = {
@@ -407,12 +407,12 @@ export type ClientUncheckedUpdateInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyInput = {
@@ -537,18 +537,20 @@ export type ClientUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutReviewsInput, Prisma.ClientUpdateWithoutReviewsInput>, Prisma.ClientUncheckedUpdateWithoutReviewsInput>
 }
 
-export type ClientCreateNestedOneWithoutChatsInput = {
-  create?: Prisma.XOR<Prisma.ClientCreateWithoutChatsInput, Prisma.ClientUncheckedCreateWithoutChatsInput>
-  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutChatsInput
+export type ClientCreateNestedOneWithoutChatParticipantsInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutChatParticipantsInput, Prisma.ClientUncheckedCreateWithoutChatParticipantsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutChatParticipantsInput
   connect?: Prisma.ClientWhereUniqueInput
 }
 
-export type ClientUpdateOneRequiredWithoutChatsNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientCreateWithoutChatsInput, Prisma.ClientUncheckedCreateWithoutChatsInput>
-  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutChatsInput
-  upsert?: Prisma.ClientUpsertWithoutChatsInput
+export type ClientUpdateOneWithoutChatParticipantsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutChatParticipantsInput, Prisma.ClientUncheckedCreateWithoutChatParticipantsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutChatParticipantsInput
+  upsert?: Prisma.ClientUpsertWithoutChatParticipantsInput
+  disconnect?: Prisma.ClientWhereInput | boolean
+  delete?: Prisma.ClientWhereInput | boolean
   connect?: Prisma.ClientWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutChatsInput, Prisma.ClientUpdateWithoutChatsInput>, Prisma.ClientUncheckedUpdateWithoutChatsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutChatParticipantsInput, Prisma.ClientUpdateWithoutChatParticipantsInput>, Prisma.ClientUncheckedUpdateWithoutChatParticipantsInput>
 }
 
 export type ClientCreateNestedOneWithoutKycInput = {
@@ -629,18 +631,18 @@ export type ClientUpdateOneWithoutReferralsReceivedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutReferralsReceivedInput, Prisma.ClientUpdateWithoutReferralsReceivedInput>, Prisma.ClientUncheckedUpdateWithoutReferralsReceivedInput>
 }
 
-export type ClientCreateNestedOneWithoutPostTransactionInput = {
-  create?: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionInput, Prisma.ClientUncheckedCreateWithoutPostTransactionInput>
-  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutPostTransactionInput
+export type ClientCreateNestedOneWithoutPostTransactionsInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionsInput, Prisma.ClientUncheckedCreateWithoutPostTransactionsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutPostTransactionsInput
   connect?: Prisma.ClientWhereUniqueInput
 }
 
-export type ClientUpdateOneRequiredWithoutPostTransactionNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionInput, Prisma.ClientUncheckedCreateWithoutPostTransactionInput>
-  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutPostTransactionInput
-  upsert?: Prisma.ClientUpsertWithoutPostTransactionInput
+export type ClientUpdateOneRequiredWithoutPostTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionsInput, Prisma.ClientUncheckedCreateWithoutPostTransactionsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutPostTransactionsInput
+  upsert?: Prisma.ClientUpsertWithoutPostTransactionsInput
   connect?: Prisma.ClientWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutPostTransactionInput, Prisma.ClientUpdateWithoutPostTransactionInput>, Prisma.ClientUncheckedUpdateWithoutPostTransactionInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutPostTransactionsInput, Prisma.ClientUpdateWithoutPostTransactionsInput>, Prisma.ClientUncheckedUpdateWithoutPostTransactionsInput>
 }
 
 export type ClientCreateWithoutOrdersInput = {
@@ -657,12 +659,12 @@ export type ClientCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutOrdersInput = {
@@ -679,12 +681,12 @@ export type ClientUncheckedCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutOrdersInput = {
@@ -717,12 +719,12 @@ export type ClientUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutOrdersInput = {
@@ -739,12 +741,12 @@ export type ClientUncheckedUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutReviewsInput = {
@@ -761,12 +763,12 @@ export type ClientCreateWithoutReviewsInput = {
   updatedAt?: Date | string
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutReviewsInput = {
@@ -783,12 +785,12 @@ export type ClientUncheckedCreateWithoutReviewsInput = {
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutReviewsInput = {
@@ -821,12 +823,12 @@ export type ClientUpdateWithoutReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutReviewsInput = {
@@ -843,15 +845,15 @@ export type ClientUncheckedUpdateWithoutReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
-export type ClientCreateWithoutChatsInput = {
+export type ClientCreateWithoutChatParticipantsInput = {
   id?: string
   username: string
   email: string
@@ -870,10 +872,10 @@ export type ClientCreateWithoutChatsInput = {
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
 }
 
-export type ClientUncheckedCreateWithoutChatsInput = {
+export type ClientUncheckedCreateWithoutChatParticipantsInput = {
   id?: string
   username: string
   email: string
@@ -892,26 +894,26 @@ export type ClientUncheckedCreateWithoutChatsInput = {
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
 }
 
-export type ClientCreateOrConnectWithoutChatsInput = {
+export type ClientCreateOrConnectWithoutChatParticipantsInput = {
   where: Prisma.ClientWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientCreateWithoutChatsInput, Prisma.ClientUncheckedCreateWithoutChatsInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutChatParticipantsInput, Prisma.ClientUncheckedCreateWithoutChatParticipantsInput>
 }
 
-export type ClientUpsertWithoutChatsInput = {
-  update: Prisma.XOR<Prisma.ClientUpdateWithoutChatsInput, Prisma.ClientUncheckedUpdateWithoutChatsInput>
-  create: Prisma.XOR<Prisma.ClientCreateWithoutChatsInput, Prisma.ClientUncheckedCreateWithoutChatsInput>
+export type ClientUpsertWithoutChatParticipantsInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutChatParticipantsInput, Prisma.ClientUncheckedUpdateWithoutChatParticipantsInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutChatParticipantsInput, Prisma.ClientUncheckedCreateWithoutChatParticipantsInput>
   where?: Prisma.ClientWhereInput
 }
 
-export type ClientUpdateToOneWithWhereWithoutChatsInput = {
+export type ClientUpdateToOneWithWhereWithoutChatParticipantsInput = {
   where?: Prisma.ClientWhereInput
-  data: Prisma.XOR<Prisma.ClientUpdateWithoutChatsInput, Prisma.ClientUncheckedUpdateWithoutChatsInput>
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutChatParticipantsInput, Prisma.ClientUncheckedUpdateWithoutChatParticipantsInput>
 }
 
-export type ClientUpdateWithoutChatsInput = {
+export type ClientUpdateWithoutChatParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -930,10 +932,10 @@ export type ClientUpdateWithoutChatsInput = {
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
 }
 
-export type ClientUncheckedUpdateWithoutChatsInput = {
+export type ClientUncheckedUpdateWithoutChatParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -952,7 +954,7 @@ export type ClientUncheckedUpdateWithoutChatsInput = {
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutKycInput = {
@@ -969,12 +971,12 @@ export type ClientCreateWithoutKycInput = {
   updatedAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutKycInput = {
@@ -991,12 +993,12 @@ export type ClientUncheckedCreateWithoutKycInput = {
   updatedAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutKycInput = {
@@ -1029,12 +1031,12 @@ export type ClientUpdateWithoutKycInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutKycInput = {
@@ -1051,12 +1053,12 @@ export type ClientUncheckedUpdateWithoutKycInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutRechargesInput = {
@@ -1074,11 +1076,11 @@ export type ClientCreateWithoutRechargesInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutRechargesInput = {
@@ -1096,11 +1098,11 @@ export type ClientUncheckedCreateWithoutRechargesInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutRechargesInput = {
@@ -1134,11 +1136,11 @@ export type ClientUpdateWithoutRechargesInput = {
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutRechargesInput = {
@@ -1156,11 +1158,11 @@ export type ClientUncheckedUpdateWithoutRechargesInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutFreelanceOrdersInput = {
@@ -1178,11 +1180,11 @@ export type ClientCreateWithoutFreelanceOrdersInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutFreelanceOrdersInput = {
@@ -1200,11 +1202,11 @@ export type ClientUncheckedCreateWithoutFreelanceOrdersInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutFreelanceOrdersInput = {
@@ -1238,11 +1240,11 @@ export type ClientUpdateWithoutFreelanceOrdersInput = {
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutFreelanceOrdersInput = {
@@ -1260,11 +1262,11 @@ export type ClientUncheckedUpdateWithoutFreelanceOrdersInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutReferralsMadeInput = {
@@ -1282,11 +1284,11 @@ export type ClientCreateWithoutReferralsMadeInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutReferralsMadeInput = {
@@ -1304,11 +1306,11 @@ export type ClientUncheckedCreateWithoutReferralsMadeInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutReferralsMadeInput = {
@@ -1331,11 +1333,11 @@ export type ClientCreateWithoutReferralsReceivedInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
-  PostTransaction?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutReferralsReceivedInput = {
@@ -1353,11 +1355,11 @@ export type ClientUncheckedCreateWithoutReferralsReceivedInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
-  PostTransaction?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  postTransactions?: Prisma.PostTransactionUncheckedCreateNestedManyWithoutClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutReferralsReceivedInput = {
@@ -1391,11 +1393,11 @@ export type ClientUpdateWithoutReferralsMadeInput = {
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutReferralsMadeInput = {
@@ -1413,11 +1415,11 @@ export type ClientUncheckedUpdateWithoutReferralsMadeInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUpsertWithoutReferralsReceivedInput = {
@@ -1446,11 +1448,11 @@ export type ClientUpdateWithoutReferralsReceivedInput = {
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutReferralsReceivedInput = {
@@ -1468,14 +1470,14 @@ export type ClientUncheckedUpdateWithoutReferralsReceivedInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
-  PostTransaction?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  postTransactions?: Prisma.PostTransactionUncheckedUpdateManyWithoutClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
-export type ClientCreateWithoutPostTransactionInput = {
+export type ClientCreateWithoutPostTransactionsInput = {
   id?: string
   username: string
   email: string
@@ -1490,14 +1492,14 @@ export type ClientCreateWithoutPostTransactionInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredClientInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutClientInput
 }
 
-export type ClientUncheckedCreateWithoutPostTransactionInput = {
+export type ClientUncheckedCreateWithoutPostTransactionsInput = {
   id?: string
   username: string
   email: string
@@ -1512,30 +1514,30 @@ export type ClientUncheckedCreateWithoutPostTransactionInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutClientInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutClientInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutClientInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutClientInput
   recharges?: Prisma.AccountRechargeUncheckedCreateNestedManyWithoutClientInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutClientInput
   referralsMade?: Prisma.ReferralUncheckedCreateNestedManyWithoutAffiliateClientInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredClientInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutClientInput
 }
 
-export type ClientCreateOrConnectWithoutPostTransactionInput = {
+export type ClientCreateOrConnectWithoutPostTransactionsInput = {
   where: Prisma.ClientWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionInput, Prisma.ClientUncheckedCreateWithoutPostTransactionInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionsInput, Prisma.ClientUncheckedCreateWithoutPostTransactionsInput>
 }
 
-export type ClientUpsertWithoutPostTransactionInput = {
-  update: Prisma.XOR<Prisma.ClientUpdateWithoutPostTransactionInput, Prisma.ClientUncheckedUpdateWithoutPostTransactionInput>
-  create: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionInput, Prisma.ClientUncheckedCreateWithoutPostTransactionInput>
+export type ClientUpsertWithoutPostTransactionsInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutPostTransactionsInput, Prisma.ClientUncheckedUpdateWithoutPostTransactionsInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutPostTransactionsInput, Prisma.ClientUncheckedCreateWithoutPostTransactionsInput>
   where?: Prisma.ClientWhereInput
 }
 
-export type ClientUpdateToOneWithWhereWithoutPostTransactionInput = {
+export type ClientUpdateToOneWithWhereWithoutPostTransactionsInput = {
   where?: Prisma.ClientWhereInput
-  data: Prisma.XOR<Prisma.ClientUpdateWithoutPostTransactionInput, Prisma.ClientUncheckedUpdateWithoutPostTransactionInput>
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutPostTransactionsInput, Prisma.ClientUncheckedUpdateWithoutPostTransactionsInput>
 }
 
-export type ClientUpdateWithoutPostTransactionInput = {
+export type ClientUpdateWithoutPostTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1550,14 +1552,14 @@ export type ClientUpdateWithoutPostTransactionInput = {
   kyc?: Prisma.KYCUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutClientNestedInput
 }
 
-export type ClientUncheckedUpdateWithoutPostTransactionInput = {
+export type ClientUncheckedUpdateWithoutPostTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1572,11 +1574,11 @@ export type ClientUncheckedUpdateWithoutPostTransactionInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutClientNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutClientNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutClientNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutClientNestedInput
   recharges?: Prisma.AccountRechargeUncheckedUpdateManyWithoutClientNestedInput
   freelanceOrders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutClientNestedInput
   referralsMade?: Prisma.ReferralUncheckedUpdateManyWithoutAffiliateClientNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredClientNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutClientNestedInput
 }
 
 
@@ -1587,23 +1589,23 @@ export type ClientUncheckedUpdateWithoutPostTransactionInput = {
 export type ClientCountOutputType = {
   orders: number
   reviews: number
-  chats: number
   recharges: number
   freelanceOrders: number
   referralsMade: number
   referralsReceived: number
-  PostTransaction: number
+  postTransactions: number
+  chatParticipants: number
 }
 
 export type ClientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | ClientCountOutputTypeCountOrdersArgs
   reviews?: boolean | ClientCountOutputTypeCountReviewsArgs
-  chats?: boolean | ClientCountOutputTypeCountChatsArgs
   recharges?: boolean | ClientCountOutputTypeCountRechargesArgs
   freelanceOrders?: boolean | ClientCountOutputTypeCountFreelanceOrdersArgs
   referralsMade?: boolean | ClientCountOutputTypeCountReferralsMadeArgs
   referralsReceived?: boolean | ClientCountOutputTypeCountReferralsReceivedArgs
-  PostTransaction?: boolean | ClientCountOutputTypeCountPostTransactionArgs
+  postTransactions?: boolean | ClientCountOutputTypeCountPostTransactionsArgs
+  chatParticipants?: boolean | ClientCountOutputTypeCountChatParticipantsArgs
 }
 
 /**
@@ -1628,13 +1630,6 @@ export type ClientCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.E
  */
 export type ClientCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReviewWhereInput
-}
-
-/**
- * ClientCountOutputType without action
- */
-export type ClientCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatWhereInput
 }
 
 /**
@@ -1668,8 +1663,15 @@ export type ClientCountOutputTypeCountReferralsReceivedArgs<ExtArgs extends runt
 /**
  * ClientCountOutputType without action
  */
-export type ClientCountOutputTypeCountPostTransactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ClientCountOutputTypeCountPostTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PostTransactionWhereInput
+}
+
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountChatParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatParticipantWhereInput
 }
 
 
@@ -1688,12 +1690,12 @@ export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   kyc?: boolean | Prisma.Client$kycArgs<ExtArgs>
   orders?: boolean | Prisma.Client$ordersArgs<ExtArgs>
   reviews?: boolean | Prisma.Client$reviewsArgs<ExtArgs>
-  chats?: boolean | Prisma.Client$chatsArgs<ExtArgs>
   recharges?: boolean | Prisma.Client$rechargesArgs<ExtArgs>
   freelanceOrders?: boolean | Prisma.Client$freelanceOrdersArgs<ExtArgs>
   referralsMade?: boolean | Prisma.Client$referralsMadeArgs<ExtArgs>
   referralsReceived?: boolean | Prisma.Client$referralsReceivedArgs<ExtArgs>
-  PostTransaction?: boolean | Prisma.Client$PostTransactionArgs<ExtArgs>
+  postTransactions?: boolean | Prisma.Client$postTransactionsArgs<ExtArgs>
+  chatParticipants?: boolean | Prisma.Client$chatParticipantsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["client"]>
 
@@ -1744,12 +1746,12 @@ export type ClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   kyc?: boolean | Prisma.Client$kycArgs<ExtArgs>
   orders?: boolean | Prisma.Client$ordersArgs<ExtArgs>
   reviews?: boolean | Prisma.Client$reviewsArgs<ExtArgs>
-  chats?: boolean | Prisma.Client$chatsArgs<ExtArgs>
   recharges?: boolean | Prisma.Client$rechargesArgs<ExtArgs>
   freelanceOrders?: boolean | Prisma.Client$freelanceOrdersArgs<ExtArgs>
   referralsMade?: boolean | Prisma.Client$referralsMadeArgs<ExtArgs>
   referralsReceived?: boolean | Prisma.Client$referralsReceivedArgs<ExtArgs>
-  PostTransaction?: boolean | Prisma.Client$PostTransactionArgs<ExtArgs>
+  postTransactions?: boolean | Prisma.Client$postTransactionsArgs<ExtArgs>
+  chatParticipants?: boolean | Prisma.Client$chatParticipantsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1761,12 +1763,12 @@ export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     kyc: Prisma.$KYCPayload<ExtArgs> | null
     orders: Prisma.$OrderPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
-    chats: Prisma.$ChatPayload<ExtArgs>[]
     recharges: Prisma.$AccountRechargePayload<ExtArgs>[]
     freelanceOrders: Prisma.$FreelanceOrderPayload<ExtArgs>[]
     referralsMade: Prisma.$ReferralPayload<ExtArgs>[]
     referralsReceived: Prisma.$ReferralPayload<ExtArgs>[]
-    PostTransaction: Prisma.$PostTransactionPayload<ExtArgs>[]
+    postTransactions: Prisma.$PostTransactionPayload<ExtArgs>[]
+    chatParticipants: Prisma.$ChatParticipantPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2177,12 +2179,12 @@ export interface Prisma__ClientClient<T, Null = never, ExtArgs extends runtime.T
   kyc<T extends Prisma.Client$kycArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$kycArgs<ExtArgs>>): Prisma.Prisma__KYCClient<runtime.Types.Result.GetResult<Prisma.$KYCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   orders<T extends Prisma.Client$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.Client$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  chats<T extends Prisma.Client$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   recharges<T extends Prisma.Client$rechargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$rechargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountRechargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   freelanceOrders<T extends Prisma.Client$freelanceOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$freelanceOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralsMade<T extends Prisma.Client$referralsMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$referralsMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralsReceived<T extends Prisma.Client$referralsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$referralsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  PostTransaction<T extends Prisma.Client$PostTransactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$PostTransactionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  postTransactions<T extends Prisma.Client$postTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$postTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatParticipants<T extends Prisma.Client$chatParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$chatParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2678,30 +2680,6 @@ export type Client$reviewsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Client.chats
- */
-export type Client$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Chat
-   */
-  select?: Prisma.ChatSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Chat
-   */
-  omit?: Prisma.ChatOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ChatInclude<ExtArgs> | null
-  where?: Prisma.ChatWhereInput
-  orderBy?: Prisma.ChatOrderByWithRelationInput | Prisma.ChatOrderByWithRelationInput[]
-  cursor?: Prisma.ChatWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
-}
-
-/**
  * Client.recharges
  */
 export type Client$rechargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2798,9 +2776,9 @@ export type Client$referralsReceivedArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * Client.PostTransaction
+ * Client.postTransactions
  */
-export type Client$PostTransactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Client$postTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the PostTransaction
    */
@@ -2819,6 +2797,30 @@ export type Client$PostTransactionArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.PostTransactionScalarFieldEnum | Prisma.PostTransactionScalarFieldEnum[]
+}
+
+/**
+ * Client.chatParticipants
+ */
+export type Client$chatParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatParticipant
+   */
+  select?: Prisma.ChatParticipantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatParticipant
+   */
+  omit?: Prisma.ChatParticipantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatParticipantInclude<ExtArgs> | null
+  where?: Prisma.ChatParticipantWhereInput
+  orderBy?: Prisma.ChatParticipantOrderByWithRelationInput | Prisma.ChatParticipantOrderByWithRelationInput[]
+  cursor?: Prisma.ChatParticipantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatParticipantScalarFieldEnum | Prisma.ChatParticipantScalarFieldEnum[]
 }
 
 /**

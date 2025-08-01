@@ -87,6 +87,11 @@ export type Review = Prisma.ReviewModel
  */
 export type Chat = Prisma.ChatModel
 /**
+ * Model ChatParticipant
+ * 
+ */
+export type ChatParticipant = Prisma.ChatParticipantModel
+/**
  * Model ChatMessage
  * 
  */
@@ -194,3 +199,6 @@ export const PostStatus = $Enums.PostStatus
 
 export type PostTransactionStatus = $Enums.PostTransactionStatus
 export const PostTransactionStatus = $Enums.PostTransactionStatus
+
+export type NegotiationType = $Enums.NegotiationType
+export const NegotiationType = $Enums.NegotiationType

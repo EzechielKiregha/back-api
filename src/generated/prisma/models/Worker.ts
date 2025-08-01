@@ -223,8 +223,8 @@ export type WorkerWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
-  chats?: Prisma.ChatListRelationFilter
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
+  chatParticipants?: Prisma.ChatParticipantListRelationFilter
 }
 
 export type WorkerOrderByWithRelationInput = {
@@ -240,8 +240,8 @@ export type WorkerOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   business?: Prisma.BusinessOrderByWithRelationInput
   kyc?: Prisma.KYCOrderByWithRelationInput
-  chats?: Prisma.ChatOrderByRelationAggregateInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentOrderByRelationAggregateInput
+  chatParticipants?: Prisma.ChatParticipantOrderByRelationAggregateInput
 }
 
 export type WorkerWhereUniqueInput = Prisma.AtLeast<{
@@ -260,8 +260,8 @@ export type WorkerWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
-  chats?: Prisma.ChatListRelationFilter
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
+  chatParticipants?: Prisma.ChatParticipantListRelationFilter
 }, "id" | "email">
 
 export type WorkerOrderByWithAggregationInput = {
@@ -308,8 +308,8 @@ export type WorkerCreateInput = {
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
-  chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateInput = {
@@ -324,8 +324,8 @@ export type WorkerUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUpdateInput = {
@@ -340,8 +340,8 @@ export type WorkerUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateInput = {
@@ -356,8 +356,8 @@ export type WorkerUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateManyInput = {
@@ -499,20 +499,20 @@ export type WorkerUncheckedUpdateManyWithoutBusinessNestedInput = {
   deleteMany?: Prisma.WorkerScalarWhereInput | Prisma.WorkerScalarWhereInput[]
 }
 
-export type WorkerCreateNestedOneWithoutChatsInput = {
-  create?: Prisma.XOR<Prisma.WorkerCreateWithoutChatsInput, Prisma.WorkerUncheckedCreateWithoutChatsInput>
-  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutChatsInput
+export type WorkerCreateNestedOneWithoutChatParticipantsInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutChatParticipantsInput, Prisma.WorkerUncheckedCreateWithoutChatParticipantsInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutChatParticipantsInput
   connect?: Prisma.WorkerWhereUniqueInput
 }
 
-export type WorkerUpdateOneWithoutChatsNestedInput = {
-  create?: Prisma.XOR<Prisma.WorkerCreateWithoutChatsInput, Prisma.WorkerUncheckedCreateWithoutChatsInput>
-  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutChatsInput
-  upsert?: Prisma.WorkerUpsertWithoutChatsInput
+export type WorkerUpdateOneWithoutChatParticipantsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutChatParticipantsInput, Prisma.WorkerUncheckedCreateWithoutChatParticipantsInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutChatParticipantsInput
+  upsert?: Prisma.WorkerUpsertWithoutChatParticipantsInput
   disconnect?: Prisma.WorkerWhereInput | boolean
   delete?: Prisma.WorkerWhereInput | boolean
   connect?: Prisma.WorkerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutChatsInput, Prisma.WorkerUpdateWithoutChatsInput>, Prisma.WorkerUncheckedUpdateWithoutChatsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutChatParticipantsInput, Prisma.WorkerUpdateWithoutChatParticipantsInput>, Prisma.WorkerUncheckedUpdateWithoutChatParticipantsInput>
 }
 
 export type WorkerCreateNestedOneWithoutKycInput = {
@@ -556,8 +556,8 @@ export type WorkerCreateWithoutBusinessInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
-  chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutBusinessInput = {
@@ -571,8 +571,8 @@ export type WorkerUncheckedCreateWithoutBusinessInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutBusinessInput = {
@@ -617,7 +617,7 @@ export type WorkerScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Worker"> | Date | string
 }
 
-export type WorkerCreateWithoutChatsInput = {
+export type WorkerCreateWithoutChatParticipantsInput = {
   id?: string
   email: string
   fullName?: string | null
@@ -632,7 +632,7 @@ export type WorkerCreateWithoutChatsInput = {
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
 }
 
-export type WorkerUncheckedCreateWithoutChatsInput = {
+export type WorkerUncheckedCreateWithoutChatParticipantsInput = {
   id?: string
   email: string
   fullName?: string | null
@@ -647,23 +647,23 @@ export type WorkerUncheckedCreateWithoutChatsInput = {
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
 }
 
-export type WorkerCreateOrConnectWithoutChatsInput = {
+export type WorkerCreateOrConnectWithoutChatParticipantsInput = {
   where: Prisma.WorkerWhereUniqueInput
-  create: Prisma.XOR<Prisma.WorkerCreateWithoutChatsInput, Prisma.WorkerUncheckedCreateWithoutChatsInput>
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutChatParticipantsInput, Prisma.WorkerUncheckedCreateWithoutChatParticipantsInput>
 }
 
-export type WorkerUpsertWithoutChatsInput = {
-  update: Prisma.XOR<Prisma.WorkerUpdateWithoutChatsInput, Prisma.WorkerUncheckedUpdateWithoutChatsInput>
-  create: Prisma.XOR<Prisma.WorkerCreateWithoutChatsInput, Prisma.WorkerUncheckedCreateWithoutChatsInput>
+export type WorkerUpsertWithoutChatParticipantsInput = {
+  update: Prisma.XOR<Prisma.WorkerUpdateWithoutChatParticipantsInput, Prisma.WorkerUncheckedUpdateWithoutChatParticipantsInput>
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutChatParticipantsInput, Prisma.WorkerUncheckedCreateWithoutChatParticipantsInput>
   where?: Prisma.WorkerWhereInput
 }
 
-export type WorkerUpdateToOneWithWhereWithoutChatsInput = {
+export type WorkerUpdateToOneWithWhereWithoutChatParticipantsInput = {
   where?: Prisma.WorkerWhereInput
-  data: Prisma.XOR<Prisma.WorkerUpdateWithoutChatsInput, Prisma.WorkerUncheckedUpdateWithoutChatsInput>
+  data: Prisma.XOR<Prisma.WorkerUpdateWithoutChatParticipantsInput, Prisma.WorkerUncheckedUpdateWithoutChatParticipantsInput>
 }
 
-export type WorkerUpdateWithoutChatsInput = {
+export type WorkerUpdateWithoutChatParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -678,7 +678,7 @@ export type WorkerUpdateWithoutChatsInput = {
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
 }
 
-export type WorkerUncheckedUpdateWithoutChatsInput = {
+export type WorkerUncheckedUpdateWithoutChatParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -704,8 +704,8 @@ export type WorkerCreateWithoutKycInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
-  chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutKycInput = {
@@ -719,8 +719,8 @@ export type WorkerUncheckedCreateWithoutKycInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutKycInput = {
@@ -750,8 +750,8 @@ export type WorkerUpdateWithoutKycInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutKycInput = {
@@ -765,8 +765,8 @@ export type WorkerUncheckedUpdateWithoutKycInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateWithoutWorkerServiceAssignmentsInput = {
@@ -781,7 +781,7 @@ export type WorkerCreateWithoutWorkerServiceAssignmentsInput = {
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
-  chats?: Prisma.ChatCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput = {
@@ -796,7 +796,7 @@ export type WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutWorkerServiceAssignmentsInput = {
@@ -827,7 +827,7 @@ export type WorkerUpdateWithoutWorkerServiceAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput = {
@@ -842,7 +842,7 @@ export type WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateManyBusinessInput = {
@@ -868,8 +868,8 @@ export type WorkerUpdateWithoutBusinessInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutBusinessInput = {
@@ -883,8 +883,8 @@ export type WorkerUncheckedUpdateWithoutBusinessInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateManyWithoutBusinessInput = {
@@ -905,13 +905,13 @@ export type WorkerUncheckedUpdateManyWithoutBusinessInput = {
  */
 
 export type WorkerCountOutputType = {
-  chats: number
   workerServiceAssignments: number
+  chatParticipants: number
 }
 
 export type WorkerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  chats?: boolean | WorkerCountOutputTypeCountChatsArgs
   workerServiceAssignments?: boolean | WorkerCountOutputTypeCountWorkerServiceAssignmentsArgs
+  chatParticipants?: boolean | WorkerCountOutputTypeCountChatParticipantsArgs
 }
 
 /**
@@ -927,15 +927,15 @@ export type WorkerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * WorkerCountOutputType without action
  */
-export type WorkerCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatWhereInput
+export type WorkerCountOutputTypeCountWorkerServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorkerServiceAssignmentWhereInput
 }
 
 /**
  * WorkerCountOutputType without action
  */
-export type WorkerCountOutputTypeCountWorkerServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.WorkerServiceAssignmentWhereInput
+export type WorkerCountOutputTypeCountChatParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatParticipantWhereInput
 }
 
 
@@ -952,8 +952,8 @@ export type WorkerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   kyc?: boolean | Prisma.Worker$kycArgs<ExtArgs>
-  chats?: boolean | Prisma.Worker$chatsArgs<ExtArgs>
   workerServiceAssignments?: boolean | Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>
+  chatParticipants?: boolean | Prisma.Worker$chatParticipantsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["worker"]>
 
@@ -1002,8 +1002,8 @@ export type WorkerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type WorkerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   kyc?: boolean | Prisma.Worker$kycArgs<ExtArgs>
-  chats?: boolean | Prisma.Worker$chatsArgs<ExtArgs>
   workerServiceAssignments?: boolean | Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>
+  chatParticipants?: boolean | Prisma.Worker$chatParticipantsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1018,8 +1018,8 @@ export type $WorkerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     business: Prisma.$BusinessPayload<ExtArgs>
     kyc: Prisma.$KYCPayload<ExtArgs> | null
-    chats: Prisma.$ChatPayload<ExtArgs>[]
     workerServiceAssignments: Prisma.$WorkerServiceAssignmentPayload<ExtArgs>[]
+    chatParticipants: Prisma.$ChatParticipantPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1428,8 +1428,8 @@ export interface Prisma__WorkerClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   business<T extends Prisma.BusinessDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessDefaultArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   kyc<T extends Prisma.Worker$kycArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$kycArgs<ExtArgs>>): Prisma.Prisma__KYCClient<runtime.Types.Result.GetResult<Prisma.$KYCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  chats<T extends Prisma.Worker$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workerServiceAssignments<T extends Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkerServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatParticipants<T extends Prisma.Worker$chatParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$chatParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1884,30 +1884,6 @@ export type Worker$kycArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 /**
- * Worker.chats
- */
-export type Worker$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Chat
-   */
-  select?: Prisma.ChatSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Chat
-   */
-  omit?: Prisma.ChatOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ChatInclude<ExtArgs> | null
-  where?: Prisma.ChatWhereInput
-  orderBy?: Prisma.ChatOrderByWithRelationInput | Prisma.ChatOrderByWithRelationInput[]
-  cursor?: Prisma.ChatWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
-}
-
-/**
  * Worker.workerServiceAssignments
  */
 export type Worker$workerServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1929,6 +1905,30 @@ export type Worker$workerServiceAssignmentsArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.WorkerServiceAssignmentScalarFieldEnum | Prisma.WorkerServiceAssignmentScalarFieldEnum[]
+}
+
+/**
+ * Worker.chatParticipants
+ */
+export type Worker$chatParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatParticipant
+   */
+  select?: Prisma.ChatParticipantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatParticipant
+   */
+  omit?: Prisma.ChatParticipantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatParticipantInclude<ExtArgs> | null
+  where?: Prisma.ChatParticipantWhereInput
+  orderBy?: Prisma.ChatParticipantOrderByWithRelationInput | Prisma.ChatParticipantOrderByWithRelationInput[]
+  cursor?: Prisma.ChatParticipantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatParticipantScalarFieldEnum | Prisma.ChatParticipantScalarFieldEnum[]
 }
 
 /**

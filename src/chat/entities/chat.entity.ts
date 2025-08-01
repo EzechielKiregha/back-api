@@ -1,49 +1,50 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { BusinessEntity } from 'src/business/entities/business.entity';
-import { ChatMessageEntity } from 'src/chat-nessage/entities/chat-nessage.entity';
+import { ChatMessageEntity } from 'src/chat/entities/chat-nessage.entity';
 import { ClientEntity } from 'src/client/entities/client.entity';
 import { ProductEntity } from 'src/product/entities/product.entity';
 import { WorkerEntity } from 'src/worker/entities/worker.entity';
+import { ChatStatus, NegotiationType } from '../dto/create-chat.input';
+import { FreelanceServiceEntity } from 'src/freelance-service/entities/freelance-service.entity';
+import { ChatParticipantEntity } from './chat-participants.entity';
 
 @ObjectType()
 export class ChatEntity {
   @Field()
   id: string;
 
-  @Field()
-  clientId: string;
+  @Field(() => ChatStatus)
+  status: ChatStatus;
 
-  @Field()
-  productId: string;
+  @Field(() => Boolean)
+  isSecure: boolean;
+
+  @Field(() => NegotiationType, { nullable: true })
+  negotiationType?: NegotiationType;
 
   @Field({ nullable: true })
-  businessId?: string;
+  productId?: string;
+
+  @Field(() => ProductEntity, { nullable: true })
+  product?: ProductEntity;
 
   @Field({ nullable: true })
-  workerId?: string;
+  serviceId?: string;
 
-  @Field()
-  status: string;
+  @Field(() => FreelanceServiceEntity, { nullable: true })
+  service?: FreelanceServiceEntity;
+
+  @Field(() => [ChatParticipantEntity])
+  participants: ChatParticipantEntity[];
+
+  @Field(() => [ChatMessageEntity])
+  messages: ChatMessageEntity[];
 
   @Field()
   createdAt: Date;
 
   @Field()
   updatedAt: Date;
-
-  // Relations
-  @Field(() => ClientEntity) // Client associated with the chat
-  client: ClientEntity;
-
-  @Field(() => ProductEntity) // Product associated with the chat
-  product: ProductEntity;
-
-  @Field(() => BusinessEntity, { nullable: true }) // Business associated with the chat
-  business: BusinessEntity;
-
-  @Field(() => WorkerEntity, { nullable: true }) // Worker associated with the chat
-  worker: WorkerEntity;
-
-  @Field(() => [ChatMessageEntity]) // Messages in the chat
-  messages: ChatMessageEntity[];
 }
+
+

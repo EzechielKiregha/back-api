@@ -12,13 +12,9 @@ export class ChatMessageEntity {
   @Field()
   message: string;
 
-  @Field({ nullable: true })
-  senderId?: string; // ID of the sender (business or client)
+  @Field()
+  senderId: string;
 
   @Field()
   createdAt: Date;
-
-  // Relations
-  @Field(() => ChatEntity) // Chat associated with the message
-  chat: ChatEntity;
 }

@@ -250,6 +250,7 @@ export type FreelanceServiceWhereInput = {
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   orders?: Prisma.FreelanceOrderListRelationFilter
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
+  chats?: Prisma.ChatListRelationFilter
 }
 
 export type FreelanceServiceOrderByWithRelationInput = {
@@ -265,6 +266,7 @@ export type FreelanceServiceOrderByWithRelationInput = {
   business?: Prisma.BusinessOrderByWithRelationInput
   orders?: Prisma.FreelanceOrderOrderByRelationAggregateInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentOrderByRelationAggregateInput
+  chats?: Prisma.ChatOrderByRelationAggregateInput
 }
 
 export type FreelanceServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -283,6 +285,7 @@ export type FreelanceServiceWhereUniqueInput = Prisma.AtLeast<{
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   orders?: Prisma.FreelanceOrderListRelationFilter
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
+  chats?: Prisma.ChatListRelationFilter
 }, "id">
 
 export type FreelanceServiceOrderByWithAggregationInput = {
@@ -329,6 +332,7 @@ export type FreelanceServiceCreateInput = {
   business: Prisma.BusinessCreateNestedOneWithoutFreelanceServicesInput
   orders?: Prisma.FreelanceOrderCreateNestedManyWithoutServiceInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutFreelanceServiceInput
+  chats?: Prisma.ChatCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceUncheckedCreateInput = {
@@ -343,6 +347,7 @@ export type FreelanceServiceUncheckedCreateInput = {
   updatedAt?: Date | string
   orders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutFreelanceServiceInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceUpdateInput = {
@@ -357,6 +362,7 @@ export type FreelanceServiceUpdateInput = {
   business?: Prisma.BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
   orders?: Prisma.FreelanceOrderUpdateManyWithoutServiceNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutFreelanceServiceNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceUncheckedUpdateInput = {
@@ -371,6 +377,7 @@ export type FreelanceServiceUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutFreelanceServiceNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceCreateManyInput = {
@@ -416,6 +423,11 @@ export type FreelanceServiceListRelationFilter = {
 
 export type FreelanceServiceOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type FreelanceServiceNullableScalarRelationFilter = {
+  is?: Prisma.FreelanceServiceWhereInput | null
+  isNot?: Prisma.FreelanceServiceWhereInput | null
 }
 
 export type FreelanceServiceCountOrderByAggregateInput = {
@@ -509,6 +521,22 @@ export type FreelanceServiceUncheckedUpdateManyWithoutBusinessNestedInput = {
   deleteMany?: Prisma.FreelanceServiceScalarWhereInput | Prisma.FreelanceServiceScalarWhereInput[]
 }
 
+export type FreelanceServiceCreateNestedOneWithoutChatsInput = {
+  create?: Prisma.XOR<Prisma.FreelanceServiceCreateWithoutChatsInput, Prisma.FreelanceServiceUncheckedCreateWithoutChatsInput>
+  connectOrCreate?: Prisma.FreelanceServiceCreateOrConnectWithoutChatsInput
+  connect?: Prisma.FreelanceServiceWhereUniqueInput
+}
+
+export type FreelanceServiceUpdateOneWithoutChatsNestedInput = {
+  create?: Prisma.XOR<Prisma.FreelanceServiceCreateWithoutChatsInput, Prisma.FreelanceServiceUncheckedCreateWithoutChatsInput>
+  connectOrCreate?: Prisma.FreelanceServiceCreateOrConnectWithoutChatsInput
+  upsert?: Prisma.FreelanceServiceUpsertWithoutChatsInput
+  disconnect?: Prisma.FreelanceServiceWhereInput | boolean
+  delete?: Prisma.FreelanceServiceWhereInput | boolean
+  connect?: Prisma.FreelanceServiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FreelanceServiceUpdateToOneWithWhereWithoutChatsInput, Prisma.FreelanceServiceUpdateWithoutChatsInput>, Prisma.FreelanceServiceUncheckedUpdateWithoutChatsInput>
+}
+
 export type NullableEnumFreelanceServiceCategoryFieldUpdateOperationsInput = {
   set?: $Enums.FreelanceServiceCategory | null
 }
@@ -552,6 +580,7 @@ export type FreelanceServiceCreateWithoutBusinessInput = {
   updatedAt?: Date | string
   orders?: Prisma.FreelanceOrderCreateNestedManyWithoutServiceInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutFreelanceServiceInput
+  chats?: Prisma.ChatCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceUncheckedCreateWithoutBusinessInput = {
@@ -565,6 +594,7 @@ export type FreelanceServiceUncheckedCreateWithoutBusinessInput = {
   updatedAt?: Date | string
   orders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutFreelanceServiceInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceCreateOrConnectWithoutBusinessInput = {
@@ -608,6 +638,78 @@ export type FreelanceServiceScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"FreelanceService"> | Date | string
 }
 
+export type FreelanceServiceCreateWithoutChatsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isHourly?: boolean
+  rate: number
+  category?: $Enums.FreelanceServiceCategory | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  business: Prisma.BusinessCreateNestedOneWithoutFreelanceServicesInput
+  orders?: Prisma.FreelanceOrderCreateNestedManyWithoutServiceInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutFreelanceServiceInput
+}
+
+export type FreelanceServiceUncheckedCreateWithoutChatsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isHourly?: boolean
+  rate: number
+  category?: $Enums.FreelanceServiceCategory | null
+  businessId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutFreelanceServiceInput
+}
+
+export type FreelanceServiceCreateOrConnectWithoutChatsInput = {
+  where: Prisma.FreelanceServiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.FreelanceServiceCreateWithoutChatsInput, Prisma.FreelanceServiceUncheckedCreateWithoutChatsInput>
+}
+
+export type FreelanceServiceUpsertWithoutChatsInput = {
+  update: Prisma.XOR<Prisma.FreelanceServiceUpdateWithoutChatsInput, Prisma.FreelanceServiceUncheckedUpdateWithoutChatsInput>
+  create: Prisma.XOR<Prisma.FreelanceServiceCreateWithoutChatsInput, Prisma.FreelanceServiceUncheckedCreateWithoutChatsInput>
+  where?: Prisma.FreelanceServiceWhereInput
+}
+
+export type FreelanceServiceUpdateToOneWithWhereWithoutChatsInput = {
+  where?: Prisma.FreelanceServiceWhereInput
+  data: Prisma.XOR<Prisma.FreelanceServiceUpdateWithoutChatsInput, Prisma.FreelanceServiceUncheckedUpdateWithoutChatsInput>
+}
+
+export type FreelanceServiceUpdateWithoutChatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isHourly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rate?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.NullableEnumFreelanceServiceCategoryFieldUpdateOperationsInput | $Enums.FreelanceServiceCategory | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  business?: Prisma.BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
+  orders?: Prisma.FreelanceOrderUpdateManyWithoutServiceNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutFreelanceServiceNestedInput
+}
+
+export type FreelanceServiceUncheckedUpdateWithoutChatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isHourly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rate?: Prisma.FloatFieldUpdateOperationsInput | number
+  category?: Prisma.NullableEnumFreelanceServiceCategoryFieldUpdateOperationsInput | $Enums.FreelanceServiceCategory | null
+  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutFreelanceServiceNestedInput
+}
+
 export type FreelanceServiceCreateWithoutWorkerServiceAssignmentsInput = {
   id?: string
   title: string
@@ -619,6 +721,7 @@ export type FreelanceServiceCreateWithoutWorkerServiceAssignmentsInput = {
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutFreelanceServicesInput
   orders?: Prisma.FreelanceOrderCreateNestedManyWithoutServiceInput
+  chats?: Prisma.ChatCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceUncheckedCreateWithoutWorkerServiceAssignmentsInput = {
@@ -632,6 +735,7 @@ export type FreelanceServiceUncheckedCreateWithoutWorkerServiceAssignmentsInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.FreelanceOrderUncheckedCreateNestedManyWithoutServiceInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceCreateOrConnectWithoutWorkerServiceAssignmentsInput = {
@@ -661,6 +765,7 @@ export type FreelanceServiceUpdateWithoutWorkerServiceAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
   orders?: Prisma.FreelanceOrderUpdateManyWithoutServiceNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceUncheckedUpdateWithoutWorkerServiceAssignmentsInput = {
@@ -674,6 +779,7 @@ export type FreelanceServiceUncheckedUpdateWithoutWorkerServiceAssignmentsInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceCreateWithoutOrdersInput = {
@@ -687,6 +793,7 @@ export type FreelanceServiceCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutFreelanceServicesInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutFreelanceServiceInput
+  chats?: Prisma.ChatCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceUncheckedCreateWithoutOrdersInput = {
@@ -700,6 +807,7 @@ export type FreelanceServiceUncheckedCreateWithoutOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutFreelanceServiceInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutServiceInput
 }
 
 export type FreelanceServiceCreateOrConnectWithoutOrdersInput = {
@@ -729,6 +837,7 @@ export type FreelanceServiceUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutFreelanceServicesNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutFreelanceServiceNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceUncheckedUpdateWithoutOrdersInput = {
@@ -742,6 +851,7 @@ export type FreelanceServiceUncheckedUpdateWithoutOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutFreelanceServiceNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceCreateManyBusinessInput = {
@@ -766,6 +876,7 @@ export type FreelanceServiceUpdateWithoutBusinessInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.FreelanceOrderUpdateManyWithoutServiceNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutFreelanceServiceNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceUncheckedUpdateWithoutBusinessInput = {
@@ -779,6 +890,7 @@ export type FreelanceServiceUncheckedUpdateWithoutBusinessInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.FreelanceOrderUncheckedUpdateManyWithoutServiceNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutFreelanceServiceNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutServiceNestedInput
 }
 
 export type FreelanceServiceUncheckedUpdateManyWithoutBusinessInput = {
@@ -800,11 +912,13 @@ export type FreelanceServiceUncheckedUpdateManyWithoutBusinessInput = {
 export type FreelanceServiceCountOutputType = {
   orders: number
   workerServiceAssignments: number
+  chats: number
 }
 
 export type FreelanceServiceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | FreelanceServiceCountOutputTypeCountOrdersArgs
   workerServiceAssignments?: boolean | FreelanceServiceCountOutputTypeCountWorkerServiceAssignmentsArgs
+  chats?: boolean | FreelanceServiceCountOutputTypeCountChatsArgs
 }
 
 /**
@@ -831,6 +945,13 @@ export type FreelanceServiceCountOutputTypeCountWorkerServiceAssignmentsArgs<Ext
   where?: Prisma.WorkerServiceAssignmentWhereInput
 }
 
+/**
+ * FreelanceServiceCountOutputType without action
+ */
+export type FreelanceServiceCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatWhereInput
+}
+
 
 export type FreelanceServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -845,6 +966,7 @@ export type FreelanceServiceSelect<ExtArgs extends runtime.Types.Extensions.Inte
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   orders?: boolean | Prisma.FreelanceService$ordersArgs<ExtArgs>
   workerServiceAssignments?: boolean | Prisma.FreelanceService$workerServiceAssignmentsArgs<ExtArgs>
+  chats?: boolean | Prisma.FreelanceService$chatsArgs<ExtArgs>
   _count?: boolean | Prisma.FreelanceServiceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["freelanceService"]>
 
@@ -891,6 +1013,7 @@ export type FreelanceServiceInclude<ExtArgs extends runtime.Types.Extensions.Int
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   orders?: boolean | Prisma.FreelanceService$ordersArgs<ExtArgs>
   workerServiceAssignments?: boolean | Prisma.FreelanceService$workerServiceAssignmentsArgs<ExtArgs>
+  chats?: boolean | Prisma.FreelanceService$chatsArgs<ExtArgs>
   _count?: boolean | Prisma.FreelanceServiceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FreelanceServiceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -906,6 +1029,7 @@ export type $FreelanceServicePayload<ExtArgs extends runtime.Types.Extensions.In
     business: Prisma.$BusinessPayload<ExtArgs>
     orders: Prisma.$FreelanceOrderPayload<ExtArgs>[]
     workerServiceAssignments: Prisma.$WorkerServiceAssignmentPayload<ExtArgs>[]
+    chats: Prisma.$ChatPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1314,6 +1438,7 @@ export interface Prisma__FreelanceServiceClient<T, Null = never, ExtArgs extends
   business<T extends Prisma.BusinessDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessDefaultArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   orders<T extends Prisma.FreelanceService$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceService$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FreelanceOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workerServiceAssignments<T extends Prisma.FreelanceService$workerServiceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceService$workerServiceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkerServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chats<T extends Prisma.FreelanceService$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FreelanceService$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1793,6 +1918,30 @@ export type FreelanceService$workerServiceAssignmentsArgs<ExtArgs extends runtim
   take?: number
   skip?: number
   distinct?: Prisma.WorkerServiceAssignmentScalarFieldEnum | Prisma.WorkerServiceAssignmentScalarFieldEnum[]
+}
+
+/**
+ * FreelanceService.chats
+ */
+export type FreelanceService$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Chat
+   */
+  select?: Prisma.ChatSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Chat
+   */
+  omit?: Prisma.ChatOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatInclude<ExtArgs> | null
+  where?: Prisma.ChatWhereInput
+  orderBy?: Prisma.ChatOrderByWithRelationInput | Prisma.ChatOrderByWithRelationInput[]
+  cursor?: Prisma.ChatWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
 }
 
 /**

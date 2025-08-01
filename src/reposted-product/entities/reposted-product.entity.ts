@@ -10,19 +10,19 @@ export class RepostedProductEntity {
   @Field()
   businessId: string;
 
+  @Field(() => BusinessEntity)
+  business: BusinessEntity;
+
   @Field()
   productId: string;
+
+  @Field(() => ProductEntity)
+  product: ProductEntity;
 
   @Field(() => Float)
   earnPercentage: number;
 
   @Field()
   createdAt: Date;
-
-  // Relations
-  @Field(() => BusinessEntity) // Business associated with the reposted product
-  business: BusinessEntity;
-
-  @Field(() => ProductEntity) // Product being reposted
-  product: ProductEntity;
 }
+

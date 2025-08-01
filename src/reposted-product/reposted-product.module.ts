@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
-import { RepostedProductService } from './reposted-product.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { RepostedProductResolver } from './reposted-product.resolver';
+import { RepostedProductService } from './reposted-product.service';
 
+
+
+// Module
 @Module({
-  providers: [RepostedProductResolver, RepostedProductService],
+  providers: [RepostedProductResolver, RepostedProductService, PrismaService],
 })
 export class RepostedProductModule {}

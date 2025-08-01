@@ -110,10 +110,16 @@ model Business {
   referralsReceived    Referral[]            @relation("BusinessReferred")
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
-
-  chats Chat[]
   postOfSales PostOfSale[]
   freelanceOrderBusiness FreelanceOrderBusiness[]
+
+  kycStatus            KycStatus             @default(PENDING)  // Enum: PENDING, VERIFIED, REJECTED
+  isB2BEnabled         Boolean               @default(false)    // B2B participation flag
+  totalProductsSold    Int                   @default(0)        // Tracks sales for threshold
+  hasAgreedToTerms     Boolean               @default(false)    // Terms compliance
+  termsAgreedAt        DateTime?             // Timestamp of agreement
+
+  chatParticipants ChatParticipant[]
 }
 
 model Client {
@@ -129,7 +135,6 @@ model Client {
   kyc                  KYC?                  @relation("ClientKYC")
   orders               Order[]
   reviews              Review[]
-  chats                Chat[]
   recharges            AccountRecharge[]     @relation("ClientRecharges")
   freelanceOrders      FreelanceOrder[]      @relation("ClientOrders")
   referralsMade        Referral[]            @relation("ClientAffiliations")
@@ -137,7 +142,9 @@ model Client {
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
 
-  PostTransaction PostTransaction[]
+  postTransactions PostTransaction[]
+
+  chatParticipants ChatParticipant[]
 }
 
 model Worker {
@@ -153,9 +160,8 @@ model Worker {
   isVerified           Boolean               @default(false)
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
-
-  chats Chat[]
   workerServiceAssignments WorkerServiceAssignment[]
+  chatParticipants ChatParticipant[]
 }
 
 model Category {
@@ -234,21 +240,39 @@ model Review {
   createdAt            DateTime              @default(now())
 }
 
+enum NegotiationType {
+  REOWNERSHIP
+  FREELANCEORDER
+  PURCHASE
+  GENERAL
+}
+
 model Chat {
   id                   String                @id @default(uuid())
-  client               Client                @relation(fields: [clientId], references: [id])
-  clientId             String
-  product              Product               @relation(fields: [productId], references: [id])
-  productId            String
+  status               String                @default("PENDING")
+  isSecure             Boolean               @default(false)
+  negotiationType      NegotiationType?
+  product              Product?              @relation(fields: [productId], references: [id])
+  productId            String?
+  service              FreelanceService?     @relation(fields: [serviceId], references: [id])
+  serviceId            String?
+  participants         ChatParticipant[]     // New relation for dynamic participants
+  messages             ChatMessage[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+}
+
+model ChatParticipant {
+  id                   String                @id @default(uuid())
+  chat                 Chat                  @relation(fields: [chatId], references: [id])
+  chatId               String
+  client               Client?               @relation(fields: [clientId], references: [id])
+  clientId             String?
   business             Business?             @relation(fields: [businessId], references: [id])
   businessId           String?
   worker               Worker?               @relation(fields: [workerId], references: [id])
   workerId             String?
-  status               String                @default("PENDING")
   createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-
-  messages             ChatMessage[]         // Relation to ChatMessage
 }
 
 model ChatMessage {
@@ -281,6 +305,8 @@ model ReOwnedProduct {
   newPrice             Float
   markupPercentage     Float
   agreedViaChatId      String
+  agreementDate        DateTime              // When agreement was finalized
+  isApproved           Boolean               @default(false)  // Approval status
   createdAt            DateTime              @default(now())
 }
 
@@ -360,6 +386,7 @@ model FreelanceService {
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
   workerServiceAssignments WorkerServiceAssignment[]
+  chats Chat[]
 }
 
 model WorkerServiceAssignment {

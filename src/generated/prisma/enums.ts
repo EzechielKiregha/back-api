@@ -113,3 +113,13 @@ export const PostTransactionStatus = {
 } as const
 
 export type PostTransactionStatus = (typeof PostTransactionStatus)[keyof typeof PostTransactionStatus]
+
+
+export const NegotiationType = {
+  REOWNERSHIP: 'REOWNERSHIP',
+  FREELANCEORDER: 'FREELANCEORDER',
+  PURCHASE: 'PURCHASE',
+  GENERAL: 'GENERAL'
+} as const
+
+export type NegotiationType = (typeof NegotiationType)[keyof typeof NegotiationType]

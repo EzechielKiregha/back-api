@@ -477,14 +477,6 @@ export type KYCUncheckedUpdateOneWithoutWorkerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.KYCUpdateToOneWithWhereWithoutWorkerInput, Prisma.KYCUpdateWithoutWorkerInput>, Prisma.KYCUncheckedUpdateWithoutWorkerInput>
 }
 
-export type EnumKycStatusFieldUpdateOperationsInput = {
-  set?: $Enums.KycStatus
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type KYCCreateWithoutBusinessInput = {
   id?: string
   status?: $Enums.KycStatus
