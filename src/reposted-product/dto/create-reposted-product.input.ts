@@ -12,9 +12,9 @@ export class CreateRepostedProductInput {
   @IsString()
   businessId: string;
 
-  @Field(() => Float, { defaultValue: 0.002 })
+  @Field(() => Float, { defaultValue: 0.02 })
   @IsNumber()
   @Min(0)
-  earnPercentage: number;
+  markupPercentage: number;
 }
 

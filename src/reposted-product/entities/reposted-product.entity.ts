@@ -8,21 +8,20 @@ export class RepostedProductEntity {
   id: string;
 
   @Field()
-  businessId: string;
-
-  @Field(() => BusinessEntity)
-  business: BusinessEntity;
-
-  @Field()
   productId: string;
 
   @Field(() => ProductEntity)
   product: ProductEntity;
 
+  @Field()
+  businessId: string;
+
+  @Field(() => BusinessEntity)
+  business: BusinessEntity;
+
   @Field(() => Float)
-  earnPercentage: number;
+  markupPercentage: number;
 
   @Field()
   createdAt: Date;
 }
-

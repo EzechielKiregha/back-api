@@ -1,8 +1,22 @@
-import { CreateAccountRechargeInput } from './create-account-recharge.input';
-import { InputType, Field, PartialType } from '@nestjs/graphql';
+import { IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
+import { Country, RechargeMethod } from './create-account-recharge.input';
+import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateAccountRechargeInput extends PartialType(CreateAccountRechargeInput) {
-  @Field(() => String)
-  id: string;
+export class UpdateAccountRechargeInput {
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  amount?: number;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsEnum(RechargeMethod)
+  method?: RechargeMethod;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsEnum(Country)
+  origin?: Country;
 }

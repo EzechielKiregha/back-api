@@ -7,6 +7,7 @@ export enum RechargeMethod {
   AIRTEL_MONEY = 'AIRTEL_MONEY',
   ORANGE_MONEY = 'ORANGE_MONEY',
   MPESA = 'MPESA',
+  TOKEN = 'TOKEN'
 }
 
 export enum Country {
@@ -47,5 +48,10 @@ export class CreateAccountRechargeInput {
   @IsOptional()
   @IsString()
   businessId?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  tokenTransactionId?: string;
 }
 

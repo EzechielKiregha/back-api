@@ -25,7 +25,7 @@ export class RepostedProductService {
   }
 
   async create(createRepostedProductInput: CreateRepostedProductInput) {
-    const { productId, businessId, earnPercentage } = createRepostedProductInput;
+    const { productId, businessId, markupPercentage } = createRepostedProductInput;
 
     // Check eligibility of reposting business
     const isEligible = await this.checkBusinessEligibility(businessId);
@@ -48,16 +48,32 @@ export class RepostedProductService {
       throw new Error('Original business is not eligible for reposting');
     }
 
-    // Create RepostedProduct record
+    // Check if product exists
+    const prod = await this.prisma.product.findUnique({
+      where: { id: productId },
+      select: { id: true, title: true, price: true, businessId: true, createdAt: true },
+    });
+    if (!prod) {
+      throw new Error('Product not found');
+    }
+
+    // Check for duplicate repost
+    const existingRepost = await this.prisma.repostedProduct.findUnique({
+      where: { productId, businessId },
+    });
+    if (existingRepost) {
+      throw new Error('Business has already reposted this product');
+    }
+
     return this.prisma.repostedProduct.create({
       data: {
-        business: { connect: { id: businessId } },
         product: { connect: { id: productId } },
-        earnPercentage,
+        business: { connect: { id: businessId } },
+        markupPercentage,
       },
       include: {
+        product: { select: { id: true, title: true, price: true, businessId: true, createdAt: true } },
         business: { select: { id: true, name: true, email: true, createdAt: true } },
-        product: { select: { id: true, title: true, price: true, businessId: true } },
       },
     });
   }

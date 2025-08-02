@@ -27,7 +27,7 @@ export type WorkerMinAggregateOutputType = {
   id: string | null
   email: string | null
   fullName: string | null
-  role: string | null
+  role: $Enums.WorkerRole | null
   phone: string | null
   password: string | null
   businessId: string | null
@@ -40,7 +40,7 @@ export type WorkerMaxAggregateOutputType = {
   id: string | null
   email: string | null
   fullName: string | null
-  role: string | null
+  role: $Enums.WorkerRole | null
   phone: string | null
   password: string | null
   businessId: string | null
@@ -180,7 +180,7 @@ export type WorkerGroupByOutputType = {
   id: string
   email: string
   fullName: string | null
-  role: string | null
+  role: $Enums.WorkerRole | null
   phone: string | null
   password: string
   businessId: string
@@ -214,7 +214,7 @@ export type WorkerWhereInput = {
   id?: Prisma.StringFilter<"Worker"> | string
   email?: Prisma.StringFilter<"Worker"> | string
   fullName?: Prisma.StringNullableFilter<"Worker"> | string | null
-  role?: Prisma.StringNullableFilter<"Worker"> | string | null
+  role?: Prisma.EnumWorkerRoleNullableFilter<"Worker"> | $Enums.WorkerRole | null
   phone?: Prisma.StringNullableFilter<"Worker"> | string | null
   password?: Prisma.StringFilter<"Worker"> | string
   businessId?: Prisma.StringFilter<"Worker"> | string
@@ -225,6 +225,8 @@ export type WorkerWhereInput = {
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
   chatParticipants?: Prisma.ChatParticipantListRelationFilter
+  sales?: Prisma.SaleListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }
 
 export type WorkerOrderByWithRelationInput = {
@@ -242,6 +244,8 @@ export type WorkerOrderByWithRelationInput = {
   kyc?: Prisma.KYCOrderByWithRelationInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentOrderByRelationAggregateInput
   chatParticipants?: Prisma.ChatParticipantOrderByRelationAggregateInput
+  sales?: Prisma.SaleOrderByRelationAggregateInput
+  shifts?: Prisma.ShiftOrderByRelationAggregateInput
 }
 
 export type WorkerWhereUniqueInput = Prisma.AtLeast<{
@@ -251,7 +255,7 @@ export type WorkerWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.WorkerWhereInput[]
   NOT?: Prisma.WorkerWhereInput | Prisma.WorkerWhereInput[]
   fullName?: Prisma.StringNullableFilter<"Worker"> | string | null
-  role?: Prisma.StringNullableFilter<"Worker"> | string | null
+  role?: Prisma.EnumWorkerRoleNullableFilter<"Worker"> | $Enums.WorkerRole | null
   phone?: Prisma.StringNullableFilter<"Worker"> | string | null
   password?: Prisma.StringFilter<"Worker"> | string
   businessId?: Prisma.StringFilter<"Worker"> | string
@@ -262,6 +266,8 @@ export type WorkerWhereUniqueInput = Prisma.AtLeast<{
   kyc?: Prisma.XOR<Prisma.KYCNullableScalarRelationFilter, Prisma.KYCWhereInput> | null
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentListRelationFilter
   chatParticipants?: Prisma.ChatParticipantListRelationFilter
+  sales?: Prisma.SaleListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }, "id" | "email">
 
 export type WorkerOrderByWithAggregationInput = {
@@ -287,7 +293,7 @@ export type WorkerScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Worker"> | string
   email?: Prisma.StringWithAggregatesFilter<"Worker"> | string
   fullName?: Prisma.StringNullableWithAggregatesFilter<"Worker"> | string | null
-  role?: Prisma.StringNullableWithAggregatesFilter<"Worker"> | string | null
+  role?: Prisma.EnumWorkerRoleNullableWithAggregatesFilter<"Worker"> | $Enums.WorkerRole | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Worker"> | string | null
   password?: Prisma.StringWithAggregatesFilter<"Worker"> | string
   businessId?: Prisma.StringWithAggregatesFilter<"Worker"> | string
@@ -300,7 +306,7 @@ export type WorkerCreateInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -310,13 +316,15 @@ export type WorkerCreateInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   businessId: string
@@ -326,13 +334,15 @@ export type WorkerUncheckedCreateInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -342,13 +352,15 @@ export type WorkerUpdateInput = {
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -358,13 +370,15 @@ export type WorkerUncheckedUpdateInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateManyInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   businessId: string
@@ -377,7 +391,7 @@ export type WorkerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -389,7 +403,7 @@ export type WorkerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -499,6 +513,10 @@ export type WorkerUncheckedUpdateManyWithoutBusinessNestedInput = {
   deleteMany?: Prisma.WorkerScalarWhereInput | Prisma.WorkerScalarWhereInput[]
 }
 
+export type NullableEnumWorkerRoleFieldUpdateOperationsInput = {
+  set?: $Enums.WorkerRole | null
+}
+
 export type WorkerCreateNestedOneWithoutChatParticipantsInput = {
   create?: Prisma.XOR<Prisma.WorkerCreateWithoutChatParticipantsInput, Prisma.WorkerUncheckedCreateWithoutChatParticipantsInput>
   connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutChatParticipantsInput
@@ -545,11 +563,39 @@ export type WorkerUpdateOneRequiredWithoutWorkerServiceAssignmentsNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutWorkerServiceAssignmentsInput, Prisma.WorkerUpdateWithoutWorkerServiceAssignmentsInput>, Prisma.WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput>
 }
 
+export type WorkerCreateNestedOneWithoutSalesInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutSalesInput, Prisma.WorkerUncheckedCreateWithoutSalesInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutSalesInput
+  connect?: Prisma.WorkerWhereUniqueInput
+}
+
+export type WorkerUpdateOneRequiredWithoutSalesNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutSalesInput, Prisma.WorkerUncheckedCreateWithoutSalesInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutSalesInput
+  upsert?: Prisma.WorkerUpsertWithoutSalesInput
+  connect?: Prisma.WorkerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutSalesInput, Prisma.WorkerUpdateWithoutSalesInput>, Prisma.WorkerUncheckedUpdateWithoutSalesInput>
+}
+
+export type WorkerCreateNestedOneWithoutShiftsInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutShiftsInput, Prisma.WorkerUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutShiftsInput
+  connect?: Prisma.WorkerWhereUniqueInput
+}
+
+export type WorkerUpdateOneRequiredWithoutShiftsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkerCreateWithoutShiftsInput, Prisma.WorkerUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.WorkerCreateOrConnectWithoutShiftsInput
+  upsert?: Prisma.WorkerUpsertWithoutShiftsInput
+  connect?: Prisma.WorkerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkerUpdateToOneWithWhereWithoutShiftsInput, Prisma.WorkerUpdateWithoutShiftsInput>, Prisma.WorkerUncheckedUpdateWithoutShiftsInput>
+}
+
 export type WorkerCreateWithoutBusinessInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -558,13 +604,15 @@ export type WorkerCreateWithoutBusinessInput = {
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutBusinessInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -573,6 +621,8 @@ export type WorkerUncheckedCreateWithoutBusinessInput = {
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutBusinessInput = {
@@ -608,7 +658,7 @@ export type WorkerScalarWhereInput = {
   id?: Prisma.StringFilter<"Worker"> | string
   email?: Prisma.StringFilter<"Worker"> | string
   fullName?: Prisma.StringNullableFilter<"Worker"> | string | null
-  role?: Prisma.StringNullableFilter<"Worker"> | string | null
+  role?: Prisma.EnumWorkerRoleNullableFilter<"Worker"> | $Enums.WorkerRole | null
   phone?: Prisma.StringNullableFilter<"Worker"> | string | null
   password?: Prisma.StringFilter<"Worker"> | string
   businessId?: Prisma.StringFilter<"Worker"> | string
@@ -621,7 +671,7 @@ export type WorkerCreateWithoutChatParticipantsInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -630,13 +680,15 @@ export type WorkerCreateWithoutChatParticipantsInput = {
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutChatParticipantsInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   businessId: string
@@ -645,6 +697,8 @@ export type WorkerUncheckedCreateWithoutChatParticipantsInput = {
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutChatParticipantsInput = {
@@ -667,7 +721,7 @@ export type WorkerUpdateWithoutChatParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -676,13 +730,15 @@ export type WorkerUpdateWithoutChatParticipantsInput = {
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutChatParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -691,13 +747,15 @@ export type WorkerUncheckedUpdateWithoutChatParticipantsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateWithoutKycInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -706,13 +764,15 @@ export type WorkerCreateWithoutKycInput = {
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutKycInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   businessId: string
@@ -721,6 +781,8 @@ export type WorkerUncheckedCreateWithoutKycInput = {
   updatedAt?: Date | string
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutKycInput = {
@@ -743,7 +805,7 @@ export type WorkerUpdateWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -752,13 +814,15 @@ export type WorkerUpdateWithoutKycInput = {
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutKycInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -767,13 +831,15 @@ export type WorkerUncheckedUpdateWithoutKycInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateWithoutWorkerServiceAssignmentsInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -782,13 +848,15 @@ export type WorkerCreateWithoutWorkerServiceAssignmentsInput = {
   business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
   kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   businessId: string
@@ -797,6 +865,8 @@ export type WorkerUncheckedCreateWithoutWorkerServiceAssignmentsInput = {
   updatedAt?: Date | string
   kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
   chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutWorkerInput
 }
 
 export type WorkerCreateOrConnectWithoutWorkerServiceAssignmentsInput = {
@@ -819,7 +889,7 @@ export type WorkerUpdateWithoutWorkerServiceAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -828,13 +898,15 @@ export type WorkerUpdateWithoutWorkerServiceAssignmentsInput = {
   business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -843,13 +915,183 @@ export type WorkerUncheckedUpdateWithoutWorkerServiceAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutWorkerNestedInput
+}
+
+export type WorkerCreateWithoutSalesInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  role?: $Enums.WorkerRole | null
+  phone?: string | null
+  password: string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
+  kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutWorkerInput
+}
+
+export type WorkerUncheckedCreateWithoutSalesInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  role?: $Enums.WorkerRole | null
+  phone?: string | null
+  password: string
+  businessId: string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutWorkerInput
+}
+
+export type WorkerCreateOrConnectWithoutSalesInput = {
+  where: Prisma.WorkerWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutSalesInput, Prisma.WorkerUncheckedCreateWithoutSalesInput>
+}
+
+export type WorkerUpsertWithoutSalesInput = {
+  update: Prisma.XOR<Prisma.WorkerUpdateWithoutSalesInput, Prisma.WorkerUncheckedUpdateWithoutSalesInput>
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutSalesInput, Prisma.WorkerUncheckedCreateWithoutSalesInput>
+  where?: Prisma.WorkerWhereInput
+}
+
+export type WorkerUpdateToOneWithWhereWithoutSalesInput = {
+  where?: Prisma.WorkerWhereInput
+  data: Prisma.XOR<Prisma.WorkerUpdateWithoutSalesInput, Prisma.WorkerUncheckedUpdateWithoutSalesInput>
+}
+
+export type WorkerUpdateWithoutSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
+  kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutWorkerNestedInput
+}
+
+export type WorkerUncheckedUpdateWithoutSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutWorkerNestedInput
+}
+
+export type WorkerCreateWithoutShiftsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  role?: $Enums.WorkerRole | null
+  phone?: string | null
+  password: string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  business: Prisma.BusinessCreateNestedOneWithoutWorkersInput
+  kyc?: Prisma.KYCCreateNestedOneWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleCreateNestedManyWithoutWorkerInput
+}
+
+export type WorkerUncheckedCreateWithoutShiftsInput = {
+  id?: string
+  email: string
+  fullName?: string | null
+  role?: $Enums.WorkerRole | null
+  phone?: string | null
+  password: string
+  businessId: string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kyc?: Prisma.KYCUncheckedCreateNestedOneWithoutWorkerInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedCreateNestedManyWithoutWorkerInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedCreateNestedManyWithoutWorkerInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutWorkerInput
+}
+
+export type WorkerCreateOrConnectWithoutShiftsInput = {
+  where: Prisma.WorkerWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutShiftsInput, Prisma.WorkerUncheckedCreateWithoutShiftsInput>
+}
+
+export type WorkerUpsertWithoutShiftsInput = {
+  update: Prisma.XOR<Prisma.WorkerUpdateWithoutShiftsInput, Prisma.WorkerUncheckedUpdateWithoutShiftsInput>
+  create: Prisma.XOR<Prisma.WorkerCreateWithoutShiftsInput, Prisma.WorkerUncheckedCreateWithoutShiftsInput>
+  where?: Prisma.WorkerWhereInput
+}
+
+export type WorkerUpdateToOneWithWhereWithoutShiftsInput = {
+  where?: Prisma.WorkerWhereInput
+  data: Prisma.XOR<Prisma.WorkerUpdateWithoutShiftsInput, Prisma.WorkerUncheckedUpdateWithoutShiftsInput>
+}
+
+export type WorkerUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  business?: Prisma.BusinessUpdateOneRequiredWithoutWorkersNestedInput
+  kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutWorkerNestedInput
+}
+
+export type WorkerUncheckedUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
+  workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
+  chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerCreateManyBusinessInput = {
   id?: string
   email: string
   fullName?: string | null
-  role?: string | null
+  role?: $Enums.WorkerRole | null
   phone?: string | null
   password: string
   isVerified?: boolean
@@ -861,7 +1103,7 @@ export type WorkerUpdateWithoutBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -870,13 +1112,15 @@ export type WorkerUpdateWithoutBusinessInput = {
   kyc?: Prisma.KYCUpdateOneWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUpdateManyWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateWithoutBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -885,13 +1129,15 @@ export type WorkerUncheckedUpdateWithoutBusinessInput = {
   kyc?: Prisma.KYCUncheckedUpdateOneWithoutWorkerNestedInput
   workerServiceAssignments?: Prisma.WorkerServiceAssignmentUncheckedUpdateManyWithoutWorkerNestedInput
   chatParticipants?: Prisma.ChatParticipantUncheckedUpdateManyWithoutWorkerNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutWorkerNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutWorkerNestedInput
 }
 
 export type WorkerUncheckedUpdateManyWithoutBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableEnumWorkerRoleFieldUpdateOperationsInput | $Enums.WorkerRole | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -907,11 +1153,15 @@ export type WorkerUncheckedUpdateManyWithoutBusinessInput = {
 export type WorkerCountOutputType = {
   workerServiceAssignments: number
   chatParticipants: number
+  sales: number
+  shifts: number
 }
 
 export type WorkerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workerServiceAssignments?: boolean | WorkerCountOutputTypeCountWorkerServiceAssignmentsArgs
   chatParticipants?: boolean | WorkerCountOutputTypeCountChatParticipantsArgs
+  sales?: boolean | WorkerCountOutputTypeCountSalesArgs
+  shifts?: boolean | WorkerCountOutputTypeCountShiftsArgs
 }
 
 /**
@@ -938,6 +1188,20 @@ export type WorkerCountOutputTypeCountChatParticipantsArgs<ExtArgs extends runti
   where?: Prisma.ChatParticipantWhereInput
 }
 
+/**
+ * WorkerCountOutputType without action
+ */
+export type WorkerCountOutputTypeCountSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SaleWhereInput
+}
+
+/**
+ * WorkerCountOutputType without action
+ */
+export type WorkerCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftWhereInput
+}
+
 
 export type WorkerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -954,6 +1218,8 @@ export type WorkerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   kyc?: boolean | Prisma.Worker$kycArgs<ExtArgs>
   workerServiceAssignments?: boolean | Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>
   chatParticipants?: boolean | Prisma.Worker$chatParticipantsArgs<ExtArgs>
+  sales?: boolean | Prisma.Worker$salesArgs<ExtArgs>
+  shifts?: boolean | Prisma.Worker$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["worker"]>
 
@@ -1004,6 +1270,8 @@ export type WorkerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   kyc?: boolean | Prisma.Worker$kycArgs<ExtArgs>
   workerServiceAssignments?: boolean | Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>
   chatParticipants?: boolean | Prisma.Worker$chatParticipantsArgs<ExtArgs>
+  sales?: boolean | Prisma.Worker$salesArgs<ExtArgs>
+  shifts?: boolean | Prisma.Worker$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1020,12 +1288,14 @@ export type $WorkerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     kyc: Prisma.$KYCPayload<ExtArgs> | null
     workerServiceAssignments: Prisma.$WorkerServiceAssignmentPayload<ExtArgs>[]
     chatParticipants: Prisma.$ChatParticipantPayload<ExtArgs>[]
+    sales: Prisma.$SalePayload<ExtArgs>[]
+    shifts: Prisma.$ShiftPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
     fullName: string | null
-    role: string | null
+    role: $Enums.WorkerRole | null
     phone: string | null
     password: string
     businessId: string
@@ -1430,6 +1700,8 @@ export interface Prisma__WorkerClient<T, Null = never, ExtArgs extends runtime.T
   kyc<T extends Prisma.Worker$kycArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$kycArgs<ExtArgs>>): Prisma.Prisma__KYCClient<runtime.Types.Result.GetResult<Prisma.$KYCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   workerServiceAssignments<T extends Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$workerServiceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkerServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatParticipants<T extends Prisma.Worker$chatParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$chatParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sales<T extends Prisma.Worker$salesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$salesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shifts<T extends Prisma.Worker$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Worker$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1462,7 +1734,7 @@ export interface WorkerFieldRefs {
   readonly id: Prisma.FieldRef<"Worker", 'String'>
   readonly email: Prisma.FieldRef<"Worker", 'String'>
   readonly fullName: Prisma.FieldRef<"Worker", 'String'>
-  readonly role: Prisma.FieldRef<"Worker", 'String'>
+  readonly role: Prisma.FieldRef<"Worker", 'WorkerRole'>
   readonly phone: Prisma.FieldRef<"Worker", 'String'>
   readonly password: Prisma.FieldRef<"Worker", 'String'>
   readonly businessId: Prisma.FieldRef<"Worker", 'String'>
@@ -1929,6 +2201,54 @@ export type Worker$chatParticipantsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ChatParticipantScalarFieldEnum | Prisma.ChatParticipantScalarFieldEnum[]
+}
+
+/**
+ * Worker.sales
+ */
+export type Worker$salesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sale
+   */
+  select?: Prisma.SaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sale
+   */
+  omit?: Prisma.SaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SaleInclude<ExtArgs> | null
+  where?: Prisma.SaleWhereInput
+  orderBy?: Prisma.SaleOrderByWithRelationInput | Prisma.SaleOrderByWithRelationInput[]
+  cursor?: Prisma.SaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SaleScalarFieldEnum | Prisma.SaleScalarFieldEnum[]
+}
+
+/**
+ * Worker.shifts
+ */
+export type Worker$shiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Shift
+   */
+  select?: Prisma.ShiftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Shift
+   */
+  omit?: Prisma.ShiftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShiftInclude<ExtArgs> | null
+  where?: Prisma.ShiftWhereInput
+  orderBy?: Prisma.ShiftOrderByWithRelationInput | Prisma.ShiftOrderByWithRelationInput[]
+  cursor?: Prisma.ShiftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
 }
 
 /**

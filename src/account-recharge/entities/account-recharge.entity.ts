@@ -2,7 +2,7 @@ import { ObjectType, Field, Float, registerEnumType } from '@nestjs/graphql';
 import { BusinessEntity } from 'src/business/entities/business.entity';
 import { ClientEntity } from 'src/client/entities/client.entity';
 import { Country, RechargeMethod } from '../dto/create-account-recharge.input';
-
+import { TokenTransactionEntity } from 'src/token-transaction/entities/token-transaction.entity';
 
 @ObjectType()
 export class AccountRechargeEntity {
@@ -18,14 +18,24 @@ export class AccountRechargeEntity {
   @Field(() => Country)
   origin: Country;
 
-  @Field()
-  createdAt: Date;
+  @Field({ nullable: true })
+  businessId?: string;
+
+  @Field(() => BusinessEntity, { nullable: true })
+  business?: BusinessEntity;
+
+  @Field({ nullable: true })
+  clientId?: string;
 
   @Field(() => ClientEntity, { nullable: true })
   client?: ClientEntity;
 
-  @Field(() => BusinessEntity, { nullable: true })
-  business?: BusinessEntity;
+  @Field({ nullable: true })
+  tokenTransactionId?: string;
+
+  @Field(() => TokenTransactionEntity, { nullable: true })
+  tokenTransaction?: TokenTransactionEntity;
+
+  @Field()
+  createdAt: Date;
 }
-
-

@@ -40,6 +40,7 @@ export type AccountRechargeMinAggregateOutputType = {
   origin: $Enums.Country | null
   businessId: string | null
   clientId: string | null
+  tokenTransactionId: string | null
   createdAt: Date | null
 }
 
@@ -50,6 +51,7 @@ export type AccountRechargeMaxAggregateOutputType = {
   origin: $Enums.Country | null
   businessId: string | null
   clientId: string | null
+  tokenTransactionId: string | null
   createdAt: Date | null
 }
 
@@ -60,6 +62,7 @@ export type AccountRechargeCountAggregateOutputType = {
   origin: number
   businessId: number
   clientId: number
+  tokenTransactionId: number
   createdAt: number
   _all: number
 }
@@ -80,6 +83,7 @@ export type AccountRechargeMinAggregateInputType = {
   origin?: true
   businessId?: true
   clientId?: true
+  tokenTransactionId?: true
   createdAt?: true
 }
 
@@ -90,6 +94,7 @@ export type AccountRechargeMaxAggregateInputType = {
   origin?: true
   businessId?: true
   clientId?: true
+  tokenTransactionId?: true
   createdAt?: true
 }
 
@@ -100,6 +105,7 @@ export type AccountRechargeCountAggregateInputType = {
   origin?: true
   businessId?: true
   clientId?: true
+  tokenTransactionId?: true
   createdAt?: true
   _all?: true
 }
@@ -197,6 +203,7 @@ export type AccountRechargeGroupByOutputType = {
   origin: $Enums.Country
   businessId: string | null
   clientId: string | null
+  tokenTransactionId: string | null
   createdAt: Date
   _count: AccountRechargeCountAggregateOutputType | null
   _avg: AccountRechargeAvgAggregateOutputType | null
@@ -230,9 +237,11 @@ export type AccountRechargeWhereInput = {
   origin?: Prisma.EnumCountryFilter<"AccountRecharge"> | $Enums.Country
   businessId?: Prisma.StringNullableFilter<"AccountRecharge"> | string | null
   clientId?: Prisma.StringNullableFilter<"AccountRecharge"> | string | null
+  tokenTransactionId?: Prisma.StringNullableFilter<"AccountRecharge"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AccountRecharge"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessNullableScalarRelationFilter, Prisma.BusinessWhereInput> | null
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  tokenTransaction?: Prisma.XOR<Prisma.TokenTransactionNullableScalarRelationFilter, Prisma.TokenTransactionWhereInput> | null
 }
 
 export type AccountRechargeOrderByWithRelationInput = {
@@ -242,13 +251,16 @@ export type AccountRechargeOrderByWithRelationInput = {
   origin?: Prisma.SortOrder
   businessId?: Prisma.SortOrderInput | Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tokenTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   business?: Prisma.BusinessOrderByWithRelationInput
   client?: Prisma.ClientOrderByWithRelationInput
+  tokenTransaction?: Prisma.TokenTransactionOrderByWithRelationInput
 }
 
 export type AccountRechargeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  tokenTransactionId?: string
   AND?: Prisma.AccountRechargeWhereInput | Prisma.AccountRechargeWhereInput[]
   OR?: Prisma.AccountRechargeWhereInput[]
   NOT?: Prisma.AccountRechargeWhereInput | Prisma.AccountRechargeWhereInput[]
@@ -260,7 +272,8 @@ export type AccountRechargeWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"AccountRecharge"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessNullableScalarRelationFilter, Prisma.BusinessWhereInput> | null
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
-}, "id">
+  tokenTransaction?: Prisma.XOR<Prisma.TokenTransactionNullableScalarRelationFilter, Prisma.TokenTransactionWhereInput> | null
+}, "id" | "tokenTransactionId">
 
 export type AccountRechargeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -269,6 +282,7 @@ export type AccountRechargeOrderByWithAggregationInput = {
   origin?: Prisma.SortOrder
   businessId?: Prisma.SortOrderInput | Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tokenTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.AccountRechargeCountOrderByAggregateInput
   _avg?: Prisma.AccountRechargeAvgOrderByAggregateInput
@@ -287,6 +301,7 @@ export type AccountRechargeScalarWhereWithAggregatesInput = {
   origin?: Prisma.EnumCountryWithAggregatesFilter<"AccountRecharge"> | $Enums.Country
   businessId?: Prisma.StringNullableWithAggregatesFilter<"AccountRecharge"> | string | null
   clientId?: Prisma.StringNullableWithAggregatesFilter<"AccountRecharge"> | string | null
+  tokenTransactionId?: Prisma.StringNullableWithAggregatesFilter<"AccountRecharge"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AccountRecharge"> | Date | string
 }
 
@@ -298,6 +313,7 @@ export type AccountRechargeCreateInput = {
   createdAt?: Date | string
   business?: Prisma.BusinessCreateNestedOneWithoutRechargesInput
   client?: Prisma.ClientCreateNestedOneWithoutRechargesInput
+  tokenTransaction?: Prisma.TokenTransactionCreateNestedOneWithoutAccountRechargeInput
 }
 
 export type AccountRechargeUncheckedCreateInput = {
@@ -307,6 +323,7 @@ export type AccountRechargeUncheckedCreateInput = {
   origin: $Enums.Country
   businessId?: string | null
   clientId?: string | null
+  tokenTransactionId?: string | null
   createdAt?: Date | string
 }
 
@@ -318,6 +335,7 @@ export type AccountRechargeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneWithoutRechargesNestedInput
   client?: Prisma.ClientUpdateOneWithoutRechargesNestedInput
+  tokenTransaction?: Prisma.TokenTransactionUpdateOneWithoutAccountRechargeNestedInput
 }
 
 export type AccountRechargeUncheckedUpdateInput = {
@@ -327,6 +345,7 @@ export type AccountRechargeUncheckedUpdateInput = {
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokenTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -337,6 +356,7 @@ export type AccountRechargeCreateManyInput = {
   origin: $Enums.Country
   businessId?: string | null
   clientId?: string | null
+  tokenTransactionId?: string | null
   createdAt?: Date | string
 }
 
@@ -355,6 +375,7 @@ export type AccountRechargeUncheckedUpdateManyInput = {
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokenTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -375,6 +396,7 @@ export type AccountRechargeCountOrderByAggregateInput = {
   origin?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
+  tokenTransactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -389,6 +411,7 @@ export type AccountRechargeMaxOrderByAggregateInput = {
   origin?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
+  tokenTransactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -399,6 +422,7 @@ export type AccountRechargeMinOrderByAggregateInput = {
   origin?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
+  tokenTransactionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -490,6 +514,48 @@ export type AccountRechargeUncheckedUpdateManyWithoutClientNestedInput = {
   deleteMany?: Prisma.AccountRechargeScalarWhereInput | Prisma.AccountRechargeScalarWhereInput[]
 }
 
+export type AccountRechargeCreateNestedManyWithoutTokenTransactionInput = {
+  create?: Prisma.XOR<Prisma.AccountRechargeCreateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput> | Prisma.AccountRechargeCreateWithoutTokenTransactionInput[] | Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput[]
+  connectOrCreate?: Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput | Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput[]
+  createMany?: Prisma.AccountRechargeCreateManyTokenTransactionInputEnvelope
+  connect?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+}
+
+export type AccountRechargeUncheckedCreateNestedManyWithoutTokenTransactionInput = {
+  create?: Prisma.XOR<Prisma.AccountRechargeCreateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput> | Prisma.AccountRechargeCreateWithoutTokenTransactionInput[] | Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput[]
+  connectOrCreate?: Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput | Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput[]
+  createMany?: Prisma.AccountRechargeCreateManyTokenTransactionInputEnvelope
+  connect?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+}
+
+export type AccountRechargeUpdateManyWithoutTokenTransactionNestedInput = {
+  create?: Prisma.XOR<Prisma.AccountRechargeCreateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput> | Prisma.AccountRechargeCreateWithoutTokenTransactionInput[] | Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput[]
+  connectOrCreate?: Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput | Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput[]
+  upsert?: Prisma.AccountRechargeUpsertWithWhereUniqueWithoutTokenTransactionInput | Prisma.AccountRechargeUpsertWithWhereUniqueWithoutTokenTransactionInput[]
+  createMany?: Prisma.AccountRechargeCreateManyTokenTransactionInputEnvelope
+  set?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  disconnect?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  delete?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  connect?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  update?: Prisma.AccountRechargeUpdateWithWhereUniqueWithoutTokenTransactionInput | Prisma.AccountRechargeUpdateWithWhereUniqueWithoutTokenTransactionInput[]
+  updateMany?: Prisma.AccountRechargeUpdateManyWithWhereWithoutTokenTransactionInput | Prisma.AccountRechargeUpdateManyWithWhereWithoutTokenTransactionInput[]
+  deleteMany?: Prisma.AccountRechargeScalarWhereInput | Prisma.AccountRechargeScalarWhereInput[]
+}
+
+export type AccountRechargeUncheckedUpdateManyWithoutTokenTransactionNestedInput = {
+  create?: Prisma.XOR<Prisma.AccountRechargeCreateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput> | Prisma.AccountRechargeCreateWithoutTokenTransactionInput[] | Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput[]
+  connectOrCreate?: Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput | Prisma.AccountRechargeCreateOrConnectWithoutTokenTransactionInput[]
+  upsert?: Prisma.AccountRechargeUpsertWithWhereUniqueWithoutTokenTransactionInput | Prisma.AccountRechargeUpsertWithWhereUniqueWithoutTokenTransactionInput[]
+  createMany?: Prisma.AccountRechargeCreateManyTokenTransactionInputEnvelope
+  set?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  disconnect?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  delete?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  connect?: Prisma.AccountRechargeWhereUniqueInput | Prisma.AccountRechargeWhereUniqueInput[]
+  update?: Prisma.AccountRechargeUpdateWithWhereUniqueWithoutTokenTransactionInput | Prisma.AccountRechargeUpdateWithWhereUniqueWithoutTokenTransactionInput[]
+  updateMany?: Prisma.AccountRechargeUpdateManyWithWhereWithoutTokenTransactionInput | Prisma.AccountRechargeUpdateManyWithWhereWithoutTokenTransactionInput[]
+  deleteMany?: Prisma.AccountRechargeScalarWhereInput | Prisma.AccountRechargeScalarWhereInput[]
+}
+
 export type EnumRechargeMethodFieldUpdateOperationsInput = {
   set?: $Enums.RechargeMethod
 }
@@ -505,6 +571,7 @@ export type AccountRechargeCreateWithoutBusinessInput = {
   origin: $Enums.Country
   createdAt?: Date | string
   client?: Prisma.ClientCreateNestedOneWithoutRechargesInput
+  tokenTransaction?: Prisma.TokenTransactionCreateNestedOneWithoutAccountRechargeInput
 }
 
 export type AccountRechargeUncheckedCreateWithoutBusinessInput = {
@@ -513,6 +580,7 @@ export type AccountRechargeUncheckedCreateWithoutBusinessInput = {
   method: $Enums.RechargeMethod
   origin: $Enums.Country
   clientId?: string | null
+  tokenTransactionId?: string | null
   createdAt?: Date | string
 }
 
@@ -552,6 +620,7 @@ export type AccountRechargeScalarWhereInput = {
   origin?: Prisma.EnumCountryFilter<"AccountRecharge"> | $Enums.Country
   businessId?: Prisma.StringNullableFilter<"AccountRecharge"> | string | null
   clientId?: Prisma.StringNullableFilter<"AccountRecharge"> | string | null
+  tokenTransactionId?: Prisma.StringNullableFilter<"AccountRecharge"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AccountRecharge"> | Date | string
 }
 
@@ -562,6 +631,7 @@ export type AccountRechargeCreateWithoutClientInput = {
   origin: $Enums.Country
   createdAt?: Date | string
   business?: Prisma.BusinessCreateNestedOneWithoutRechargesInput
+  tokenTransaction?: Prisma.TokenTransactionCreateNestedOneWithoutAccountRechargeInput
 }
 
 export type AccountRechargeUncheckedCreateWithoutClientInput = {
@@ -570,6 +640,7 @@ export type AccountRechargeUncheckedCreateWithoutClientInput = {
   method: $Enums.RechargeMethod
   origin: $Enums.Country
   businessId?: string | null
+  tokenTransactionId?: string | null
   createdAt?: Date | string
 }
 
@@ -599,12 +670,59 @@ export type AccountRechargeUpdateManyWithWhereWithoutClientInput = {
   data: Prisma.XOR<Prisma.AccountRechargeUpdateManyMutationInput, Prisma.AccountRechargeUncheckedUpdateManyWithoutClientInput>
 }
 
+export type AccountRechargeCreateWithoutTokenTransactionInput = {
+  id?: string
+  amount: number
+  method: $Enums.RechargeMethod
+  origin: $Enums.Country
+  createdAt?: Date | string
+  business?: Prisma.BusinessCreateNestedOneWithoutRechargesInput
+  client?: Prisma.ClientCreateNestedOneWithoutRechargesInput
+}
+
+export type AccountRechargeUncheckedCreateWithoutTokenTransactionInput = {
+  id?: string
+  amount: number
+  method: $Enums.RechargeMethod
+  origin: $Enums.Country
+  businessId?: string | null
+  clientId?: string | null
+  createdAt?: Date | string
+}
+
+export type AccountRechargeCreateOrConnectWithoutTokenTransactionInput = {
+  where: Prisma.AccountRechargeWhereUniqueInput
+  create: Prisma.XOR<Prisma.AccountRechargeCreateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput>
+}
+
+export type AccountRechargeCreateManyTokenTransactionInputEnvelope = {
+  data: Prisma.AccountRechargeCreateManyTokenTransactionInput | Prisma.AccountRechargeCreateManyTokenTransactionInput[]
+  skipDuplicates?: boolean
+}
+
+export type AccountRechargeUpsertWithWhereUniqueWithoutTokenTransactionInput = {
+  where: Prisma.AccountRechargeWhereUniqueInput
+  update: Prisma.XOR<Prisma.AccountRechargeUpdateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedUpdateWithoutTokenTransactionInput>
+  create: Prisma.XOR<Prisma.AccountRechargeCreateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedCreateWithoutTokenTransactionInput>
+}
+
+export type AccountRechargeUpdateWithWhereUniqueWithoutTokenTransactionInput = {
+  where: Prisma.AccountRechargeWhereUniqueInput
+  data: Prisma.XOR<Prisma.AccountRechargeUpdateWithoutTokenTransactionInput, Prisma.AccountRechargeUncheckedUpdateWithoutTokenTransactionInput>
+}
+
+export type AccountRechargeUpdateManyWithWhereWithoutTokenTransactionInput = {
+  where: Prisma.AccountRechargeScalarWhereInput
+  data: Prisma.XOR<Prisma.AccountRechargeUpdateManyMutationInput, Prisma.AccountRechargeUncheckedUpdateManyWithoutTokenTransactionInput>
+}
+
 export type AccountRechargeCreateManyBusinessInput = {
   id?: string
   amount: number
   method: $Enums.RechargeMethod
   origin: $Enums.Country
   clientId?: string | null
+  tokenTransactionId?: string | null
   createdAt?: Date | string
 }
 
@@ -615,6 +733,7 @@ export type AccountRechargeUpdateWithoutBusinessInput = {
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   client?: Prisma.ClientUpdateOneWithoutRechargesNestedInput
+  tokenTransaction?: Prisma.TokenTransactionUpdateOneWithoutAccountRechargeNestedInput
 }
 
 export type AccountRechargeUncheckedUpdateWithoutBusinessInput = {
@@ -623,6 +742,7 @@ export type AccountRechargeUncheckedUpdateWithoutBusinessInput = {
   method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokenTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -632,6 +752,7 @@ export type AccountRechargeUncheckedUpdateManyWithoutBusinessInput = {
   method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokenTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -641,6 +762,7 @@ export type AccountRechargeCreateManyClientInput = {
   method: $Enums.RechargeMethod
   origin: $Enums.Country
   businessId?: string | null
+  tokenTransactionId?: string | null
   createdAt?: Date | string
 }
 
@@ -651,6 +773,7 @@ export type AccountRechargeUpdateWithoutClientInput = {
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneWithoutRechargesNestedInput
+  tokenTransaction?: Prisma.TokenTransactionUpdateOneWithoutAccountRechargeNestedInput
 }
 
 export type AccountRechargeUncheckedUpdateWithoutClientInput = {
@@ -659,6 +782,7 @@ export type AccountRechargeUncheckedUpdateWithoutClientInput = {
   method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokenTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -668,6 +792,47 @@ export type AccountRechargeUncheckedUpdateManyWithoutClientInput = {
   method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
   origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
   businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokenTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AccountRechargeCreateManyTokenTransactionInput = {
+  id?: string
+  amount: number
+  method: $Enums.RechargeMethod
+  origin: $Enums.Country
+  businessId?: string | null
+  clientId?: string | null
+  createdAt?: Date | string
+}
+
+export type AccountRechargeUpdateWithoutTokenTransactionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
+  origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  business?: Prisma.BusinessUpdateOneWithoutRechargesNestedInput
+  client?: Prisma.ClientUpdateOneWithoutRechargesNestedInput
+}
+
+export type AccountRechargeUncheckedUpdateWithoutTokenTransactionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
+  origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
+  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AccountRechargeUncheckedUpdateManyWithoutTokenTransactionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  method?: Prisma.EnumRechargeMethodFieldUpdateOperationsInput | $Enums.RechargeMethod
+  origin?: Prisma.EnumCountryFieldUpdateOperationsInput | $Enums.Country
+  businessId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -680,9 +845,11 @@ export type AccountRechargeSelect<ExtArgs extends runtime.Types.Extensions.Inter
   origin?: boolean
   businessId?: boolean
   clientId?: boolean
+  tokenTransactionId?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.AccountRecharge$businessArgs<ExtArgs>
   client?: boolean | Prisma.AccountRecharge$clientArgs<ExtArgs>
+  tokenTransaction?: boolean | Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>
 }, ExtArgs["result"]["accountRecharge"]>
 
 export type AccountRechargeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -692,9 +859,11 @@ export type AccountRechargeSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   origin?: boolean
   businessId?: boolean
   clientId?: boolean
+  tokenTransactionId?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.AccountRecharge$businessArgs<ExtArgs>
   client?: boolean | Prisma.AccountRecharge$clientArgs<ExtArgs>
+  tokenTransaction?: boolean | Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>
 }, ExtArgs["result"]["accountRecharge"]>
 
 export type AccountRechargeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -704,9 +873,11 @@ export type AccountRechargeSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   origin?: boolean
   businessId?: boolean
   clientId?: boolean
+  tokenTransactionId?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.AccountRecharge$businessArgs<ExtArgs>
   client?: boolean | Prisma.AccountRecharge$clientArgs<ExtArgs>
+  tokenTransaction?: boolean | Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>
 }, ExtArgs["result"]["accountRecharge"]>
 
 export type AccountRechargeSelectScalar = {
@@ -716,21 +887,25 @@ export type AccountRechargeSelectScalar = {
   origin?: boolean
   businessId?: boolean
   clientId?: boolean
+  tokenTransactionId?: boolean
   createdAt?: boolean
 }
 
-export type AccountRechargeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "method" | "origin" | "businessId" | "clientId" | "createdAt", ExtArgs["result"]["accountRecharge"]>
+export type AccountRechargeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "method" | "origin" | "businessId" | "clientId" | "tokenTransactionId" | "createdAt", ExtArgs["result"]["accountRecharge"]>
 export type AccountRechargeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.AccountRecharge$businessArgs<ExtArgs>
   client?: boolean | Prisma.AccountRecharge$clientArgs<ExtArgs>
+  tokenTransaction?: boolean | Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>
 }
 export type AccountRechargeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.AccountRecharge$businessArgs<ExtArgs>
   client?: boolean | Prisma.AccountRecharge$clientArgs<ExtArgs>
+  tokenTransaction?: boolean | Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>
 }
 export type AccountRechargeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.AccountRecharge$businessArgs<ExtArgs>
   client?: boolean | Prisma.AccountRecharge$clientArgs<ExtArgs>
+  tokenTransaction?: boolean | Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>
 }
 
 export type $AccountRechargePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -738,6 +913,7 @@ export type $AccountRechargePayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     business: Prisma.$BusinessPayload<ExtArgs> | null
     client: Prisma.$ClientPayload<ExtArgs> | null
+    tokenTransaction: Prisma.$TokenTransactionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -746,6 +922,7 @@ export type $AccountRechargePayload<ExtArgs extends runtime.Types.Extensions.Int
     origin: $Enums.Country
     businessId: string | null
     clientId: string | null
+    tokenTransactionId: string | null
     createdAt: Date
   }, ExtArgs["result"]["accountRecharge"]>
   composites: {}
@@ -1143,6 +1320,7 @@ export interface Prisma__AccountRechargeClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   business<T extends Prisma.AccountRecharge$businessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountRecharge$businessArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   client<T extends Prisma.AccountRecharge$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountRecharge$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tokenTransaction<T extends Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountRecharge$tokenTransactionArgs<ExtArgs>>): Prisma.Prisma__TokenTransactionClient<runtime.Types.Result.GetResult<Prisma.$TokenTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1178,6 +1356,7 @@ export interface AccountRechargeFieldRefs {
   readonly origin: Prisma.FieldRef<"AccountRecharge", 'Country'>
   readonly businessId: Prisma.FieldRef<"AccountRecharge", 'String'>
   readonly clientId: Prisma.FieldRef<"AccountRecharge", 'String'>
+  readonly tokenTransactionId: Prisma.FieldRef<"AccountRecharge", 'String'>
   readonly createdAt: Prisma.FieldRef<"AccountRecharge", 'DateTime'>
 }
     
@@ -1610,6 +1789,25 @@ export type AccountRecharge$clientArgs<ExtArgs extends runtime.Types.Extensions.
    */
   include?: Prisma.ClientInclude<ExtArgs> | null
   where?: Prisma.ClientWhereInput
+}
+
+/**
+ * AccountRecharge.tokenTransaction
+ */
+export type AccountRecharge$tokenTransactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TokenTransaction
+   */
+  select?: Prisma.TokenTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TokenTransaction
+   */
+  omit?: Prisma.TokenTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TokenTransactionInclude<ExtArgs> | null
+  where?: Prisma.TokenTransactionWhereInput
 }
 
 /**

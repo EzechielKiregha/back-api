@@ -42,7 +42,7 @@ export class BusinessService {
       include: {
         products: { select: { id: true, title: true, price: true, stock: true, createdAt: true } },
         workers: { select: { id: true, email: true, fullName: true, role: true, createdAt: true } },
-        repostedItems: { select: { id: true, earnPercentage: true, createdAt: true } },
+        repostedItems: { select: { id: true, markupPercentage: true, createdAt: true } },
         reownedItems: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
         recharges: { select: { id: true, amount: true, method: true, createdAt: true } },
         ads: { select: { id: true, price: true, periodDays: true, createdAt: true, endedAt: true } },
@@ -62,7 +62,7 @@ export class BusinessService {
       include: {
         products: { select: { id: true, title: true, price: true, stock: true, createdAt: true } },
         workers: { select: { id: true, email: true, fullName: true, role: true, createdAt: true } },
-        repostedItems: { select: { id: true, earnPercentage: true, createdAt: true } },
+        repostedItems: { select: { id: true, markupPercentage: true, createdAt: true } },
         reownedItems: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
         recharges: { select: { id: true, amount: true, method: true, createdAt: true } },
         ads: { select: { id: true, price: true, periodDays: true, createdAt: true, endedAt: true } },

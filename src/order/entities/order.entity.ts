@@ -23,6 +23,9 @@ export class OrderEntity {
   @Field()
   updatedAt: Date;
 
+  @Field()
+  clientId: string;
+
   @Field(() => ClientEntity)
   client: ClientEntity;
 

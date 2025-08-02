@@ -12,7 +12,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // Resolver
 @Resolver(() => OrderEntity)
 export class OrderResolver {
-  constructor(private readonly orderService: OrderService, private readonly prisma: PrismaService) {}
+  constructor(private readonly orderService: OrderService) {}
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('client')
@@ -30,59 +30,22 @@ export class OrderResolver {
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('client', 'business')
-  @Query(() => [OrderEntity], { name: 'orders', description: 'Retrieves orders based on user role.' })
+  @Query(() => [OrderEntity], { name: 'orders', description: 'Retrieves orders.' })
   async getOrders(@Context() context) {
     const user = context.req.user;
-    if (user.role === 'client') {
-      return this.prisma.order.findMany({
-        where: { clientId: user.id },
-        include: {
-          client: { select: { id: true, username: true, email: true, createdAt: true } },
-          payment: { select: { id: true, amount: true, method: true, status: true, transactionDate: true, qrCode: true, createdAt: true } },
-          products: { select: { id: true, quantity: true, createdAt: true, product: { select: { id: true, title: true, price: true, stock: true, createdAt: true } } } },
-        },
-      });
-    }
-    if (user.role === 'business') {
-      return this.prisma.order.findMany({
-        where: {
-          products: {
-            some: {
-              product: { businessId: user.id },
-            },
-          },
-        },
-        include: {
-          client: { select: { id: true, username: true, email: true, createdAt: true } },
-          payment: { select: { id: true, amount: true, method: true, status: true, transactionDate: true, qrCode: true, createdAt: true } },
-          products: { select: { id: true, quantity: true, createdAt: true, product: { select: { id: true, title: true, price: true, stock: true, createdAt: true } } } },
-        },
-      });
-    }
-    throw new Error('Unauthorized role');
+    return this.orderService.findAll();
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('client', 'business')
   @Query(() => OrderEntity, { name: 'order', description: 'Retrieves a single order by ID.' })
-  async getOrder(@Args('id', { type: () => String }) id: string, @Context() context) {
-    const user = context.req.user;
-    const order = await this.orderService.findOne(id);
-    if (!order) {
-      throw new Error('Order not found');
-    }
-    if (user.role === 'client' && user.id !== order.client.id) {
-      throw new Error('Clients can only access their own orders');
-    }
-    if (user.role === 'business' && !order.products.some(item => item.product.businessId === user.id)) {
-      throw new Error('Businesses can only access orders containing their products');
-    }
-    return order;
+  async getOrder(@Args('id', { type: () => String }) id: string) {
+    return this.orderService.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('client')
-  @Mutation(() => OrderEntity, { description: 'Updates an order’s details.' })
+  @Mutation(() => OrderEntity, { description: 'Updates an order.' })
   async updateOrder(
     @Args('id', { type: () => String }) id: string,
     @Args('updateOrderInput') updateOrderInput: UpdateOrderInput,
@@ -90,15 +53,12 @@ export class OrderResolver {
   ) {
     const user = context.req.user;
     const order = await this.orderService.findOne(id);
-    if (!order) {
-      throw new Error('Order not found');
-    }
-    if (user.id !== order.client.id) {
+
+    if (!order) throw new Error("Order not found")
+
+    if (order.clientId !== user.id) {
       throw new Error('Clients can only update their own orders');
     }
-
-    if (!updateOrderInput) return BadRequestException
-
     return this.orderService.update(id, updateOrderInput);
   }
 
@@ -108,13 +68,12 @@ export class OrderResolver {
   async deleteOrder(@Args('id', { type: () => String }) id: string, @Context() context) {
     const user = context.req.user;
     const order = await this.orderService.findOne(id);
-    if (!order) {
-      throw new Error('Order not found');
-    }
-    if (user.id !== order.client.id) {
+
+    if (!order) throw new Error("Order not found")
+
+    if (order.clientId !== user.id) {
       throw new Error('Clients can only delete their own orders');
     }
     return this.orderService.remove(id);
   }
 }
-

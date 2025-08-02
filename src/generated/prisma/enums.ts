@@ -19,7 +19,8 @@ export const RechargeMethod = {
   MTN_MONEY: 'MTN_MONEY',
   AIRTEL_MONEY: 'AIRTEL_MONEY',
   ORANGE_MONEY: 'ORANGE_MONEY',
-  MPESA: 'MPESA'
+  MPESA: 'MPESA',
+  TOKEN: 'TOKEN'
 } as const
 
 export type RechargeMethod = (typeof RechargeMethod)[keyof typeof RechargeMethod]
@@ -57,7 +58,9 @@ export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 export const PaymentMethod = {
   TOKEN: 'TOKEN',
-  MOBILE_MONEY: 'MOBILE_MONEY'
+  MOBILE_MONEY: 'MOBILE_MONEY',
+  CASH: 'CASH',
+  CARD: 'CARD'
 } as const
 
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
@@ -125,6 +128,15 @@ export const NegotiationType = {
 export type NegotiationType = (typeof NegotiationType)[keyof typeof NegotiationType]
 
 
+export const TokenTransactionType = {
+  RELEASE: 'RELEASE',
+  PROFIT_SHARE: 'PROFIT_SHARE',
+  REPOST_COMMISSION: 'REPOST_COMMISSION'
+} as const
+
+export type TokenTransactionType = (typeof TokenTransactionType)[keyof typeof TokenTransactionType]
+
+
 export const ChatStatus = {
   PENDING: 'PENDING',
   ACTIVE: 'ACTIVE',
@@ -132,3 +144,48 @@ export const ChatStatus = {
 } as const
 
 export type ChatStatus = (typeof ChatStatus)[keyof typeof ChatStatus]
+
+
+export const SaleStatus = {
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type SaleStatus = (typeof SaleStatus)[keyof typeof SaleStatus]
+
+
+export const PurchaseOrderStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type PurchaseOrderStatus = (typeof PurchaseOrderStatus)[keyof typeof PurchaseOrderStatus]
+
+
+export const TransferOrderStatus = {
+  PENDING: 'PENDING',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type TransferOrderStatus = (typeof TransferOrderStatus)[keyof typeof TransferOrderStatus]
+
+
+export const AdjustmentType = {
+  ADD: 'ADD',
+  REMOVE: 'REMOVE'
+} as const
+
+export type AdjustmentType = (typeof AdjustmentType)[keyof typeof AdjustmentType]
+
+
+export const WorkerRole = {
+  ADMIN: 'ADMIN',
+  STAFF: 'STAFF',
+  MANAGER: 'MANAGER'
+} as const
+
+export type WorkerRole = (typeof WorkerRole)[keyof typeof WorkerRole]

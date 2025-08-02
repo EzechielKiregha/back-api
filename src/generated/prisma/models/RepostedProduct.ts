@@ -26,18 +26,18 @@ export type AggregateRepostedProduct = {
 }
 
 export type RepostedProductAvgAggregateOutputType = {
-  earnPercentage: number | null
+  markupPercentage: number | null
 }
 
 export type RepostedProductSumAggregateOutputType = {
-  earnPercentage: number | null
+  markupPercentage: number | null
 }
 
 export type RepostedProductMinAggregateOutputType = {
   id: string | null
   businessId: string | null
   productId: string | null
-  earnPercentage: number | null
+  markupPercentage: number | null
   createdAt: Date | null
 }
 
@@ -45,7 +45,7 @@ export type RepostedProductMaxAggregateOutputType = {
   id: string | null
   businessId: string | null
   productId: string | null
-  earnPercentage: number | null
+  markupPercentage: number | null
   createdAt: Date | null
 }
 
@@ -53,25 +53,25 @@ export type RepostedProductCountAggregateOutputType = {
   id: number
   businessId: number
   productId: number
-  earnPercentage: number
+  markupPercentage: number
   createdAt: number
   _all: number
 }
 
 
 export type RepostedProductAvgAggregateInputType = {
-  earnPercentage?: true
+  markupPercentage?: true
 }
 
 export type RepostedProductSumAggregateInputType = {
-  earnPercentage?: true
+  markupPercentage?: true
 }
 
 export type RepostedProductMinAggregateInputType = {
   id?: true
   businessId?: true
   productId?: true
-  earnPercentage?: true
+  markupPercentage?: true
   createdAt?: true
 }
 
@@ -79,7 +79,7 @@ export type RepostedProductMaxAggregateInputType = {
   id?: true
   businessId?: true
   productId?: true
-  earnPercentage?: true
+  markupPercentage?: true
   createdAt?: true
 }
 
@@ -87,7 +87,7 @@ export type RepostedProductCountAggregateInputType = {
   id?: true
   businessId?: true
   productId?: true
-  earnPercentage?: true
+  markupPercentage?: true
   createdAt?: true
   _all?: true
 }
@@ -182,7 +182,7 @@ export type RepostedProductGroupByOutputType = {
   id: string
   businessId: string
   productId: string
-  earnPercentage: number
+  markupPercentage: number
   createdAt: Date
   _count: RepostedProductCountAggregateOutputType | null
   _avg: RepostedProductAvgAggregateOutputType | null
@@ -213,40 +213,43 @@ export type RepostedProductWhereInput = {
   id?: Prisma.StringFilter<"RepostedProduct"> | string
   businessId?: Prisma.StringFilter<"RepostedProduct"> | string
   productId?: Prisma.StringFilter<"RepostedProduct"> | string
-  earnPercentage?: Prisma.FloatFilter<"RepostedProduct"> | number
+  markupPercentage?: Prisma.FloatFilter<"RepostedProduct"> | number
   createdAt?: Prisma.DateTimeFilter<"RepostedProduct"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  tokenTransactions?: Prisma.TokenTransactionListRelationFilter
 }
 
 export type RepostedProductOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   business?: Prisma.BusinessOrderByWithRelationInput
   product?: Prisma.ProductOrderByWithRelationInput
+  tokenTransactions?: Prisma.TokenTransactionOrderByRelationAggregateInput
 }
 
 export type RepostedProductWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  businessId?: string
+  productId?: string
   AND?: Prisma.RepostedProductWhereInput | Prisma.RepostedProductWhereInput[]
   OR?: Prisma.RepostedProductWhereInput[]
   NOT?: Prisma.RepostedProductWhereInput | Prisma.RepostedProductWhereInput[]
-  businessId?: Prisma.StringFilter<"RepostedProduct"> | string
-  productId?: Prisma.StringFilter<"RepostedProduct"> | string
-  earnPercentage?: Prisma.FloatFilter<"RepostedProduct"> | number
+  markupPercentage?: Prisma.FloatFilter<"RepostedProduct"> | number
   createdAt?: Prisma.DateTimeFilter<"RepostedProduct"> | Date | string
   business?: Prisma.XOR<Prisma.BusinessScalarRelationFilter, Prisma.BusinessWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
-}, "id">
+  tokenTransactions?: Prisma.TokenTransactionListRelationFilter
+}, "id" | "businessId" | "productId">
 
 export type RepostedProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.RepostedProductCountOrderByAggregateInput
   _avg?: Prisma.RepostedProductAvgOrderByAggregateInput
@@ -262,53 +265,57 @@ export type RepostedProductScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"RepostedProduct"> | string
   businessId?: Prisma.StringWithAggregatesFilter<"RepostedProduct"> | string
   productId?: Prisma.StringWithAggregatesFilter<"RepostedProduct"> | string
-  earnPercentage?: Prisma.FloatWithAggregatesFilter<"RepostedProduct"> | number
+  markupPercentage?: Prisma.FloatWithAggregatesFilter<"RepostedProduct"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RepostedProduct"> | Date | string
 }
 
 export type RepostedProductCreateInput = {
   id?: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutRepostedItemsInput
   product: Prisma.ProductCreateNestedOneWithoutRepostsInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutRepostedProductInput
 }
 
 export type RepostedProductUncheckedCreateInput = {
   id?: string
   businessId: string
   productId: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutRepostedProductInput
 }
 
 export type RepostedProductUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutRepostedItemsNestedInput
   product?: Prisma.ProductUpdateOneRequiredWithoutRepostsNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutRepostedProductNestedInput
 }
 
 export type RepostedProductUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutRepostedProductNestedInput
 }
 
 export type RepostedProductCreateManyInput = {
   id?: string
   businessId: string
   productId: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
 }
 
 export type RepostedProductUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -316,7 +323,7 @@ export type RepostedProductUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -334,19 +341,19 @@ export type RepostedProductCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type RepostedProductAvgOrderByAggregateInput = {
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
 }
 
 export type RepostedProductMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -354,12 +361,17 @@ export type RepostedProductMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   businessId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type RepostedProductSumOrderByAggregateInput = {
-  earnPercentage?: Prisma.SortOrder
+  markupPercentage?: Prisma.SortOrder
+}
+
+export type RepostedProductNullableScalarRelationFilter = {
+  is?: Prisma.RepostedProductWhereInput | null
+  isNot?: Prisma.RepostedProductWhereInput | null
 }
 
 export type RepostedProductCreateNestedManyWithoutBusinessInput = {
@@ -446,18 +458,36 @@ export type RepostedProductUncheckedUpdateManyWithoutProductNestedInput = {
   deleteMany?: Prisma.RepostedProductScalarWhereInput | Prisma.RepostedProductScalarWhereInput[]
 }
 
+export type RepostedProductCreateNestedOneWithoutTokenTransactionsInput = {
+  create?: Prisma.XOR<Prisma.RepostedProductCreateWithoutTokenTransactionsInput, Prisma.RepostedProductUncheckedCreateWithoutTokenTransactionsInput>
+  connectOrCreate?: Prisma.RepostedProductCreateOrConnectWithoutTokenTransactionsInput
+  connect?: Prisma.RepostedProductWhereUniqueInput
+}
+
+export type RepostedProductUpdateOneWithoutTokenTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.RepostedProductCreateWithoutTokenTransactionsInput, Prisma.RepostedProductUncheckedCreateWithoutTokenTransactionsInput>
+  connectOrCreate?: Prisma.RepostedProductCreateOrConnectWithoutTokenTransactionsInput
+  upsert?: Prisma.RepostedProductUpsertWithoutTokenTransactionsInput
+  disconnect?: Prisma.RepostedProductWhereInput | boolean
+  delete?: Prisma.RepostedProductWhereInput | boolean
+  connect?: Prisma.RepostedProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RepostedProductUpdateToOneWithWhereWithoutTokenTransactionsInput, Prisma.RepostedProductUpdateWithoutTokenTransactionsInput>, Prisma.RepostedProductUncheckedUpdateWithoutTokenTransactionsInput>
+}
+
 export type RepostedProductCreateWithoutBusinessInput = {
   id?: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutRepostsInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutRepostedProductInput
 }
 
 export type RepostedProductUncheckedCreateWithoutBusinessInput = {
   id?: string
   productId: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutRepostedProductInput
 }
 
 export type RepostedProductCreateOrConnectWithoutBusinessInput = {
@@ -493,22 +523,24 @@ export type RepostedProductScalarWhereInput = {
   id?: Prisma.StringFilter<"RepostedProduct"> | string
   businessId?: Prisma.StringFilter<"RepostedProduct"> | string
   productId?: Prisma.StringFilter<"RepostedProduct"> | string
-  earnPercentage?: Prisma.FloatFilter<"RepostedProduct"> | number
+  markupPercentage?: Prisma.FloatFilter<"RepostedProduct"> | number
   createdAt?: Prisma.DateTimeFilter<"RepostedProduct"> | Date | string
 }
 
 export type RepostedProductCreateWithoutProductInput = {
   id?: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
   business: Prisma.BusinessCreateNestedOneWithoutRepostedItemsInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutRepostedProductInput
 }
 
 export type RepostedProductUncheckedCreateWithoutProductInput = {
   id?: string
   businessId: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutRepostedProductInput
 }
 
 export type RepostedProductCreateOrConnectWithoutProductInput = {
@@ -537,79 +569,162 @@ export type RepostedProductUpdateManyWithWhereWithoutProductInput = {
   data: Prisma.XOR<Prisma.RepostedProductUpdateManyMutationInput, Prisma.RepostedProductUncheckedUpdateManyWithoutProductInput>
 }
 
+export type RepostedProductCreateWithoutTokenTransactionsInput = {
+  id?: string
+  markupPercentage?: number
+  createdAt?: Date | string
+  business: Prisma.BusinessCreateNestedOneWithoutRepostedItemsInput
+  product: Prisma.ProductCreateNestedOneWithoutRepostsInput
+}
+
+export type RepostedProductUncheckedCreateWithoutTokenTransactionsInput = {
+  id?: string
+  businessId: string
+  productId: string
+  markupPercentage?: number
+  createdAt?: Date | string
+}
+
+export type RepostedProductCreateOrConnectWithoutTokenTransactionsInput = {
+  where: Prisma.RepostedProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.RepostedProductCreateWithoutTokenTransactionsInput, Prisma.RepostedProductUncheckedCreateWithoutTokenTransactionsInput>
+}
+
+export type RepostedProductUpsertWithoutTokenTransactionsInput = {
+  update: Prisma.XOR<Prisma.RepostedProductUpdateWithoutTokenTransactionsInput, Prisma.RepostedProductUncheckedUpdateWithoutTokenTransactionsInput>
+  create: Prisma.XOR<Prisma.RepostedProductCreateWithoutTokenTransactionsInput, Prisma.RepostedProductUncheckedCreateWithoutTokenTransactionsInput>
+  where?: Prisma.RepostedProductWhereInput
+}
+
+export type RepostedProductUpdateToOneWithWhereWithoutTokenTransactionsInput = {
+  where?: Prisma.RepostedProductWhereInput
+  data: Prisma.XOR<Prisma.RepostedProductUpdateWithoutTokenTransactionsInput, Prisma.RepostedProductUncheckedUpdateWithoutTokenTransactionsInput>
+}
+
+export type RepostedProductUpdateWithoutTokenTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  business?: Prisma.BusinessUpdateOneRequiredWithoutRepostedItemsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutRepostsNestedInput
+}
+
+export type RepostedProductUncheckedUpdateWithoutTokenTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  businessId?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type RepostedProductCreateManyBusinessInput = {
   id?: string
   productId: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
 }
 
 export type RepostedProductUpdateWithoutBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutRepostsNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutRepostedProductNestedInput
 }
 
 export type RepostedProductUncheckedUpdateWithoutBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutRepostedProductNestedInput
 }
 
 export type RepostedProductUncheckedUpdateManyWithoutBusinessInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RepostedProductCreateManyProductInput = {
   id?: string
   businessId: string
-  earnPercentage?: number
+  markupPercentage?: number
   createdAt?: Date | string
 }
 
 export type RepostedProductUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   business?: Prisma.BusinessUpdateOneRequiredWithoutRepostedItemsNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutRepostedProductNestedInput
 }
 
 export type RepostedProductUncheckedUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutRepostedProductNestedInput
 }
 
 export type RepostedProductUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   businessId?: Prisma.StringFieldUpdateOperationsInput | string
-  earnPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  markupPercentage?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type RepostedProductCountOutputType
+ */
+
+export type RepostedProductCountOutputType = {
+  tokenTransactions: number
+}
+
+export type RepostedProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tokenTransactions?: boolean | RepostedProductCountOutputTypeCountTokenTransactionsArgs
+}
+
+/**
+ * RepostedProductCountOutputType without action
+ */
+export type RepostedProductCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RepostedProductCountOutputType
+   */
+  select?: Prisma.RepostedProductCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RepostedProductCountOutputType without action
+ */
+export type RepostedProductCountOutputTypeCountTokenTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TokenTransactionWhereInput
+}
 
 
 export type RepostedProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   businessId?: boolean
   productId?: boolean
-  earnPercentage?: boolean
+  markupPercentage?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  tokenTransactions?: boolean | Prisma.RepostedProduct$tokenTransactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.RepostedProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["repostedProduct"]>
 
 export type RepostedProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   businessId?: boolean
   productId?: boolean
-  earnPercentage?: boolean
+  markupPercentage?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -619,7 +734,7 @@ export type RepostedProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   id?: boolean
   businessId?: boolean
   productId?: boolean
-  earnPercentage?: boolean
+  markupPercentage?: boolean
   createdAt?: boolean
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
@@ -629,14 +744,16 @@ export type RepostedProductSelectScalar = {
   id?: boolean
   businessId?: boolean
   productId?: boolean
-  earnPercentage?: boolean
+  markupPercentage?: boolean
   createdAt?: boolean
 }
 
-export type RepostedProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessId" | "productId" | "earnPercentage" | "createdAt", ExtArgs["result"]["repostedProduct"]>
+export type RepostedProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessId" | "productId" | "markupPercentage" | "createdAt", ExtArgs["result"]["repostedProduct"]>
 export type RepostedProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  tokenTransactions?: boolean | Prisma.RepostedProduct$tokenTransactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.RepostedProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RepostedProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   business?: boolean | Prisma.BusinessDefaultArgs<ExtArgs>
@@ -652,12 +769,13 @@ export type $RepostedProductPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     business: Prisma.$BusinessPayload<ExtArgs>
     product: Prisma.$ProductPayload<ExtArgs>
+    tokenTransactions: Prisma.$TokenTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     businessId: string
     productId: string
-    earnPercentage: number
+    markupPercentage: number
     createdAt: Date
   }, ExtArgs["result"]["repostedProduct"]>
   composites: {}
@@ -1055,6 +1173,7 @@ export interface Prisma__RepostedProductClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   business<T extends Prisma.BusinessDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BusinessDefaultArgs<ExtArgs>>): Prisma.Prisma__BusinessClient<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  tokenTransactions<T extends Prisma.RepostedProduct$tokenTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RepostedProduct$tokenTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1087,7 +1206,7 @@ export interface RepostedProductFieldRefs {
   readonly id: Prisma.FieldRef<"RepostedProduct", 'String'>
   readonly businessId: Prisma.FieldRef<"RepostedProduct", 'String'>
   readonly productId: Prisma.FieldRef<"RepostedProduct", 'String'>
-  readonly earnPercentage: Prisma.FieldRef<"RepostedProduct", 'Float'>
+  readonly markupPercentage: Prisma.FieldRef<"RepostedProduct", 'Float'>
   readonly createdAt: Prisma.FieldRef<"RepostedProduct", 'DateTime'>
 }
     
@@ -1482,6 +1601,30 @@ export type RepostedProductDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many RepostedProducts to delete.
    */
   limit?: number
+}
+
+/**
+ * RepostedProduct.tokenTransactions
+ */
+export type RepostedProduct$tokenTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TokenTransaction
+   */
+  select?: Prisma.TokenTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TokenTransaction
+   */
+  omit?: Prisma.TokenTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TokenTransactionInclude<ExtArgs> | null
+  where?: Prisma.TokenTransactionWhereInput
+  orderBy?: Prisma.TokenTransactionOrderByWithRelationInput | Prisma.TokenTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TokenTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TokenTransactionScalarFieldEnum | Prisma.TokenTransactionScalarFieldEnum[]
 }
 
 /**

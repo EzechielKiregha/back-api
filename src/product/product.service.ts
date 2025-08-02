@@ -36,7 +36,7 @@ export class ProductService {
         business: { select: { id: true, name: true, email: true, createdAt: true } },
         category: { select: { id: true, name: true, description: true, createdAt: true } },
         orders: { select: { id: true, quantity: true, orderId: true } },
-        reposts: { select: { id: true, earnPercentage: true, createdAt: true } },
+        reposts: { select: { id: true, markupPercentage: true, createdAt: true } },
         reOwnedProducts: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
       },
     });
@@ -49,7 +49,7 @@ export class ProductService {
         business: { select: { id: true, name: true, email: true, createdAt: true } },
         category: { select: { id: true, name: true, description: true, createdAt: true } },
         orders: { select: { id: true, quantity: true, orderId: true } },
-        reposts: { select: { id: true, earnPercentage: true, createdAt: true } },
+        reposts: { select: { id: true, markupPercentage: true, createdAt: true } },
         reOwnedProducts: { select: { id: true, oldPrice: true, newPrice: true, markupPercentage: true, createdAt: true } },
       },
     });

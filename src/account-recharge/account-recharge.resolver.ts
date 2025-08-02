@@ -9,17 +9,15 @@ import { UseGuards } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { PrismaService } from 'src/prisma/prisma.service';
 
+
 // Resolver
 @Resolver(() => AccountRechargeEntity)
 export class AccountRechargeResolver {
-  constructor(
-    private readonly accountRechargeService: AccountRechargeService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly accountRechargeService: AccountRechargeService) {}
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('client', 'business')
-  @Mutation(() => AccountRechargeEntity, { description: 'Creates a new account recharge.' })
+  @Roles('business', 'client')
+  @Mutation(() => AccountRechargeEntity, { description: 'Creates an account recharge.' })
   async createAccountRecharge(
     @Args('createAccountRechargeInput') createAccountRechargeInput: CreateAccountRechargeInput,
     @Context() context,
@@ -29,52 +27,22 @@ export class AccountRechargeResolver {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('client', 'business')
-  @Query(() => Float, { name: 'accountBalance', description: 'Retrieves the total recharge balance for the user.' })
-  async getAccountBalance(@Context() context) {
-    const user = context.req.user;
-    return this.accountRechargeService.getBalance(user.id, user.role);
-  }
-
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('client', 'business')
-  @Query(() => [AccountRechargeEntity], { name: 'accountRecharges', description: 'Retrieves account recharges for the user.' })
+  @Roles('business', 'client')
+  @Query(() => [AccountRechargeEntity], { name: 'accountRecharges', description: 'Retrieves account recharges for a user.' })
   async getAccountRecharges(@Context() context) {
     const user = context.req.user;
-    return this.prisma.accountRecharge.findMany({
-      where: {
-        OR: [
-          { clientId: user.role === 'client' ? user.id : undefined },
-          { businessId: user.role === 'business' ? user.id : undefined },
-        ],
-      },
-      include: {
-        client: { select: { id: true, username: true, email: true, createdAt: true } },
-        business: { select: { id: true, name: true, email: true, createdAt: true } },
-      },
-    });
+    return this.accountRechargeService.findAll();
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('client', 'business')
+  @Roles('business', 'client')
   @Query(() => AccountRechargeEntity, { name: 'accountRecharge', description: 'Retrieves a single account recharge by ID.' })
-  async getAccountRecharge(@Args('id', { type: () => String }) id: string, @Context() context) {
-    const user = context.req.user;
-    const recharge = await this.accountRechargeService.findOne(id);
-    if (!recharge) {
-      throw new Error('Account recharge not found');
-    }
-    if (user.role === 'client' && recharge.clientId !== user.id) {
-      throw new Error('Clients can only access their own recharges');
-    }
-    if (user.role === 'business' && recharge.businessId !== user.id) {
-      throw new Error('Businesses can only access their own recharges');
-    }
-    return recharge;
+  async getAccountRecharge(@Args('id', { type: () => String }) id: string) {
+    return this.accountRechargeService.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('client', 'business')
+  @Roles('business', 'client')
   @Mutation(() => AccountRechargeEntity, { description: 'Updates an account recharge.' })
   async updateAccountRecharge(
     @Args('id', { type: () => String }) id: string,
@@ -86,10 +54,18 @@ export class AccountRechargeResolver {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('client', 'business')
+  @Roles('business', 'client')
   @Mutation(() => AccountRechargeEntity, { description: 'Deletes an account recharge.' })
   async deleteAccountRecharge(@Args('id', { type: () => String }) id: string, @Context() context) {
     const user = context.req.user;
     return this.accountRechargeService.remove(id, user.id, user.role);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('business', 'client')
+  @Query(() => Float, { name: 'accountBalance', description: 'Retrieves the account balance for a user.' })
+  async getAccountBalance(@Context() context) {
+    const user = context.req.user;
+    return this.accountRechargeService.getBalance(user.id, user.role);
   }
 }

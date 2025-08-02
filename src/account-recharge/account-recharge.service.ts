@@ -9,7 +9,7 @@ export class AccountRechargeService {
   constructor(private prisma: PrismaService) {}
 
   async create(createAccountRechargeInput: CreateAccountRechargeInput, userId: string, userRole: string) {
-    const { clientId, businessId, ...data } = createAccountRechargeInput;
+    const { clientId, businessId, tokenTransactionId, ...data } = createAccountRechargeInput;
 
     // Validate that only one of clientId or businessId is provided
     if (clientId && businessId) {
@@ -27,20 +27,30 @@ export class AccountRechargeService {
       throw new Error('Businesses can only recharge their own account');
     }
 
+    // Validate tokenTransactionId if provided
+    if (tokenTransactionId) {
+      const tokenTransaction = await this.prisma.tokenTransaction.findUnique({
+        where: { id: tokenTransactionId },
+      });
+      if (!tokenTransaction) {
+        throw new Error('TokenTransaction not found');
+      }
+      if (tokenTransaction.isRedeemed !== true || tokenTransaction.isReleased !== true) {
+        throw new Error('TokenTransaction must be both redeemed and released');
+      }
+    }
+
     return this.prisma.accountRecharge.create({
       data: {
         ...data,
-        ...(clientId ? { client: { connect: { id: clientId } } } : {}),
-        ...(businessId ? { business: { connect: { id: businessId } } } : {}),
+        client: clientId ? { connect: { id: clientId } } : undefined,
+        business: businessId ? { connect: { id: businessId } } : undefined,
+        tokenTransaction: tokenTransactionId ? { connect: { id: tokenTransactionId } } : undefined,
       },
-      select: {
-        id: true,
-        amount: true,
-        method: true,
-        origin: true,
-        createdAt: true,
-        client: { select: { id: true, username: true, email: true, createdAt: true } },
-        business: { select: { id: true, name: true, email: true, createdAt: true } },
+      include: {
+        client: clientId ? { select: { id: true, username: true, email: true, createdAt: true } } : false,
+        business: businessId ? { select: { id: true, name: true, email: true, createdAt: true } } : false,
+        tokenTransaction: tokenTransactionId ? { select: { id: true, businessId: true, amount: true, type: true, createdAt: true } } : false,
       },
     });
   }
@@ -63,6 +73,7 @@ export class AccountRechargeService {
       include: {
         client: { select: { id: true, username: true, email: true, createdAt: true } },
         business: { select: { id: true, name: true, email: true, createdAt: true } },
+        tokenTransaction: { select: { id: true, businessId: true, amount: true, type: true, createdAt: true } },
       },
     });
   }
@@ -73,6 +84,7 @@ export class AccountRechargeService {
       include: {
         client: { select: { id: true, username: true, email: true, createdAt: true } },
         business: { select: { id: true, name: true, email: true, createdAt: true } },
+        tokenTransaction: { select: { id: true, businessId: true, amount: true, type: true, createdAt: true } },
       },
     });
   }
@@ -93,14 +105,10 @@ export class AccountRechargeService {
     return this.prisma.accountRecharge.update({
       where: { id },
       data: { amount, method, origin },
-      select: {
-        id: true,
-        amount: true,
-        method: true,
-        origin: true,
-        createdAt: true,
+      include: {
         client: { select: { id: true, username: true, email: true } },
         business: { select: { id: true, name: true, email: true } },
+        tokenTransaction: { select: { id: true, businessId: true, amount: true, type: true } },
       },
     });
   }
@@ -123,4 +131,3 @@ export class AccountRechargeService {
     });
   }
 }
-

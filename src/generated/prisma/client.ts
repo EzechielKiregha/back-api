@@ -176,6 +176,56 @@ export type PostOfSale = Prisma.PostOfSaleModel
  * 
  */
 export type PostTransaction = Prisma.PostTransactionModel
+/**
+ * Model Store
+ * 
+ */
+export type Store = Prisma.StoreModel
+/**
+ * Model Sale
+ * 
+ */
+export type Sale = Prisma.SaleModel
+/**
+ * Model SaleProduct
+ * 
+ */
+export type SaleProduct = Prisma.SaleProductModel
+/**
+ * Model PurchaseOrder
+ * 
+ */
+export type PurchaseOrder = Prisma.PurchaseOrderModel
+/**
+ * Model TransferOrder
+ * 
+ */
+export type TransferOrder = Prisma.TransferOrderModel
+/**
+ * Model InventoryAdjustment
+ * 
+ */
+export type InventoryAdjustment = Prisma.InventoryAdjustmentModel
+/**
+ * Model Shift
+ * 
+ */
+export type Shift = Prisma.ShiftModel
+/**
+ * Model LoyaltyProgram
+ * 
+ */
+export type LoyaltyProgram = Prisma.LoyaltyProgramModel
+/**
+ * Model PointsTransaction
+ * 
+ */
+export type PointsTransaction = Prisma.PointsTransactionModel
+/**
+ * Model Return
+ * 
+ */
+export type Return = Prisma.ReturnModel
 
 export type MediaType = $Enums.MediaType
 export const MediaType = $Enums.MediaType
@@ -213,5 +263,23 @@ export const PostTransactionStatus = $Enums.PostTransactionStatus
 export type NegotiationType = $Enums.NegotiationType
 export const NegotiationType = $Enums.NegotiationType
 
+export type TokenTransactionType = $Enums.TokenTransactionType
+export const TokenTransactionType = $Enums.TokenTransactionType
+
 export type ChatStatus = $Enums.ChatStatus
 export const ChatStatus = $Enums.ChatStatus
+
+export type SaleStatus = $Enums.SaleStatus
+export const SaleStatus = $Enums.SaleStatus
+
+export type PurchaseOrderStatus = $Enums.PurchaseOrderStatus
+export const PurchaseOrderStatus = $Enums.PurchaseOrderStatus
+
+export type TransferOrderStatus = $Enums.TransferOrderStatus
+export const TransferOrderStatus = $Enums.TransferOrderStatus
+
+export type AdjustmentType = $Enums.AdjustmentType
+export const AdjustmentType = $Enums.AdjustmentType
+
+export type WorkerRole = $Enums.WorkerRole
+export const WorkerRole = $Enums.WorkerRole

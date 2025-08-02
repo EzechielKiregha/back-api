@@ -20,6 +20,7 @@ enum RechargeMethod {
   AIRTEL_MONEY
   ORANGE_MONEY
   MPESA
+  TOKEN
 }
 
 enum Country {
@@ -46,6 +47,8 @@ enum PaymentStatus {
 enum PaymentMethod {
   TOKEN
   MOBILE_MONEY
+  CASH
+  CARD
 }
 
 enum FreelanceServiceCategory {
@@ -104,6 +107,38 @@ enum ChatStatus {
   CLOSED
 }
 
+// Enums (Updated)
+
+enum SaleStatus {
+  OPEN
+  CLOSED
+  REFUNDED
+}
+
+enum PurchaseOrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum TransferOrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum AdjustmentType {
+  ADD
+  REMOVE
+}
+
+enum WorkerRole {
+  ADMIN
+  STAFF
+  MANAGER
+}
+
 // Models
 
 model Business {
@@ -139,8 +174,10 @@ model Business {
   termsAgreedAt        DateTime?             // Timestamp of agreement
 
   chatParticipants ChatParticipant[]
-
   tokenTransactions TokenTransaction[]
+  stores Store[]
+  purchaseOrders PurchaseOrder[]
+  loyaltyPrograms LoyaltyProgram[]
 }
 
 model Client {
@@ -153,6 +190,8 @@ model Client {
   phone                String?
   password             String
   isVerified           Boolean               @default(false)
+  notes                String?               // For CRM notes
+  preferences          Json?                 // For customer preferences
   kyc                  KYC?                  @relation("ClientKYC")
   orders               Order[]
   reviews              Review[]
@@ -164,15 +203,16 @@ model Client {
   updatedAt            DateTime              @updatedAt
 
   postTransactions PostTransaction[]
-
   chatParticipants ChatParticipant[]
+  sales Sale[]
+  pointsTransactions PointsTransaction[]
 }
 
 model Worker {
   id                   String                @id @default(uuid())
   email                String                @unique
   fullName             String?
-  role                 String?
+  role                 WorkerRole?           @default(STAFF) // Updated to use WorkerRole enum
   phone                String?
   password             String
   business             Business              @relation(fields: [businessId], references: [id])
@@ -183,6 +223,8 @@ model Worker {
   updatedAt            DateTime              @updatedAt
   workerServiceAssignments WorkerServiceAssignment[]
   chatParticipants ChatParticipant[]
+  sales Sale[]
+  shifts Shift[]
 }
 
 model Category {
@@ -204,8 +246,11 @@ model Product {
   isPhysical           Boolean               @default(false)  // New field to flag physical products
   business             Business              @relation(fields: [businessId], references: [id])
   businessId           String
+  storeId              String?
+  store                Store?                @relation(fields: [storeId], references: [id])
   categoryId           String
   category             Category         @relation("ProductCategory", fields: [categoryId], references: [id])
+  variants             Json?                 // For size, color, etc.
   medias               Media[]
   reviews              Review[]
   orders               OrderProduct[]
@@ -217,6 +262,10 @@ model Product {
 
   reOwnedProducts      ReOwnedProduct[]      @relation(name: "OriginalProduct")
   newReOwnedProducts   ReOwnedProduct[]
+
+  SaleProduct SaleProduct[]
+
+  InventoryAdjustment InventoryAdjustment[]
 }
 
 model Media {
@@ -307,14 +356,12 @@ model ChatMessage {
 model RepostedProduct {
   id                   String                @id @default(uuid())
   business             Business              @relation(fields: [businessId], references: [id])
-  businessId           String
+  businessId           String                @unique
   product              Product               @relation(fields: [productId], references: [id])
-  productId            String
-  // earnPercentage       Float                 @default(0.003)
+  productId            String                @unique
+  markupPercentage     Float                 @default(0.02)
   createdAt            DateTime              @default(now())
-
-  @@unique([productId, businessId]) // Prevent duplicate reposts by the same business
-  tokenTransactions TokenTransaction[]
+  tokenTransactions    TokenTransaction[]
 }
 
 model ReOwnedProduct {
@@ -537,4 +584,131 @@ model PostTransaction {
   status              PostTransactionStatus   @default(PENDING)
   amount              Float
   createdAt           DateTime                @default(now())
+}
+
+// New Models
+model Store {
+  id           String         @id @default(uuid())
+  businessId   String
+  business     Business       @relation(fields: [businessId], references: [id])
+  name         String
+  address      String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  sales        Sale[]
+  purchaseOrders PurchaseOrder[]
+  transferOrdersFrom TransferOrder[] @relation("FromStore")
+  transferOrdersTo   TransferOrder[] @relation("ToStore")
+  inventoryAdjustments InventoryAdjustment[]
+  shifts       Shift[]
+  products     Product[]
+}
+
+model Sale {
+  id           String         @id @default(uuid())
+  storeId      String
+  store        Store          @relation(fields: [storeId], references: [id])
+  workerId     String
+  worker       Worker         @relation(fields: [workerId], references: [id])
+  clientId     String?
+  client       Client?        @relation(fields: [clientId], references: [id])
+  totalAmount  Float
+  discount     Float          @default(0)
+  paymentMethod PaymentMethod
+  status       SaleStatus     @default(OPEN)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  saleProducts SaleProduct[]
+  returns      Return[]
+}
+
+model SaleProduct {
+  id           String         @id @default(uuid())
+  saleId       String
+  sale         Sale           @relation(fields: [saleId], references: [id])
+  productId    String
+  product      Product        @relation(fields: [productId], references: [id])
+  quantity     Int            @default(1)
+  price        Float
+  modifiers    Json?          // For item variants or modifiers (e.g., size, color)
+  createdAt    DateTime       @default(now())
+}
+
+model PurchaseOrder {
+  id              String              @id @default(uuid())
+  businessId      String
+  business        Business            @relation(fields: [businessId], references: [id])
+  storeId         String
+  store           Store               @relation(fields: [storeId], references: [id])
+  supplierId      String?             // External supplier ID or reference
+  status          PurchaseOrderStatus @default(PENDING)
+  expectedDelivery DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+model TransferOrder {
+  id              String              @id @default(uuid())
+  fromStoreId     String
+  fromStore       Store               @relation("FromStore", fields: [fromStoreId], references: [id])
+  toStoreId       String
+  toStore         Store               @relation("ToStore", fields: [toStoreId], references: [id])
+  status          TransferOrderStatus @default(PENDING)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+model InventoryAdjustment {
+  id              String         @id @default(uuid())
+  productId       String
+  product         Product        @relation(fields: [productId], references: [id])
+  storeId         String
+  store           Store          @relation(fields: [storeId], references: [id])
+  adjustmentType  AdjustmentType
+  quantity        Int
+  reason          String?
+  createdAt       DateTime       @default(now())
+}
+
+model Shift {
+  id           String         @id @default(uuid())
+  workerId     String
+  worker       Worker         @relation(fields: [workerId], references: [id])
+  storeId      String
+  store        Store          @relation(fields: [storeId], references: [id])
+  startTime    DateTime
+  endTime      DateTime?
+  sales        Float          @default(0) // Total sales during shift
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model LoyaltyProgram {
+  id              String            @id @default(uuid())
+  businessId      String
+  business        Business          @relation(fields: [businessId], references: [id])
+  name            String
+  pointsPerPurchase Float          // Points earned per unit of currency spent
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  pointsTransactions PointsTransaction[]
+}
+
+model PointsTransaction {
+  id              String         @id @default(uuid())
+  clientId        String
+  client          Client         @relation(fields: [clientId], references: [id])
+  loyaltyProgramId String
+  loyaltyProgram  LoyaltyProgram @relation(fields: [loyaltyProgramId], references: [id])
+  points          Float
+  createdAt       DateTime       @default(now())
+}
+
+model Return {
+  id           String         @id @default(uuid())
+  saleId       String
+  sale         Sale           @relation(fields: [saleId], references: [id])
+  reason       String?
+  status       SaleStatus     @default(REFUNDED)
+  createdAt    DateTime       @default(now())
 }
